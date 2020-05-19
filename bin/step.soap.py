@@ -4,8 +4,6 @@
 
 import sys, json
 
-sys.path.append('..')
-
 from STEP.SOAP import *
 
 result = args.execute()

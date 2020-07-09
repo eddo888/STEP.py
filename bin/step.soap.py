@@ -5,10 +5,7 @@
 import sys, json
 
 from STEP.SOAP import *
+from STEP.Cleaner import suds2dict
 
-result = args.execute()
-if type(result) in [list, dict]:
-	json.dump(result, sys.stdout, indent=4)
-else:
-	print(result)
+print(suds2dict(args.execute()))
 

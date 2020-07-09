@@ -10,7 +10,7 @@ with codecs.open(path.join(pwd, 'README.md'), 'r', encoding='utf8') as input:
 
 name='STEP.py'
 user='eddo888'
-version='1.1'
+version='1.3'
 
 setup(
 	name=name,
@@ -29,6 +29,7 @@ setup(
 		'argcomplete',
 		'xlrd',
 		'xlwt',
+		'dotmap',
 		'pyxb',
 		'suds-py3',
 		'xmltodict',

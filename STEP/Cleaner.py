@@ -11,12 +11,12 @@ def suds2dict(d):
     if type(d) in [dict, OrderedDict]: return d
 
     out = {'__class__': d.__class__.__name__}
-    for k, v in asdict(d).iteritems():
+    for k, v in asdict(d).items():
         if hasattr(v, '__keylist__'):
             out[k] = suds2dict(v)
         elif isinstance(v, list):
             out[k] = []
-            for item in v:
+            for item in list(v):
                 if hasattr(item, '__keylist__'):
                     out[k].append(suds2dict(item))
                 else:
@@ -31,12 +31,12 @@ def dict2suds(d):
     Suds object deserializer
     """
     out = {}
-    for k, v in d.iteritems():
+    for k, v in d.items():
         if isinstance(v, dict):
             out[k] = dict2suds(v)
         elif isinstance(v, list):
             out[k] = []
-            for item in v:
+            for item in list(v):
                 if isinstance(item, dict):
                     out[k].append(dict2suds(item))
                 else:

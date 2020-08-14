@@ -4,6 +4,8 @@
 
 import sys, json
 
+sys.path.append('..')
+
 from STEP.REST import *
 
 result = args.execute()

@@ -409,8 +409,18 @@ class Products(STEP):
 	@args.parameter(name='attributeID', help='the ID of product')
 	@args.parameter(name='value', help='the ID of product')
 	def update(self, id, attributeID, value):
-		payload=dict(value=dict(value=value))
-		return super().put('%s/%s/values/%s'%(self.base, id, attributeID), body=payload)
+		headers={
+			"accept": "application/json",
+			"Content-Type: application/json",
+		}
+		payload={
+			"value": {
+				"value":value
+			}
+		}
+		return super().put('%s/%s/values/%s'%(
+			self.base, id, attributeID), body=json.dumps(payload), headers=headers
+		)
 
 	@args.operation(help='get tables of product by id')
 	@args.parameter(name='id', help='the ID of product')

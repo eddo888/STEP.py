@@ -399,9 +399,18 @@ class Products(STEP):
 
 	@args.operation(help='get values of product by id')
 	@args.parameter(name='id', help='the ID of product')
-	def values(self, id):
-		return super().get('%s/%s/values'%(self.base,id))
+	@args.parameter(name='attributeID', help='the ID of product')
+	def values(self, id, attributeID):
+		return super().get('%s/%s/values/%s'%(self.base, id, attributeID))
 
+
+	@args.operation(help='set values of product by id')
+	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='attributeID', help='the ID of product')
+	@args.parameter(name='value', help='the ID of product')
+	def update(self, id, attributeID, value):
+		payload=dict(value=dict(value=value))
+		return super().put('%s/%s/values/%s'%(self.base, id, attributeID), body=payload)
 
 	@args.operation(help='get tables of product by id')
 	@args.parameter(name='id', help='the ID of product')

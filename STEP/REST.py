@@ -411,7 +411,7 @@ class Products(STEP):
 	def update(self, id, attributeID, value):
 		headers={
 			"accept": "application/json",
-			"Content-Type: application/json",
+			"Content-Type": "application/json",
 		}
 		payload={
 			"value": {

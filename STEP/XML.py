@@ -257,7 +257,7 @@ class Converter(object):
 			lov_group = ListOfValuesGroupType(
 				ID=sheet.name,
 				Name=[NameType(sheet.name)],
-				ParentID='Attribute group root',
+				ParentID='List Of Values group root',
 			)
 			self.doc.ListOfValuesGroupList.append(lov_group)
 

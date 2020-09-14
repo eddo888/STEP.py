@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# PYTHON_ARGCOMPLETE_OK
+
 import sys, os, argparse, json, xmltodict, codecs, sqlalchemy
 
 from datetime import datetime, date
@@ -13,21 +15,33 @@ from Perdy.pyxbext import directory
 from Perdy.parser import printXML
 from Spanners.IdentityCache import IdentityCache
 from Spanners.Squirrel import Squirrel
+from Argumental.Argue import Argue
 
 from STEP.XSD import *
 
+args = Argue()
+
 #_________________________________________________________________
+@args.command(single=True)
 class Converter(object):
+	'''
+	tool to convert excel into step xml formats
+	'''
+	
+	@args.property(default='PIM', help='prefix to use on ID definitions')
+	def prefix(self): return
+
+	@args.property(default='Context1', help='step context id')
+	def context(self): return
+
+	@args.property(default='Main', help='step workspace id')
+	def workspace(self): return
 
 	parent_type_id = 'Product user-type root'
 	parent_product_id = 'Product hierarchy root' 
 
 	#_____________________________________________________________
-	def __init__(self, prefix='PIM', context='Context1', workspace='Main'):
-		self.prefix = prefix
-		self.context = context
-		self.workspace = workspace
-		
+	def __init__(self):
 		self.ids = IdentityCache()
 		
 		self.types   = OrderedDict()
@@ -52,27 +66,23 @@ class Converter(object):
 			Classifications = ClassificationsType(),
 		)
 
-		self.ag = AttributeGroupType(
-			ID = self.prefix,
-			ShowInWorkbench = 'true',
-			ManuallySorted = 'false',
-			Name = [
-				NameType(self.prefix)
-			]
-		)
-		self.doc.AttributeGroupList.append(self.ag)
-
-		root_id = '%s_Root'%self.prefix
-		root_name = '%s Root'%self.prefix
-
-		self.tipe = self.make_type(root_id, root_name, self.parent_type_id)
-		self.prod = self.make_prod(root_id, root_name, self.tipe.ID, self.parent_product_id)
-
 		
 	#_____________________________________________________________
+	def __del__(self):
+		self.close()
+
+
+	#_____________________________________________________________
 	def close(self):
-		self.ids.save()
+		if self.ids:
+			self.ids.save()
 		
+
+	#_____________________________________________________________
+	def save(self, file):
+		with codecs.open(file, 'w', encoding='utf8') as output:
+			printXML(self.doc.toxml(), output=output)
+					
 
 	#_____________________________________________________________
 	def make_prod(self, id, name, type_id, parent_id):
@@ -219,27 +229,56 @@ class Converter(object):
 
 
 	#_____________________________________________________________
-	def make_lovs(self):
-		lov_group = ListOfValuesGroupType(
-			ID='%s_LOVs'%self.prefix,
-			Name=[NameType('%s LOVs'%self.prefix)]
-		)
-		self.doc.ListOfValuesGroupList.append(lov_group)
+	@args.operation
+	@args.parameter(name='id', help='LOV ID')
+	@args.parameter(name='name', help='LOV Name')
+	@args.parameter(name='input', help='excel file with attribute definitions')
+	@args.parameter(name='validation', short='V', default='TEXT', help='attribute validation type')
+	@args.parameter(name='length', short='L', type=int, default=256, help='attribute validation length')
+	@args.parameter(name='output', short='o', default='step.xml', help='step xml format output file')
+	def make_lovs(self, id, name, input, validation=None, length=None, output=None):
+		'''
+		process an excel file to create a STEP LOV xml import
 
+		| ID | Name |
+		|----+------|
+		| a  | aye  |
+		| b  | bee  |
+		|----+------|
+ 
+		<group_id=sheet_name/>
+
+		'''
+
+		workbook = open_workbook(filename=input)
+
+		for sheet in workbook.sheets():
+
+			lov_group = ListOfValuesGroupType(
+				ID=sheet.name,
+				Name=[NameType(sheet.name)],
+				ParentID='Attribute group root',
+			)
+			self.doc.ListOfValuesGroupList.append(lov_group)
+
+			lov = self.make_lov(id, name, validation, length, lov_group.ID)
+
+			for r in list(range(sheet.nrows))[1:]:
+				if sheet.ncols > 1:
+					value_id = sheet.cell(r,0).value
+					value_name = sheet.cell(r,1).value
+				else:
+					value_name = sheet.cell(r,0).value
+
+				lov.Value.append(ValueType(value_name, ID=value_id))
 		
-		lov = self.make_lov('Randeep', 'Randeeps LOV', 'TEXT', 256, lov_group.ID)
-		lov.Value.append(ValueType('one', ID='1'))
-		lov.Value.append(ValueType('two', ID='2'))
-		
+		self.save(output)
 				
 	#_____________________________________________________________
-	def save(self, file):
-		with codecs.open(file, 'w', encoding='utf8') as output:
-			printXML(self.doc.toxml(), output=output)
-					
-
-	#_____________________________________________________________
-	def process(self, input, output='step.xml'):
+	@args.operation
+	@args.parameter(name='input', help='excel file with attribute definitions')
+	@args.parameter(name='output', short='o', default='step.xml', help='step xml format output file')
+	def process(self, input, output=None):
 		'''
 		process an excel file to create a STEP import
 
@@ -250,6 +289,22 @@ class Converter(object):
 
 		'''
 		
+		self.ag = AttributeGroupType(
+			ID = self.prefix,
+			ShowInWorkbench = 'true',
+			ManuallySorted = 'false',
+			Name = [
+				NameType(self.prefix)
+			]
+		)
+		self.doc.AttributeGroupList.append(self.ag)
+
+		root_id = '%s_Root'%self.prefix
+		root_name = '%s Root'%self.prefix
+
+		self.tipe = self.make_type(root_id, root_name, self.parent_type_id)
+		self.prod = self.make_prod(root_id, root_name, self.tipe.ID, self.parent_product_id)
+
 		columns = {
 			'' : 'text',
 			'bigint' : 'integer',
@@ -353,4 +408,5 @@ class Converter(object):
 			)
 			
 		self.save(output)
+
 

@@ -67,6 +67,12 @@ class STEP2UML(object):
 			xmi.addDiagramClass(_lov, diagram)
 			#print(lid, lname)
 			self.lovs[lid] = _lov
+
+			for value in getElements(STEP.ctx, 'Value', lov):
+				name = value.content
+				id = getAttribute(value, 'ID')
+				xmi.makeAttribute(name, None, id, _lov, array=False)
+
 	
 
 	def Attributes(self, xmi, STEP):
@@ -103,9 +109,25 @@ class STEP2UML(object):
 			uname = getElementText(STEP.ctx, 'Name', user_type)
 			uid = getAttribute(user_type, 'ID')
 			_user_type = xmi.makeClass(uname, classes, uid=uid)
-			xmi.makeStereotype('UserType', _user_type)
+
+			aid  = getAttribute(user_type, 'AllowInDesignTemplate')
+			aqt  = getAttribute(user_type, 'AllowQuarkTemplate')
+			ic   = getAttribute(user_type, 'IsCategory')
+			copl = getAttribute(user_type, 'ClassificationOwnsProductLinks')
+			r    = getAttribute(user_type, 'Revisability')
+
+			if r:
+				st = 'Entity'
+			elif aid and aqt and ic:
+				st = 'UserType'
+			elif not ic:
+				st = 'Classification'
+			else:
+				st = 'Asset'
+			xmi.makeStereotype(st, _user_type)
+
 			xmi.addDiagramClass(_user_type, diagram)
-			#print(uid, uname)
+			print(uid, st, uname)
 			self.user_types[uid] = _user_type
 
 			xpath=f'/{self.spi}/AttributeList/Attribute[UserTypeLink/@UserTypeID="{uid}"]'

@@ -37,6 +37,7 @@ class STEP2UML(object):
 		for base_type in ['text','number','date','datetime','isodate','isodatetime']:
 			_base_type = xmi.makeClass(base_type, classes, uid=base_type)
 			xmi.addDiagramClass(_base_type, diagram)
+			xmi.makeStereotype('BaseType', _base_type)
 			self.base_types[base_type] = _base_type
 	
 
@@ -51,6 +52,7 @@ class STEP2UML(object):
 			lname = getElementText(STEP.ctx, 'Name', lov)
 			lid = getAttribute(lov, 'ID')
 			_lov = xmi.makeClass(lname, classes, uid=lid)
+			xmi.makeStereotype('ListOfValues', _lov)
 			xmi.addDiagramClass(_lov, diagram)
 			#print(lid, lname)
 			self.lovs[lid] = _lov
@@ -67,9 +69,16 @@ class STEP2UML(object):
 			aname = getElementText(STEP.ctx, 'Name', attribute)
 			aid = getAttribute(attribute, 'ID')
 			_attribute = xmi.makeClass(aname, classes, uid=aid)
+			xmi.makeStereotype('Attribute', _attribute)
 			xmi.addDiagramClass(_attribute, diagram)
 			#print(aid, aname)
 			self.attributes[aid] = _attribute
+
+			lov = getElement(STEP.ctx, 'ListOfValueLink', attribute)
+			if lov:
+				lid = getAttribute(lov, 'ListOfValueID')
+				_lov = self.lovs[lid]
+				xmi.makeAssociation('LOV', _attribute, _lov, classes)
 					
 	
 	def UserTypes(self, xmi, STEP):
@@ -83,6 +92,7 @@ class STEP2UML(object):
 			uname = getElementText(STEP.ctx, 'Name', user_type)
 			uid = getAttribute(user_type, 'ID')
 			_user_type = xmi.makeClass(uname, classes, uid=uid)
+			xmi.makeStereotype('UserType', _user_type)
 			xmi.addDiagramClass(_user_type, diagram)
 			#print(uid, uname)
 			self.user_types[uid] = _user_type
@@ -105,6 +115,16 @@ class STEP2UML(object):
 
 			self.user_types[uid] = _user_type
 
+		for user_type in getElements(STEP.ctx, f'/{self.spi}/UserTypes/UserType'):
+			uid = getAttribute(user_type, 'ID')
+			_user_type = self.user_types[uid]
+			user_type_link = getElement(STEP.ctx, 'UserTypeLink', user_type)
+			if user_type_link:
+				pid = getAttribute(user_type_link, 'UserTypeID')
+				if pid in self.user_types.keys():
+					_parent_user_type = self.user_types[pid]
+					xmi.assignBaseClass(_parent_user_type, _user_type, classes)
+
 	
 	def References(self, xmi, STEP):
 		'''
@@ -117,6 +137,7 @@ class STEP2UML(object):
 			rname = getElementText(STEP.ctx, 'Name', reference)
 			rid = getAttribute(reference, 'ID')
 			_reference = xmi.makeClass(rname, classes, uid=rid)
+			xmi.makeStereotype('Reference', _reference)
 			xmi.addDiagramClass(_reference, diagram)
 			#print(rid, rname)
 
@@ -173,6 +194,7 @@ class STEP2UML(object):
 		name = output or f'{file}.xmi'
 		with open(name,'w') as _output:
 			printXML(str(xmi.doc), output=_output, colour=False)
+
 
 #_________________________________________________________________
 if __name__ == '__main__': args.execute()

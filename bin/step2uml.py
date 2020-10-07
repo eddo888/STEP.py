@@ -34,7 +34,18 @@ class STEP2UML(object):
 		classes = xmi.makePackage('Fundamentals', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('Fundamentals', classes)
 
-		for base_type in ['text','number','date','datetime','isodate','isodatetime']:
+		types = [
+			'text', 
+			'number', 
+			'date', 
+			'datetime', 
+			'isodate', 
+			'isodatetime', 
+			'legacyisodatetime',
+			'legacyisodate',
+			'regexp',
+		]
+		for base_type in types:
 			_base_type = xmi.makeClass(base_type, classes, uid=base_type)
 			xmi.addDiagramClass(_base_type, diagram)
 			xmi.makeStereotype('BaseType', _base_type)
@@ -105,7 +116,7 @@ class STEP2UML(object):
 				tipe = getElement(STEP.ctx, 'Validation', attribute)
 				if tipe:
 					cid = getAttribute(tipe, 'BaseType')
-					ctype = self.base_types[cid]
+					ctype = self.base_types[cid.lower()]
 				else:
 					tipe = getElement(STEP.ctx, 'ListOfValueLink', attribute)
 					if tipe:

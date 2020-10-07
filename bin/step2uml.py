@@ -24,32 +24,13 @@ class STEP2UML(object):
 		self.attributes = dict() # id: xml.class
 		self.user_types = dict() # id: xmi.class
 		self.references = dict() # id: xmi.class
+		self.spi = 'STEP-ProductInformation'
 
-	def References(self, user_type):
-		pass
-	
-	def Attributes(self, user_type):
-		pass
-	
-	def UserTypes(self, user_type):
-		pass
-	
-	@args.operation
-	@args.parameter(name='file', help='input step.xml file')
-	@args.parameter(name='output', short='o', help='output xmi UML file')
-	def toUML(self, file, output=None):
+
+	def BaseTypes(self, xmi):
 		'''
-		make an UML XMI file from a STEP.XML input
+		make the fundamentals
 		'''
-		print(file)
-
-		spi = 'STEP-ProductInformation'
-
-		STEP = XML(*getContextFromFile(file))
-
-		xmi = XMI()
-
-		# make the fundamentals
 		classes = xmi.makePackage('Fundamentals', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('Fundamentals', classes)
 
@@ -57,24 +38,32 @@ class STEP2UML(object):
 			_base_type = xmi.makeClass(base_type, classes, uid=base_type)
 			xmi.addDiagramClass(_base_type, diagram)
 			self.base_types[base_type] = _base_type
+	
 
-		# get LOVs as class enums
+	def ListsOfValues(self, xmi, STEP):
+		'''
+		get LOVs as class enums
+		'''
 		classes = xmi.makePackage('ListsOfValues', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('ListsOfValues', classes)
 
-		for lov in getElements(STEP.ctx, f'/{spi}/ListsOfValues/ListOfValue'):
+		for lov in getElements(STEP.ctx, f'/{self.spi}/ListsOfValues/ListOfValue'):
 			lname = getElementText(STEP.ctx, 'Name', lov)
 			lid = getAttribute(lov, 'ID')
 			_lov = xmi.makeClass(lname, classes, uid=lid)
 			xmi.addDiagramClass(_lov, diagram)
 			#print(lid, lname)
 			self.lovs[lid] = _lov
-			
-		# get attributes as classes
+	
+
+	def Attributes(self, xmi, STEP):
+		'''
+		get attributes as classes
+		'''
 		classes = xmi.makePackage('Attributes', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('Attributes', classes)
 
-		for attribute in getElements(STEP.ctx, f'/{spi}/AttributeList/Attribute'):
+		for attribute in getElements(STEP.ctx, f'/{self.spi}/AttributeList/Attribute'):
 			aname = getElementText(STEP.ctx, 'Name', attribute)
 			aid = getAttribute(attribute, 'ID')
 			_attribute = xmi.makeClass(aname, classes, uid=aid)
@@ -82,11 +71,15 @@ class STEP2UML(object):
 			#print(aid, aname)
 			self.attributes[aid] = _attribute
 					
-		# make the user types
+	
+	def UserTypes(self, xmi, STEP):
+		'''
+		make the user types
+		'''
 		classes = xmi.makePackage('UserTypes', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('UserTypes', classes)
 		
-		for user_type in getElements(STEP.ctx, f'/{spi}/UserTypes/UserType'):
+		for user_type in getElements(STEP.ctx, f'/{self.spi}/UserTypes/UserType'):
 			uname = getElementText(STEP.ctx, 'Name', user_type)
 			uid = getAttribute(user_type, 'ID')
 			_user_type = xmi.makeClass(uname, classes, uid=uid)
@@ -94,7 +87,7 @@ class STEP2UML(object):
 			#print(uid, uname)
 			self.user_types[uid] = _user_type
 
-			xpath=f'/{spi}/AttributeList/Attribute[UserTypeLink/@UserTypeID="{uid}"]'
+			xpath=f'/{self.spi}/AttributeList/Attribute[UserTypeLink/@UserTypeID="{uid}"]'
 			for attribute in getElements(STEP.ctx, xpath):
 				aname = getElementText(STEP.ctx, 'Name', attribute)
 				aid = getAttribute(attribute, 'ID')
@@ -112,11 +105,15 @@ class STEP2UML(object):
 
 			self.user_types[uid] = _user_type
 
-		# make references
+	
+	def References(self, xmi, STEP):
+		'''
+		make references
+		'''
 		classes = xmi.makePackage('References', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('References', classes)
 
-		for reference in getElements(STEP.ctx, f'/{spi}/CrossReferenceTypes/ProductCrossReferenceType'):
+		for reference in getElements(STEP.ctx, f'/{self.spi}/CrossReferenceTypes/*'):
 			rname = getElementText(STEP.ctx, 'Name', reference)
 			rid = getAttribute(reference, 'ID')
 			_reference = xmi.makeClass(rname, classes, uid=rid)
@@ -135,6 +132,26 @@ class STEP2UML(object):
 				
 			self.references[rid] = _reference
 
+	
+	@args.operation
+	@args.parameter(name='file', help='input step.xml file')
+	@args.parameter(name='output', short='o', help='output xmi UML file')
+	def toUML(self, file, output=None):
+		'''
+		make an UML XMI file from a STEP.XML input
+		'''
+		print(file)
+
+
+		STEP = XML(*getContextFromFile(file))
+
+		xmi = XMI()
+
+		self.BaseTypes(xmi)
+		self.ListsOfValues(xmi, STEP)
+		self.Attributes(xmi, STEP)
+		self.UserTypes(xmi, STEP)
+		self.References(xmi, STEP)
 
 		'''									   
 		parameters = {

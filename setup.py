@@ -10,7 +10,7 @@ with codecs.open(path.join(pwd, 'README.md'), 'r', encoding='utf8') as input:
 
 name='STEP.py'
 user='eddo888'
-version='1.11'
+version='1.12'
 
 setup(
 	name=name,
@@ -38,11 +38,13 @@ setup(
 		'Spanners',
 		'Argumental',
 		'GoldenChild',
+		'Swapsies',
 	],
 	scripts=[
 		'bin/step.soap.py',
 		'bin/step.rest.py',
 		'bin/excel2step.py',
+		'bin/step2uml.py',
 	], 
 )
 

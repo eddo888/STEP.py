@@ -170,9 +170,10 @@ class STEP(object):
 		}
 		self.headers = None
 		result = self.process(path, params=params, kwargs=dict(stream=True))
-		with open(destination, 'wb') as output:
-			result.raw.decode_content = True
-			shutil.copyfileobj(result.raw, output)
+		if destination:
+			with open(destination, 'wb') as output:
+				result.raw.decode_content = True
+				shutil.copyfileobj(result.raw, output)
 		return
 
 
@@ -224,15 +225,14 @@ class Assets(STEP):
 
 
 	@args.operation
-	def content(self, id):
+	@args.parameter(name='output', short='o', help='where to store the content, defautls to stdout')
+	def content(self, id, output=None):
 		'''
 		downlaod the asset to a local directory
 		'''
 		path='%s/%s/content'%(self.base, id)
 		name='/%s/%s/%s/content'%(self.path, self.base, id)
-		if not os.path.isdir(os.path.dirname(name)):
-			os.makedirs(os.path.dirname(name))
-		super().file(path=path,destination=name)
+		super().file(path=path, destination=output)
 
 
 	@args.operation

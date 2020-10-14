@@ -74,7 +74,6 @@ class STEP2UML(object):
 				xmi.makeAttribute(name, None, id, _lov, array=False)
 
 	
-
 	def Attributes(self, xmi, STEP):
 		'''
 		get attributes as classes
@@ -185,7 +184,7 @@ class STEP2UML(object):
 				xmi.makeAssociation(rname, _reference, _target_user_type, classes)
 				
 			self.references[rid] = _reference
-
+;;
 	
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')

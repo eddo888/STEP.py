@@ -4,8 +4,6 @@
 
 import sys, json
 
-sys.path.insert(0, '..')
-
 from STEP.REST import *
 
 result = args.execute()

@@ -184,7 +184,7 @@ class STEP2UML(object):
 				xmi.makeAssociation(rname, _reference, _target_user_type, classes)
 				
 			self.references[rid] = _reference
-;;
+
 	
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')

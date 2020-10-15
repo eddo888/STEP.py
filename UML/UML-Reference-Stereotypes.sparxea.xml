@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<RefData version="1.0" exporter="EA.25">
+	<DataSet name="Stereotypes" table="t_stereotypes" filter="Stereotype='#Stereotype#' and AppliesTo='#AppliesTo#'">
+		<DataRow>
+			<Column name="Stereotype" value="BaseType"/>
+			<Column name="AppliesTo" value="Class"/>
+			<Column name="Description" value="BaseType"/>
+			<Column name="MFEnabled" value="FALSE"/>
+			<Column name="ea_guid" value="{BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="ListOfValues"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="ListOfValues"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;3329434&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{F641E816-6FC5-448f-8477-F55B75C09330}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="Attribute"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="Attribute"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;32768&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{6BFEF991-7025-478a-B962-44B9792ED162}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="UserType"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="UserType"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;16748574&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{7BF08AD1-3744-4847-ADF5-E57D090ACBC3}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="Reference"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="Reference"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;13850042&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{C54CB353-26D1-4889-886E-A00A3A109D50}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="Classification"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="Classification"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;55295&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{87F106C5-F6C2-40f2-A265-3ABAA5E98D69}"/>
+		</DataRow>
+	</DataSet>
+</RefData>

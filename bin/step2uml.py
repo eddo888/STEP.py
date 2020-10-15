@@ -57,6 +57,11 @@ class STEP2UML(object):
 			self.base_types[base_type] = _base_type
 	
 
+	def Validation(self, xmi, validation, target):
+		for property in ['MinValue', 'MaxValue', 'MaxLingth', 'InputMask']:
+			value = getAttribute(validation, property)
+			xmi.makeAttribute(property, None, value, target, array=False)
+			
 	def ListsOfValues(self, xmi, STEP):
 		'''
 		get LOVs as class enums
@@ -75,6 +80,10 @@ class STEP2UML(object):
 			sys.stdout.write(f'\t\tListOfValues[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
 			self.lovs[lid] = _lov
 
+			validation = getElement(STEP.ctx, 'step:Validation', lov)
+			if validation:
+				self.Validation(xmi, validation, _lov)
+			
 			for value in getElements(STEP.ctx, 'step:Value', lov):
 				name = value.content
 				id = getAttribute(value, 'ID')
@@ -99,6 +108,25 @@ class STEP2UML(object):
 			sys.stdout.write(f'\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]/Name={colours.Green}{aname}{colours.Off}\n')
 			self.attributes[aid] = _attribute
 
+			validation = getElement(STEP.ctx, 'step:Validation', attribute)
+			if validation:
+				cid = getAttribute(validation, 'BaseType')
+				ctype = self.base_types[cid.lower()]
+				self.Validation(xmi, validation, _attribute)
+			else:
+				lovl = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
+				if lovl:
+					cid = getAttribute(lovl, 'ListOfValueID')
+					ctype = self.lovs[cid]
+			xmi.makeAttribute('base', ctype, None, _attribute, array=False)
+
+			spec_desc = getAttribute(attribute, 'ProductMode')
+			if spec_desc == 'Normal':
+				spec_desc = 'Specification'
+			else:
+				spec_desc = 'Description'
+			xmi.makeAttribute('type', None, spec_desc, _attribute, array=False)
+			
 			lov = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
 			if lov:
 				lid = getAttribute(lov, 'ListOfValueID')
@@ -146,14 +174,14 @@ class STEP2UML(object):
 				aname = getElementText(STEP.ctx, 'step:Name', attribute)
 				aid = getAttribute(attribute, 'ID')
 				multiple = getAttribute(attribute, 'MultiValued') == 'true'				
-				tipe = getElement(STEP.ctx, 'step:Validation', attribute)
-				if tipe:
-					cid = getAttribute(tipe, 'BaseType')
+				validation = getElement(STEP.ctx, 'step:Validation', attribute)
+				if validation:
+					cid = getAttribute(validation, 'BaseType')
 					ctype = self.base_types[cid.lower()]
 				else:
-					tipe = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
-					if tipe:
-						cid = getAttribute(tipe, 'ListOfValueID')
+					lovl = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
+					if lovl:
+						cid = getAttribute(lovl, 'ListOfValueID')
 						ctype = self.lovs[cid]
 				xmi.makeAttribute(aname, ctype, None, _user_type, array=multiple)
 

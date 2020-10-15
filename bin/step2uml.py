@@ -191,21 +191,21 @@ class STEP2UML(object):
 
 			for user_type_link in getElements(STEP.ctx, 'step:UserTypeLink', reference):
 				uid = getAttribute(user_type_link, 'UserTypeID')
+				sys.stdout.write(f'\t\t\tSource[@UserTypeID="{colours.Orange}{uid}{colours.Off}"]\n')
 				if uid in self.user_types.keys():
-					sys.stdout.write(f'\t\t\tSource[@UserTypeID="{colours.Orange}{uid}{colours.Off}"]\n')
 					_user_type = self.user_types[uid]
 					xmi.makeAssociation(rname, _user_type, _reference, classes)
 				else:
-					sys.stderr.write(f'\t\t\t{colours.Red}UserType[@ID="{uid}"] not found !{colours.Off}\n')  
+					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{uid}"] not found !{colours.Off}\n')  
 
 			for target_user_type_link in getElements(STEP.ctx, 'step:TargetUserTypeLink', reference):
 				tid = getAttribute(target_user_type_link, 'UserTypeID')
+				sys.stdout.write(f'\t\t\tTarget[@UserTypeID="{colours.Orange}{tid}{colours.Off}"]\n')
 				if tid in self.user_types.keys():
-					sys.stdout.write(f'\t\t\tTarget[@UserTypeID="{colours.Orange}{tid}{colours.Off}"]\n')
 					_target_user_type = self.user_types[tid]
 					xmi.makeAssociation(rname, _reference, _target_user_type, classes)
 				else:
-					sys.stderr.write(f'\t\t\t{colours.Red}UserType[@ID="{tid}"] not found !{colours.Off}\n')
+					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{tid}"] not found !{colours.Off}\n')
 					
 			self.references[rid] = _reference
 

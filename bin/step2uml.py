@@ -62,6 +62,7 @@ class STEP2UML(object):
 			value = getAttribute(validation, property)
 			xmi.makeAttribute(property, None, value, target, array=False)
 			
+
 	def ListsOfValues(self, xmi, STEP):
 		'''
 		get LOVs as class enums
@@ -237,7 +238,23 @@ class STEP2UML(object):
 					
 			self.references[rid] = _reference
 
-	
+
+	@args.operation
+	@args.parameter(name='file', help='input step.xml file')
+	def setNS(self, file):
+		xmlns='http://www.stibosystems.com/step'
+		STEP = XML(*getContextFromFile(file))
+		root = STEP.doc.getRootElement()
+		ns = root.ns()
+		if ns:
+			print(f'{file} => {ns}')
+		else:
+			setAttribute(root, 'xmlns', xmlns)
+			with open(file, 'w') as output:
+				printXML(str(STEP.doc), output=output, colour=False)
+			print(f'{file} +> {xmlns}')
+
+				  
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	@args.parameter(name='output', short='o', help='output xmi UML file')
@@ -246,7 +263,6 @@ class STEP2UML(object):
 		make an UML XMI file from a STEP.XML input
 		'''
 		print(file)
-
 
 		STEP = XML(*getContextFromFile(file, argsNS=[
 			'step="http://www.stibosystems.com/step"'

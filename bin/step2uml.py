@@ -125,6 +125,7 @@ class STEP2UML(object):
 			if spec_desc == 'Normal':
 				spec_desc = 'Specification'
 			else:
+				# Property -> Description
 				spec_desc = 'Description'
 			xmi.makeAttribute('type', None, spec_desc, _attribute, array=False)
 			

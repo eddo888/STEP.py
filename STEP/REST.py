@@ -404,6 +404,51 @@ class Products(STEP):
 		return super().get('%s/%s/values/%s'%(self.base, id, attributeID))
 
 
+	@args.operation(help='get references of product by id')
+	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='referenceID', help='the ID of reference')
+	def references(self, id, referenceID):
+		return super().get('%s/%s/references/%s'%(self.base, id, referenceID))
+	
+	@args.operation(help='get references of product by id')
+	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='referenceID', help='the ID of reference')
+	@args.parameter(name='targetID', help='the ID of target')
+	@args.parameter(name='values', short='m', metavar='attr=value', nargs='*', help='metadata attribute on reference')
+	@args.parameter(name='asid', short='i', flag=True, help='reference valus as lov id')
+	@args.parameter(name='overwrite', short='w', flag=True, help='allow overwrite')
+	def reference(self, id, referenceID, targetID, values=[], asid=False, overwrite=False):
+		headers={
+			"accept": "application/json",
+			"Content-Type": "application/json",
+		}
+		payload={
+			"target": targetID,
+			"targetType": "product",
+			"values": {
+			}
+		}
+		for nvp in values:
+			_name, _value = nvp.split('=')
+			payload['values'][_name] = { 
+				"calculated": False,
+				"contextLocal": True,
+				"value": {
+					"value": _value if not asid else None,
+					"valueId": _value if asid else None,
+					"unit": None
+				}
+			}
+		params = {
+			"context" : self.context,
+			"workspace": self.workspace,
+			"allow-overwrite" : overwrite
+		}
+		return super().put('%s/%s/references/%s/%s'%(
+			self.base, id, referenceID, targetID), body=json.dumps(payload), params=params, headers=headers
+		)
+
+
 	@args.operation(help='set values of product by id')
 	@args.parameter(name='id', help='the ID of product')
 	@args.parameter(name='attributeID', help='the ID of product')
@@ -421,6 +466,7 @@ class Products(STEP):
 		return super().put('%s/%s/values/%s'%(
 			self.base, id, attributeID), body=json.dumps(payload), headers=headers
 		)
+
 
 	@args.operation(help='get tables of product by id')
 	@args.parameter(name='id', help='the ID of product')

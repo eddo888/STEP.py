@@ -1,52 +1,69 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<RefData version="1.0" exporter="EA.25">
-	<DataSet name="Stereotypes" table="t_stereotypes" filter="Stereotype='#Stereotype#' and AppliesTo='#AppliesTo#'">
+<RefData exporter="EA.25" version="1.0">
+	<DataSet filter="Stereotype='#Stereotype#' and AppliesTo='#AppliesTo#'" name="Stereotypes" table="t_stereotypes">
 		<DataRow>
-			<Column name="Stereotype" value="BaseType"/>
-			<Column name="AppliesTo" value="Class"/>
-			<Column name="Description" value="BaseType"/>
-			<Column name="MFEnabled" value="FALSE"/>
+			<Column name="Stereotype" value="STEP Classification"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;55295&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{87F106C5-F6C2-40f2-A265-3ABAA5E98D69}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP Entity"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;16777215&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{8086809F-F43F-4476-941F-FF31EBC23E4D}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP Asset"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;14599344&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{9DC2612E-76F1-4a69-B766-1966BA5232DE}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP Reference"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;13850042&quot; text=&quot;13882323&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{E1B33DAB-B258-4c97-881F-6C243B46737C}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP LOV"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;3145645&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{78CDA6DF-5795-4784-B68D-49C26885A1B7}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP Unit"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="Description" value="STEP Unit"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;32896&quot; text=&quot;14474460&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{16497342-6B00-47e7-BD6C-A608A7E0CFD9}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP BaseType"/>
+			<Column name="AppliesTo" value="class"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;-1&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
 			<Column name="ea_guid" value="{BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF}"/>
 		</DataRow>
 		<DataRow>
-			<Column name="Stereotype" value="ListOfValues"/>
+			<Column name="Stereotype" value="STEP Attribute"/>
 			<Column name="AppliesTo" value="class"/>
-			<Column name="Description" value="ListOfValues"/>
 			<Column name="MFEnabled" value="TRUE"/>
-			<Column name="Style" value="&lt;STYLE fill=&quot;3329434&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
-			<Column name="ea_guid" value="{F641E816-6FC5-448f-8477-F55B75C09330}"/>
-		</DataRow>
-		<DataRow>
-			<Column name="Stereotype" value="Attribute"/>
-			<Column name="AppliesTo" value="class"/>
-			<Column name="Description" value="Attribute"/>
-			<Column name="MFEnabled" value="TRUE"/>
-			<Column name="Style" value="&lt;STYLE fill=&quot;32768&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;32768&quot; text=&quot;14474460&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
 			<Column name="ea_guid" value="{6BFEF991-7025-478a-B962-44B9792ED162}"/>
 		</DataRow>
 		<DataRow>
-			<Column name="Stereotype" value="UserType"/>
+			<Column name="Stereotype" value="STEP UserType"/>
 			<Column name="AppliesTo" value="class"/>
-			<Column name="Description" value="UserType"/>
 			<Column name="MFEnabled" value="TRUE"/>
-			<Column name="Style" value="&lt;STYLE fill=&quot;16748574&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;16748574&quot; text=&quot;13882323&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
 			<Column name="ea_guid" value="{7BF08AD1-3744-4847-ADF5-E57D090ACBC3}"/>
-		</DataRow>
-		<DataRow>
-			<Column name="Stereotype" value="Reference"/>
-			<Column name="AppliesTo" value="class"/>
-			<Column name="Description" value="Reference"/>
-			<Column name="MFEnabled" value="TRUE"/>
-			<Column name="Style" value="&lt;STYLE fill=&quot;13850042&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
-			<Column name="ea_guid" value="{C54CB353-26D1-4889-886E-A00A3A109D50}"/>
-		</DataRow>
-		<DataRow>
-			<Column name="Stereotype" value="Classification"/>
-			<Column name="AppliesTo" value="class"/>
-			<Column name="Description" value="Classification"/>
-			<Column name="MFEnabled" value="TRUE"/>
-			<Column name="Style" value="&lt;STYLE fill=&quot;55295&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
-			<Column name="ea_guid" value="{87F106C5-F6C2-40f2-A265-3ABAA5E98D69}"/>
 		</DataRow>
 	</DataSet>
 </RefData>

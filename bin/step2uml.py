@@ -21,21 +21,25 @@ class STEP2UML(object):
 	'''
 
 	def __init__(self):
-		self.base_types = dict() # validation: xmi.class
-		self.lovs = dict() # id: xmi.class
-		self.attributes = dict() # id: xml.class
-		self.user_types = dict() # id: xmi.class
-		self.references = dict() # id: xmi.classuer
+		self.base_types           = dict() # validation: xmi.class
+		self.lov_groups_packages  = dict() # id: xmi.class
+		self.lov_groups_diagrams  = dict() # id: xmi.class
+		self.lovs                 = dict() # id: xmi.class
+		self.attr_groups_packages = dict() # id: xml.class
+		self.attr_groups_diagrams = dict() # id: xml.class
+		self.attributes           = dict() # id: xml.class
+		self.user_types           = dict() # id: xmi.class
+		self.references           = dict() # id: xmi.classuer
 
 
-	def BaseTypes(self, xmi):
+	def BaseTypes(self, xmi, parent):
 		'''
 		make the fundamentals
 		'''
 		sys.stdout.write(f'\t{colours.Teal}BaseTypes{colours.Off}\n')
 		
-		classes = xmi.makePackage('Fundamentals', xmi.modelNS)
-		diagram = xmi.makeClassDiagram('Fundamentals', classes)
+		package = xmi.makePackage('Fundamentals', parent)
+		diagram = xmi.makeClassDiagram('Fundamentals', package)
 
 		types = [
 			'text', 
@@ -50,11 +54,13 @@ class STEP2UML(object):
 			'regexp',
 		]
 		for base_type in types:
-			_base_type = xmi.makeClass(base_type, classes, uid=base_type)
+			_base_type = xmi.makeClass(base_type, package, uid=base_type)
 			sys.stdout.write(f'\t\tBaseType[@ID={colours.Orange}"{base_type}"{colours.Off}]\n')
 			xmi.addDiagramClass(_base_type, diagram)
 			xmi.makeStereotype('BaseType', _base_type)
 			self.base_types[base_type] = _base_type
+
+		return package
 	
 
 	def Validation(self, xmi, validation, target):
@@ -63,20 +69,54 @@ class STEP2UML(object):
 			xmi.makeAttribute(property, None, value, target, array=False)
 			
 
+	def ListsOfValuesGroup(self, xmi, STEP, lov_group, package, diagram, indent=''):
+		lname = getElementText(STEP.ctx, 'step:Name', lov_group)
+		lid = getAttribute(lov_group, 'ID')
+
+		_package = xmi.makePackage(lname, package)
+		_diagram = xmi.makeClassDiagram(lname, _package)
+		xmi.addDiagramClass(_package, diagram)
+		
+		sys.stdout.write(f'\t\t{indent}ListOfValuesGroup[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
+		self.lov_groups_packages[lid] = _package
+		self.lov_groups_diagrams[lid] = _diagram
+
+		for child in getElements(STEP.ctx, 'step:ListOfValuesGroup', lov_group):
+			self.ListsOfValuesGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
+			
+		
+	def ListsOfValuesGroups(self, xmi, STEP, parent):
+		'''
+		get LOV groups as packages
+		'''
+		sys.stdout.write(f'\t{colours.Teal}ListsOfValuesGroups{colours.Off}\n')
+		
+		package = xmi.makePackage('ListsOfValues', parent)
+		diagram = xmi.makeClassDiagram('ListsOfValues', package)
+
+		for lov_group in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:ListOfValuesGroupList/step:ListOfValuesGroup'):
+			self.ListsOfValuesGroup(xmi, STEP, lov_group, package, diagram)
+
+		return package
+			
+
 	def ListsOfValues(self, xmi, STEP):
 		'''
 		get LOVs as class enums
 		'''
 		sys.stdout.write(f'\t{colours.Teal}ListsOfValues{colours.Off}\n')
 		
-		classes = xmi.makePackage('ListsOfValues', xmi.modelNS)
-		diagram = xmi.makeClassDiagram('ListsOfValues', classes)
-
 		for lov in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:ListsOfValues/step:ListOfValue'):
 			lname = getElementText(STEP.ctx, 'step:Name', lov)
 			lid = getAttribute(lov, 'ID')
-			_lov = xmi.makeClass(lname, classes, uid=lid)
+			pid = getAttribute(lov, 'ParentID')
+
+			package = self.lov_groups_packages[pid]
+			diagram = self.lov_groups_diagrams[pid]
+			
+			_lov = xmi.makeClass(lname, package, uid=lid)
 			xmi.makeStereotype('ListOfValues', _lov)
+
 			xmi.addDiagramClass(_lov, diagram)
 			sys.stdout.write(f'\t\tListOfValues[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
 			self.lovs[lid] = _lov
@@ -91,19 +131,53 @@ class STEP2UML(object):
 				xmi.makeAttribute(name, None, id, _lov, array=False)
 
 	
+	def AttributeGroup(self, xmi, STEP, attr_group, package, diagram, indent=''):
+		lname = getElementText(STEP.ctx, 'step:Name', attr_group)
+		lid = getAttribute(attr_group, 'ID')
+
+		_package = xmi.makePackage(lname, package)
+		_diagram = xmi.makeClassDiagram(lname, _package)
+		xmi.addDiagramClass(_package, diagram)
+		
+		sys.stdout.write(f'\t\t{indent}AttributeGroup[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
+		self.attr_groups_packages[lid] = _package
+		self.attr_groups_diagrams[lid] = _diagram
+
+		for child in getElements(STEP.ctx, 'step:AttributeGroup', attr_group):
+			self.AttributeGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
+
+			
+	def AttributeGroups(self, xmi, STEP, parent):
+		'''
+		get LOV groups as packages
+		'''
+		sys.stdout.write(f'\t{colours.Teal}AttributeGroups{colours.Off}\n')
+		
+		package = xmi.makePackage('Attributes', parent)
+		diagram = xmi.makeClassDiagram('Attributes', package)
+
+		for attr_group in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:AttributeGroupList/step:AttributeGroup'):
+			self.AttributeGroup(xmi, STEP, attr_group, package, diagram)
+
+		return package
+	
+			
 	def Attributes(self, xmi, STEP):
 		'''
 		get attributes as classes
 		'''
 		sys.stdout.write(f'\t{colours.Teal}Attributes{colours.Off}\n')
 		
-		classes = xmi.makePackage('Attributes', xmi.modelNS)
-		diagram = xmi.makeClassDiagram('Attributes', classes)
-
 		for attribute in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:AttributeList/step:Attribute'):
 			aname = getElementText(STEP.ctx, 'step:Name', attribute)
 			aid = getAttribute(attribute, 'ID')
-			_attribute = xmi.makeClass(aname, classes, uid=aid)
+			agl = getElement(STEP.ctx, 'step:AttributeGroupLink', attribute)
+			pid = getAttribute(agl, 'AttributeGroupID')
+
+			package = self.attr_groups_packages[pid]
+			diagram = self.attr_groups_diagrams[pid]
+				
+			_attribute = xmi.makeClass(aname, package, uid=aid)
 			xmi.makeStereotype('Attribute', _attribute)
 			xmi.addDiagramClass(_attribute, diagram)
 			sys.stdout.write(f'\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]/Name={colours.Green}{aname}{colours.Off}\n')
@@ -133,22 +207,22 @@ class STEP2UML(object):
 			if lov:
 				lid = getAttribute(lov, 'ListOfValueID')
 				_lov = self.lovs[lid]
-				xmi.makeAssociation('LOV', _attribute, _lov, classes)
+				xmi.makeAssociation('LOV', _attribute, _lov, package)
 					
 	
-	def UserTypes(self, xmi, STEP):
+	def UserTypes(self, xmi, STEP, parent):
 		'''
 		make the user types
 		'''
 		sys.stdout.write(f'\t{colours.Teal}UserTypes{colours.Off}\n')
 		
-		classes = xmi.makePackage('UserTypes', xmi.modelNS)
-		diagram = xmi.makeClassDiagram('UserTypes', classes)
+		package = xmi.makePackage('UserTypes', parent)
+		diagram = xmi.makeClassDiagram('UserTypes', package)
 		
 		for user_type in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:UserTypes/step:UserType'):
 			uname = getElementText(STEP.ctx, 'step:Name', user_type)
 			uid = getAttribute(user_type, 'ID')
-			_user_type = xmi.makeClass(uname, classes, uid=uid)
+			_user_type = xmi.makeClass(uname, package, uid=uid)
 
 			aid  = getAttribute(user_type, 'AllowInDesignTemplate')
 			aqt  = getAttribute(user_type, 'AllowQuarkTemplate')
@@ -197,22 +271,24 @@ class STEP2UML(object):
 				pid = getAttribute(user_type_link, 'UserTypeID')
 				if pid in self.user_types.keys():
 					_parent_user_type = self.user_types[pid]
-					xmi.assignBaseClass(_parent_user_type, _user_type, classes)
+					xmi.assignBaseClass(_parent_user_type, _user_type, package)
 
+		return package
 	
-	def References(self, xmi, STEP):
+	
+	def References(self, xmi, STEP, parent):
 		'''
 		make references
 		'''
 		sys.stdout.write(f'\t{colours.Teal}References{colours.Off}\n')
 		
-		classes = xmi.makePackage('References', xmi.modelNS)
-		diagram = xmi.makeClassDiagram('References', classes)
+		package = xmi.makePackage('References', parent)
+		diagram = xmi.makeClassDiagram('References', package)
 
 		for reference in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:CrossReferenceTypes/*'):
 			rname = getElementText(STEP.ctx, 'step:Name', reference)
 			rid = getAttribute(reference, 'ID')
-			_reference = xmi.makeClass(rname, classes, uid=rid)
+			_reference = xmi.makeClass(rname, package, uid=rid)
 			xmi.makeStereotype('Reference', _reference)
 			xmi.addDiagramClass(_reference, diagram)
 			sys.stdout.write(f'\t\tReference[@ID="{colours.Orange}{rid}{colours.Off}"]/Name={colours.Green}{rname}{colours.Off}\n')
@@ -224,7 +300,7 @@ class STEP2UML(object):
 				sys.stdout.write(f'\t\t\tSource[@UserTypeID="{colours.Orange}{uid}{colours.Off}"]\n')
 				if uid in self.user_types.keys():
 					_user_type = self.user_types[uid]
-					xmi.makeAssociation(rname, _user_type, _reference, classes)
+					xmi.makeAssociation(rname, _user_type, _reference, package)
 				else:
 					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{uid}"] not found !{colours.Off}\n')  
 
@@ -233,11 +309,13 @@ class STEP2UML(object):
 				sys.stdout.write(f'\t\t\tTarget[@UserTypeID="{colours.Orange}{tid}{colours.Off}"]\n')
 				if tid in self.user_types.keys():
 					_target_user_type = self.user_types[tid]
-					xmi.makeAssociation(rname, _reference, _target_user_type, classes)
+					xmi.makeAssociation(rname, _reference, _target_user_type, package)
 				else:
 					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{tid}"] not found !{colours.Off}\n')
 					
 			self.references[rid] = _reference
+
+		return package
 
 
 	@args.operation
@@ -271,27 +349,17 @@ class STEP2UML(object):
 		
 		xmi = XMI()
 
-		self.BaseTypes(xmi)
+		package = xmi.makePackage('STEP', xmi.modelNS)
+		diagram = xmi.makeClassDiagram('STEP', package)
+
+		xmi.addDiagramClass(self.BaseTypes(xmi, package), diagram)
+		xmi.addDiagramClass(self.ListsOfValuesGroups(xmi, STEP, package), diagram)
 		self.ListsOfValues(xmi, STEP)
+		xmi.addDiagramClass(self.AttributeGroups(xmi, STEP, package), diagram)
 		self.Attributes(xmi, STEP)
-		self.UserTypes(xmi, STEP)
-		self.References(xmi, STEP)
+		xmi.addDiagramClass(self.UserTypes(xmi, STEP, package), diagram)
+		xmi.addDiagramClass(self.References(xmi, STEP, package), diagram)
 
-		'''									   
-		parameters = {
-			'name' : string,
-			'child' : child
-		}
-		returns=child
-		xmi.makeOperation('getChild',parameters,returns,parent)
-
-		xmi.makeStereotype('hifi',string)
-
- 		diagram = xmi.makeClassDiagram('Diagram',classes)
-		xmi.addDiagramClass(parent,diagram)
-		xmi.addDiagramClass(child,diagram)
-		'''
-											   
 		# export the results
 
 		name = output or f'{file}.xmi'

@@ -57,7 +57,7 @@ class STEP2UML(object):
 			_base_type = xmi.makeClass(base_type, package, uid=base_type)
 			sys.stdout.write(f'\t\tBaseType[@ID={colours.Orange}"{base_type}"{colours.Off}]\n')
 			xmi.addDiagramClass(_base_type, diagram)
-			xmi.makeStereotype('BaseType', _base_type)
+			xmi.makeStereotype('STEP BaseType', _base_type)
 			self.base_types[base_type] = _base_type
 
 		return package
@@ -115,7 +115,7 @@ class STEP2UML(object):
 			diagram = self.lov_groups_diagrams[pid]
 			
 			_lov = xmi.makeClass(lname, package, uid=lid)
-			xmi.makeStereotype('ListOfValues', _lov)
+			xmi.makeStereotype('STEP ListOfValues', _lov)
 
 			xmi.addDiagramClass(_lov, diagram)
 			sys.stdout.write(f'\t\tListOfValues[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
@@ -178,7 +178,7 @@ class STEP2UML(object):
 			diagram = self.attr_groups_diagrams[pid]
 				
 			_attribute = xmi.makeClass(aname, package, uid=aid)
-			xmi.makeStereotype('Attribute', _attribute)
+			xmi.makeStereotype('STEP Attribute', _attribute)
 			xmi.addDiagramClass(_attribute, diagram)
 			sys.stdout.write(f'\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]/Name={colours.Green}{aname}{colours.Off}\n')
 			self.attributes[aid] = _attribute
@@ -238,7 +238,7 @@ class STEP2UML(object):
 				st = 'Classification'
 			else:
 				st = 'Asset'
-			xmi.makeStereotype(st, _user_type)
+			xmi.makeStereotype(f'STEP {st}', _user_type)
 
 			xmi.addDiagramClass(_user_type, diagram)
 			sys.stdout.write(f'\t\tUserType[@ID="{colours.Orange}{uid}{colours.Off}" and @UserTypeID="{colours.Orange}{st}{colours.Off}"]/Name={colours.Green}{uname}{colours.Off}\n')
@@ -289,7 +289,7 @@ class STEP2UML(object):
 			rname = getElementText(STEP.ctx, 'step:Name', reference)
 			rid = getAttribute(reference, 'ID')
 			_reference = xmi.makeClass(rname, package, uid=rid)
-			xmi.makeStereotype('Reference', _reference)
+			xmi.makeStereotype('STEP Reference', _reference)
 			xmi.addDiagramClass(_reference, diagram)
 			sys.stdout.write(f'\t\tReference[@ID="{colours.Orange}{rid}{colours.Off}"]/Name={colours.Green}{rname}{colours.Off}\n')
 

@@ -30,7 +30,7 @@
 			<Column name="ea_guid" value="{E1B33DAB-B258-4c97-881F-6C243B46737C}"/>
 		</DataRow>
 		<DataRow>
-			<Column name="Stereotype" value="STEP LOV"/>
+			<Column name="Stereotype" value="STEP ListOfValues"/>
 			<Column name="AppliesTo" value="class"/>
 			<Column name="MFEnabled" value="TRUE"/>
 			<Column name="Style" value="&lt;STYLE fill=&quot;3145645&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
@@ -64,6 +64,22 @@
 			<Column name="MFEnabled" value="TRUE"/>
 			<Column name="Style" value="&lt;STYLE fill=&quot;16748574&quot; text=&quot;13882323&quot; border=&quot;-1&quot; groupname=&quot;STEP&quot; type=&quot;metafile&quot;/&gt;"/>
 			<Column name="ea_guid" value="{7BF08AD1-3744-4847-ADF5-E57D090ACBC3}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP AttributeGroup"/>
+			<Column name="AppliesTo" value="package"/>
+			<Column name="Description" value="STEP Attribute Group"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;-1&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{221A74F6-56F3-42f0-832D-1C5BC3C1F043}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="Stereotype" value="STEP ListOfValuesGroup"/>
+			<Column name="AppliesTo" value="package"/>
+			<Column name="Description" value="STEP Lists of Values Group"/>
+			<Column name="MFEnabled" value="TRUE"/>
+			<Column name="Style" value="&lt;STYLE fill=&quot;-1&quot; text=&quot;-1&quot; border=&quot;-1&quot; groupname=&quot;&quot; type=&quot;metafile&quot;/&gt;"/>
+			<Column name="ea_guid" value="{194423E9-E487-4ebe-AAF3-91CC555733CA}"/>
 		</DataRow>
 	</DataSet>
 </RefData>

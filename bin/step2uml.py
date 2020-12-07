@@ -42,16 +42,17 @@ class STEP2UML(object):
 		diagram = xmi.makeClassDiagram('Fundamentals', package)
 
 		types = [
-			'text', 
-			'number',
-			'integer',
+			'condition',
 			'date', 
 			'datetime', 
+			'integer',
 			'isodate', 
 			'isodatetime', 
-			'legacyisodatetime',
 			'legacyisodate',
+			'legacyisodatetime',
+			'number',
 			'regexp',
+			'text', 
 		]
 		for base_type in types:
 			_base_type = xmi.makeClass(base_type, package, uid=base_type)
@@ -66,14 +67,17 @@ class STEP2UML(object):
 	def Validation(self, xmi, validation, target):
 		for property in ['MinValue', 'MaxValue', 'MaxLingth', 'InputMask']:
 			value = getAttribute(validation, property)
-			xmi.makeAttribute(property, None, value, target, array=False)
+			xmi.makeAttribute(f'@{property}', None, value, target, array=False)
 			
 
-	def ListsOfValuesGroup(self, xmi, STEP, lov_group, package, diagram, indent=''):
+	def ListOfValuesGroup(self, xmi, STEP, lov_group, package, diagram, indent=''):
 		lname = getElementText(STEP.ctx, 'step:Name', lov_group)
 		lid = getAttribute(lov_group, 'ID')
 
 		_package = xmi.makePackage(lname, package)
+		xmi.makeStereotype('STEP ListOfValuesGroup', _package)
+		xmi.makeAttribute('@ID', None, lid, _package, array=False)
+		
 		_diagram = xmi.makeClassDiagram(lname, _package)
 		xmi.addDiagramClass(_package, diagram)
 		
@@ -82,25 +86,26 @@ class STEP2UML(object):
 		self.lov_groups_diagrams[lid] = _diagram
 
 		for child in getElements(STEP.ctx, 'step:ListOfValuesGroup', lov_group):
-			self.ListsOfValuesGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
+			self.ListOfValuesGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
 			
 		
-	def ListsOfValuesGroups(self, xmi, STEP, parent):
+	def ListOfValuesGroups(self, xmi, STEP, parent):
 		'''
 		get LOV groups as packages
 		'''
-		sys.stdout.write(f'\t{colours.Teal}ListsOfValuesGroups{colours.Off}\n')
+		sys.stdout.write(f'\t{colours.Teal}ListOfValuesGroups{colours.Off}\n')
 		
-		package = xmi.makePackage('ListsOfValues', parent)
-		diagram = xmi.makeClassDiagram('ListsOfValues', package)
+		package = xmi.makePackage('ListOfValues', parent)
+		xmi.makeStereotype('STEP ListOfValuesGroup', package)
+		diagram = xmi.makeClassDiagram('ListOfValues', package)
 
 		for lov_group in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:ListOfValuesGroupList/step:ListOfValuesGroup'):
-			self.ListsOfValuesGroup(xmi, STEP, lov_group, package, diagram)
+			self.ListOfValuesGroup(xmi, STEP, lov_group, package, diagram)
 
 		return package
 			
 
-	def ListsOfValues(self, xmi, STEP):
+	def ListOfValues(self, xmi, STEP):
 		'''
 		get LOVs as class enums
 		'''
@@ -121,6 +126,8 @@ class STEP2UML(object):
 			sys.stdout.write(f'\t\tListOfValues[@ID="{colours.Orange}{lid}{colours.Off}"]/Name={colours.Green}{lname}{colours.Off}\n')
 			self.lovs[lid] = _lov
 
+			xmi.makeAttribute('@ID', None, lid, _lov, array=False)
+
 			validation = getElement(STEP.ctx, 'step:Validation', lov)
 			if validation:
 				self.Validation(xmi, validation, _lov)
@@ -136,6 +143,8 @@ class STEP2UML(object):
 		lid = getAttribute(attr_group, 'ID')
 
 		_package = xmi.makePackage(lname, package)
+		xmi.makeStereotype('STEP AttributeGroup', _package)
+		xmi.makeAttribute('@ID', None, lid, _package, array=False)
 		_diagram = xmi.makeClassDiagram(lname, _package)
 		xmi.addDiagramClass(_package, diagram)
 		
@@ -182,6 +191,8 @@ class STEP2UML(object):
 			xmi.addDiagramClass(_attribute, diagram)
 			sys.stdout.write(f'\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]/Name={colours.Green}{aname}{colours.Off}\n')
 			self.attributes[aid] = _attribute
+
+			xmi.makeAttribute('@ID', None, aid, _attribute, array=False)
 
 			validation = getElement(STEP.ctx, 'step:Validation', attribute)
 			if validation:
@@ -240,6 +251,8 @@ class STEP2UML(object):
 				st = 'Asset'
 			xmi.makeStereotype(f'STEP {st}', _user_type)
 
+			xmi.makeAttribute('@ID', None, uid, _user_type, array=False)
+
 			xmi.addDiagramClass(_user_type, diagram)
 			sys.stdout.write(f'\t\tUserType[@ID="{colours.Orange}{uid}{colours.Off}" and @UserTypeID="{colours.Orange}{st}{colours.Off}"]/Name={colours.Green}{uname}{colours.Off}\n')
 
@@ -292,6 +305,8 @@ class STEP2UML(object):
 			xmi.makeStereotype('STEP Reference', _reference)
 			xmi.addDiagramClass(_reference, diagram)
 			sys.stdout.write(f'\t\tReference[@ID="{colours.Orange}{rid}{colours.Off}"]/Name={colours.Green}{rname}{colours.Off}\n')
+
+			xmi.makeAttribute('@ID', None, rid, _reference, array=False)
 
 			#print(rid, rname)
 
@@ -353,8 +368,8 @@ class STEP2UML(object):
 		diagram = xmi.makeClassDiagram('STEP', package)
 
 		xmi.addDiagramClass(self.BaseTypes(xmi, package), diagram)
-		xmi.addDiagramClass(self.ListsOfValuesGroups(xmi, STEP, package), diagram)
-		self.ListsOfValues(xmi, STEP)
+		xmi.addDiagramClass(self.ListOfValuesGroups(xmi, STEP, package), diagram)
+		self.ListOfValues(xmi, STEP)
 		xmi.addDiagramClass(self.AttributeGroups(xmi, STEP, package), diagram)
 		self.Attributes(xmi, STEP)
 		xmi.addDiagramClass(self.UserTypes(xmi, STEP, package), diagram)

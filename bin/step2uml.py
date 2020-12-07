@@ -22,14 +22,15 @@ class STEP2UML(object):
 
 	def __init__(self):
 		self.base_types           = dict() # validation: xmi.class
-		self.lov_groups_packages  = dict() # id: xmi.class
-		self.lov_groups_diagrams  = dict() # id: xmi.class
+		self.lov_groups_packages  = dict() # id: xmi.package
+		self.lov_groups_diagrams  = dict() # id: xmi.diagram
 		self.lovs                 = dict() # id: xmi.class
-		self.attr_groups_packages = dict() # id: xml.class
-		self.attr_groups_diagrams = dict() # id: xml.class
+		self.attr_groups_packages = dict() # id: xml.package
+		self.attr_groups_diagrams = dict() # id: xml.diagram
 		self.attributes           = dict() # id: xml.class
 		self.user_types           = dict() # id: xmi.class
-		self.references           = dict() # id: xmi.classuer
+		self.references           = dict() # id: xmi.class
+		self.keys                 = dict() # id: xmi.class
 
 
 	def BaseTypes(self, xmi, parent):
@@ -204,7 +205,7 @@ class STEP2UML(object):
 				if lovl:
 					cid = getAttribute(lovl, 'ListOfValueID')
 					ctype = self.lovs[cid]
-			xmi.makeAttribute('base', ctype, None, _attribute, array=False)
+			xmi.makeAttribute('@base', ctype, None, _attribute, array=False)
 
 			spec_desc = getAttribute(attribute, 'ProductMode')
 			if spec_desc == 'Normal':
@@ -212,7 +213,7 @@ class STEP2UML(object):
 			else:
 				# Property -> Description
 				spec_desc = 'Description'
-			xmi.makeAttribute('type', None, spec_desc, _attribute, array=False)
+			xmi.makeAttribute('@type', None, spec_desc, _attribute, array=False)
 			
 			lov = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
 			if lov:
@@ -333,6 +334,50 @@ class STEP2UML(object):
 		return package
 
 
+	def Keys(self, xmi, STEP, parent):
+		'''
+		make keys
+		'''
+		sys.stdout.write(f'\t{colours.Teal}Keys{colours.Off}\n')
+		
+		package = xmi.makePackage('Keys', parent)
+		diagram = xmi.makeClassDiagram('Keys', package)
+
+		for key in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:Keys/step:Key'):
+			kname = getElementText(STEP.ctx, 'step:Name', key)
+			kid = getAttribute(key, 'ID')
+			_key = xmi.makeClass(kname, package, uid=kid)
+
+			xmi.makeStereotype('STEP Key', _key)
+			xmi.addDiagramClass(_key, diagram)
+			sys.stdout.write(f'\t\tKey[@ID="{colours.Orange}{kid}{colours.Off}"]/Name={colours.Green}{kname}{colours.Off}\n')
+
+			xmi.makeAttribute('@ID', None, kid, _key, array=False)
+			key_formula = getElementText(STEP.ctx, 'step:KeyFormula', key)
+			xmi.makeAttribute('@KeyFormuula', None, key_formula, _key, array=False)
+
+			for user_type_link in getElements(STEP.ctx, 'step:UserTypeLink', key):
+				uid = getAttribute(user_type_link, 'UserTypeID')
+				sys.stdout.write(f'\t\t\tSource[@UserTypeID="{colours.Orange}{uid}{colours.Off}"]\n')
+				if uid in self.user_types.keys():
+					_user_type = self.user_types[uid]
+					xmi.makeAssociation(kname, _user_type, _key, package)
+				else:
+					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{uid}"] not found !{colours.Off}\n')  
+
+			for attribute_link in getElements(STEP.ctx, 'step:AttributeLink', key):
+				aid = getAttribute(attribute_link, 'AttributeID')
+				sys.stdout.write(f'\t\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]\n')
+				if aid in self.attributes.keys():
+					_attribute = self.attributes[aid]
+					xmi.makeAssociation(kname, _key, _attribute, package)
+				else:
+					sys.stderr.write(f'\t\t\t\t{colours.Red}Attribute[@ID="{aid}"] not found !{colours.Off}\n')
+					
+			self.keys[kid] = _key
+
+		return package
+
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	def setNS(self, file):
@@ -362,7 +407,7 @@ class STEP2UML(object):
 			'step="http://www.stibosystems.com/step"'
 		]))
 		
-		xmi = XMI()
+		xmi = XMI(name=os.path.basename(file))
 
 		package = xmi.makePackage('STEP', xmi.modelNS)
 		diagram = xmi.makeClassDiagram('STEP', package)
@@ -374,9 +419,9 @@ class STEP2UML(object):
 		self.Attributes(xmi, STEP)
 		xmi.addDiagramClass(self.UserTypes(xmi, STEP, package), diagram)
 		xmi.addDiagramClass(self.References(xmi, STEP, package), diagram)
+		xmi.addDiagramClass(self.Keys(xmi, STEP, package), diagram)
 
 		# export the results
-
 		name = output or f'{file}.xmi'
 		with open(name,'w') as _output:
 			printXML(str(xmi.doc), output=_output, colour=False)

@@ -66,7 +66,7 @@ class STEP2UML(object):
 	
 
 	def Validation(self, xmi, validation, target):
-		for property in ['MinValue', 'MaxValue', 'MaxLingth', 'InputMask']:
+		for property in ['MinValue', 'MaxValue', 'MaxLength', 'InputMask']:
 			value = getAttribute(validation, property)
 			xmi.makeAttribute(f'@{property}', None, value, target, array=False)
 			

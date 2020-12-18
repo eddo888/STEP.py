@@ -7,5 +7,24 @@ import sys, json
 from STEP.SOAP import *
 from STEP.Cleaner import suds2dict
 
-print(suds2dict(args.execute()))
-
+#_________________________________________________________________
+def main():
+	result = args.execute()
+	if result:
+		_colour = colour()
+		if output():
+			_colour = False
+			_output = codecs.open(output(),'w',encoding='utf8')
+		else:
+			_output = sys.stdout
+			
+		prettyPrint(render(result),output=_output,colour=_colour)
+		if output():
+			print(output())
+			_output.close()
+		sys.exit(0)
+	else:
+		sys.exit(1)
+		
+#_________________________________________________________________
+if __name__ == '__main__': main()

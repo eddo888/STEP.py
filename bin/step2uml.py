@@ -53,7 +53,10 @@ class STEP2UML(object):
 			'legacyisodatetime',
 			'number',
 			'regexp',
-			'text', 
+			'text',
+			'url',
+			'numeric_text',
+			'text_exclude_tags',
 		]
 		for base_type in types:
 			_base_type = xmi.makeClass(base_type, package, uid=base_type)
@@ -378,6 +381,7 @@ class STEP2UML(object):
 
 		return package
 
+
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	def setNS(self, file):
@@ -393,6 +397,33 @@ class STEP2UML(object):
 				printXML(str(STEP.doc), output=output, colour=False)
 			print(f'{file} +> {xmlns}')
 
+
+	@args.operation
+	@args.parameter(name='file', help='input step.xml file')
+	def addMissingGroups(self, file):
+		xmlns='http://www.stibosystems.com/step'
+		STEP = XML(*getContextFromFile(file, argsNS=[
+			f'step="{xmlns}"'
+		]))
+		root = STEP.doc.getRootElement()
+
+		attribute_groups = set()
+		for element in getElements(STEP.ctx, '//step:AttributeGroup'):
+			id = getAttribute(element, 'ID')
+			attribute_groups.add(id)
+
+		groups = getElement(STEP.ctx, '//step:AttributeGroupList')
+		for element in getElements(STEP.ctx, '//step:Attribute/step:AttributeGroupLink'):
+			id = getAttribute(element, 'AttributeGroupID')
+			if id not in attribute_groups:
+				print(id)
+				element = addElement(STEP.doc, 'AttributeGroup', groups)
+				setAttribute(element, 'ID', id)
+				attribute_groups.add(id)
+		
+		with open(file, 'w') as output:
+			printXML(str(STEP.doc), output=output, colour=False)
+		print(f'{file} +> {xmlns}')
 				  
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')

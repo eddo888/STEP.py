@@ -385,6 +385,9 @@ class STEP2UML(object):
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	def setNS(self, file):
+		'''
+		used to put the step namespace into the step.xml file
+		'''
 		xmlns='http://www.stibosystems.com/step'
 		STEP = XML(*getContextFromFile(file))
 		root = STEP.doc.getRootElement()
@@ -401,6 +404,9 @@ class STEP2UML(object):
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	def addMissingGroups(self, file):
+		'''
+		adds missing attribute groups
+		'''
 		xmlns='http://www.stibosystems.com/step'
 		STEP = XML(*getContextFromFile(file, argsNS=[
 			f'step="{xmlns}"'

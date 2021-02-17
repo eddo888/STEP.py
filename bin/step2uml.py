@@ -403,6 +403,51 @@ class STEP2UML(object):
 
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
+	def addMissingNames(self, file):
+		'''
+		adds missing object Names
+		'''
+		xmlns='http://www.stibosystems.com/step'
+		STEP = XML(*getContextFromFile(file, argsNS=[
+			f'step="{xmlns}"'
+		]))
+		root = STEP.doc.getRootElement()
+
+		xpath = '''
+//*[
+(
+  local-name()="UserType"
+  or
+  local-name()="AttributeGroup"
+  or
+  local-name()="Attribute"
+  or
+  local-name()="ListOfValuesGroup"
+  or
+  local-name()="ListOfValue"
+  or
+  local-name()="AssetCrossReferenceType"
+  or
+  local-name()="ProductCrossReferenceType"
+  or
+  local-name()="ClassificationCrossReferenceType"
+  or
+  local-name()="EntityCrossReferenceType"
+) 
+and @ID and not(step:Name)
+]
+'''
+		for element in getElements(STEP.ctx, xpath):
+			id = getAttribute(element, 'ID')
+			print(id)
+			addElementText(STEP.doc, 'Name', id, element)
+		
+		with open(file, 'w') as output:
+			printXML(str(STEP.doc), output=output, colour=False)
+		print(f'{file} +> {xmlns}')
+				  
+	@args.operation
+	@args.parameter(name='file', help='input step.xml file')
 	def addMissingGroups(self, file):
 		'''
 		adds missing attribute groups
@@ -426,11 +471,13 @@ class STEP2UML(object):
 				element = addElement(STEP.doc, 'AttributeGroup', groups)
 				setAttribute(element, 'ID', id)
 				attribute_groups.add(id)
+				addElementText(STEP.doc, 'Name', id, element)
 		
 		with open(file, 'w') as output:
 			printXML(str(STEP.doc), output=output, colour=False)
 		print(f'{file} +> {xmlns}')
 				  
+
 	@args.operation
 	@args.parameter(name='file', help='input step.xml file')
 	@args.parameter(name='output', short='o', help='output xmi UML file')

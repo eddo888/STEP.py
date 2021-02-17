@@ -5,21 +5,21 @@ python libraries to support Stibo STEP MDM APIs
 ## step2uml.py
 ```
 $ step2uml.py -h
-usage: step2uml.py [-h] {addMissingGroups,setNS,toUML,args} ...
+usage: step2uml.py [-h] {addMissingGroups,addMissingNames,setNS,toUML,args} ...
 
 convert STEP to UML
 
 positional arguments:
-  {addMissingGroups,setNS,toUML,args}
+  {addMissingGroups,addMissingNames,setNS,toUML,args}
                         operations
     addMissingGroups    adds missing attribute groups
+    addMissingNames     adds missing object Names
     setNS               used to put the step namespace into the step.xml file
     toUML               make an UML XMI file from a STEP.XML input
     args                print the values for the args
 
 optional arguments:
   -h, --help            show this help message and exit
-
 ```
 
 ## excel2step.py

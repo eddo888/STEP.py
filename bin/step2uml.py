@@ -52,11 +52,12 @@ class STEP2UML(object):
 			'legacyisodate',
 			'legacyisodatetime',
 			'number',
+			'numberrange',
+			'numeric_text',
 			'regexp',
 			'text',
-			'url',
-			'numeric_text',
 			'text_exclude_tags',
+			'url',
 		]
 		for base_type in types:
 			_base_type = xmi.makeClass(base_type, package, uid=base_type)

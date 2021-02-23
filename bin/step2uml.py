@@ -284,8 +284,7 @@ class STEP2UML(object):
 		for user_type in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:UserTypes/step:UserType'):
 			uid = getAttribute(user_type, 'ID')
 			_user_type = self.user_types[uid]
-			user_type_link = getElement(STEP.ctx, 'step:UserTypeLink', user_type)
-			if user_type_link:
+			for user_type_link in getElements(STEP.ctx, 'step:UserTypeLink', user_type):
 				pid = getAttribute(user_type_link, 'UserTypeID')
 				if pid in self.user_types.keys():
 					_parent_user_type = self.user_types[pid]

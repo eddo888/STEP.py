@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2021-02-19 10:05:22">
+	<XMI.header>
+		<XMI.documentation>
+			<XMI.exporter>Enterprise Architect</XMI.exporter>
+			<XMI.exporterVersion>2.5</XMI.exporterVersion>
+			<XMI.exporterID>1557</XMI.exporterID>
+		</XMI.documentation>
+	</XMI.header>
+	<XMI.content>
+		<UML:Model name="EA Model" xmi.id="MX_EAID_657EE4E2_C7F0_4b2a_BEF1_E182A7417406">
+			<UML:Namespace.ownedElement>
+				<UML:Class name="EARootClass" xmi.id="EAID_11111111_5487_4080_A7F4_41526CB0AA00" isRoot="true" isLeaf="false" isAbstract="false"/>
+				<UML:Package name="Fundamentals" xmi.id="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+					<UML:ModelElement.taggedValue>
+						<UML:TaggedValue tag="parent" value="EAPK_35DF42F4_313F_4624_A730_554A40549334"/>
+						<UML:TaggedValue tag="created" value="2021-02-12 15:11:02"/>
+						<UML:TaggedValue tag="modified" value="2021-02-12 15:15:02"/>
+						<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+						<UML:TaggedValue tag="lastloaddate" value="2021-02-12 15:11:02"/>
+						<UML:TaggedValue tag="lastsavedate" value="2021-02-12 15:11:02"/>
+						<UML:TaggedValue tag="isprotected" value="FALSE"/>
+						<UML:TaggedValue tag="usedtd" value="FALSE"/>
+						<UML:TaggedValue tag="logxml" value="FALSE"/>
+						<UML:TaggedValue tag="packageFlags" value="CRC=0;"/>
+						<UML:TaggedValue tag="batchsave" value="0"/>
+						<UML:TaggedValue tag="batchload" value="0"/>
+						<UML:TaggedValue tag="ea_stype" value="Public"/>
+						<UML:TaggedValue tag="tpos" value="0"/>
+						<UML:TaggedValue tag="gentype" value="Java"/>
+					</UML:ModelElement.taggedValue>
+					<UML:Namespace.ownedElement>
+						<UML:Class name="text" xmi.id="EAID_0598C03A_0525_44bd_81B2_45B74FDBC4F9" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2950"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={C1C67154-D625-4d71-9B65-F29DD955DD9E}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={0598C03A-0525-44bd-81B2-45B74FDBC4F9}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="isodate" xmi.id="EAID_1742E444_6B39_416c_BE4E_B7BC9B6E8639" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2951"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={88C46EC6-CF54-47f9-A2C6-9E74793A3194}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={1742E444-6B39-416c-BE4E-B7BC9B6E8639}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="legacyisodatetime" xmi.id="EAID_214EDD5F_8167_4bcf_A803_8A3C4B8B50B1" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2952"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={7CFE55A0-E581-4205-A82D-EB53D837C86F}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={214EDD5F-8167-4bcf-A803-8A3C4B8B50B1}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="date" xmi.id="EAID_227A6094_DAF9_4028_A7FD_6865781D990D" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2953"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={A6084843-9C43-4336-83CF-50E116411336}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={227A6094-DAF9-4028-A7FD-6865781D990D}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="datetime" xmi.id="EAID_4F092802_789D_451d_9799_78A995C7AB9F" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2954"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="$ea_attsclassified" value="{DC29D3DC-DF51-4165-8BC4-54DFCB85BC44}"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={16261F8A-D521-40c3-AA0A-04263286000F}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={4F092802-789D-451d-9799-78A995C7AB9F}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="integer" xmi.id="EAID_6915C0D5_E7FF_4d6d_A88F_62B444BA5452" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2955"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={EA68630B-751B-4bf2-8249-D4EA41228B70}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={6915C0D5-E7FF-4d6d-A88F-62B444BA5452}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="number" xmi.id="EAID_90495EA5_17A3_4abe_9113_11C9F68F530D" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2956"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={B138605A-D7D6-4167-B83B-F2507638739E}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={90495EA5-17A3-4abe-9113-11C9F68F530D}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="legacyisodate" xmi.id="EAID_99DE30B4_AA7F_4cb9_9D5B_DC8E2D74DEBF" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2957"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={778F4E39-EFE3-4d1b-9088-4D9A6AC97750}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={99DE30B4-AA7F-4cb9-9D5B-DC8E2D74DEBF}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="isodatetime" xmi.id="EAID_AA76164C_D7D5_44a1_B436_DF57C44FE47E" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2958"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={F2683925-F509-4bd9-975D-5E4CC17E25C4}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={AA76164C-D7D5-44a1-B436-DF57C44FE47E}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="condition" xmi.id="EAID_DD258A5B_354E_45fd_B6E6_BFAA70C0EC83" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2959"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={D766F105-F72C-4c25-8E52-5162E84C0018}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={DD258A5B-354E-45fd-B6E6-BFAA70C0EC83}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+						<UML:Class name="regexp" xmi.id="EAID_E325A551_5E1B_4321_87CF_3672E08EBC5A" visibility="public" namespace="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" isRoot="true" isLeaf="false" isAbstract="false" isActive="false">
+							<UML:ModelElement.stereotype>
+								<UML:Stereotype name="STEP BaseType"/>
+							</UML:ModelElement.stereotype>
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="isSpecification" value="false"/>
+								<UML:TaggedValue tag="ea_stype" value="Class"/>
+								<UML:TaggedValue tag="ea_ntype" value="0"/>
+								<UML:TaggedValue tag="package" value="EAPK_657EE4E2_C7F0_4b2a_BEF1_E182A7417406"/>
+								<UML:TaggedValue tag="date_created" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="date_modified" value="2020-12-09 14:12:39"/>
+								<UML:TaggedValue tag="tagged" value="0"/>
+								<UML:TaggedValue tag="package_name" value="Fundamentals"/>
+								<UML:TaggedValue tag="stereotype" value="STEP BaseType"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2960"/>
+								<UML:TaggedValue tag="ea_eleType" value="element"/>
+								<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={0B16DBE1-F7CF-4c98-AE9E-B05623A8CCE7}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP BaseType;GUID={BCB0A18C-6A5B-48cf-903E-9C6CE9D750EF};@ENDSTEREO;$DES;$CLT={E325A551-5E1B-4321-87CF-3672E08EBC5A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Class>
+					</UML:Namespace.ownedElement>
+				</UML:Package>
+			</UML:Namespace.ownedElement>
+		</UML:Model>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_B398A1EA_63F7_455e_8B89_10EE7A4E910C" value="element" modelElement="EAID_0598C03A_0525_44bd_81B2_45B74FDBC4F9"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_9696F579_5C88_4121_9BBA_7E89CE84E0E7" value="element" modelElement="EAID_1742E444_6B39_416c_BE4E_B7BC9B6E8639"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_A71A6286_B8F8_4bb0_8E2C_814DD5780695" value="element" modelElement="EAID_214EDD5F_8167_4bcf_A803_8A3C4B8B50B1"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_9C8F6FDD_5C1D_482b_A709_C3BDB0A04A25" value="element" modelElement="EAID_227A6094_DAF9_4028_A7FD_6865781D990D"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_575BC235_B895_460d_8FCD_C87EA1526F55" value="element" modelElement="EAID_4F092802_789D_451d_9799_78A995C7AB9F"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_D66A30A6_3A26_4199_97BB_486A0EB08AFF" value="element" modelElement="EAID_6915C0D5_E7FF_4d6d_A88F_62B444BA5452"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_2BD6F0A3_10FB_4ac3_833D_FAD8FCEBC0A8" value="element" modelElement="EAID_90495EA5_17A3_4abe_9113_11C9F68F530D"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_C91AE976_AA1A_411c_8EDD_4556096E98C9" value="element" modelElement="EAID_99DE30B4_AA7F_4cb9_9D5B_DC8E2D74DEBF"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_C1D338EB_8937_437d_A3A1_20291EA22F37" value="element" modelElement="EAID_AA76164C_D7D5_44a1_B436_DF57C44FE47E"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_59F1745E_BBF7_4758_BFD2_2F2ED8A2609D" value="element" modelElement="EAID_DD258A5B_354E_45fd_B6E6_BFAA70C0EC83"/>
+		<UML:TaggedValue tag="ea_eleType" xmi.id="EAID_F4813A6C_4F8B_4730_8798_E1E8B180BAF0" value="element" modelElement="EAID_E325A551_5E1B_4321_87CF_3672E08EBC5A"/>
+		<UML:DiagramElement geometry="Left=400;Top=378;Right=530;Bottom=580;" subject="EAID_657EE4E2_C7F0_4b2a_BEF1_E182A7417406" seqno="1" style=" DUID=0A00CCBD;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="diagram_guid" value="EAID_35979A1A_7852_4ac5_A405_3C8C3BD7563F"/>
+			</UML:ModelElement.taggedValue>
+		</UML:DiagramElement>
+	</XMI.content>
+	<XMI.difference/>
+	<XMI.extensions xmi.extender="Enterprise Architect 2.5"/>
+</XMI>

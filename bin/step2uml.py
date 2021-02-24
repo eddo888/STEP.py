@@ -79,7 +79,7 @@ class STEP2UML(object):
 		lname = getElementText(STEP.ctx, 'step:Name', lov_group)
 		lid = getAttribute(lov_group, 'ID')
 
-		_package = xmi.makePackage(lname, package)
+		_package = xmi.makePackage(lname, package, uid=lid)
 		xmi.makeStereotype('STEP ListOfValuesGroup', _package)
 		xmi.makeAttribute('@ID', None, lid, _package, array=False)
 		

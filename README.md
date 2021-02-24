@@ -146,13 +146,13 @@ the following helper libraries are in Sparx jScript
 create a "User Scripts" folder,
 then create a new jscript .js file for each of the following
 
-[jscript/Library.js]("Library.js" base shared library)
+[jscript/Library.js](base shared library)
 
-[jscript/IncludeMissingParts.js]("IncludeMissingParts.js" will look for missing items in this package and add to the diagram if not there) 
+[jscript/IncludeMissingParts.js](will look for missing items in this package and add to the diagram if not there) 
 
-[jscript/IncludeLinkedParts]("IncludeLinkedParts.js" to find referenced parts and add to the current diagram)
+[jscript/IncludeLinkedParts](to find referenced parts on  selected items and add to the current diagram)
 
-[jscript/set_stereotype.js]("set_sterotype.js" to set the STEP stereotype for STEP types)
+[jscript/set_stereotype.js](set the STEP stereotype for selected diagram items)
 
 # uml resources for Sparx
 

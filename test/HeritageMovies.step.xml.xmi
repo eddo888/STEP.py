@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<XMI timestamp="2021-02-24 10:49:06" xmi.version="1.1" xmlns:UML="omg.org/UML1.3">
+<XMI timestamp="2021-02-24 14:14:42" xmi.version="1.1" xmlns:UML="omg.org/UML1.3">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>$HeadURL: git@github.com:eddo888/Tools/xmi.py $</XMI.exporter>
@@ -153,46 +153,25 @@
 						</UML:Package>
 						<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="ListOfValues" visibility="public" xmi.id="EDDO_F3E3FAB9AFEEC8D877126A340F73B87A">
 							<UML:Namespace.ownedElement>
-								<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie LOVs" visibility="public" xmi.id="EDDO_1F1705CF68BB473E985C56FFBCAE93AF">
+								<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Lists of Values / LOVs" visibility="public" xmi.id="EDDO_75D2FBE82FA692B584285D605E256ED2">
 									<UML:Namespace.ownedElement>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_LOVs"/>
+												<UML:Expression body="List Of Values group root"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
-										<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Yes/No LOV" visibility="public" xmi.id="EDDO_B65FFBCB4DCFB93ECDC257D6E4BA42C4">
-											<UML:ModelElement.taggedValue>
-												<UML:TaggedValue tag="ea_eleType" value="element"/>
-											</UML:ModelElement.taggedValue>
-											<UML:Classifier.feature>
+										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="DAVE LOVs" visibility="public" xmi.id="EDDO_9084A416E64EA965A0403E3CCD873D6E">
+											<UML:Namespace.ownedElement>
 												<UML:Attribute name="@ID" visibility="private">
 													<UML:Attribute.initialValue>
-														<UML:Expression body="YesNo"/>
+														<UML:Expression body="DAVE_LOVs"/>
 													</UML:Attribute.initialValue>
 												</UML:Attribute>
-												<UML:Attribute name="@MinValue" visibility="private"/>
-												<UML:Attribute name="@MaxValue" visibility="private"/>
-												<UML:Attribute name="@MaxLength" visibility="private">
-													<UML:Attribute.initialValue>
-														<UML:Expression body="256"/>
-													</UML:Attribute.initialValue>
-												</UML:Attribute>
-												<UML:Attribute name="@InputMask" visibility="private"/>
-												<UML:Attribute name="Yes" visibility="private">
-													<UML:Attribute.initialValue>
-														<UML:Expression body="Y"/>
-													</UML:Attribute.initialValue>
-												</UML:Attribute>
-												<UML:Attribute name="No" visibility="private">
-													<UML:Attribute.initialValue>
-														<UML:Expression body="N"/>
-													</UML:Attribute.initialValue>
-												</UML:Attribute>
-											</UML:Classifier.feature>
+											</UML:Namespace.ownedElement>
 											<UML:ModelElement.stereotype>
-												<UML:Stereotype xmi.idref="EDDO_130254569D490650951EE7930AFC7E32"/>
+												<UML:Stereotype xmi.idref="EDDO_AEA65B8AA15D49E0BE6E1D5D0EC62D39"/>
 											</UML:ModelElement.stereotype>
-										</UML:Class>
+										</UML:Package>
 									</UML:Namespace.ownedElement>
 									<UML:ModelElement.stereotype>
 										<UML:Stereotype xmi.idref="EDDO_AEA65B8AA15D49E0BE6E1D5D0EC62D39"/>
@@ -205,14 +184,14 @@
 						</UML:Package>
 						<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Attributes" visibility="public" xmi.id="EDDO_287234A1FF35A314B5B6BC4E5828E745">
 							<UML:Namespace.ownedElement>
-								<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie Attributes" visibility="public" xmi.id="EDDO_48E326AFF19611B1DD5CA5B360B6A1D7">
+								<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie" visibility="public" xmi.id="EDDO_1526E0AC850C241EE1631D9AD5664475">
 									<UML:Namespace.ownedElement>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
 												<UML:Expression body="ATGP_131603"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
-										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie_Writers" visibility="public" xmi.id="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0">
+										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Writers" visibility="public" xmi.id="EDDO_CA9F06BDF5A78D36EF12674A9F138BD6">
 											<UML:Namespace.ownedElement>
 												<UML:Attribute name="@ID" visibility="private">
 													<UML:Attribute.initialValue>
@@ -257,21 +236,140 @@
 												<UML:Stereotype xmi.idref="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
 											</UML:ModelElement.stereotype>
 										</UML:Package>
-										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie_Shows" visibility="public" xmi.id="EDDO_724E4204098295DC1FEE73AA6AADB768">
+										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Relations" visibility="public" xmi.id="EDDO_E109705703E0324D1A5DE1D84A3A8951">
+											<UML:Namespace.ownedElement>
+												<UML:Attribute name="@ID" visibility="private">
+													<UML:Attribute.initialValue>
+														<UML:Expression body="Movie_Relations"/>
+													</UML:Attribute.initialValue>
+												</UML:Attribute>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Character" visibility="public" xmi.id="EDDO_FA4BAA6E356DA9E5BF6421D980431DCD">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_Character"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="100"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+											<UML:ModelElement.stereotype>
+												<UML:Stereotype xmi.idref="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
+											</UML:ModelElement.stereotype>
+										</UML:Package>
+										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Actors" visibility="public" xmi.id="EDDO_D9B36998C97BE687BD400E5CAF440BF5">
+											<UML:Namespace.ownedElement>
+												<UML:Attribute name="@ID" visibility="private">
+													<UML:Attribute.initialValue>
+														<UML:Expression body="ATGP_131605"/>
+													</UML:Attribute.initialValue>
+												</UML:Attribute>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Age" visibility="public" xmi.id="EDDO_8A8A5FEEF4A98E5E3FB6F2F18EF7D1E6">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_Age"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private"/>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Name" visibility="public" xmi.id="EDDO_C9EC6B568BE825452FD8524269763E31">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_Name"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="100"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+											<UML:ModelElement.stereotype>
+												<UML:Stereotype xmi.idref="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
+											</UML:ModelElement.stereotype>
+										</UML:Package>
+										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Shows" visibility="public" xmi.id="EDDO_6201EF1B62AFC8279DBE20AAF6DCF3BE">
 											<UML:Namespace.ownedElement>
 												<UML:Attribute name="@ID" visibility="private">
 													<UML:Attribute.initialValue>
 														<UML:Expression body="ATGP_131604"/>
 													</UML:Attribute.initialValue>
 												</UML:Attribute>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="imdbRating" visibility="public" xmi.id="EDDO_E9F90B1F4C7AF7543ED518B78F7706AB">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Director" visibility="public" xmi.id="EDDO_F39FB5DDE6E7539B2419273AE02F4546">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_imdbRating"/>
+																<UML:Expression body="Movie_Director"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -297,14 +395,14 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="imdbID" visibility="public" xmi.id="EDDO_20BF24E8F36E5CB5EC50D20C6E508298">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="BoxOffice" visibility="public" xmi.id="EDDO_89830AF05A697D0C735DE38755087BCD">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_imdbID"/>
+																<UML:Expression body="Movie_BoxOffice"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -330,120 +428,21 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Type" visibility="public" xmi.id="EDDO_5D5EF8B96404450BB64BA055DE6245CC">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Plot" visibility="public" xmi.id="EDDO_7DC0274BE6A5696E1995D6EB5A34E880">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Type"/>
+																<UML:Expression body="Movie_Plot"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
 														<UML:Attribute name="@MaxValue" visibility="private"/>
 														<UML:Attribute name="@MaxLength" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="100"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Title" visibility="public" xmi.id="EDDO_7214839DC056ED8B1BE0164D0B1FE5D6">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Title"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="256"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Year" visibility="public" xmi.id="EDDO_2BCC92AE9D7E6B5CFFB482FFAFAE2283">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Year"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="100"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Rated" visibility="public" xmi.id="EDDO_D2980D6697F05D5D686966FD7BD7FEB8">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Rated"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="100"/>
+																<UML:Expression body="2048"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@InputMask" visibility="private"/>
@@ -528,21 +527,21 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Plot" visibility="public" xmi.id="EDDO_7DC0274BE6A5696E1995D6EB5A34E880">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Title" visibility="public" xmi.id="EDDO_7214839DC056ED8B1BE0164D0B1FE5D6">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Plot"/>
+																<UML:Expression body="Movie_Title"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
 														<UML:Attribute name="@MaxValue" visibility="private"/>
 														<UML:Attribute name="@MaxLength" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="2048"/>
+																<UML:Expression body="256"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@InputMask" visibility="private"/>
@@ -561,47 +560,14 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Director" visibility="public" xmi.id="EDDO_F39FB5DDE6E7539B2419273AE02F4546">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Rated" visibility="public" xmi.id="EDDO_D2980D6697F05D5D686966FD7BD7FEB8">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Director"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="100"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="BoxOffice" visibility="public" xmi.id="EDDO_89830AF05A697D0C735DE38755087BCD">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_BoxOffice"/>
+																<UML:Expression body="Movie_Rated"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -627,26 +593,14 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-											</UML:Namespace.ownedElement>
-											<UML:ModelElement.stereotype>
-												<UML:Stereotype xmi.idref="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
-											</UML:ModelElement.stereotype>
-										</UML:Package>
-										<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="Movie_Actors" visibility="public" xmi.id="EDDO_F9A2928A076C1AFACFFF1C74D46497E1">
-											<UML:Namespace.ownedElement>
-												<UML:Attribute name="@ID" visibility="private">
-													<UML:Attribute.initialValue>
-														<UML:Expression body="ATGP_131605"/>
-													</UML:Attribute.initialValue>
-												</UML:Attribute>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Name" visibility="public" xmi.id="EDDO_C9EC6B568BE825452FD8524269763E31">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Year" visibility="public" xmi.id="EDDO_2BCC92AE9D7E6B5CFFB482FFAFAE2283">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Name"/>
+																<UML:Expression body="Movie_Year"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -672,14 +626,80 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Age" visibility="public" xmi.id="EDDO_8A8A5FEEF4A98E5E3FB6F2F18EF7D1E6">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Type" visibility="public" xmi.id="EDDO_5D5EF8B96404450BB64BA055DE6245CC">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Movie_Age"/>
+																<UML:Expression body="Movie_Type"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="100"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="imdbID" visibility="public" xmi.id="EDDO_20BF24E8F36E5CB5EC50D20C6E508298">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_imdbID"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="100"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="DVD" visibility="public" xmi.id="EDDO_411C27FB4429D8371B9AEA0A33EBE1AE">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_DVD"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -688,7 +708,40 @@
 														<UML:Attribute name="@InputMask" visibility="private"/>
 														<UML:Attribute name="@base" visibility="private">
 															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
+																<UML:Classifier xmi.idref="EDDO_5FC732311905CB27E82D67F4F6511F7F"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="imdbRating" visibility="public" xmi.id="EDDO_E9F90B1F4C7AF7543ED518B78F7706AB">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Movie_imdbRating"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="100"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 															</UML:StructuralFeature.type>
 														</UML:Attribute>
 														<UML:Attribute name="@type" visibility="private">
@@ -725,14 +778,14 @@
 														<UML:Expression body="ATGP_131507"/>
 													</UML:Attribute.initialValue>
 												</UML:Attribute>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Category" visibility="public" xmi.id="EDDO_9837730477B870A88C927B7E71B0662D">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Region" visibility="public" xmi.id="EDDO_9421E110D46B0FD11AFBD34AF7B0294D">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_Category"/>
+																<UML:Expression body="Heritage_Region"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -791,14 +844,14 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Region" visibility="public" xmi.id="EDDO_9421E110D46B0FD11AFBD34AF7B0294D">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Category" visibility="public" xmi.id="EDDO_9837730477B870A88C927B7E71B0662D">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_Region"/>
+																<UML:Expression body="Heritage_Category"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -836,14 +889,14 @@
 														<UML:Expression body="ATGP_131508"/>
 													</UML:Attribute.initialValue>
 												</UML:Attribute>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Postcode" visibility="public" xmi.id="EDDO_AA76BFE76185DCCFED548D982395FB8E">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="ID" visibility="public" xmi.id="EDDO_4AC20E864F033C9DFDBE8BEA931D191B">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_Postcode"/>
+																<UML:Expression body="Heritage_ID"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -879,9 +932,17 @@
 																<UML:Expression body="Heritage_AboriginalListing"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="400"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@InputMask" visibility="private"/>
 														<UML:Attribute name="@base" visibility="private">
 															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_B65FFBCB4DCFB93ECDC257D6E4BA42C4"/>
+																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 															</UML:StructuralFeature.type>
 														</UML:Attribute>
 														<UML:Attribute name="@type" visibility="private">
@@ -894,20 +955,6 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="LOV" visibility="public" xmi.id="EDDO_4168caba-15f2-47fc-92d6-511b64e31bbc">
-													<UML:Association.connection>
-														<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_b3e5e4f3-6594-4951-b1b7-b1170d034ec9">
-															<UML:AssociationEnd.participant>
-																<UML:Class xmi.idref="EDDO_B86A576887DAD48BDD58F12A667192B0"/>
-															</UML:AssociationEnd.participant>
-														</UML:AssociationEnd>
-														<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_fccc51f2-5447-4907-bf44-5b0239dc8ede">
-															<UML:AssociationEnd.participant>
-																<UML:Class xmi.idref="EDDO_B65FFBCB4DCFB93ECDC257D6E4BA42C4"/>
-															</UML:AssociationEnd.participant>
-														</UML:AssociationEnd>
-													</UML:Association.connection>
-												</UML:Association>
 												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Street/Suburb" visibility="public" xmi.id="EDDO_8E8D6B6975F27F0CA9BAE64D2AD1D1E6">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
@@ -941,14 +988,14 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="ID" visibility="public" xmi.id="EDDO_4AC20E864F033C9DFDBE8BEA931D191B">
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Postcode" visibility="public" xmi.id="EDDO_AA76BFE76185DCCFED548D982395FB8E">
 													<UML:ModelElement.taggedValue>
 														<UML:TaggedValue tag="ea_eleType" value="element"/>
 													</UML:ModelElement.taggedValue>
 													<UML:Classifier.feature>
 														<UML:Attribute name="@ID" visibility="private">
 															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_ID"/>
+																<UML:Expression body="Heritage_Postcode"/>
 															</UML:Attribute.initialValue>
 														</UML:Attribute>
 														<UML:Attribute name="@MinValue" visibility="private"/>
@@ -962,64 +1009,6 @@
 														<UML:Attribute name="@base" visibility="private">
 															<UML:StructuralFeature.type>
 																<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Longitude" visibility="public" xmi.id="EDDO_2AEBB4E712D0298A5481D66B24820B98">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_Longitude"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private"/>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
-															</UML:StructuralFeature.type>
-														</UML:Attribute>
-														<UML:Attribute name="@type" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Description"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-													</UML:Classifier.feature>
-													<UML:ModelElement.stereotype>
-														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
-													</UML:ModelElement.stereotype>
-												</UML:Class>
-												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Latitude" visibility="public" xmi.id="EDDO_751DFC7D771D282FC1FCABB556A97C30">
-													<UML:ModelElement.taggedValue>
-														<UML:TaggedValue tag="ea_eleType" value="element"/>
-													</UML:ModelElement.taggedValue>
-													<UML:Classifier.feature>
-														<UML:Attribute name="@ID" visibility="private">
-															<UML:Attribute.initialValue>
-																<UML:Expression body="Heritage_Latitude"/>
-															</UML:Attribute.initialValue>
-														</UML:Attribute>
-														<UML:Attribute name="@MinValue" visibility="private"/>
-														<UML:Attribute name="@MaxValue" visibility="private"/>
-														<UML:Attribute name="@MaxLength" visibility="private"/>
-														<UML:Attribute name="@InputMask" visibility="private"/>
-														<UML:Attribute name="@base" visibility="private">
-															<UML:StructuralFeature.type>
-																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
 															</UML:StructuralFeature.type>
 														</UML:Attribute>
 														<UML:Attribute name="@type" visibility="private">
@@ -1065,6 +1054,64 @@
 														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 													</UML:ModelElement.stereotype>
 												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Latitude" visibility="public" xmi.id="EDDO_751DFC7D771D282FC1FCABB556A97C30">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Heritage_Latitude"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private"/>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
+												<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Longitude" visibility="public" xmi.id="EDDO_2AEBB4E712D0298A5481D66B24820B98">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+													</UML:ModelElement.taggedValue>
+													<UML:Classifier.feature>
+														<UML:Attribute name="@ID" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Heritage_Longitude"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+														<UML:Attribute name="@MinValue" visibility="private"/>
+														<UML:Attribute name="@MaxValue" visibility="private"/>
+														<UML:Attribute name="@MaxLength" visibility="private"/>
+														<UML:Attribute name="@InputMask" visibility="private"/>
+														<UML:Attribute name="@base" visibility="private">
+															<UML:StructuralFeature.type>
+																<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
+															</UML:StructuralFeature.type>
+														</UML:Attribute>
+														<UML:Attribute name="@type" visibility="private">
+															<UML:Attribute.initialValue>
+																<UML:Expression body="Description"/>
+															</UML:Attribute.initialValue>
+														</UML:Attribute>
+													</UML:Classifier.feature>
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype xmi.idref="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
+													</UML:ModelElement.stereotype>
+												</UML:Class>
 											</UML:Namespace.ownedElement>
 											<UML:ModelElement.stereotype>
 												<UML:Stereotype xmi.idref="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
@@ -1079,14 +1126,14 @@
 						</UML:Package>
 						<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="UserTypes" visibility="public" xmi.id="EDDO_2F6C1AF225355B0F9CC3D2AF7CC1EF72">
 							<UML:Namespace.ownedElement>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Heritage Root" visibility="public" xmi.id="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA">
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Classification" visibility="public" xmi.id="EDDO_29CEAC178DCCF5160AF08DF94B13D312">
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Heritage_Root"/>
+												<UML:Expression body="Movie_Classification"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
 									</UML:Classifier.feature>
@@ -1109,144 +1156,19 @@
 										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Writer" visibility="public" xmi.id="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9">
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Heritage Root" visibility="public" xmi.id="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA">
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Writer"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-										<UML:Attribute name="Author" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Actor" visibility="public" xmi.id="EDDO_92A0B3522A3E76246EB88234EF9D69D4">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Actor"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-										<UML:Attribute name="Name" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Age" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Classification" visibility="public" xmi.id="EDDO_29CEAC178DCCF5160AF08DF94B13D312">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Classification"/>
+												<UML:Expression body="Heritage_Root"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
 									</UML:Classifier.feature>
 									<UML:ModelElement.stereotype>
 										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Classification Type" visibility="public" xmi.id="EDDO_25E11BA308054CA4B17D77E19FA3C5E5">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Classification_Type"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Heritage Site" visibility="public" xmi.id="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Heritige_Site"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-										<UML:Attribute name="Category" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Colour" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Postcode" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Aboriginal Listing" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_B65FFBCB4DCFB93ECDC257D6E4BA42C4"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Street/Suburb" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Region" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="ID" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Longitude" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Latitude" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Name" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
 								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Show" visibility="public" xmi.id="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF">
@@ -1259,32 +1181,17 @@
 												<UML:Expression body="Movie_Show"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
-										<UML:Attribute name="imdbRating" visibility="private">
+										<UML:Attribute name="Director" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
 										</UML:Attribute>
-										<UML:Attribute name="imdbID" visibility="private">
+										<UML:Attribute name="BoxOffice" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
 										</UML:Attribute>
-										<UML:Attribute name="Type" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Title" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Year" visibility="private">
-											<UML:StructuralFeature.type>
-												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
-											</UML:StructuralFeature.type>
-										</UML:Attribute>
-										<UML:Attribute name="Rated" visibility="private">
+										<UML:Attribute name="Plot" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
@@ -1299,17 +1206,37 @@
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
 										</UML:Attribute>
-										<UML:Attribute name="Plot" visibility="private">
+										<UML:Attribute name="Title" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
 										</UML:Attribute>
-										<UML:Attribute name="Director" visibility="private">
+										<UML:Attribute name="Rated" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
 										</UML:Attribute>
-										<UML:Attribute name="BoxOffice" visibility="private">
+										<UML:Attribute name="Year" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+										<UML:Attribute name="Type" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+										<UML:Attribute name="imdbID" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+										<UML:Attribute name="DVD" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_5FC732311905CB27E82D67F4F6511F7F"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+										<UML:Attribute name="imdbRating" visibility="private">
 											<UML:StructuralFeature.type>
 												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
 											</UML:StructuralFeature.type>
@@ -1317,51 +1244,6 @@
 									</UML:Classifier.feature>
 									<UML:ModelElement.stereotype>
 										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Root" visibility="public" xmi.id="EDDO_385C7EE0A0884725890D1E643C2213B4">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Root"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Heritage Sites" visibility="public" xmi.id="EDDO_487088FE7537C3B4C17579AED40578C2">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Heritige_Sites"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Product Image" visibility="public" xmi.id="EDDO_4F60EEE5DFDDC9E1B60936A0AF0D4011">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="ProductImage"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
 								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Actors" visibility="public" xmi.id="EDDO_F9A2928A076C1AFACFFF1C74D46497E1">
@@ -1394,15 +1276,75 @@
 										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Writers" visibility="public" xmi.id="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0">
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Root" visibility="public" xmi.id="EDDO_385C7EE0A0884725890D1E643C2213B4">
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_Writers"/>
+												<UML:Expression body="Movie_Root"/>
 											</UML:Attribute.initialValue>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Classification Type" visibility="public" xmi.id="EDDO_25E11BA308054CA4B17D77E19FA3C5E5">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_Classification_Type"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Actor" visibility="public" xmi.id="EDDO_92A0B3522A3E76246EB88234EF9D69D4">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_Actor"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+										<UML:Attribute name="Age" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_B1BC248A7FF2B2E95569F56DE68615DF"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+										<UML:Attribute name="Name" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+											</UML:StructuralFeature.type>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Writer" visibility="public" xmi.id="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_Writer"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+										<UML:Attribute name="Author" visibility="private">
+											<UML:StructuralFeature.type>
+												<UML:Classifier xmi.idref="EDDO_1CB251EC0D568DE6A929B520C4AED8D1"/>
+											</UML:StructuralFeature.type>
 										</UML:Attribute>
 									</UML:Classifier.feature>
 									<UML:ModelElement.stereotype>
@@ -1424,29 +1366,44 @@
 										<UML:Stereotype xmi.idref="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Generalization subtype="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9" supertype="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0" visibility="public" xmi.id="EDDO_30ebee5e-56cc-4814-ad75-19d5f43bce7c"/>
-								<UML:Generalization subtype="EDDO_92A0B3522A3E76246EB88234EF9D69D4" supertype="EDDO_F9A2928A076C1AFACFFF1C74D46497E1" visibility="public" xmi.id="EDDO_eb7681ed-770a-46d2-944d-7f1c464fd317"/>
-								<UML:Generalization subtype="EDDO_29CEAC178DCCF5160AF08DF94B13D312" supertype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" visibility="public" xmi.id="EDDO_cc572653-6461-456d-b812-0ddea5e66b43"/>
-								<UML:Generalization subtype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" supertype="EDDO_F3A2F852CB8E2E978B7AB43D8165B380" visibility="public" xmi.id="EDDO_a4e4010b-41e2-4d6b-ae3f-1df64a43ac3c"/>
-								<UML:Generalization subtype="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F" supertype="EDDO_487088FE7537C3B4C17579AED40578C2" visibility="public" xmi.id="EDDO_00a43979-28ba-46e9-ade8-eb0cb50f6bd2"/>
-								<UML:Generalization subtype="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF" supertype="EDDO_724E4204098295DC1FEE73AA6AADB768" visibility="public" xmi.id="EDDO_76de4a30-43dd-4304-bd99-9f58ef6669fa"/>
-								<UML:Generalization subtype="EDDO_F9A2928A076C1AFACFFF1C74D46497E1" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_9d476a74-2be8-4488-b063-afdbe8a4631f"/>
-								<UML:Generalization subtype="EDDO_724E4204098295DC1FEE73AA6AADB768" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_0e92ddd7-6369-40b8-ad82-552499f63d04"/>
-								<UML:Generalization subtype="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_ad42b087-2daa-4e16-9454-f9913d31283c"/>
-								<UML:Generalization subtype="EDDO_7607F0B501BE26C0A492F546827594FF" supertype="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA" visibility="public" xmi.id="EDDO_8ed7d737-1dd3-4876-b24f-b4568af99274"/>
-								<UML:Generalization subtype="EDDO_7607F0B501BE26C0A492F546827594FF" supertype="EDDO_7607F0B501BE26C0A492F546827594FF" visibility="public" xmi.id="EDDO_31f16168-9dce-4f1c-934d-2dc11a5369f8"/>
-							</UML:Namespace.ownedElement>
-						</UML:Package>
-						<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="References" visibility="public" xmi.id="EDDO_D95867DEADFE690E40F42068D6B59DF8">
-							<UML:Namespace.ownedElement>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1">
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie Writers" visibility="public" xmi.id="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0">
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_2_Writer"/>
+												<UML:Expression body="Movie_Writers"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_57E6EF4A0DA5BABF490DD76F83A822F1"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Generalization subtype="EDDO_29CEAC178DCCF5160AF08DF94B13D312" supertype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" visibility="public" xmi.id="EDDO_6f4b0016-2da0-463d-96af-5a10bbf2606a"/>
+								<UML:Generalization subtype="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF" supertype="EDDO_724E4204098295DC1FEE73AA6AADB768" visibility="public" xmi.id="EDDO_3f5c8c24-ea9a-4408-a40f-b5362facbe9d"/>
+								<UML:Generalization subtype="EDDO_F9A2928A076C1AFACFFF1C74D46497E1" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_3fe26547-358a-478b-a760-291ad89f5376"/>
+								<UML:Generalization subtype="EDDO_724E4204098295DC1FEE73AA6AADB768" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_4547d33a-7e18-47e1-b1d7-22783b3962f1"/>
+								<UML:Generalization subtype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" supertype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" visibility="public" xmi.id="EDDO_ac1e227d-31bc-4d13-afef-ac0a7d9f1935"/>
+								<UML:Generalization subtype="EDDO_25E11BA308054CA4B17D77E19FA3C5E5" supertype="EDDO_F3A2F852CB8E2E978B7AB43D8165B380" visibility="public" xmi.id="EDDO_2b5aac00-e9f3-4efc-86c5-ca075dd632a9"/>
+								<UML:Generalization subtype="EDDO_92A0B3522A3E76246EB88234EF9D69D4" supertype="EDDO_F9A2928A076C1AFACFFF1C74D46497E1" visibility="public" xmi.id="EDDO_e8927d31-5ca7-4322-afc9-5bf5355580dd"/>
+								<UML:Generalization subtype="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9" supertype="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0" visibility="public" xmi.id="EDDO_ec162eb7-d877-4a2a-bfb7-7930d08a829c"/>
+								<UML:Generalization subtype="EDDO_7607F0B501BE26C0A492F546827594FF" supertype="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA" visibility="public" xmi.id="EDDO_91631e7e-b5dd-4425-a00d-e3dbeae3f677"/>
+								<UML:Generalization subtype="EDDO_7607F0B501BE26C0A492F546827594FF" supertype="EDDO_7607F0B501BE26C0A492F546827594FF" visibility="public" xmi.id="EDDO_98ae6c20-aaa0-4ac1-8359-36e17d965c95"/>
+								<UML:Generalization subtype="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0" supertype="EDDO_385C7EE0A0884725890D1E643C2213B4" visibility="public" xmi.id="EDDO_5bc75999-cb36-43e1-b2bc-2b2cbd67e134"/>
+							</UML:Namespace.ownedElement>
+						</UML:Package>
+						<UML:Package isAbstract="false" isLeaf="false" isRoot="true" isSpecification="false" name="References" visibility="public" xmi.id="EDDO_D95867DEADFE690E40F42068D6B59DF8">
+							<UML:Namespace.ownedElement>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Site" visibility="public" xmi.id="EDDO_F46BDCC652AC865C7477ED6A12F0985A">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_2_Site"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
 									</UML:Classifier.feature>
@@ -1454,30 +1411,16 @@
 										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_f92d989f-4bf8-4922-a584-d14ac8ed2be2">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Site" visibility="public" xmi.id="EDDO_8d4301df-7bd0-4df4-8f19-552e714b96c3">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_fac79295-8beb-4fc7-b8f6-8befd4b548a1">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_21422323-3c8d-4945-ad31-54375fc9817f">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_8748b889-5004-4989-acf6-a78063dd507e">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_bb514b47-4bc1-4f6e-8e4f-c69c76d30327">
 											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_8dbedfd6-90ce-4eab-9b48-bb1491edcae4">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_d1639194-12a4-489a-9053-b80d361b824e">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_b262ff1c-869a-44df-84c3-01ef69524e59">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
+												<UML:Class xmi.idref="EDDO_F46BDCC652AC865C7477ED6A12F0985A"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
@@ -1497,42 +1440,42 @@
 										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Actor" visibility="public" xmi.id="EDDO_46807c80-6f59-455d-9a0d-1635a135a2cb">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Actor" visibility="public" xmi.id="EDDO_c998ac39-b443-41ed-8f10-b0a0654a495a">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_4c4e7674-4f44-455b-875f-6c2a35f4cd68">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_1e511246-5b5e-4395-8d31-162931fa312f">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_80ceed13-0485-4bcf-a4a1-c0c0c6d36ac3">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_733fc4df-dfc1-4057-9414-0737b0efba98">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_DB0369803B30F6DEAFCEA1407B3729F5"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
 								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Actor" visibility="public" xmi.id="EDDO_b1214d32-794d-473d-b998-2d90424690a5">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Actor" visibility="public" xmi.id="EDDO_bcf601d8-ade2-4499-bd0c-31f46c5422e9">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_5144b009-3fb0-4a91-9048-6e149d748241">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_151343fd-d0a7-4c68-9b0f-9326f489974f">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_DB0369803B30F6DEAFCEA1407B3729F5"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_457ec926-0bdc-431f-8964-8931d88ed8ec">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_c615b7bb-d52c-4e46-870a-b2c49529ea30">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
 								</UML:Association>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Heritige_Site2Site" visibility="public" xmi.id="EDDO_458334006AC77DE6F45BF996115AD8E2">
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1">
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="@ID" visibility="private">
 											<UML:Attribute.initialValue>
-												<UML:Expression body="Heritige_Site2Site"/>
+												<UML:Expression body="Movie_2_Writer"/>
 											</UML:Attribute.initialValue>
 										</UML:Attribute>
 									</UML:Classifier.feature>
@@ -1540,116 +1483,30 @@
 										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Heritige_Site2Site" visibility="public" xmi.id="EDDO_a785e620-d89d-4c02-8d8d-6e427dd88083">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_a39e5246-6c23-403d-9491-a5998ea01490">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_f621ae64-de37-45ca-94a9-6b20a72310f6">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_d34e090f-2d10-4e48-9ef1-15ab2c8d852e">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_458334006AC77DE6F45BF996115AD8E2"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Heritige_Site2Site" visibility="public" xmi.id="EDDO_c7823f67-5a40-4eb8-8252-35e62cf3c923">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_c97e1b7c-9ab8-44a9-8bb7-4e597ceba107">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_458334006AC77DE6F45BF996115AD8E2"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_77fb4d2a-511b-4d2e-b55b-bf8a5e278079">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Site" visibility="public" xmi.id="EDDO_F46BDCC652AC865C7477ED6A12F0985A">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_2_Site"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Site" visibility="public" xmi.id="EDDO_e15292ea-f4bf-4232-909a-1fa8525eae4f">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_ee1f8e98-64c6-48dd-a5c6-fc99a2095ac0">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_0b8b6bd2-199c-4e60-b7bb-be233c8c40af">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_79838fc1-0b3d-4281-a647-4fe469ef0c71">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_69f826eb-962c-4ba4-8e10-59dce45794ee">
 											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F46BDCC652AC865C7477ED6A12F0985A"/>
+												<UML:Class xmi.idref="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
 								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Site" visibility="public" xmi.id="EDDO_1a64ca8e-fe2e-4d36-9c81-3a685c5dce48">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Writer" visibility="public" xmi.id="EDDO_75f6d996-0690-4bb5-9030-eeeb17721209">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_11090203-1a89-4e99-b25c-6aa20c38ad84">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_454e2b49-9bb8-41b0-98a8-939ba8c51ebe">
 											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F46BDCC652AC865C7477ED6A12F0985A"/>
+												<UML:Class xmi.idref="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_7065d8fc-0edd-4349-b4d6-995a2535a6cd">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_698a0b30-6623-4f59-8075-361b713d84c9">
 											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_2_Favourite"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_8c4df10a-603c-4e42-b9be-49df47a652e4">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_3e7ba702-c469-45ac-b1e3-ce086cd87647">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_d0163039-4f94-4946-836d-3dfa7a4e2be0">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_e91204a5-7ddc-43d3-b81e-4670296587c5">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_9e8dfcf5-e86e-49c3-8afa-fab5bf534e47">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_6cb2cb02-dd5c-47f6-b2eb-ebd8daada6e0">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
+												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
@@ -1669,56 +1526,170 @@
 										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_1b909d8e-323d-47dc-a806-3b5bf3cbbd33">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_e562d028-6aa9-4773-952f-2a3366a71108">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_0bc24ce8-4066-4aa2-b5d5-2b2f2a20f9c2">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_3c548dfb-41cd-4f1e-84c3-3c194a7a134a">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_517c671a-2cbe-412b-baba-af8f649635fd">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_a531a54c-d74e-43ea-89ba-d2d76b5d6273">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_a0256248-9409-4b5c-ab35-bafae9ee41e3">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_9b6f5b74-03b0-409e-a9ad-e3be7d97e28e">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_14507fdf-d8a6-4f13-916d-713c3b889690">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
 								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_61f9d854-b0fa-411d-ba20-0cea5f801f00">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_f533b8e4-4b96-4dc1-8ef4-2482f5a4a012">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_c99e7f68-ebe1-4bcd-b6d0-50b527b8d31d">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_8f79128d-c606-412f-af44-b532742fce96">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_bc6d223b-0b79-43b4-832d-d49ee0d0c6fd">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_d5ff65b9-a5d4-416b-b1b3-7fc0c5667512">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_4c85d467-5b08-45e1-9eb6-c6e218f2b147">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_72a0b668-55d6-4961-9555-e27bea199ba8">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_a610a609-4c3f-4ad0-bb8d-4fcd763bc91f">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
 								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_8ac4ce58-b786-4a05-98c6-68e29f816674">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Clasification" visibility="public" xmi.id="EDDO_a4cc89b5-6ddf-41ec-9036-fbc2ad9b0c68">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_cf2227a8-5bcc-456a-87b6-209e24d2cc58">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_76608963-f780-4dd1-8029-47cad2df98ad">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_b7f04d6e-9af8-4b47-ae2b-e09bbe6a6857">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_55f5a48c-4bc3-4463-8c5c-fa824d114e6f">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_2_Favourite"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_c49f65e1-64f0-4fe7-8d50-61b8c0e0f7a0">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_e7349fb8-6d24-4567-9377-c3b1c6598f9c">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_fd49b948-522b-48c8-8be2-7383ae118907">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Favourite" visibility="public" xmi.id="EDDO_b6434e21-400e-4b58-81bb-53599ee6311d">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_6653ac65-bba9-491d-aa7c-647238d8f017">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_a9a1a6b4-d436-4e63-8f10-66f8a152d603">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_CCE245C8F9757772E3BDAB6806D16676">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Classifier.feature>
+										<UML:Attribute name="@ID" visibility="private">
+											<UML:Attribute.initialValue>
+												<UML:Expression body="Movie_2_Classification"/>
+											</UML:Attribute.initialValue>
+										</UML:Attribute>
+									</UML:Classifier.feature>
+									<UML:ModelElement.stereotype>
+										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
+									</UML:ModelElement.stereotype>
+								</UML:Class>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_3414c36e-a702-4799-a782-12357e498bea">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_7f15f3f4-d335-4efd-9e55-1fde09bb24d7">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_67686095-946e-46e0-b330-67e91ea5450e">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_02928578-1f34-491f-b29f-c9198ff8720d">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_fffe1ec5-6215-4071-b36a-ad018e76836d">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_3435644d-007f-40be-9668-d11124ff4ea1">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_86bf43b0-04ea-4bcd-90d0-70c8bbbddec1">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_0c96d2d2-611c-468b-9788-e0a9bef37174">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_7d12dd38-205d-4edf-bfa2-28c647a84c91">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+									</UML:Association.connection>
+								</UML:Association>
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_028cd632-76a9-4492-a8a1-5edfd3237a2d">
+									<UML:Association.connection>
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_14b86409-d101-4e5b-b483-b486a23237a6">
+											<UML:AssociationEnd.participant>
+												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
+											</UML:AssociationEnd.participant>
+										</UML:AssociationEnd>
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_4efbee91-dba5-466b-9b59-736246f7cfda">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
 											</UML:AssociationEnd.participant>
@@ -1740,101 +1711,16 @@
 										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 									</UML:ModelElement.stereotype>
 								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Heritage_Site_2_Classification" visibility="public" xmi.id="EDDO_04471457-d9a1-4e62-ba9a-a1824fa3244a">
+								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Heritage_Site_2_Classification" visibility="public" xmi.id="EDDO_324a308d-2346-4047-b091-6265755af2ff">
 									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_f1dd82c1-372b-43d2-bd5e-45b29d8392d8">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_ce52455f-0e39-45da-b166-943455cf5412">
+										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_a0558907-7964-49bd-90b5-9b9bb0ac0d28">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_421615350C97350B54C3D72E3506711E"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Heritage_Site_2_Classification" visibility="public" xmi.id="EDDO_1484793c-91ba-4af5-9216-641f7191c720">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_da333ab2-2f92-4b50-a0af-c83bbdc6c9a9">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_421615350C97350B54C3D72E3506711E"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_4ddfe416-b85f-4354-bb81-43447a0f2174">
+										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_e43ebcb9-e51f-44dc-be75-948fa68213c6">
 											<UML:AssociationEnd.participant>
 												<UML:Class xmi.idref="EDDO_7607F0B501BE26C0A492F546827594FF"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Class isAbstract="false" isLeaf="false" isRoot="false" isSpecification="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_CCE245C8F9757772E3BDAB6806D16676">
-									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="ea_eleType" value="element"/>
-									</UML:ModelElement.taggedValue>
-									<UML:Classifier.feature>
-										<UML:Attribute name="@ID" visibility="private">
-											<UML:Attribute.initialValue>
-												<UML:Expression body="Movie_2_Classification"/>
-											</UML:Attribute.initialValue>
-										</UML:Attribute>
-									</UML:Classifier.feature>
-									<UML:ModelElement.stereotype>
-										<UML:Stereotype xmi.idref="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
-									</UML:ModelElement.stereotype>
-								</UML:Class>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_be53c72c-771a-48f1-a485-0c381222709b">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_8b8ee4df-a70e-44e7-8ad8-ac30cd05f1c7">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_f8c01d5d-d37d-4386-bd7f-95d20e4039a8">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_70e74947-a53b-43a4-a9de-a42a24de8c87">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_73c4edee-5f77-40f3-a76f-f48d56b0c5d4">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_55244c55-21eb-47e6-b3d0-1dd799a6273c">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_2db572e6-af4c-48cd-b1a7-040739cd77b0">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_d9d2b1d3-9982-4ea0-9c75-9dcc37684b45">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_e8d6bcfa-5484-4275-b705-40bd6dce89c6">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-									</UML:Association.connection>
-								</UML:Association>
-								<UML:Association isAbstract="false" isLeaf="false" isRoot="false" name="Movie_2_Classification" visibility="public" xmi.id="EDDO_12fc4be4-588a-4d32-b163-50b421241b9c">
-									<UML:Association.connection>
-										<UML:AssociationEnd aggregation="none" isNavigable="false" xmi.id="EDDO_bfb7ddff-b866-4ea6-8696-9cae1a24eb1b">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
-											</UML:AssociationEnd.participant>
-										</UML:AssociationEnd>
-										<UML:AssociationEnd aggregation="none" isNavigable="true" xmi.id="EDDO_6087f349-5cba-4872-a498-b9c7a2d8fd9b">
-											<UML:AssociationEnd.participant>
-												<UML:Class xmi.idref="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
 											</UML:AssociationEnd.participant>
 										</UML:AssociationEnd>
 									</UML:Association.connection>
@@ -1848,7 +1734,6 @@
 				</UML:Package>
 				<UML:Stereotype name="STEP BaseType" xmi.id="EDDO_2C1C9EEFCF5D7E33FA31299E1B85B818"/>
 				<UML:Stereotype name="STEP ListOfValuesGroup" xmi.id="EDDO_AEA65B8AA15D49E0BE6E1D5D0EC62D39"/>
-				<UML:Stereotype name="STEP ListOfValues" xmi.id="EDDO_130254569D490650951EE7930AFC7E32"/>
 				<UML:Stereotype name="STEP AttributeGroup" xmi.id="EDDO_CB518A17E2CEADCB826017296E2FEF8C"/>
 				<UML:Stereotype name="STEP Attribute" xmi.id="EDDO_274A7D60F4A44594DC5012920182D1C5"/>
 				<UML:Stereotype name="STEP Classification" xmi.id="EDDO_E9F768BA4B147B66810AF4EC353632DD"/>
@@ -1856,7 +1741,7 @@
 				<UML:Stereotype name="STEP Reference" xmi.id="EDDO_C51D281535932E73D8CC6D22D6E12C2E"/>
 			</UML:Namespace.ownedElement>
 		</UML:Model>
-		<UML:Diagram diagramType="ClassDiagram" name="STEP" owner="EDDO_522F694F92E679D874A1CC2B2616C3D7" toolName="Enterprise Architect 2.5" xmi.id="EDDO_21754c42-f48b-4d85-8083-76715d569f77">
+		<UML:Diagram diagramType="ClassDiagram" name="STEP" owner="EDDO_522F694F92E679D874A1CC2B2616C3D7" toolName="Enterprise Architect 2.5" xmi.id="EDDO_509a6f3d-c066-4109-b86f-1f7557facd43">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_522F694F92E679D874A1CC2B2616C3D7"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
@@ -1871,7 +1756,7 @@
 				<UML:DiagramElement subject="EDDO_A73E6BF278578E09D2351EE2EC7A7908"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Fundamentals" owner="EDDO_71BEB2396C36F8BEC428E653806CA532" toolName="Enterprise Architect 2.5" xmi.id="EDDO_e391919e-e271-498f-b339-fe5776735713">
+		<UML:Diagram diagramType="ClassDiagram" name="Fundamentals" owner="EDDO_71BEB2396C36F8BEC428E653806CA532" toolName="Enterprise Architect 2.5" xmi.id="EDDO_58d05b0b-2c78-4f96-b49d-c53768121113">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_71BEB2396C36F8BEC428E653806CA532"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
@@ -1895,52 +1780,61 @@
 				<UML:DiagramElement subject="EDDO_572D4E421E5E6B9BC11D815E8A027112"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="ListOfValues" owner="EDDO_F3E3FAB9AFEEC8D877126A340F73B87A" toolName="Enterprise Architect 2.5" xmi.id="EDDO_b06603b0-98cd-4e30-81ba-ecf13613bd18">
+		<UML:Diagram diagramType="ClassDiagram" name="ListOfValues" owner="EDDO_F3E3FAB9AFEEC8D877126A340F73B87A" toolName="Enterprise Architect 2.5" xmi.id="EDDO_01fb0223-d97e-4d30-bb00-c624db50a51f">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_F3E3FAB9AFEEC8D877126A340F73B87A"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_1F1705CF68BB473E985C56FFBCAE93AF"/>
+				<UML:DiagramElement subject="EDDO_75D2FBE82FA692B584285D605E256ED2"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Movie LOVs" owner="EDDO_1F1705CF68BB473E985C56FFBCAE93AF" toolName="Enterprise Architect 2.5" xmi.id="EDDO_56b9b513-6a47-430a-bbac-5eb4ba224c7e">
+		<UML:Diagram diagramType="ClassDiagram" name="Lists of Values / LOVs" owner="EDDO_75D2FBE82FA692B584285D605E256ED2" toolName="Enterprise Architect 2.5" xmi.id="EDDO_26fc1c06-d6ec-444d-bbed-8586a7949b3a">
 			<UML:ModelElement.taggedValue>
-				<UML:TaggedValue tag="package" value="EDDO_1F1705CF68BB473E985C56FFBCAE93AF"/>
+				<UML:TaggedValue tag="package" value="EDDO_75D2FBE82FA692B584285D605E256ED2"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_B65FFBCB4DCFB93ECDC257D6E4BA42C4"/>
+				<UML:DiagramElement subject="EDDO_9084A416E64EA965A0403E3CCD873D6E"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Attributes" owner="EDDO_287234A1FF35A314B5B6BC4E5828E745" toolName="Enterprise Architect 2.5" xmi.id="EDDO_1cb9f438-88b6-4004-ba11-be0258d16751">
+		<UML:Diagram diagramType="ClassDiagram" name="DAVE LOVs" owner="EDDO_9084A416E64EA965A0403E3CCD873D6E" toolName="Enterprise Architect 2.5" xmi.id="EDDO_102afce9-ad68-4112-a5ec-a1f8a559101d">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="package" value="EDDO_9084A416E64EA965A0403E3CCD873D6E"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element/>
+		</UML:Diagram>
+		<UML:Diagram diagramType="ClassDiagram" name="Attributes" owner="EDDO_287234A1FF35A314B5B6BC4E5828E745" toolName="Enterprise Architect 2.5" xmi.id="EDDO_209a42f6-045a-4b3a-a12d-2880d755f3e9">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_287234A1FF35A314B5B6BC4E5828E745"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_48E326AFF19611B1DD5CA5B360B6A1D7"/>
+				<UML:DiagramElement subject="EDDO_1526E0AC850C241EE1631D9AD5664475"/>
 				<UML:DiagramElement subject="EDDO_5793E012C240F861EA0E36F29CA7FE4B"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Movie Attributes" owner="EDDO_48E326AFF19611B1DD5CA5B360B6A1D7" toolName="Enterprise Architect 2.5" xmi.id="EDDO_1f42dbc7-d183-4d22-829b-27cd7ee8337f">
+		<UML:Diagram diagramType="ClassDiagram" name="Movie" owner="EDDO_1526E0AC850C241EE1631D9AD5664475" toolName="Enterprise Architect 2.5" xmi.id="EDDO_768c4c3a-f2f7-46a5-a408-8abc22f10f21">
 			<UML:ModelElement.taggedValue>
-				<UML:TaggedValue tag="package" value="EDDO_48E326AFF19611B1DD5CA5B360B6A1D7"/>
+				<UML:TaggedValue tag="package" value="EDDO_1526E0AC850C241EE1631D9AD5664475"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0"/>
-				<UML:DiagramElement subject="EDDO_724E4204098295DC1FEE73AA6AADB768"/>
-				<UML:DiagramElement subject="EDDO_F9A2928A076C1AFACFFF1C74D46497E1"/>
+				<UML:DiagramElement subject="EDDO_CA9F06BDF5A78D36EF12674A9F138BD6"/>
+				<UML:DiagramElement subject="EDDO_E109705703E0324D1A5DE1D84A3A8951"/>
+				<UML:DiagramElement subject="EDDO_D9B36998C97BE687BD400E5CAF440BF5"/>
+				<UML:DiagramElement subject="EDDO_6201EF1B62AFC8279DBE20AAF6DCF3BE"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Movie_Writers" owner="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0" toolName="Enterprise Architect 2.5" xmi.id="EDDO_5808dedd-a985-4a7c-9ecb-92d0bdb9fb89">
+		<UML:Diagram diagramType="ClassDiagram" name="Writers" owner="EDDO_CA9F06BDF5A78D36EF12674A9F138BD6" toolName="Enterprise Architect 2.5" xmi.id="EDDO_c24bc969-6c3d-4cb4-aacf-78ddc332c99e">
 			<UML:ModelElement.taggedValue>
-				<UML:TaggedValue tag="package" value="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0"/>
+				<UML:TaggedValue tag="package" value="EDDO_CA9F06BDF5A78D36EF12674A9F138BD6"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
@@ -1948,38 +1842,49 @@
 				<UML:DiagramElement subject="EDDO_76596DD093545E66C056795C91D2A7D4"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Movie_Shows" owner="EDDO_724E4204098295DC1FEE73AA6AADB768" toolName="Enterprise Architect 2.5" xmi.id="EDDO_afb80ff9-a846-4a9a-b729-9fe9e74f2574">
+		<UML:Diagram diagramType="ClassDiagram" name="Relations" owner="EDDO_E109705703E0324D1A5DE1D84A3A8951" toolName="Enterprise Architect 2.5" xmi.id="EDDO_a59d6a22-ec18-494f-a15e-37b5b85fcbe8">
 			<UML:ModelElement.taggedValue>
-				<UML:TaggedValue tag="package" value="EDDO_724E4204098295DC1FEE73AA6AADB768"/>
+				<UML:TaggedValue tag="package" value="EDDO_E109705703E0324D1A5DE1D84A3A8951"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_E9F90B1F4C7AF7543ED518B78F7706AB"/>
-				<UML:DiagramElement subject="EDDO_20BF24E8F36E5CB5EC50D20C6E508298"/>
-				<UML:DiagramElement subject="EDDO_5D5EF8B96404450BB64BA055DE6245CC"/>
-				<UML:DiagramElement subject="EDDO_7214839DC056ED8B1BE0164D0B1FE5D6"/>
-				<UML:DiagramElement subject="EDDO_2BCC92AE9D7E6B5CFFB482FFAFAE2283"/>
-				<UML:DiagramElement subject="EDDO_D2980D6697F05D5D686966FD7BD7FEB8"/>
-				<UML:DiagramElement subject="EDDO_C0D6F21A57937ABFC648B4F20E9191B9"/>
-				<UML:DiagramElement subject="EDDO_E62C2954278BB860D15D5CD212FAB27D"/>
-				<UML:DiagramElement subject="EDDO_7DC0274BE6A5696E1995D6EB5A34E880"/>
+				<UML:DiagramElement subject="EDDO_FA4BAA6E356DA9E5BF6421D980431DCD"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:Diagram diagramType="ClassDiagram" name="Actors" owner="EDDO_D9B36998C97BE687BD400E5CAF440BF5" toolName="Enterprise Architect 2.5" xmi.id="EDDO_ce91d52c-09fe-43b0-913c-ad6eadb1251d">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="package" value="EDDO_D9B36998C97BE687BD400E5CAF440BF5"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement subject="EDDO_8A8A5FEEF4A98E5E3FB6F2F18EF7D1E6"/>
+				<UML:DiagramElement subject="EDDO_C9EC6B568BE825452FD8524269763E31"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:Diagram diagramType="ClassDiagram" name="Shows" owner="EDDO_6201EF1B62AFC8279DBE20AAF6DCF3BE" toolName="Enterprise Architect 2.5" xmi.id="EDDO_7056377a-30e2-48d8-91e8-39d6ab1a0f8a">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="package" value="EDDO_6201EF1B62AFC8279DBE20AAF6DCF3BE"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
 				<UML:DiagramElement subject="EDDO_F39FB5DDE6E7539B2419273AE02F4546"/>
 				<UML:DiagramElement subject="EDDO_89830AF05A697D0C735DE38755087BCD"/>
+				<UML:DiagramElement subject="EDDO_7DC0274BE6A5696E1995D6EB5A34E880"/>
+				<UML:DiagramElement subject="EDDO_C0D6F21A57937ABFC648B4F20E9191B9"/>
+				<UML:DiagramElement subject="EDDO_E62C2954278BB860D15D5CD212FAB27D"/>
+				<UML:DiagramElement subject="EDDO_7214839DC056ED8B1BE0164D0B1FE5D6"/>
+				<UML:DiagramElement subject="EDDO_D2980D6697F05D5D686966FD7BD7FEB8"/>
+				<UML:DiagramElement subject="EDDO_2BCC92AE9D7E6B5CFFB482FFAFAE2283"/>
+				<UML:DiagramElement subject="EDDO_5D5EF8B96404450BB64BA055DE6245CC"/>
+				<UML:DiagramElement subject="EDDO_20BF24E8F36E5CB5EC50D20C6E508298"/>
+				<UML:DiagramElement subject="EDDO_411C27FB4429D8371B9AEA0A33EBE1AE"/>
+				<UML:DiagramElement subject="EDDO_E9F90B1F4C7AF7543ED518B78F7706AB"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Movie_Actors" owner="EDDO_F9A2928A076C1AFACFFF1C74D46497E1" toolName="Enterprise Architect 2.5" xmi.id="EDDO_003988ab-284f-432e-aac3-6b3a23732263">
-			<UML:ModelElement.taggedValue>
-				<UML:TaggedValue tag="package" value="EDDO_F9A2928A076C1AFACFFF1C74D46497E1"/>
-				<UML:TaggedValue tag="type" value="Logical"/>
-				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
-			</UML:ModelElement.taggedValue>
-			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_C9EC6B568BE825452FD8524269763E31"/>
-				<UML:DiagramElement subject="EDDO_8A8A5FEEF4A98E5E3FB6F2F18EF7D1E6"/>
-			</UML:Diagram.element>
-		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Heritage" owner="EDDO_5793E012C240F861EA0E36F29CA7FE4B" toolName="Enterprise Architect 2.5" xmi.id="EDDO_96113070-76b3-41a8-baec-906fd611b973">
+		<UML:Diagram diagramType="ClassDiagram" name="Heritage" owner="EDDO_5793E012C240F861EA0E36F29CA7FE4B" toolName="Enterprise Architect 2.5" xmi.id="EDDO_5e092155-b28a-422c-a18f-d8aefbd94a9d">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_5793E012C240F861EA0E36F29CA7FE4B"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
@@ -1990,76 +1895,72 @@
 				<UML:DiagramElement subject="EDDO_B346E252C2100475A6AA8DC021682246"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Heritage Classification" owner="EDDO_EC4BC59964E0F390FE18E460231C7FE3" toolName="Enterprise Architect 2.5" xmi.id="EDDO_976d90eb-e168-4d95-9a37-2c2d36cecf21">
+		<UML:Diagram diagramType="ClassDiagram" name="Heritage Classification" owner="EDDO_EC4BC59964E0F390FE18E460231C7FE3" toolName="Enterprise Architect 2.5" xmi.id="EDDO_87526c1d-78aa-4277-867e-affca3485449">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_EC4BC59964E0F390FE18E460231C7FE3"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_9837730477B870A88C927B7E71B0662D"/>
-				<UML:DiagramElement subject="EDDO_F1D3027C5E61C8AD5631909BE9D7422D"/>
 				<UML:DiagramElement subject="EDDO_9421E110D46B0FD11AFBD34AF7B0294D"/>
+				<UML:DiagramElement subject="EDDO_F1D3027C5E61C8AD5631909BE9D7422D"/>
+				<UML:DiagramElement subject="EDDO_9837730477B870A88C927B7E71B0662D"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Heritage Object" owner="EDDO_B346E252C2100475A6AA8DC021682246" toolName="Enterprise Architect 2.5" xmi.id="EDDO_2954e13a-97b8-4f14-92e0-81d17c83cb4e">
+		<UML:Diagram diagramType="ClassDiagram" name="Heritage Object" owner="EDDO_B346E252C2100475A6AA8DC021682246" toolName="Enterprise Architect 2.5" xmi.id="EDDO_61422f83-ea3f-4fae-8118-579cb93aa9d6">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_B346E252C2100475A6AA8DC021682246"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_AA76BFE76185DCCFED548D982395FB8E"/>
+				<UML:DiagramElement subject="EDDO_4AC20E864F033C9DFDBE8BEA931D191B"/>
 				<UML:DiagramElement subject="EDDO_B86A576887DAD48BDD58F12A667192B0"/>
 				<UML:DiagramElement subject="EDDO_8E8D6B6975F27F0CA9BAE64D2AD1D1E6"/>
-				<UML:DiagramElement subject="EDDO_4AC20E864F033C9DFDBE8BEA931D191B"/>
-				<UML:DiagramElement subject="EDDO_2AEBB4E712D0298A5481D66B24820B98"/>
-				<UML:DiagramElement subject="EDDO_751DFC7D771D282FC1FCABB556A97C30"/>
+				<UML:DiagramElement subject="EDDO_AA76BFE76185DCCFED548D982395FB8E"/>
 				<UML:DiagramElement subject="EDDO_7EF83D05BE2008FF240623AC0060ADCD"/>
+				<UML:DiagramElement subject="EDDO_751DFC7D771D282FC1FCABB556A97C30"/>
+				<UML:DiagramElement subject="EDDO_2AEBB4E712D0298A5481D66B24820B98"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="UserTypes" owner="EDDO_2F6C1AF225355B0F9CC3D2AF7CC1EF72" toolName="Enterprise Architect 2.5" xmi.id="EDDO_928bbecd-2dc8-4cb5-bb99-566c4046ef11">
+		<UML:Diagram diagramType="ClassDiagram" name="UserTypes" owner="EDDO_2F6C1AF225355B0F9CC3D2AF7CC1EF72" toolName="Enterprise Architect 2.5" xmi.id="EDDO_c9742739-1c1e-4f0d-855b-3ac9317018f2">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_2F6C1AF225355B0F9CC3D2AF7CC1EF72"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA"/>
-				<UML:DiagramElement subject="EDDO_F3A2F852CB8E2E978B7AB43D8165B380"/>
-				<UML:DiagramElement subject="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
-				<UML:DiagramElement subject="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
 				<UML:DiagramElement subject="EDDO_29CEAC178DCCF5160AF08DF94B13D312"/>
-				<UML:DiagramElement subject="EDDO_25E11BA308054CA4B17D77E19FA3C5E5"/>
-				<UML:DiagramElement subject="EDDO_F72A377BB8EC91A66A4F89B634ADDE8F"/>
+				<UML:DiagramElement subject="EDDO_F3A2F852CB8E2E978B7AB43D8165B380"/>
+				<UML:DiagramElement subject="EDDO_7CB30829EF718EF48EF9F1CD325ECCDA"/>
 				<UML:DiagramElement subject="EDDO_34E857B59AA5DA9AFCF602EE9B670CFF"/>
-				<UML:DiagramElement subject="EDDO_385C7EE0A0884725890D1E643C2213B4"/>
-				<UML:DiagramElement subject="EDDO_487088FE7537C3B4C17579AED40578C2"/>
-				<UML:DiagramElement subject="EDDO_4F60EEE5DFDDC9E1B60936A0AF0D4011"/>
 				<UML:DiagramElement subject="EDDO_F9A2928A076C1AFACFFF1C74D46497E1"/>
 				<UML:DiagramElement subject="EDDO_724E4204098295DC1FEE73AA6AADB768"/>
-				<UML:DiagramElement subject="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0"/>
+				<UML:DiagramElement subject="EDDO_385C7EE0A0884725890D1E643C2213B4"/>
+				<UML:DiagramElement subject="EDDO_25E11BA308054CA4B17D77E19FA3C5E5"/>
+				<UML:DiagramElement subject="EDDO_92A0B3522A3E76246EB88234EF9D69D4"/>
+				<UML:DiagramElement subject="EDDO_FC5BBD1806F33DA17FA27E8A0F22E3D9"/>
 				<UML:DiagramElement subject="EDDO_7607F0B501BE26C0A492F546827594FF"/>
+				<UML:DiagramElement subject="EDDO_AE3F4CE55BD94CB78C6B22F7488AA0E0"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="References" owner="EDDO_D95867DEADFE690E40F42068D6B59DF8" toolName="Enterprise Architect 2.5" xmi.id="EDDO_4270bc60-8d1c-45ee-86c4-69fb61c2f3c9">
+		<UML:Diagram diagramType="ClassDiagram" name="References" owner="EDDO_D95867DEADFE690E40F42068D6B59DF8" toolName="Enterprise Architect 2.5" xmi.id="EDDO_6ec5f1ac-35a9-439b-9f6f-ba8f953c5e7d">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_D95867DEADFE690E40F42068D6B59DF8"/>
 				<UML:TaggedValue tag="type" value="Logical"/>
 				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=1;PPgs.cx=1;PPgs.cy=1;DocSize.cx=1000;DocSize.cy=1000;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=1;HideProps=1;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=1;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
 			</UML:ModelElement.taggedValue>
 			<UML:Diagram.element>
-				<UML:DiagramElement subject="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
-				<UML:DiagramElement subject="EDDO_DB0369803B30F6DEAFCEA1407B3729F5"/>
-				<UML:DiagramElement subject="EDDO_458334006AC77DE6F45BF996115AD8E2"/>
 				<UML:DiagramElement subject="EDDO_F46BDCC652AC865C7477ED6A12F0985A"/>
-				<UML:DiagramElement subject="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
+				<UML:DiagramElement subject="EDDO_DB0369803B30F6DEAFCEA1407B3729F5"/>
+				<UML:DiagramElement subject="EDDO_FFE2A0616EC8C2871743B62F1E71A9A1"/>
 				<UML:DiagramElement subject="EDDO_F7A047ACC4A6789F037D8E919809043B"/>
-				<UML:DiagramElement subject="EDDO_421615350C97350B54C3D72E3506711E"/>
+				<UML:DiagramElement subject="EDDO_C2F8F13CBD54ECE8990B790FCEDE5973"/>
 				<UML:DiagramElement subject="EDDO_CCE245C8F9757772E3BDAB6806D16676"/>
+				<UML:DiagramElement subject="EDDO_421615350C97350B54C3D72E3506711E"/>
 			</UML:Diagram.element>
 		</UML:Diagram>
-		<UML:Diagram diagramType="ClassDiagram" name="Keys" owner="EDDO_A73E6BF278578E09D2351EE2EC7A7908" toolName="Enterprise Architect 2.5" xmi.id="EDDO_3169954d-22c9-46fa-9274-ef58806cd7cf">
+		<UML:Diagram diagramType="ClassDiagram" name="Keys" owner="EDDO_A73E6BF278578E09D2351EE2EC7A7908" toolName="Enterprise Architect 2.5" xmi.id="EDDO_4e360209-f160-46a0-aeff-16e7b764a512">
 			<UML:ModelElement.taggedValue>
 				<UML:TaggedValue tag="package" value="EDDO_A73E6BF278578E09D2351EE2EC7A7908"/>
 				<UML:TaggedValue tag="type" value="Logical"/>

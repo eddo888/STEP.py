@@ -140,6 +140,28 @@ optional arguments:
   -c, --colour          in colour
   ```
   
+# jscript libraries for Sparx
+
+the following helper libraries are in Sparx jScript
+create a "User Scripts" folder,
+then create a new jscript .js file for each of the following
+
+[jscript/Library.js]("Library.js" base shared library)
+
+[jscript/IncludeMissingParts.js]("IncludeMissingParts.js" will look for missing items in this package and add to the diagram if not there) 
+
+[jscript/IncludeLinkedParts]("IncludeLinkedParts.js" to find referenced parts and add to the current diagram)
+
+[jscript/set_stereotype.js]("set_sterotype.js" to set the STEP stereotype for STEP types)
+
+# uml resources for Sparx
+
+this Sparx Resource file can be used to create colour profiles for UML types.
+
+[UML/UML-Reference-Stereotypes.sparxea.xml]("UML-Reference-Stereotypes.sparxea.xml" Sparx->Configure->Model->Transfer->Import Reference Data, then select file and choose specifications)
+
+
+
 
 
 

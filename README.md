@@ -146,19 +146,19 @@ the following helper libraries are in Sparx jScript
 create a "User Scripts" folder,
 then create a new jscript .js file for each of the following
 
-["Library.js" base shared library](https://github.com/eddo888/STEP.py/raw/master/jscript/Library.js)
+["Library.js" base shared library](raw/master/jscript/Library.js)
 
-["IncludeMissingParts.js" will look for missing items in this package and add to the diagram if not there](https://github.com/eddo888/STEP.py/raw/master/jscript/IncludeMissingParts.js) 
+["IncludeMissingParts.js" will look for missing items in this package and add to the diagram if not there](raw/master/jscript/IncludeMissingParts.js) 
 
-["IncludeLInkedParts.js" to find referenced parts on selected items and add to the current diagram](https://github.com/eddo888/STEP.py/raw/master/jscript/IncludeLinkedParts.js)
+["IncludeLInkedParts.js" to find referenced parts on selected items and add to the current diagram](raw/master/jscript/IncludeLinkedParts.js)
 
-["set-stereotype.js" set the STEP stereotype for selected diagram items](https://github.com/eddo888/STEP.py/raw/master/jscript/set_stereotype.js)
+["set-stereotype.js" set the STEP stereotype for selected diagram items](raw/master/jscript/set_stereotype.js)
 
 # uml resources for Sparx
 
 this Sparx Resource file can be used to create colour profiles for UML types.
 
-["UML-Reference-Stereotypes.sparxea.xml" Sparx->Configure->Model->Transfer->Import Reference Data, then select file and choose specifications](https://github.com/eddo888/STEP.py/raw/master/UML/UML-Reference-Stereotypes.sparxea.xml)
+["UML-Reference-Stereotypes.sparxea.xml" Sparx->Configure->Model->Transfer->Import Reference Data, then select file and choose specifications](raw/master/UML/UML-Reference-Stereotypes.sparxea.xml)
 
 
 

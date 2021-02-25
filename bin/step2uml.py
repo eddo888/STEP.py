@@ -60,7 +60,7 @@ class STEP2UML(object):
 			'url',
 		]
 		for base_type in types:
-			_base_type = xmi.makeClass(base_type, package, uid=base_type)
+			_base_type = xmi.makeClass(base_type, package, uid=f'BaseType={base_type}')
 			sys.stdout.write(f'\t\tBaseType[@ID={colours.Orange}"{base_type}"{colours.Off}]\n')
 			xmi.addDiagramClass(_base_type, diagram)
 			xmi.makeStereotype('STEP BaseType', _base_type)
@@ -77,9 +77,10 @@ class STEP2UML(object):
 
 	def ListOfValuesGroup(self, xmi, STEP, lov_group, package, diagram, indent=''):
 		lname = getElementText(STEP.ctx, 'step:Name', lov_group)
+		if lname: lname = lname.replace("'","&apos;")
 		lid = getAttribute(lov_group, 'ID')
 
-		_package = xmi.makePackage(lname, package, uid=lid)
+		_package = xmi.makePackage(lname, package, uid=f'ListOfValuesGroup={lid}')
 		xmi.makeStereotype('STEP ListOfValuesGroup', _package)
 		xmi.makeAttribute('@ID', None, lid, _package, array=False)
 		
@@ -118,13 +119,14 @@ class STEP2UML(object):
 		
 		for lov in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:ListsOfValues/step:ListOfValue'):
 			lname = getElementText(STEP.ctx, 'step:Name', lov)
+			if lname: lname = lname.replace("'","&apos;")
 			lid = getAttribute(lov, 'ID')
 			pid = getAttribute(lov, 'ParentID')
 
 			package = self.lov_groups_packages[pid]
 			diagram = self.lov_groups_diagrams[pid]
 			
-			_lov = xmi.makeClass(lname, package, uid=lid)
+			_lov = xmi.makeClass(lname, package, uid=f'ListOfValues_{lid}')
 			xmi.makeStereotype('STEP ListOfValues', _lov)
 
 			xmi.addDiagramClass(_lov, diagram)
@@ -139,12 +141,14 @@ class STEP2UML(object):
 			
 			for value in getElements(STEP.ctx, 'step:Value', lov):
 				name = value.content
+				if name: name = name.replace("'","&apos;")
 				id = getAttribute(value, 'ID')
 				xmi.makeAttribute(name, None, id, _lov, array=False)
 
 	
 	def AttributeGroup(self, xmi, STEP, attr_group, package, diagram, indent=''):
 		lname = getElementText(STEP.ctx, 'step:Name', attr_group)
+		if lname: lname = lname.replace("'","&apos;")
 		lid = getAttribute(attr_group, 'ID')
 
 		_package = xmi.makePackage(lname, package)
@@ -184,6 +188,7 @@ class STEP2UML(object):
 		
 		for attribute in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:AttributeList/step:Attribute'):
 			aname = getElementText(STEP.ctx, 'step:Name', attribute)
+			if aname: aname = aname.replace("'","&apos;")
 			aid = getAttribute(attribute, 'ID')
 			agl = getElement(STEP.ctx, 'step:AttributeGroupLink', attribute)
 			pid = getAttribute(agl, 'AttributeGroupID')
@@ -191,7 +196,7 @@ class STEP2UML(object):
 			package = self.attr_groups_packages[pid]
 			diagram = self.attr_groups_diagrams[pid]
 				
-			_attribute = xmi.makeClass(aname, package, uid=aid)
+			_attribute = xmi.makeClass(aname, package, uid=f'Attribute={aid}')
 			xmi.makeStereotype('STEP Attribute', _attribute)
 			xmi.addDiagramClass(_attribute, diagram)
 			sys.stdout.write(f'\t\tAttribute[@ID="{colours.Orange}{aid}{colours.Off}"]/Name={colours.Green}{aname}{colours.Off}\n')
@@ -237,8 +242,9 @@ class STEP2UML(object):
 		
 		for user_type in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:UserTypes/step:UserType'):
 			uname = getElementText(STEP.ctx, 'step:Name', user_type)
+			if uname: uname = uname.replace("'","&apos;")
 			uid = getAttribute(user_type, 'ID')
-			_user_type = xmi.makeClass(uname, package, uid=uid)
+			_user_type = xmi.makeClass(uname, package, uid=f'UserType_{uid}')
 
 			aid  = getAttribute(user_type, 'AllowInDesignTemplate')
 			aqt  = getAttribute(user_type, 'AllowQuarkTemplate')
@@ -266,6 +272,7 @@ class STEP2UML(object):
 			xpath=f'/step:STEP-ProductInformation/step:AttributeList/step:Attribute[step:UserTypeLink/@UserTypeID="{uid}"]'
 			for attribute in getElements(STEP.ctx, xpath):
 				aname = getElementText(STEP.ctx, 'step:Name', attribute)
+				if aname: aname = aname.replace("'","&apos;")
 				aid = getAttribute(attribute, 'ID')
 				multiple = getAttribute(attribute, 'MultiValued') == 'true'				
 				validation = getElement(STEP.ctx, 'step:Validation', attribute)
@@ -277,6 +284,7 @@ class STEP2UML(object):
 					if lovl:
 						cid = getAttribute(lovl, 'ListOfValueID')
 						ctype = self.lovs[cid]
+						
 				xmi.makeAttribute(aname, ctype, None, _user_type, array=multiple)
 
 			self.user_types[uid] = _user_type
@@ -304,8 +312,9 @@ class STEP2UML(object):
 
 		for reference in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:CrossReferenceTypes/*'):
 			rname = getElementText(STEP.ctx, 'step:Name', reference)
+			if rname: rname = rname.replace("'","&apos;")
 			rid = getAttribute(reference, 'ID')
-			_reference = xmi.makeClass(rname, package, uid=rid)
+			_reference = xmi.makeClass(rname, package, uid=f'Reference_{rid}')
 			xmi.makeStereotype('STEP Reference', _reference)
 			xmi.addDiagramClass(_reference, diagram)
 			sys.stdout.write(f'\t\tReference[@ID="{colours.Orange}{rid}{colours.Off}"]/Name={colours.Green}{rname}{colours.Off}\n')
@@ -332,6 +341,24 @@ class STEP2UML(object):
 				else:
 					sys.stderr.write(f'\t\t\t\t{colours.Red}UserType[@ID="{tid}"] not found !{colours.Off}\n')
 					
+			for attribute_link in getElements(STEP.ctx, 'step:AttributeLink',reference):
+				aid = getAttribute(attribute_link, 'AttributeID')
+				attribute = getElement(STEP.ctx, f'//step:Attribute[@ID="{aid}"]')
+				aname = getElementText(STEP.ctx, 'step:Name', attribute)
+				if aname: aname = aname.replace("'","&apos;")
+				
+				multiple = getAttribute(attribute, 'MultiValued') == 'true'				
+				validation = getElement(STEP.ctx, 'step:Validation', attribute)
+				if validation:
+					cid = getAttribute(validation, 'BaseType')
+					ctype = self.base_types[cid.lower()]
+				else:
+					lovl = getElement(STEP.ctx, 'step:ListOfValueLink', attribute)
+					if lovl:
+						cid = getAttribute(lovl, 'ListOfValueID')
+						ctype = self.lovs[cid]
+				xmi.makeAttribute(aname, ctype, None, _reference, array=multiple)
+
 			self.references[rid] = _reference
 
 		return package
@@ -348,8 +375,9 @@ class STEP2UML(object):
 
 		for key in getElements(STEP.ctx, f'/step:STEP-ProductInformation/step:Keys/step:Key'):
 			kname = getElementText(STEP.ctx, 'step:Name', key)
+			if kname: kname = kname.replace("'","&apos;")
 			kid = getAttribute(key, 'ID')
-			_key = xmi.makeClass(kname, package, uid=kid)
+			_key = xmi.makeClass(kname, package, uid=f'Key={kid}')
 
 			xmi.makeStereotype('STEP Key', _key)
 			xmi.addDiagramClass(_key, diagram)

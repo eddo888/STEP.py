@@ -17,7 +17,7 @@ function LayoutThisDiagram(diagram) {
 		= lsCycleRemoveDFS 
 		| lsLayeringOptimalLinkLength 
 		| lsInitializeDFSOut 
-		| lsLayoutDirectionDown
+		| lsLayoutDirectionLeft
 		;
       
       Iterations = 4;
@@ -40,7 +40,7 @@ function set_stereotype(new_stereotype) {
 	testPackage = Repository.GetPackageByID(testDiagram.PackageID);
 
 	Session.Output("---------------------------------------------------------------------------------");
-	Session.Output( "diagramPackage[" + testDiagram.Name + "]=" + testPackage.Name );
+	Session.Output( "/ " + testPackage.Name );
 	
 	for (var o=0; o<testDiagram.SelectedObjects.Count; o++) {
 		var object as EA.DiagramObject;
@@ -49,7 +49,7 @@ function set_stereotype(new_stereotype) {
 		var element as EA.Element;
 		element = Repository.GetElementByID(object.ElementID);
 
-		Session.Output("element["+element.ElementID+"]="+element.Name+":"+element.StereotypeEx);
+		//Session.Output("element["+element.ElementID+"]="+element.Name+":"+element.StereotypeEx);
 		if (element.StereotypeEx != new_stereotype) {
 			element.StereotypeEx = new_stereotype;
 			element.Update();
@@ -66,10 +66,10 @@ function add_diagram_package(diagram, package) {
 	diagram_object = diagram.FindElementInDiagram(package.Element.ElementID);
 
 	if (diagram_object) {
-		Session.output("= "+package.Name);
+		//Session.output("= "+package.Name);
 	}
 	else {
-		Session.output("? "+package.Name);
+		Session.output("+ "+package.Name);
 		diagram_object = diagram.DiagramObjects.AddNew("l=1;r=1;t=-20;b=-80","");
 		diagram_object.ElementID = package.Element.ElementID;
 		diagram_object.Update();
@@ -83,10 +83,10 @@ function add_diagram_element(diagram, element) {
 	diagram_object = diagram.FindElementInDiagram(element.ElementID);
 
 	if (diagram_object) {
-		Session.output("= "+element.Name);
+		//Session.output("= "+element.Name);
 	}
 	else {
-		Session.output("? "+element.Name);
+		Session.output("+ "+element.Name);
 		diagram_object = diagram.DiagramObjects.AddNew("l=1;r=1;t=-20;b=-80","");
 		diagram_object.ElementID = element.ElementID;
 		diagram_object.p

@@ -16,7 +16,7 @@ function IncludedMissingElements(diagram, depth, recurse) {
 
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
-	Session.Output(depth+"package["+package.PackageID+"]="+package.Name);
+	Session.Output(depth+"/ "+package.Name);
 
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;

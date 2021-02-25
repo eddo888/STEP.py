@@ -20,7 +20,7 @@ function IncludeLinkedElements(diagram, depth) {
 		
 		var element as EA.Element;
 		element = Repository.GetElementByID(diagram_object.ElementID);
-		Session.Output(element.Name+" id="+element.ElementID);
+		//Session.Output(element.Name+" id="+element.ElementID);
 		
 		for (var c=0; c<element.Connectors.Count; c++) {
 			var connector as EA.Connector;
@@ -33,7 +33,7 @@ function IncludeLinkedElements(diagram, depth) {
 				other = Repository.GetElementByID(connector.ClientID);
 			}
 			if (other) {
-				Session.Output("    "+other.Name);
+				//Session.Output("    "+other.Name);
 				add_diagram_element(_diagram, other);
 			}
 		}

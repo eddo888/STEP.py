@@ -141,7 +141,7 @@ class STEP(object):
 		result = requests.post(url=url, auth=auth, headers=headers, params=params, data=body)
 		if result.status_code not in [200,201] or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result
+		return result.json()
 
 
 	def delete(self, path, body=None, params=None, headers=None):
@@ -523,6 +523,33 @@ class Entities(STEP):
 		body = json.dumps(dict(value=dict(value=value)))
 		headers = { 'Content-Type' : 'application/json' }
 		return super().put('%s/%s/values/%s'%(self.base, id, name), body=body, headers=headers)
+
+	
+	@args.operation(help='search for entities')
+	@args.parameter(name='below_id', help='the ID of entity to search within')
+	@args.parameter(name='conditionType', choices=['name'], default='name', help='the type of confidition')
+	@args.parameter(name='operator', choices=['eq','exists','like','neq'], default='eq', help='comparison choices')
+	@args.parameter(name='queryString', help='string to search for')
+	def search(self, below_id, conditionType, operator, queryString):
+		body = json.dumps({
+			"condition": {
+				"conditionType": "and",
+				"conditions": [
+					{
+						"conditionType": "simplebelow",
+						"topNodeId": below_id,
+						"topNodeType": "entity"
+					},
+					{
+						"conditionType": conditionType,
+						"operator": operator, 
+						"queryString": queryString,
+					}
+				]
+			}
+		})
+		headers = { 'Content-Type' : 'application/json' }
+		return super().post('%s/search'%(self.base), body=body, headers=headers)
 		
 
 #________________________________________________________________

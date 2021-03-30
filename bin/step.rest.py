@@ -5,7 +5,7 @@
 import sys, json
 
 # remove before flight
-sys.path.insert(0, '..')
+#sys.path.insert(0, '..')
 
 from STEP.REST import *
 

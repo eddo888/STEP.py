@@ -583,6 +583,12 @@ class Classifications(STEP):
 	
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
+	def assets(self, id):
+		return super().get('%s/%s/assets'%(self.base, id))
+
+	
+	@args.operation(help='get children of classification by id')
+	@args.parameter(name='id', help='the ID of classification')
 	def children(self, id):
 		return super().get('%s/%s/children'%(self.base,id))
 

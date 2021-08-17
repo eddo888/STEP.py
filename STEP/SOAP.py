@@ -244,6 +244,7 @@ class StepSoapClient(object):
 		request = self.createAccessControl()
 		return self.client.service.getAttributeDetails(request, nodeURL)
 		
+
 	#.............................................................
 	@args.operation
 	@args.parameter(name='urls', short='u', flag=True, help='show attribute urls')
@@ -443,6 +444,14 @@ class StepSoapClient(object):
 	def getLOVValueIDs(self,nodeID):
 		request = self.createAccessControl()
 		response = self.client.service.getLOVValueIDs(request,nodeID)
+		return response
+
+	#.............................................................
+	@args.operation
+	@args.parameter(name='templateID', choices=['Inbound', 'Outbound', 'Importer', 'Exporter'])
+	def getBackgoundProcesses(self, templateID):
+		request = self.createAccessControl()
+		response = self.client.service.getBackgroundProcesses(request, templateID)
 		return response
 
 

@@ -4,6 +4,9 @@
 
 import sys, json
 
+# remove before flight
+# sys.path.insert(0, '..')
+
 from STEP.SOAP import *
 from STEP.Cleaner import suds2dict
 

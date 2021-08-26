@@ -70,10 +70,14 @@ class STEP(object):
 	@args.property(short='X')
 	def xslt(self): return
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		if asXML: self.asXML = asXML
 		if verbose: self.verbose = verbose
 		if output: self.output = output
+		if hostname: self.hostname = hostname
+		if username: self.username = username
+		if context: self.context=context
+		if workspace: self.workspace = workspace
 		self.silent = silent
 		tipe = 'application/xml' if self.asXML else 'application/json'
 		self.headers={
@@ -212,8 +216,8 @@ class Assets(STEP):
 	
 	base = 'assets'
 	
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 		
 
 	@args.operation
@@ -256,9 +260,9 @@ class Processes(STEP):
 	'''
 	base = 'backgroundprocesses'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
-
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
 
 	@args.operation
 	def list(self):
@@ -267,14 +271,49 @@ class Processes(STEP):
 		'''
 		return super().get(self.base)
 
-
+	
 	@args.operation
 	def get(self, id):
 		'''
 		get the process by id
 		'''
-		return super().get('%s/%s'%(self.base,id))
+		if self.asXML:
+			return super().get('%s/%s'%(self.base,id))
+		else:
+			return super().get('background-processes/%s'%id)
 
+		
+	@args.operation(help='get error report, JSON only !')
+	def report(self, id):
+		'''
+		get the process by id
+		'''
+		return super().get('background-processes/%s/execution-report'%id)
+
+	
+	@args.operation(help='get attachments, JSON only !')
+	def attachments(self, id):
+		'''
+		get the process by id
+		'''
+		return super().get('background-processes/%s/attachments'%id)
+
+	
+	@args.operation(help='get attachment metadata, JSON only !')
+	def attachment_metadata(self, id, attachmentId):
+		'''
+		get the process by id
+		'''
+		return super().get('background-processes/%s/attachments/%s'%(id,attachmentId))
+
+	@args.operation(help='get attachment content, JSON only !')
+	def attachment_content(self, id, attachmentId):
+		'''
+		get the process by id
+		'''
+		return super().get('background-processes/%s/attachments/%s/content'%(id,attachmentId))
+
+	
 
 #________________________________________________________________
 @args.command(name='instances')
@@ -284,9 +323,9 @@ class Instances(STEP):
 	'''
 	base = 'bgpinstance'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
-
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
 
 	@args.operation
 	def list(self):
@@ -326,9 +365,9 @@ class ObjectsByKey(STEP):
 
 	base = 'objectsbykey'
 	
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
-
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+	
 
 	@args.operation(help='get object by keyid and key')
 	@args.parameter(name='keyid', help='the ID of object type')
@@ -343,8 +382,8 @@ class Products(STEP):
 
 	base = 'products'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 		
 
 	@args.operation(help='list the products')
@@ -486,9 +525,10 @@ class Entities(STEP):
 
 	base = 'entities'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 
+		
 	@args.property(short='r', default='Entity hierarchy root')
 	def root(self): return
 	
@@ -558,9 +598,10 @@ class Classifications(STEP):
 
 	base = 'classifications'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 
+		
 	@args.property(short='r', default='Metcash_Root_Metcash')
 	def root(self): return
 	
@@ -605,14 +646,44 @@ class Endpoints(STEP):
 
 	base = 'integrationendpoints'
 
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent)
-
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
 
 	@args.operation(help='get a list of endpoints')
 	def list(self):
 		return super().get('%s'%self.base)
 
+	
+	@args.operation(help='get a list of inbound endpoints, JSON only !')
+	def list_inbound(self):
+		return super().get('inbound-integration-endpoints')
+	
+
+	@args.operation(help='get the status of an inbound endpoint, JSON only !')
+	def status_inbound(self, id):
+		return super().get('inbound-integration-endpoints/%s/status'%id)
+	
+
+	@args.operation(help='get the background processes of an inbound endpoint, JSON only !')
+	def processes_inbound(self, id):
+		return super().get('inbound-integration-endpoints/%s/worker-processes'%id)
+	
+
+	@args.operation(help='get a list of outbound endpoints, JSON only !')
+	def list_outbound(self):
+		return super().get('outbound-integration-endpoints')
+	
+
+	@args.operation(help='get the status of an outbound endpoint, JSON only !')
+	def status_outbound(self, id):
+		return super().get('outbound-integration-endpoints/%s/status'%id)
+	
+
+	@args.operation(help='get the background processes of an outbound endpoint, JSON only !')
+	def processes_outbound(self, id):
+		return super().get('outbound-integration-endpoints/%s/worker-processes'%id)
+	
 
 	@args.operation(help='get the logs')
 	def log(self, id):

@@ -448,7 +448,7 @@ class StepSoapClient(object):
 
 	#.............................................................
 	@args.operation
-	@args.parameter(name='templateID', choices=['Inbound', 'Outbound', 'Importer', 'Exporter'])
+	@args.parameter(name='templateID', choices=['Inbound', 'Outbound', 'Importer', 'Exporter', 'StateflowDeadline'])
 	def getBackgoundProcesses(self, templateID):
 		request = self.createAccessControl()
 		response = self.client.service.getBackgroundProcesses(request, templateID)

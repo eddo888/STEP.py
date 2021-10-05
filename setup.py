@@ -10,7 +10,7 @@ with codecs.open(path.join(pwd, 'README.md'), 'r', encoding='utf8') as input:
 
 name='STEP.py'
 user='eddo888'
-version='1.43'
+version='1.44'
 
 setup(
 	name=name,
@@ -27,6 +27,7 @@ setup(
 	],
 	install_requires=[
 		'argcomplete',
+		'openpyxl',
 		'xlrd',
 		'xlwt',
 		'dotmap',

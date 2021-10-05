@@ -8,7 +8,7 @@ from datetime import datetime, date
 from decimal import Decimal
 from io import StringIO
 from collections import namedtuple, OrderedDict
-from xlrd import open_workbook, xldate_as_tuple
+from openpyxl import load_workbook
 
 from GoldenChild.xpath import *
 from Perdy.pyxbext import directory
@@ -208,7 +208,7 @@ class Converter(object):
 
 			
 	#_____________________________________________________________
-	def make_lov(self, id, name, tipe, length, parent):
+	def make_lov(self, id, name, tipe, length, parent='List Of Values group root'):
 		if id not in self.lovs.keys():
 			lov = ListOfValueType(
 				ID = id,
@@ -234,10 +234,14 @@ class Converter(object):
 	@args.parameter(name='id', help='LOV ID')
 	@args.parameter(name='name', help='LOV Name')
 	@args.parameter(name='input', help='excel file with attribute definitions')
+	@args.parameter(name='sheet_name', short='s', help='name of worksheet')
+	@args.parameter(name='parent_id', short='p', help='parent LOV group')
+	@args.parameter(name='id_col', short='i', help='column name for LOV value ID')
+	@args.parameter(name='name_col', short='n', help='column name for LOV value name')
 	@args.parameter(name='validation', short='V', default='TEXT', help='attribute validation type')
 	@args.parameter(name='length', short='L', type=int, default=256, help='attribute validation length')
 	@args.parameter(name='output', short='o', default='step.xml', help='step xml format output file')
-	def make_lovs(self, id, name, input, validation=None, length=None, output=None):
+	def make_lovs(self, id, name, input, sheet_name=None, parent_id=None, id_col=None, name_col=None, validation=None, length=None, output=None):
 		'''
 		process an excel file to create a STEP LOV xml import
 
@@ -251,28 +255,31 @@ class Converter(object):
 
 		'''
 
-		workbook = open_workbook(filename=input)
+		workbook = load_workbook(input)
 
-		for sheet in workbook.sheets():
+		if sheet_name:
+			sheet = workbook[sheet_name]
+		else:
+			sheet = workbook.active
 
-			lov_group = ListOfValuesGroupType(
-				ID=sheet.name,
-				Name=[NameType(sheet.name)],
-				ParentID='List Of Values group root',
-			)
-			self.doc.ListOfValuesGroupList.append(lov_group)
+		lov = self.make_lov(id, name, validation, length, parent_id)
 
-			lov = self.make_lov(id, name, validation, length, lov_group.ID)
+		rows = list(sheet.rows)
 
-			for r in list(range(sheet.nrows))[1:]:
-				if sheet.ncols > 1:
-					value_id = sheet.cell(r,0).value
-					value_name = sheet.cell(r,1).value
-				else:
-					value_name = sheet.cell(r,0).value
+		columns = list(rows[0])
+		id_col = id_col or columns[0]
+		name_col = name_col or columns[1]
 
-				lov.Value.append(ValueType(value_name, ID=value_id))
-		
+		for r in list(range(len(rows)))[1:]:
+			row = rows[r]
+			if len(row) > 1:
+				value_id = row[columns.index(id_col)].value
+				value_name = row[columns.index(name_col)].value
+			else:
+				value_name = row[columns.index(id_col)].value
+
+			lov.Value.append(ValueType(value_name, ID=value_id))
+
 		self.save(output)
 				
 

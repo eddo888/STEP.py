@@ -75,7 +75,7 @@ class Converter(object):
 
 	#_____________________________________________________________
 	def close(self):
-		if self.ids:
+		if hasattr(self, 'ids'):
 			self.ids.save()
 		
 

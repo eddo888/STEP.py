@@ -327,12 +327,7 @@ class StepSoapClient(object):
 	@args.operation
 	def getNodeDetails(self, nodeURL):
 		request = self.createAccessControl()
-		try:
-			response = self.client.service.getNodeDetails(request, nodeURL)
-			return response
-		except:
-			logger.debug(sys.exc_info()[1])
-		return
+		return self.client.service.getNodeDetails(request, nodeURL)
 		
 
 	#.............................................................

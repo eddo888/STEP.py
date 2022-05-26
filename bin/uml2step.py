@@ -4,8 +4,7 @@
 
 import sys, os, re
 
-# todo: remove before flight
-sys.path.insert(0, '..')
+if os.path.dirname(sys.argv[0]) == '.': sys.path.insert(0, '..')
 
 from Argumental.Argue import Argue
 from Baubles.Colours import Colours
@@ -81,6 +80,7 @@ class STEP2UML(object):
 
 			print(f'\t\t{name} : {id} ^= {package}')
 	
+
 	def Attributes(self, XMI, STEP):
 		'''
 		get attributes as classes
@@ -94,7 +94,12 @@ class STEP2UML(object):
 			parent_element = getElement(XMI.ctx, '../..', node)
 			parent = getAttribute(parent_element, 'xmi.id')
 
-			print(f'\t\t{name} : {id} ^= {parent}')
+			tipe_element = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="type"]', node)
+			tipe = None
+			if tipe_element:
+				tipe = getAttribute(tipe_element, 'value')
+
+			print(f'\t\t{name} [{tipe}] : {id} ^= {parent}')
 					
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Attribute"]'):
 			name = getAttribute(node, 'name')
@@ -104,6 +109,7 @@ class STEP2UML(object):
 
 			print(f'\t\t{name} : {id} ^= {package}')
 	
+
 	def UserTypes(self, XMI, STEP):
 		'''
 		make the user types

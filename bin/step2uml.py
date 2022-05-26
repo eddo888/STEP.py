@@ -4,6 +4,8 @@
 
 import sys, os, re
 
+if os.path.dirname(sys.argv[0]) == '.': sys.path.insert(0, '..')
+
 from Argumental.Argue import Argue
 from Baubles.Colours import Colours
 from Perdy.parser import printXML

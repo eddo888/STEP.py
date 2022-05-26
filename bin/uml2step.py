@@ -30,11 +30,11 @@ class STEP2UML(object):
 		self.references = dict() # id: xmi.classuer
 		
 
-	def parent(self, XMI, node):
-		parent = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="parent"]', node)
-		if parent:
-			parent = getAttribute(parent, 'value')
-		return parent
+	def package(self, XMI, node):
+		package = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="package"]', node)
+		if package:
+			package = getAttribute(package, 'value')
+		return package
 
 	
 	def Packages(self, XMI, STEP):
@@ -46,8 +46,10 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Package'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			parent = self.parent(XMI, node)
-			print(f'\t\t{name} -> {id} ^= {parent}')
+			
+			package = self.package(XMI, node)
+
+			print(f'\t\t{name} : {id} ^= {package}')
 
 
 	def ListsOfValues(self, XMI, STEP):
@@ -59,9 +61,25 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name="enumeration"]'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			parent = self.parent(XMI, node)
-			print(f'\t\t{name} -> {id} ^= {parent}')
 
+			package = self.package(XMI, node)
+
+			print(f'\t\t{name} : {id} ^= {package}')
+
+	
+	def AttributeGroups(self, XMI, STEP):
+		'''
+		get attributes as classes
+		'''
+		sys.stdout.write(f'\t{colours.Teal}AttributeGroups{colours.Off}\n')
+
+		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP AttributeGroup"]'):
+			name = getAttribute(node, 'name')
+			id = getAttribute(node, 'xmi.id')
+			
+			package = self.package(XMI, node)
+
+			print(f'\t\t{name} : {id} ^= {package}')
 	
 	def Attributes(self, XMI, STEP):
 		'''
@@ -72,22 +90,37 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Attribute'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			parent = self.parent(XMI, node)
-			print(f'\t\t{name} -> {id} ^= {parent}')
+
+			parent_element = getElement(XMI.ctx, '../..', node)
+			parent = getAttribute(parent_element, 'xmi.id')
+
+			print(f'\t\t{name} : {id} ^= {parent}')
 					
+		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Attribute"]'):
+			name = getAttribute(node, 'name')
+			id = getAttribute(node, 'xmi.id')
+			
+			package = self.package(XMI, node)
+
+			print(f'\t\t{name} : {id} ^= {package}')
 	
 	def UserTypes(self, XMI, STEP):
 		'''
 		make the user types
 		'''
 		sys.stdout.write(f'\t{colours.Teal}UserTypes{colours.Off}\n')
-		
-		for node in getElements(XMI.ctx, '//UML:Class'):
+
+		for tipe in ['UserType', 'Entity', 'Classification', 'Asset']:
+			print(f'\t\t{colours.Orange}{tipe}{colours.Off}')
 			
-			name = getAttribute(node, 'name')
-			id = getAttribute(node, 'xmi.id')
-			parent = self.parent(XMI, node)
-			print(f'\t\t{name} -> {id} ^= {parent}')
+			for node in getElements(XMI.ctx, f'//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP {tipe}"]'):
+
+				name = getAttribute(node, 'name')
+				id = getAttribute(node, 'xmi.id')
+
+				package = self.package(XMI, node)
+				
+				print(f'\t\t\t{name} : {id} ^= {package}')
 
 			
 	def References(self, XMI, STEP):
@@ -96,13 +129,29 @@ class STEP2UML(object):
 		'''
 		sys.stdout.write(f'\t{colours.Teal}References{colours.Off}\n')
 
+		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Reference"]'):
+			name = getAttribute(node, 'name')
+			id = getAttribute(node, 'xmi.id')
+			package = self.package(XMI, node)
+			print(f'\t\t{name} : {id} ^= {package}')
+			
+			
+	def Associations(self, XMI, STEP):
+		'''
+		make associations
+		'''
+		sys.stdout.write(f'\t{colours.Teal}Associations{colours.Off}\n')
+
 		for node in getElements(XMI.ctx, '//UML:Association'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			parent = self.parent(XMI, node)
-			print(f'\t\t{name} -> {id} ^= {parent}')
+			source_element = getElement(XMI.ctx, 'UML:Association.connection/UML:AssociationEnd[UML:ModelElement.taggedValue/UML:TaggedValue[@tag="ea_end" and @value="source"]]', node)
+			source = getAttribute(source_element, 'type')
+			target_element = getElement(XMI.ctx, 'UML:Association.connection/UML:AssociationEnd[UML:ModelElement.taggedValue/UML:TaggedValue[@tag="ea_end" and @value="target"]]', node)
+			target = getAttribute(target_element, 'type')
+			print(f'\t\t{source} -> {target}')
 
-			
+
 	@args.operation
 	@args.parameter(name='file', help='input sparx xmi file')
 	@args.parameter(name='output', short='o', help='output step xml file')
@@ -120,9 +169,11 @@ class STEP2UML(object):
 
 		self.Packages(XMI, STEP)
 		self.ListsOfValues(XMI, STEP)
+		self.AttributeGroups(XMI, STEP)
 		self.Attributes(XMI, STEP)
 		self.UserTypes(XMI, STEP)
 		self.References(XMI, STEP)
+		self.Associations(XMI, STEP)
 
 		# export the results
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2022-05-26 11:33:07">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2022-05-26 13:34:10">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -2071,7 +2071,7 @@
 								</UML:Dependency>
 								<UML:Class name="Colour LOV" xmi.id="EAID_A5DF88C1_5C0F_4a68_8379_38456B1AF851" visibility="public" namespace="EAPK_FBE46C9F_B7A3_4d05_939A_A47CE8F63266" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
 									<UML:ModelElement.stereotype>
-										<UML:Stereotype name="STEP ListOfValues"/>
+										<UML:Stereotype name="enumeration"/>
 									</UML:ModelElement.stereotype>
 									<UML:ModelElement.taggedValue>
 										<UML:TaggedValue tag="isSpecification" value="false"/>
@@ -2080,7 +2080,7 @@
 										<UML:TaggedValue tag="version" value="1.0"/>
 										<UML:TaggedValue tag="package" value="EAPK_FBE46C9F_B7A3_4d05_939A_A47CE8F63266"/>
 										<UML:TaggedValue tag="date_created" value="2022-05-25 15:28:46"/>
-										<UML:TaggedValue tag="date_modified" value="2022-05-25 15:45:32"/>
+										<UML:TaggedValue tag="date_modified" value="2022-05-26 13:33:50"/>
 										<UML:TaggedValue tag="gentype" value="Java"/>
 										<UML:TaggedValue tag="tagged" value="0"/>
 										<UML:TaggedValue tag="package_name" value="STEP"/>
@@ -2088,13 +2088,13 @@
 										<UML:TaggedValue tag="author" value="dave"/>
 										<UML:TaggedValue tag="complexity" value="1"/>
 										<UML:TaggedValue tag="status" value="Proposed"/>
-										<UML:TaggedValue tag="stereotype" value="STEP ListOfValues"/>
+										<UML:TaggedValue tag="stereotype" value="enumeration"/>
 										<UML:TaggedValue tag="tpos" value="0"/>
 										<UML:TaggedValue tag="ea_localid" value="21040"/>
 										<UML:TaggedValue tag="ea_eleType" value="element"/>
 										<UML:TaggedValue tag="$ea_attsclassified" value="{CD556F1C-4CB4-4e4e-98CB-BC3A1DBEF711}"/>
 										<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-										<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={1792ABE6-8FF7-4c16-919C-57594609123F}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=STEP ListOfValues;GUID={78CDA6DF-5795-4784-B68D-49C26885A1B7};@ENDSTEREO;$DES;$CLT={A5DF88C1-5C0F-4a68-8379-38456B1AF851}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={619850DE-B35B-40b5-BD49-1317F293700D}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=0@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={A5DF88C1-5C0F-4a68-8379-38456B1AF851}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+										<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={1792ABE6-8FF7-4c16-919C-57594609123F}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=enumeration;GUID={EC3EB385-B784-4b04-BA6D-F949BA17DB94};@ENDSTEREO;$DES;$CLT={A5DF88C1-5C0F-4a68-8379-38456B1AF851}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={619850DE-B35B-40b5-BD49-1317F293700D}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=0@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={A5DF88C1-5C0F-4a68-8379-38456B1AF851}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 									</UML:ModelElement.taggedValue>
 									<UML:Classifier.feature>
 										<UML:Attribute name="red" changeable="none" visibility="public" ownerScope="instance" targetScope="instance">

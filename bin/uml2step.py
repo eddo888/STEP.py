@@ -48,7 +48,7 @@ class STEP2UML(object):
 			
 			package = self.package(XMI, node)
 
-			print(f'\t\t{name} : {id} ^= {package}')
+			print(f'\t\t{name} : {id} ^~ {package}')
 
 
 	def ListsOfValues(self, XMI, STEP):
@@ -63,7 +63,7 @@ class STEP2UML(object):
 
 			package = self.package(XMI, node)
 
-			print(f'\t\t{name} : {id} ^= {package}')
+			print(f'\t\t{name} : {id} ^~ {package}')
 
 	
 	def AttributeGroups(self, XMI, STEP):
@@ -78,28 +78,14 @@ class STEP2UML(object):
 			
 			package = self.package(XMI, node)
 
-			print(f'\t\t{name} : {id} ^= {package}')
+			print(f'\t\t{name} : {id} ^~ {package}')
 	
 
-	def Attributes(self, XMI, STEP):
+	def AttributeTypes(self, XMI, STEP):
 		'''
 		get attributes as classes
 		'''
-		sys.stdout.write(f'\t{colours.Teal}Attributes{colours.Off}\n')
-
-		for node in getElements(XMI.ctx, '//UML:Attribute'):
-			name = getAttribute(node, 'name')
-			id = getAttribute(node, 'xmi.id')
-
-			parent_element = getElement(XMI.ctx, '../..', node)
-			parent = getAttribute(parent_element, 'xmi.id')
-
-			tipe_element = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="type"]', node)
-			tipe = None
-			if tipe_element:
-				tipe = getAttribute(tipe_element, 'value')
-
-			print(f'\t\t{name} [{tipe}] : {id} ^= {parent}')
+		sys.stdout.write(f'\t{colours.Teal}AttributeTypes{colours.Off}\n')
 					
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Attribute"]'):
 			name = getAttribute(node, 'name')
@@ -107,17 +93,15 @@ class STEP2UML(object):
 			
 			package = self.package(XMI, node)
 
-			print(f'\t\t{name} : {id} ^= {package}')
+			print(f'\t\t{name} : {id} ^~ {package}')
 	
 
 	def UserTypes(self, XMI, STEP):
 		'''
 		make the user types
 		'''
-		sys.stdout.write(f'\t{colours.Teal}UserTypes{colours.Off}\n')
-
 		for tipe in ['UserType', 'Entity', 'Classification', 'Asset']:
-			print(f'\t\t{colours.Orange}{tipe}{colours.Off}')
+			print(f'\t{colours.Teal}{tipe}{colours.Off}')
 			
 			for node in getElements(XMI.ctx, f'//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP {tipe}"]'):
 
@@ -126,8 +110,18 @@ class STEP2UML(object):
 
 				package = self.package(XMI, node)
 				
-				print(f'\t\t\t{name} : {id} ^= {package}')
+				print(f'\t\t{colours.Orange}{name}{colours.Off} : {id} ^~ {package}')
 
+				for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
+					attr_name = getAttribute(attr, 'name')
+					attr_id = getAttribute(attr, 'xmi.id') or ''
+
+					tipe_element = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="type"]', attr)
+					tipe = None
+					if tipe_element:
+						tipe = getAttribute(tipe_element, 'value')
+
+					print(f'\t\t\t@{attr_name} : {tipe} : {attr_id}')
 			
 	def References(self, XMI, STEP):
 		'''
@@ -139,7 +133,7 @@ class STEP2UML(object):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
 			package = self.package(XMI, node)
-			print(f'\t\t{name} : {id} ^= {package}')
+			print(f'\t\t{name} : {id} ^~ {package}')
 			
 			
 	def Associations(self, XMI, STEP):
@@ -151,10 +145,16 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Association'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
+
 			source_element = getElement(XMI.ctx, 'UML:Association.connection/UML:AssociationEnd[UML:ModelElement.taggedValue/UML:TaggedValue[@tag="ea_end" and @value="source"]]', node)
-			source = getAttribute(source_element, 'type')
+			source = None
+			if source_element:
+				source = getAttribute(source_element, 'type')
+
 			target_element = getElement(XMI.ctx, 'UML:Association.connection/UML:AssociationEnd[UML:ModelElement.taggedValue/UML:TaggedValue[@tag="ea_end" and @value="target"]]', node)
-			target = getAttribute(target_element, 'type')
+			target = None
+			if target_element:
+				target = getAttribute(target_element, 'type')
 			print(f'\t\t{source} -> {target}')
 
 
@@ -176,7 +176,7 @@ class STEP2UML(object):
 		self.Packages(XMI, STEP)
 		self.ListsOfValues(XMI, STEP)
 		self.AttributeGroups(XMI, STEP)
-		self.Attributes(XMI, STEP)
+		self.AttributeTypes(XMI, STEP)
 		self.UserTypes(XMI, STEP)
 		self.References(XMI, STEP)
 		self.Associations(XMI, STEP)

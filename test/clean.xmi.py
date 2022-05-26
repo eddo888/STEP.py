@@ -39,7 +39,7 @@ keeps = OrderedDict([
     ( 'step:CrossReferenceTypes//step:Value', [
 		'starts-with(@AttributeID,"XMI_")',
     ]),
-    ( 'step:ListOfValuesGroupList/step:ListOfValuesGroup', [
+    ( 'step:ListOfValuesGroupList/step:ListOfValuesGroup/step:ListOfValuesGroup', [
         'starts-with(@ID, "XMI_")',
     ]),
     ( 'step:ListsOfValues/step:ListOfValue', [

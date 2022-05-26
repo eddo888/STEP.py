@@ -84,6 +84,7 @@ class STEP2UML(object):
 
 				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
 	
+
 	def AttributeGroups(self, XMI, STEP):
 		'''
 		get attributes as classes

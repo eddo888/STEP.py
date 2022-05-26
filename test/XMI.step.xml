@@ -32,115 +32,1221 @@ Assets All
 
 Exported by database exporter.
 -->
-<STEP-ProductInformation AutoApprove="Y" ContextID="Australian" ExportContext="GL" ExportTime="2022-05-26 15:48:16" UseContextLocale="false" WorkspaceID="Main" xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd">
-	<UserTypes>
-		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Root" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
-			<Name>XMI_Root</Name>
-			<MetaData/>
-			<UserTypeLink UserTypeID="Product user-type root"/>
-		</UserType>
-		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Sibling" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
-			<Name>XMI_Sibling</Name>
-			<MetaData/>
-			<UserTypeLink UserTypeID="XMI_Package"/>
-		</UserType>
-		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Class" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
-			<Name>XMI_Class</Name>
-			<MetaData/>
-			<UserTypeLink UserTypeID="XMI_Class"/>
-			<UserTypeLink UserTypeID="XMI_Package"/>
-			<AttributeLink AttributeID="XMI_Attribute"/>
-			<AttributeLink AttributeID="XMI_Enum"/>
-		</UserType>
-		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Package" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
-			<Name>XMI_Package</Name>
-			<MetaData/>
-			<UserTypeLink UserTypeID="XMI_Root"/>
-			<UserTypeLink UserTypeID="XMI_Package"/>
-		</UserType>
-	</UserTypes>
-	<CrossReferenceTypes>
-		<ProductCrossReferenceType Accumulated="false" ID="XMI_Class_2_Sibling" Inherited="false" Mandatory="false" MultiValued="true" Referenced="true" Revised="true" Selected="true">
-			<Name>XMI_Class_2_Sibling</Name>
-			<MetaData/>
-			<UserTypeLink UserTypeID="XMI_Class"/>
-			<TargetUserTypeLink UserTypeID="XMI_Sibling"/>
-		</ProductCrossReferenceType>
-	</CrossReferenceTypes>
-	<ListOfValuesGroupList>
-		<ListOfValuesGroup ID="List Of Values group root">
-			<Name>Lists of Values / LOVs</Name>
-			<ListOfValuesGroup ID="XMI_LOVs" Referenced="true" Selected="true">
-				<Name>XMI_LOVs</Name>
-				<ListOfValuesGroup ID="XMI_LOV_Group">
-					<Name>XMI_LOV_Group</Name>
-				</ListOfValuesGroup>
-			</ListOfValuesGroup>
-		</ListOfValuesGroup>
-	</ListOfValuesGroupList>
-	<ListsOfValues>
-		<ListOfValue AllowUserValueAddition="false" ID="XMI_LOV" ParentID="XMI_LOV_Group" Referenced="true" Selected="true" UseValueID="true">
-			<Name>XMI_LOV</Name>
-			<Validation BaseType="text" InputMask="" MaxLength="100" MaxValue="" MinValue=""/>
-			<Value ID="C">See</Value>
-			<Value ID="B">Bee</Value>
-			<Value ID="A">Aye</Value>
-		</ListOfValue>
-	</ListsOfValues>
-	<AttributeGroupList>
-		<AttributeGroup ID="XMI_Attributes" ManuallySorted="false" Referenced="true" Selected="true" ShowInWorkbench="true">
-			<Name>XMI_Attributes</Name>
-		</AttributeGroup>
-	</AttributeGroupList>
-	<AttributeList>
-		<Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XMI_Attribute" Mandatory="false" MultiValued="false" ProductMode="Normal" Referenced="true" Selected="true">
-			<Name>XMI_Attribute</Name>
-			<Validation BaseType="text" InputMask="" MaxLength="100" MaxValue="" MinValue=""/>
-			<MetaData/>
-			<AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
-			<UserTypeLink UserTypeID="XMI_Class"/>
-		</Attribute>
-		<Attribute ClassificationHierarchicalFiltering="false" Derived="false" ExternallyMaintained="true" FullTextIndexed="false" HierarchicalFiltering="false" ID="XMI_Enum" Mandatory="false" MultiValued="false" ProductMode="Normal" Referenced="true" Selected="true">
-			<Name>XMI_Enum</Name>
-			<ListOfValueLink ListOfValueID="XMI_LOV"/>
-			<MetaData/>
-			<AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
-			<UserTypeLink UserTypeID="XMI_Class"/>
-		</Attribute>
-	</AttributeList>
-	<Products>
-		<Product ID="XMI_Project" ParentID="Product hierarchy root" UserTypeID="XMI_Root">
-			<Name>XMI</Name>
-			<AttributeLink AttributeID="XMI_Attribute">
-				<MetaData>
-					<Value AttributeID="CompletenessScore" Derived="true">0</Value>
-				</MetaData>
-			</AttributeLink>
-			<AttributeLink AttributeID="XMI_Enum">
-				<MetaData>
-					<Value AttributeID="CompletenessScore" Derived="true">0</Value>
-				</MetaData>
-			</AttributeLink>
-			<Product ID="XMI_com" UserTypeID="XMI_Package">
-				<Name>com</Name>
-				<Product ID="XMI_stibo" UserTypeID="XMI_Package">
-					<Name>stibo</Name>
-					<Product ID="XMI_Object" UserTypeID="XMI_Class">
-						<Name>Object</Name>
-						<ProductCrossReference ProductID="XMI_Sister" Type="XMI_Class_2_Sibling"/>
-						<Values>
-							<Value AttributeID="XMI_Enum" ID="B">Bee</Value>
-							<Value AttributeID="XMI_Attribute">XMI_Value</Value>
-						</Values>
-						<Product ID="XMI_Child" UserTypeID="XMI_Class">
-							<Name>Child</Name>
-						</Product>
-					</Product>
-					<Product ID="XMI_Sister" UserTypeID="XMI_Sibling">
-						<Name>Sister</Name>
-					</Product>
-				</Product>
-			</Product>
-		</Product>
-	</Products>
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ExportTime="2022-05-26 15:57:07" ExportContext="GL" ContextID="GL" WorkspaceID="Main" UseContextLocale="false">
+
+  <UserTypes>
+    <UserType ID="XMI_Root" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+      <Name>XMI_Root</Name>
+      <MetaData>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+      </MetaData>
+      <UserTypeLink UserTypeID="Product user-type root"/>
+    </UserType>
+    <UserType ID="XMI_Sibling" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+      <Name>XMI_Sibling</Name>
+      <MetaData>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+      </MetaData>
+      <UserTypeLink UserTypeID="XMI_Package"/>
+    </UserType>
+    <UserType ID="XMI_Class" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+      <Name>XMI_Class</Name>
+      <MetaData>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+      </MetaData>
+      <UserTypeLink UserTypeID="XMI_Class"/>
+      <UserTypeLink UserTypeID="XMI_Package"/>
+      <AttributeLink AttributeID="XMI_Attribute"/>
+      <AttributeLink AttributeID="XMI_Enum"/>
+    </UserType>
+    <UserType ID="XMI_Package" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+      <Name>XMI_Package</Name>
+      <MetaData>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+      </MetaData>
+      <UserTypeLink UserTypeID="XMI_Root"/>
+      <UserTypeLink UserTypeID="XMI_Package"/>
+    </UserType>
+  </UserTypes>
+
+  <EdgeTypes>
+    <EdgeType ID="C"/>
+    <EdgeType ID="CA">
+      <AttributeLink AttributeID="Max Qty"/>
+      <AttributeLink AttributeID="Completeness_Score_Marketing"/>
+      <AttributeLink AttributeID="CompletenessScore"/>
+      <AttributeLink AttributeID="ETIM6 Unit ID"/>
+      <AttributeLink AttributeID="CompletenessMetricScore"/>
+      <AttributeLink AttributeID="Completeness Status Marketing"/>
+      <AttributeLink AttributeID="10111"/>
+      <AttributeLink AttributeID="CompletenessPrimaryImage"/>
+      <AttributeLink AttributeID="CNET.DisplayName"/>
+      <AttributeLink AttributeID="QualityGateRequired.EComm"/>
+      <AttributeLink AttributeID="CNET.DisplayOrder"/>
+      <AttributeLink AttributeID="CompletenessProductOnboarding"/>
+      <AttributeLink AttributeID="QualityGateRequired.Digital"/>
+      <AttributeLink AttributeID="DisplaySequence"/>
+      <AttributeLink AttributeID="59709"/>
+      <AttributeLink AttributeID="ROP"/>
+      <AttributeLink AttributeID="CompletenessScoreOutlet"/>
+      <AttributeLink AttributeID="Reorder Qty"/>
+      <AttributeLink AttributeID="10167"/>
+      <AttributeLink AttributeID="Completeness Score"/>
+      <AttributeLink AttributeID="Quantity"/>
+      <AttributeLink AttributeID="ConditionalAttribute"/>
+      <AttributeLink AttributeID="AttributeCompletenessScore"/>
+      <AttributeLink AttributeID="CompletenessStatus"/>
+      <AttributeLink AttributeID="QualityGateRequired.Commercial"/>
+      <AttributeLink AttributeID="Supplier Completeness Metric Score"/>
+      <AttributeLink AttributeID="CategorySpecificCompleteness"/>
+      <AttributeLink AttributeID="ETIM6 Unit Description"/>
+      <AttributeLink AttributeID="59064"/>
+      <AttributeLink AttributeID="DisplayinWebUIIf"/>
+      <AttributeLink AttributeID="Completeness Score Asset References"/>
+      <AttributeLink AttributeID="POC1OverallCompleteness"/>
+    </EdgeType>
+    <EdgeType ID="P"/>
+    <EdgeType ID="PA">
+      <AttributeLink AttributeID="Completeness Score"/>
+      <AttributeLink AttributeID="62048"/>
+      <AttributeLink AttributeID="59064"/>
+      <AttributeLink AttributeID="RVariantPriority"/>
+      <AttributeLink AttributeID="ConditionalAttribute"/>
+      <AttributeLink AttributeID="59709"/>
+      <AttributeLink AttributeID="CompletenessScore"/>
+    </EdgeType>
+  </EdgeTypes>
+
+  <CrossReferenceTypes>
+    <ProductCrossReferenceType ID="XMI_Class_2_Sibling" Inherited="false" Accumulated="false" Revised="true" Mandatory="false" MultiValued="true" Selected="true" Referenced="true">
+      <Name>XMI_Class_2_Sibling</Name>
+      <MetaData>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="POC1OverallCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessScoreOutlet">0</Value>
+      </MetaData>
+      <UserTypeLink UserTypeID="XMI_Class"/>
+      <TargetUserTypeLink UserTypeID="XMI_Sibling"/>
+    </ProductCrossReferenceType>
+  </CrossReferenceTypes>
+
+  <ListOfValuesGroupList>
+    <ListOfValuesGroup ID="List Of Values group root">
+      <Name>Lists of Values / LOVs</Name>
+      <ListOfValuesGroup ID="AmazonLOVs">
+        <Name>Amazon LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="_HAC_Device">
+        <Name>Device</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Review LOVs">
+        <Name>Review LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Metcash">
+        <Name>Metcash</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="PhotoShootLovs">
+        <Name>PhotoShootLovs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CCA_LOVs">
+        <Name>Liquids LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="DownerLOVs">
+        <Name>Downer LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Fashion LOVs">
+        <Name>Fashion LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDSN Code Lists">
+        <Name>GDSN Code Lists</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Wheels &amp; Castors LOVs">
+        <Name>Wheels &amp; Castors LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="LogisticsLOV">
+        <Name>LogisticsLOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDSNLOVGroup">
+        <Name>GDSN List of Values</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CiB LOVs">
+        <Name>CiB LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="eClassLOVGroup">
+        <Name>eClass LOV Group</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDSNReceiverLOVGroup">
+        <Name>GDSN Receiver List of Values</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Financials">
+        <Name>Financials</Name>
+        <ListOfValuesGroup ID="Pepper">
+          <Name>Pepper</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="HealthCareLOVs">
+        <Name>Health Care LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDPR_LOVs">
+        <Name>GDPR LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="RegionalPortfolio LOVs">
+        <Name>RegionalPortfolio LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CCA LOVs">
+        <Name>Drinks LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CIC LOVs">
+        <Name>Product LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GoogleShoppingLOV">
+        <Name>Google Shopping LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Care Product LOVs">
+        <Name>Care Product LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Footware LOVs">
+        <Name>Footware LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Fima">
+        <Name>Fima</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Contract LOV">
+        <Name>Contract LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Employee LOV's">
+        <Name>Employee LOV's</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="FoodLoV">
+        <Name>Food</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="XMI_LOVs" Selected="true" Referenced="true">
+        <Name>XMI_LOVs</Name>
+        <ListOfValuesGroup ID="XMI_LOV_Group">
+          <Name>XMI_LOV_Group</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="StiRa_LOVs">
+        <Name>StiRa_LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDSN">
+        <Name>GDSN</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="IHG_LOVs">
+        <Name>Hardware Groups LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="IngredientsLOV">
+        <Name>IngredientsLOV</Name>
+        <ListOfValuesGroup ID="SpecialAllergenes">
+          <Name>SpecialAllergenes</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CampaignLOV">
+        <Name>Campaign LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Movie_LOVs">
+        <Name>Lists of Values</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Raw Material LOVs">
+        <Name>Raw Material LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Data Governance">
+        <Name>Data Governance</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CertificateLOV">
+        <Name>CertificateLOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="TTI_LOVs">
+        <Name>Hardware LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Coles_LOVs">
+        <Name>CPG LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Identifiers">
+        <Name>Identifiers</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="HD_LOV">
+        <Name>HD_LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Brief LOV">
+        <Name>Brief LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Wallpapers and Fabrics">
+        <Name>Wallpapers and Fabrics</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="WP Lovs">
+        <Name>WP Lovs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Customer Data">
+        <Name>Customer Data</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Web LOV">
+        <Name>Web LOV</Name>
+        <ListOfValuesGroup ID="Landing Page">
+          <Name>Landing Page</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Customer_Data_LOVs">
+        <Name>Other LOVs</Name>
+        <ListOfValuesGroup ID="DCLOVs">
+          <Name>DCLOVs</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Frequency">
+        <Name>Frequency</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Customer MDM LOVs">
+        <Name>Customer MDM LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Category LOV">
+        <Name>Category LOV</Name>
+        <ListOfValuesGroup ID="Retail Categories">
+          <Name>Retail Categories</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="BRBY">
+        <Name>BRBY</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Automotive Spark Plugs">
+        <Name>Automotive Spark Plugs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Location LOV">
+        <Name>Location LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GS1">
+        <Name>GS1</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Object Description LOV">
+        <Name>Object Description LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Project LOV">
+        <Name>Project LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="DB Attribute LOV">
+        <Name>DB Attribute LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Switches">
+        <Name>Switches</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Automotive Towbars">
+        <Name>Automotive Towbars</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Heavy Plant Machinery">
+        <Name>Heavy Plant Machinery</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="research">
+        <Name>research</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Workflow_Attribute_LOV">
+        <Name>Workflow_Attribute_LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Cropping Attributes">
+        <Name>Cropping Attributes</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Food and Preparation">
+        <Name>Food and Preparation</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Packaging">
+        <Name>Packaging</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Apparel Sizing">
+        <Name>Apparel Sizing</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ClienteleLOVs">
+        <Name>Clientele LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Northgate">
+        <Name>Northgate</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="AUSCListOfValues">
+        <Name>Z-AUSC List Of Values</Name>
+        <ListOfValuesGroup ID="POCListOfValues">
+          <Name>POC List Of Values</Name>
+          <ListOfValuesGroup ID="AUSCPOC2ListOfValues">
+            <Name>SY List Of Values</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="POC1ListOfValues">
+            <Name>BG List Of Values</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="VehicleAssetLOV">
+        <Name>VehicleAssetLOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="RetailLOVs">
+        <Name>Retail LOVs</Name>
+        <ListOfValuesGroup ID="Books">
+          <Name>Books</Name>
+          <ListOfValuesGroup ID="ONIX_BookProduct_CodeLists_List149">
+            <Name>ONIX_BookProduct_CodeLists_List149</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="DigitalCameras">
+          <Name>DigitalCameras</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Material Master LOVs">
+        <Name>Material Master LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GDSNLOV">
+        <Name>GDSNLOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="HWAG_LOVs">
+        <Name>Hardware LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="General LOVs">
+        <Name>General LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="PLMLOVs">
+        <Name>PLMLOVs</Name>
+        <ListOfValuesGroup ID="PLMRFAMaterialsLOVs">
+          <Name>PLM RFA Materials LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Footwear LOVs">
+          <Name>Footwear LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMRFAColorLOVs">
+          <Name>PLM RFA Color LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMTaskDescriptionLOVs">
+          <Name>Task Description LOV</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMRFAOperationsLOVs">
+          <Name>PLM RFA Operations LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMComplianceAttributeLOVs">
+          <Name>PLM Compliance Attribute LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMRFADesignSpecLOVs">
+          <Name>PLM RFA Design Spec LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMProgramManagementLOVs">
+          <Name>PLM Program Management LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMPPOLOVs">
+          <Name>PLM PPO LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMCommodityManagementLOVs">
+          <Name>PLM Commodity Management LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMChangeManagementLOVs">
+          <Name>PLMChangeManagementLOVs</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ProductLifecycleManagementLOVs">
+        <Name>!Product Lifecycle Management LOVs</Name>
+        <ListOfValuesGroup ID="PLMPackageLabelLOVs">
+          <Name>Package Label LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMContextualAttributeLOVs">
+          <Name>Contextual Attribute LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMSupplybaseManagementLOV">
+          <Name>Supplybase Management LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMInternationalStandardsOrgLOVs">
+          <Name>International Standards Organization Lists</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMRequirementAndParameterLOVs">
+          <Name>Requirement and Parameter LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMWorkflowLOVs">
+          <Name>PLM Workflow LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMPackagingLOVs">
+          <Name>Packaging LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMDesignSpecificationLOVs">
+          <Name>Design Specification LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMFoodAndBeverageLOVs">
+          <Name>Food And Beverage LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMMetadataLOVs">
+          <Name>Metadata LOVs</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="PLMSampleLOVs">
+          <Name>Sample LOVs</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="WP-Demo-LOV">
+        <Name>WP Demo LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="SnapshotLOVs">
+        <Name>Snapshot LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="RAMJLOVs">
+        <Name>RAMJ LOVs</Name>
+        <ListOfValuesGroup ID="RamDomesticApplicationLOVGroup">
+          <Name>Ram Domestic Application LOV Group</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="MedicineLOVs">
+        <Name>Medicine LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="HCA_LOVs">
+        <Name>Hair LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ModelLoVs">
+        <Name>ModelLoVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Outlet">
+        <Name>Outlet</Name>
+        <ListOfValuesGroup ID="OutletCarPark">
+          <Name>OutletCarPark</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Facilities">
+          <Name>Facilities</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="OutletInformation">
+          <Name>OutletInformation</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Events">
+          <Name>Events</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="FSI_LOVs">
+        <Name>FSI</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Store">
+        <Name>Store</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="PropositionLOV">
+        <Name>PropositionLOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CNET.CNET General LOVs">
+        <Name>CNET General LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CNET.CNET Attribute LOVs">
+        <Name>CNET Attribute LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="UML_LOVs">
+        <Name>UML Lists of Values</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="DnBLOVs">
+        <Name>D&amp;B LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="EDG_LOVs">
+        <Name>EDG_LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GPC_LOV">
+        <Name>GPC LoVs</Name>
+        <ListOfValuesGroup ID="gpc_lov_grp_94000000">
+          <Name>Crops</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_94010000">
+            <Name>Crops not for food or feed (animal &amp; fish)</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_72000000">
+          <Name>Home Appliances</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_72010000">
+            <Name>Major Domestic Appliances</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_72020000">
+            <Name>Small Domestic Appliances</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_65000000">
+          <Name>Computing</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_65010000">
+            <Name>Computers/Video Games</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_66000000">
+          <Name>Communications</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_66010000">
+            <Name>Communications</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_60000000">
+          <Name>Textual/Printed/Reference Materials</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_60010000">
+            <Name>Textual/Printed/Reference Materials</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_67000000">
+          <Name>Clothing</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_67010000">
+            <Name>Clothing</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_93000000">
+          <Name>Horticulture Plants</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_93080000">
+            <Name>Shrubs/Trees</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93090000">
+            <Name>Vegetables/Fungi Plants</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93110000">
+            <Name>Seedlings - Ready to Grow</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93070000">
+            <Name>Seeds/Spores</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93040000">
+            <Name>Live Plants (Genus H thru Z)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93060000">
+            <Name>Plants Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93020000">
+            <Name>Cut Greens</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93030000">
+            <Name>Live Plants (Genus A thru G)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93050000">
+            <Name>Bulbs/Corms/Rhizomes/Tubers</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93010000">
+            <Name>Cut Flowers</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_93100000">
+            <Name>Bouquets</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_58000000">
+          <Name>Cross Segment</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_58010000">
+            <Name>Cross Segment</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_75000000">
+          <Name>Household/Office Furniture/Furnishings</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_75050000">
+            <Name>Baby Furnishings</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_75030000">
+            <Name>Ornamental Furnishings</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_75020000">
+            <Name>Fabric/Textile Furnishings</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_75010000">
+            <Name>Household/Office Furniture</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_84000000">
+          <Name>Tool Storage/Workshop Aids</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_84010000">
+            <Name>Tool Storage/Workshop Aids</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_89000000">
+          <Name>Live Animals</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_89020000">
+            <Name>Live Animals</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_81000000">
+          <Name>Lawn/Garden Supplies</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_81010000">
+            <Name>Lawn/Garden Supplies</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_78000000">
+          <Name>Electrical Supplies</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_78060000">
+            <Name>General Electrical Hardware</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_78030000">
+            <Name>Electrical Lighting</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_78050000">
+            <Name>Electronic Communication Components</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_78040000">
+            <Name>Electrical Cabling/Wiring</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_78020000">
+            <Name>Electrical Connection/Distribution</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_73000000">
+          <Name>Kitchen Merchandise</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_73040000">
+            <Name>Kitchen Merchandise</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_64000000">
+          <Name>Personal Accessories</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_64010000">
+            <Name>Personal Accessories</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_68000000">
+          <Name>Audio Visual/Photography</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_68010000">
+            <Name>Audio Visual Equipment</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_68040000">
+            <Name>Audio Visual Media</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_68020000">
+            <Name>Photography/Optics</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_68050000">
+            <Name>Audio Visual/Photography Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_68030000">
+            <Name>In-car Electronics</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_61000000">
+          <Name>Music</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_61010000">
+            <Name>Musical Instruments/Accessories</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_86000000">
+          <Name>Toys/Games</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_86020000">
+            <Name>Service Provided Gambling Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_86010000">
+            <Name>Toys/Games</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_82000000">
+          <Name>Tools/Equipment - Power</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_82010000">
+            <Name>Tools/Equipment - Power</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_70000000">
+          <Name>Arts/Crafts/Needlework</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_70010000">
+            <Name>Arts/Crafts/Needlework Supplies</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_50000000">
+          <Name>Food/Beverage/Tobacco</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_50230000">
+            <Name>Food/Beverage/Tobacco Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50250000">
+            <Name>Fruits - Unprepared/Unprocessed (Fresh)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50220000">
+            <Name>Cereal/Grain/Pulse Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50160000">
+            <Name>Confectionery/Sugar Sweetening Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50200000">
+            <Name>Beverages</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50180000">
+            <Name>Bread/Bakery Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50330000">
+            <Name>Nuts/Seeds - Unprepared/Unprocessed (Perishable)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50340000">
+            <Name>Nuts/Seeds - Unprepared/Unprocessed (Shelf Stable)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50240000">
+            <Name>Meat/Poultry</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50130000">
+            <Name>Milk/Butter/Cream/Yogurts/Cheese/Eggs/Substitutes</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50100000">
+            <Name>Fruits/Vegetables/Nuts/Seeds Prepared/Processed</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50350000">
+            <Name>Leaf Vegetables - Unprepared/Unprocessed (Fresh)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50270000">
+            <Name>Fruits - Unprepared/Unprocessed (Frozen)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50310000">
+            <Name>Fruits - Unprepared/Unprocessed (Shelf Stable)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50320000">
+            <Name>Vegetables - Unprepared/Unprocessed (Shelf Stable)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50260000">
+            <Name>Vegetables (Non Leaf) - Unprepared/Unprocessed (Fresh)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50210000">
+            <Name>Tobacco/Smoking Accessories</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50290000">
+            <Name>Vegetables - Unprepared/Unprocessed (Frozen)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50120000">
+            <Name>Seafood</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50170000">
+            <Name>Seasonings/Preservatives/Extracts</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50150000">
+            <Name>Oils/Fats Edible</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_50190000">
+            <Name>Prepared/Preserved Foods</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_80000000">
+          <Name>Tools/Equipment - Hand</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_80010000">
+            <Name>Tools/Equipment - Hand</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_88000000">
+          <Name>Lubricants</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_88020000">
+            <Name>Lubricants/Protective Compounds Storage/Transfer</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_88030000">
+            <Name>Lubricants Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_88010000">
+            <Name>Lubricants/Protective Compounds</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_53000000">
+          <Name>Beauty/Personal Care/Hygiene</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_53230000">
+            <Name>Personal Intimacy</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53130000">
+            <Name>Skin Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53140000">
+            <Name>Hair Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53180000">
+            <Name>Personal Hygiene Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53200000">
+            <Name>Body Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53160000">
+            <Name>Cosmetics/Fragrances</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_53220000">
+            <Name>Beauty/Personal Care/Hygiene Variety Packs</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_85000000">
+          <Name>Safety/Protection - DIY</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_85010000">
+            <Name>Safety/Protection - DIY</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_79000000">
+          <Name>Plumbing/Heating/Ventilation/Air Conditioning</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_79010000">
+            <Name>Plumbing/Heating/Ventilation/Air Conditioning</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_77000000">
+          <Name>Automotive</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_77010000">
+            <Name>Automotive Accessories and Maintenance</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_77030000">
+            <Name>Cars and Motorcycles</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_10000000">
+          <Name>Pet Care/Food</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_10110000">
+            <Name>Pet Food/Drinks</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_10100000">
+            <Name>Pet Care</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_10120000">
+            <Name>Pet Care/Food Variety Packs</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_83000000">
+          <Name>Building Products</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_83010000">
+            <Name>Building Products</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_71000000">
+          <Name>Sports Equipment</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_71020000">
+            <Name>Baby Exercisers/Transportation</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_71010000">
+            <Name>Sports Equipment</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_91000000">
+          <Name>Safety/Security/Surveillance</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_91040000">
+            <Name>Safety/Security/Surveillance Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_91030000">
+            <Name>Home/Business Safety/Security/Surveillance</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_91010000">
+            <Name>Personal Safety/Security</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_91050000">
+            <Name>Baby Safety/Security/Surveillance</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_91020000">
+            <Name>Environmental Safety/Security</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_51000000">
+          <Name>Healthcare</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_51170000">
+            <Name>Veterinary Healthcare</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51150000">
+            <Name>Medical Devices</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51160000">
+            <Name>Pharmaceutical Drugs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51140000">
+            <Name>Healthcare Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51130000">
+            <Name>Home Diagnostics</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51120000">
+            <Name>Health Enhancement</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51100000">
+            <Name>Health Treatments/Aids</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_51110000">
+            <Name>Family Planning</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_92000000">
+          <Name>Storage/Haulage Containers</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_92030000">
+            <Name>Storage/Haulage Freight Containers (Empty)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_92040000">
+            <Name>Storage/Haulage Aids</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_92020000">
+            <Name>Storage/Haulage Boxes/Crates/Trays (Empty)</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_92010000">
+            <Name>Storage Bottles/Cylinders/Barrels (Empty)</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_87000000">
+          <Name>Fuels/Gases</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_87010000">
+            <Name>Fuels/Fuel Additives</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_87030000">
+            <Name>Gases Not Used As Fuels</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_87020000">
+            <Name>Fuel Storage/Transfer</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_47000000">
+          <Name>Cleaning/Hygiene Products</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_47120000">
+            <Name>Insect/Pest/Allergen Control</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_47210000">
+            <Name>Waste Management Products</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_47190000">
+            <Name>Cleaning/Hygiene Products Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_47200000">
+            <Name>Cleaning/Hygiene Supplies</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_47100000">
+            <Name>Cleaning Products</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_62000000">
+          <Name>Stationery/Office Machinery/Occasion Supplies</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_62060000">
+            <Name>Stationery/Office Machinery</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_62070000">
+            <Name>Stationery/Office Machinery/Occasion Supplies Variety Packs</Name>
+          </ListOfValuesGroup>
+          <ListOfValuesGroup ID="gpc_lov_grp_62050000">
+            <Name>Greeting Cards/Gift Wrap/Occasion Supplies</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_63000000">
+          <Name>Footwear</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_63010000">
+            <Name>Footwear</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="gpc_lov_grp_74000000">
+          <Name>Camping</Name>
+          <ListOfValuesGroup ID="gpc_lov_grp_74010000">
+            <Name>Camping</Name>
+          </ListOfValuesGroup>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Apparel">
+        <Name>Apparel</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ProjectLOVs">
+        <Name>Project LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Glencore">
+        <Name>GC</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Translation LOV">
+        <Name>Translation LOV</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Fitment LOVs">
+        <Name>Fitment LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="SKAL_List">
+        <Name>SKAL List</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ETIM6 List Of Values">
+        <Name>ETIM6 List Of Values</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ContentPlanningLOVs">
+        <Name>ContentPlanningLOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GC_myLOVs">
+        <Name>Mining LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="ApplicationRecord.LOVs">
+        <Name>Application Record LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="SearchAndReplace">
+        <Name>SearchAndReplace</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Retail Banking LOVs">
+        <Name>Retail Banking LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="mergeportal">
+        <Name>mergeportal</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="MachineryLOV">
+        <Name>MachineryLOV</Name>
+        <ListOfValuesGroup ID="CashDispeners">
+          <Name>CashDispeners</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="Supplier LOV's">
+        <Name>Supplier LOV's</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="SVBU_DEMO">
+        <Name>SVBU_DEMO</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="IT Services LOVs">
+        <Name>IT Services LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CattleLov">
+        <Name>CattleLov</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GS1_Rules">
+        <Name>GS1 Rules</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GS1-NPC-LOVs">
+        <Name>GS1 NPC LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="GS1-Modules">
+        <Name>GS1-Modules</Name>
+        <ListOfValuesGroup ID="GS1-Groceries">
+          <Name>GS1-Groceries</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="EDU_LOVs">
+        <Name>Education LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="BN_LOVs">
+        <Name>Hardware LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="CustomerDataLOVs">
+        <Name>Customer Data LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="EBOS LOVs">
+        <Name>General LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="PLM LOVs">
+        <Name>PLM LOVs</Name>
+      </ListOfValuesGroup>
+      <ListOfValuesGroup ID="EMDM">
+        <Name>Employee MDM</Name>
+        <ListOfValuesGroup ID="DataGovernance">
+          <Name>Data Governance (GDPR)</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Software">
+          <Name>Software</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Organization">
+          <Name>Organization</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Legal">
+          <Name>Legal</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Employee">
+          <Name>Employee</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Location">
+          <Name>Location</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Systems">
+          <Name>Systems</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Grades">
+          <Name>Grades</Name>
+        </ListOfValuesGroup>
+        <ListOfValuesGroup ID="Customers">
+          <Name>Customers</Name>
+        </ListOfValuesGroup>
+      </ListOfValuesGroup>
+    </ListOfValuesGroup>
+  </ListOfValuesGroupList>
+
+  <ListsOfValues>
+    <ListOfValue ID="XMI_LOV" ParentID="XMI_LOV_Group" AllowUserValueAddition="false" UseValueID="true" Selected="true" Referenced="true">
+      <Name>XMI_LOV</Name>
+      <Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+      <Value ID="B">Bee</Value>
+      <Value ID="A">Aye</Value>
+      <Value ID="C">See</Value>
+    </ListOfValue>
+  </ListsOfValues>
+
+  <AttributeGroupList>
+
+  <AttributeGroup ID="XMI_Attributes" ShowInWorkbench="true" ManuallySorted="false" Selected="true" Referenced="true">
+    <Name>XMI_Attributes</Name>
+    <AttributeGroup ID="XMI_Attribute_Group" ShowInWorkbench="true" ManuallySorted="false" Selected="true" Referenced="true">
+      <Name>XMI_Attribute_Group</Name>
+    </AttributeGroup>
+  </AttributeGroup>
+  </AttributeGroupList>
+
+  <AttributeList>
+
+    <Attribute ID="XMI_Attribute" MultiValued="false" ProductMode="Normal" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Selected="true" Referenced="true" Mandatory="false">
+      <Name>XMI_Attribute</Name>
+      <Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+      <MetaData>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessScoreOutlet">0</Value>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="POC1OverallCompleteness">0</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+      </MetaData>
+      <AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
+      <UserTypeLink UserTypeID="XMI_Class"/>
+    </Attribute>
+
+    <Attribute ID="XMI_Enum" MultiValued="false" ProductMode="Normal" FullTextIndexed="false" ExternallyMaintained="true" Derived="false" HierarchicalFiltering="false" ClassificationHierarchicalFiltering="false" Selected="true" Referenced="true" Mandatory="false">
+      <Name>XMI_Enum</Name>
+      <ListOfValueLink ListOfValueID="XMI_LOV"/>
+      <MetaData>
+        <Value Derived="true" AttributeID="CompletenessStatus">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="POC1OverallCompleteness">0</Value>
+        <Value Derived="true" AttributeID="Completeness Score Asset References">0 %</Value>
+        <Value Derived="true" AttributeID="Completeness Status Marketing">Item Enrichment</Value>
+        <Value Derived="true" AttributeID="Completeness_Score_Marketing">0 %</Value>
+        <Value Derived="true" AttributeID="CompletenessScoreOutlet">0</Value>
+        <Value Derived="true" AttributeID="CompletenessScore">0</Value>
+        <Value Derived="true" AttributeID="CompletenessProductOnboarding">0</Value>
+        <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
+        <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>
+      </MetaData>
+      <AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
+      <UserTypeLink UserTypeID="XMI_Class"/>
+    </Attribute>
+
+  </AttributeList>
+
+  <Products>
+    <Product ID="XMI_Project" UserTypeID="XMI_Root" ParentID="Product hierarchy root">
+      <Name>XMI</Name>
+      <AttributeLink AttributeID="XMI_Attribute">
+                
+        <MetaData>
+          <Value AttributeID="CompletenessScore" Derived="true">0</Value>
+        </MetaData>
+
+      </AttributeLink>
+      <AttributeLink AttributeID="XMI_Enum">
+                
+        <MetaData>
+          <Value AttributeID="CompletenessScore" Derived="true">0</Value>
+        </MetaData>
+
+      </AttributeLink>
+
+      <Product ID="XMI_com" UserTypeID="XMI_Package">
+        <Name>com</Name>
+        <Product ID="XMI_stibo" UserTypeID="XMI_Package">
+          <Name>stibo</Name>
+          <Product ID="XMI_Object" UserTypeID="XMI_Class">
+            <Name>Object</Name>
+              <ProductCrossReference ProductID="XMI_Sister" Type="XMI_Class_2_Sibling"/>
+
+            <Values>
+              <Value AttributeID="XMI_Enum" ID="B">Bee</Value>
+              <Value AttributeID="XMI_Attribute">XMI_Value</Value>
+            </Values>
+            <Product ID="XMI_Child" UserTypeID="XMI_Class">
+              <Name>Child</Name>
+            </Product>
+          </Product>
+          <Product ID="XMI_Sister" UserTypeID="XMI_Sibling">
+            <Name>Sister</Name>
+          </Product>
+        </Product>
+      </Product>
+    </Product>
+  </Products>
 </STEP-ProductInformation>

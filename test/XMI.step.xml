@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Configuration:
+<STEP-ProductInformation ResolveInlineRefs="true" FollowOverrideSubProducts="true" Validation="XSD">
+<UserTypes ExportSize="Selected"/>
+<EdgeTypes/>
+<CrossReferenceTypes ExportSize="Selected"/>
+<UnitList ExportSize="Minimum"/>
+<ListOfValuesGroupList/>
+<ListsOfValues ExportSize="Selected"/>
+<AttributeGroupList ExportSize="Selected"/>
+<AttributeList ExportSize="Selected"/>
+<BusinessLibraries ExportSize="Selected"/>
+<BusinessRules ExportSize="Selected"/>
+<Products ExportSize="Minimum">
+<Product>
+<Name/><AttributeLink/><DataContainerTypeLink/><ClassificationReference/><Product/>
+<ProductCrossReference/><AssetCrossReference/><EntityCrossReference/><ClassificationCrossReference/><Values/><OverrideSubProduct/></Product></Products>
+</STEP-ProductInformation>
+
+Export from Sister
+Classifications All
+Products "XMI_Object" "XMI_com" "XMI_stibo" "XMI_Child" "XMI_Project" "XMI_Sister"
+Assets All
+
+Exported by database exporter.
+-->
+<STEP-ProductInformation AutoApprove="Y" ContextID="Australian" ExportContext="GL" ExportTime="2022-05-26 12:02:34" UseContextLocale="false" WorkspaceID="Main" xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd">
+	<UserTypes>
+		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Root" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+			<Name>XMI_Root</Name>
+			<MetaData/>
+			<UserTypeLink UserTypeID="Product user-type root"/>
+		</UserType>
+		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Sibling" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+			<Name>XMI_Sibling</Name>
+			<MetaData/>
+			<UserTypeLink UserTypeID="XMI_Package"/>
+		</UserType>
+		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Class" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+			<Name>XMI_Class</Name>
+			<MetaData/>
+			<UserTypeLink UserTypeID="XMI_Class"/>
+			<UserTypeLink UserTypeID="XMI_Package"/>
+			<AttributeLink AttributeID="XMI_Attribute"/>
+			<AttributeLink AttributeID="XMI_Enum"/>
+		</UserType>
+		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Package" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+			<Name>XMI_Package</Name>
+			<MetaData/>
+			<UserTypeLink UserTypeID="XMI_Root"/>
+			<UserTypeLink UserTypeID="XMI_Package"/>
+		</UserType>
+	</UserTypes>
+	<CrossReferenceTypes>
+		<ProductCrossReferenceType Accumulated="false" ID="XMI_Class_2_Sibling" Inherited="false" Mandatory="false" MultiValued="true" Referenced="true" Revised="true" Selected="true">
+			<Name>XMI_Class_2_Sibling</Name>
+			<MetaData/>
+			<UserTypeLink UserTypeID="XMI_Class"/>
+			<TargetUserTypeLink UserTypeID="XMI_Sibling"/>
+		</ProductCrossReferenceType>
+	</CrossReferenceTypes>
+	<ListOfValuesGroupList/>
+	<ListsOfValues>
+		<ListOfValue AllowUserValueAddition="false" ID="XMI_LOV" ParentID="XMI_LOV_Group" Referenced="true" Selected="true" UseValueID="true">
+			<Name>XMI_LOV</Name>
+			<Validation BaseType="text" InputMask="" MaxLength="100" MaxValue="" MinValue=""/>
+			<Value ID="C">See</Value>
+			<Value ID="B">Bee</Value>
+			<Value ID="A">Aye</Value>
+		</ListOfValue>
+	</ListsOfValues>
+	<AttributeList>
+		<Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XMI_Attribute" Mandatory="false" MultiValued="false" ProductMode="Normal" Referenced="true" Selected="true">
+			<Name>XMI_Attribute</Name>
+			<Validation BaseType="text" InputMask="" MaxLength="100" MaxValue="" MinValue=""/>
+			<MetaData/>
+			<AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
+			<UserTypeLink UserTypeID="XMI_Class"/>
+		</Attribute>
+		<Attribute ClassificationHierarchicalFiltering="false" Derived="false" ExternallyMaintained="true" FullTextIndexed="false" HierarchicalFiltering="false" ID="XMI_Enum" Mandatory="false" MultiValued="false" ProductMode="Normal" Referenced="true" Selected="true">
+			<Name>XMI_Enum</Name>
+			<ListOfValueLink ListOfValueID="XMI_LOV"/>
+			<MetaData/>
+			<AttributeGroupLink AttributeGroupID="XMI_Attribute_Group"/>
+			<UserTypeLink UserTypeID="XMI_Class"/>
+		</Attribute>
+	</AttributeList>
+	<Products>
+		<Product ID="XMI_Project" ParentID="Product hierarchy root" UserTypeID="XMI_Root">
+			<Name>XMI</Name>
+			<AttributeLink AttributeID="XMI_Attribute">
+				<MetaData/>
+			</AttributeLink>
+			<AttributeLink AttributeID="XMI_Enum">
+				<MetaData/>
+			</AttributeLink>
+			<Product ID="XMI_com" UserTypeID="XMI_Package">
+				<Name>com</Name>
+				<Product ID="XMI_stibo" UserTypeID="XMI_Package">
+					<Name>stibo</Name>
+					<Product ID="XMI_Object" UserTypeID="XMI_Class">
+						<Name>Object</Name>
+						<ProductCrossReference ProductID="XMI_Sister" Type="XMI_Class_2_Sibling"/>
+						<Values>
+							<Value AttributeID="XMI_Enum" ID="B">Bee</Value>
+							<Value AttributeID="XMI_Attribute">XMI_Value</Value>
+						</Values>
+						<Product ID="XMI_Child" UserTypeID="XMI_Class">
+							<Name>Child</Name>
+						</Product>
+					</Product>
+					<Product ID="XMI_Sister" UserTypeID="XMI_Sibling">
+						<Name>Sister</Name>
+					</Product>
+				</Product>
+			</Product>
+		</Product>
+	</Products>
+</STEP-ProductInformation>

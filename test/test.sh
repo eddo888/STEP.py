@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
-file='../test/Buy Side Sell Side.xmi'
+rscp='rsync -i --perms --times --partial'
+
+file='Buy Side Sell Side.xmi'
+
+$rscp ~/git/gitlab.stibo.dk/step/misc/javascript-snippets/Stibo/StepModeler/"${file}" .
 
 pushd ../bin
 
 horizontal.pl
 
-./uml2step.py toSTEP  "${file}"
+./uml2step.py toSTEP  "../test/${file}"
+
+horizontal.pl
+
+popd
 
 horizontal.pl
 
@@ -15,4 +23,3 @@ open "${file}.step.xml"
 
 horizontal.pl
 
-popd

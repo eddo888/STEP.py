@@ -30,10 +30,10 @@ class STEP2UML(object):
 		self.packages = dict() # id: (name, parent)
 
 		self.LG       = dict() # id: (name, parent)
-		self.LOV      = dict() # id: (name, parent, values, usesID) 
+		self.LOV      = dict() # id: (name, parent, usesID, values=[(lov_name, lov_id)]) 
 		self.AG       = dict() # id: (name, parent) 
 		self.attr     = dict() # id: (name, parent, tipe, lov) 
-		self.tipe     = dict() # id: (name, parent, tipe, attrs) 
+		self.tipe     = dict() # id: (name, parent, tipe, attrs=[(attr_name, attr_id, attr_tipe)]) 
 		self.refs     = dict() # id: (name, parent, source, target) 
 
 		self._LG      = dict() # ID: STEP
@@ -107,7 +107,7 @@ class STEP2UML(object):
 			package = self.parent(XMI, node)
 			values = list()
 
-			self.LOV[id] = (name, package, values, False)
+			self.LOV[id] = (name, package, False, values)
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
 			for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
@@ -171,12 +171,12 @@ class STEP2UML(object):
 					attr_id = getAttribute(attr, 'xmi.id') or ''
 
 					tipe_element = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="type"]', attr)
-					tipe = None
+					attr_tipe = None
 					if tipe_element:
-						tipe = getAttribute(tipe_element, 'value')
+						attr_tipe = getAttribute(tipe_element, 'value')
 
-					attrs.append((attr_name, attr_id, tipe))
-					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {tipe} : {attr_id}')
+					attrs.append((attr_name, attr_id, attr_tipe))
+					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_tipe} : {attr_id}')
 			
 
 	def read_References(self, XMI):
@@ -285,7 +285,7 @@ class STEP2UML(object):
 		sys.stdout.write(f'{colours.Teal}Write ListOfValues{colours.Off}\n')
 
 		for id in self.LOV.keys():
-			(name, package, values, usesID) = self.LOV[id]
+			(name, package, usesID, values) = self.LOV[id]
 
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
@@ -400,6 +400,7 @@ class STEP2UML(object):
 		name = output or f'{file}.step.xml'
 		STEP.save(name)
 		print(name)
+
 
 #_________________________________________________________________
 if __name__ == '__main__': args.execute()

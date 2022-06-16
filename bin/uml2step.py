@@ -11,9 +11,13 @@ from Baubles.Colours import Colours
 from Perdy.parser import printXML
 from GoldenChild.xpath import *
 from STEP.XML import Converter
+from STEP.XSD import *
 
 colours = Colours()
 args = Argue()
+
+def _(id):
+	return id.replace('_','')
 
 #_________________________________________________________________
 @args.command(single=True)
@@ -23,34 +27,45 @@ class STEP2UML(object):
 	'''
 
 	def __init__(self):
-		self.root_id    = None   #xmi.id
-		self.packages   = dict() # xmi.id : (name, step.id)
-		self.lovs       = dict() # id: xmi.class
-		self.attributes = dict() # id: xml.class
-		self.user_types = dict() # id: xmi.class
-		self.references = dict() # id: xmi.classuer
+		self.packages = dict() # id: (name, parent)
+
+		self.LG       = dict() # id: (name, parent)
+		self.LOV      = dict() # id: (name, parent, values, usesID) 
+		self.AG       = dict() # id: (name, parent) 
+		self.attr     = dict() # id: (name, parent, tipe, lov) 
+		self.tipe     = dict() # id: (name, parent, tipe, attrs) 
+		self.refs     = dict() # id: (name, parent, source, target) 
+
+		self._LG      = dict() # ID: STEP
+		self._LOV     = dict() # ID: STEP
+		self._AG      = dict() # ID: STEP
+		self._attr    = dict() # ID: STEP
+		self._tipe    = dict() # ID: STEP
+		self._refs    = dict() # ID: STEP
 		
 
-	def package(self, XMI, node):
+	def parent(self, XMI, node):
 		package = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="package"]', node)
 		if package:
 			package = getAttribute(package, 'value')
 		return package
 
 	
-	def Packages(self, XMI, STEP):
+	def read_Packages(self, XMI):
 		'''
 		get packages
 		'''
 
-		sys.stdout.write(f'{colours.Teal}Root{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read Packages{colours.Off}\n')
 
 		root = getElement(XMI.ctx, '//UML:Model')
-		self.root_id = getAttribute(root, 'xmi.id')
-
-		sys.stdout.write(f'\t{colours.Blue}{self.root_id}{colours.Off}\n')
-
-		sys.stdout.write(f'{colours.Teal}Packages{colours.Off}\n')
+		
+		id = getAttribute(root, 'xmi.id')
+		name = getAttribute(root, 'name')
+		parent = None
+		
+		self.packages[id] = (name, parent)
+		print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
 
 		for node in getElements(XMI.ctx, '//UML:Package'):
 			name = getAttribute(node, 'name')
@@ -61,10 +76,25 @@ class STEP2UML(object):
 			if parent_element:
 				parent = getAttribute(parent_element, 'value')
 
+			self.packages[id] = (name, parent)
 			print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
 
 
-	def ListsOfValues(self, XMI, STEP):
+	def read_LOV_Groups(self, XMI):
+		'''
+		get LOVs as class enums
+		'''
+		sys.stdout.write(f'{colours.Teal}ListsOfValues{colours.Off}\n')
+
+		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP ListOfValues" or UML:ModelElement.stereotype/UML:Stereotype/@name = "enumeration"]'):
+			name = getAttribute(node, 'name')
+			id = getAttribute(node, 'xmi.id')
+			package = self.parent(XMI, node)
+			self.LG[id] = (name, package)
+			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+
+	def read_LOVs(self, XMI):
 		'''
 		get LOVs as class enums
 		'''
@@ -74,18 +104,21 @@ class STEP2UML(object):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
 
-			package = self.package(XMI, node)
+			package = self.parent(XMI, node)
+			values = list()
 
+			self.LOV[id] = (name, package, values, False)
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
 			for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
 				lov_name = getAttribute(attr, 'name')
 				lov_id = getAttribute(attr, 'xmi.id') or ''
 
+				values.append((lov_name, lov_id))
 				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
 	
 
-	def AttributeGroups(self, XMI, STEP):
+	def read_Attribute_Groups(self, XMI):
 		'''
 		get attributes as classes
 		'''
@@ -94,13 +127,13 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP AttributeGroup"]'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			
-			package = self.package(XMI, node)
+			package = self.parent(XMI, node)
 
+			self.AG[id] = (name, package)
 			print(f'\t{name} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 	
 
-	def AttributeTypes(self, XMI, STEP):
+	def read_Attributes(self, XMI):
 		'''
 		get attributes as classes
 		'''
@@ -109,13 +142,14 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Attribute"]'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			
-			package = self.package(XMI, node)
-
+			package = self.parent(XMI, node)
+			tipe=None
+			lov=None
+			self.attr[id] = (name, package, tipe, lov)
 			print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 	
 
-	def UserTypes(self, XMI, STEP):
+	def read_UserTypes(self, XMI):
 		'''
 		make the user types
 		'''
@@ -126,8 +160,9 @@ class STEP2UML(object):
 
 				name = getAttribute(node, 'name')
 				id = getAttribute(node, 'xmi.id')
-
-				package = self.package(XMI, node)
+				package = self.parent(XMI, node)
+				attrs = list()
+				self.tipe[id] = (name, package, tipe, attrs)
 				
 				print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
@@ -140,10 +175,11 @@ class STEP2UML(object):
 					if tipe_element:
 						tipe = getAttribute(tipe_element, 'value')
 
+					attrs.append((attr_name, attr_id, tipe))
 					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {tipe} : {attr_id}')
 			
 
-	def References(self, XMI, STEP):
+	def read_References(self, XMI):
 		'''
 		make references
 		'''
@@ -152,11 +188,12 @@ class STEP2UML(object):
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Reference"]'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
-			package = self.package(XMI, node)
+			package = self.parent(XMI, node)
+			self.refs[id] = (name, package, None, None)
 			print(f'\t{colours.Purple}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 			
-			
-	def Associations(self, XMI, STEP):
+
+	def read_Associations(self, XMI):
 		'''
 		make associations
 		'''
@@ -178,6 +215,147 @@ class STEP2UML(object):
 			print(f'\t{source} -> {target}')
 
 
+	def write_Packages(self, STEP):
+		'''
+		create groups for namespace for each package
+		'''
+		sys.stdout.write(f'{colours.Teal}Write Packages{colours.Off}\n')
+
+		for id in self.packages.keys():
+			(name, parent) = self.packages[id]
+			print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
+			
+			ag = AttributeGroupType(
+				ID = _(id),
+				ShowInWorkbench = 'true',
+				ManuallySorted = 'false',
+				Name = [
+					NameType(name)
+				]
+			)
+			if parent:
+				ag.ParentID = _(parent)
+	
+			self._AG[ag.ID] = ag
+			STEP.doc.AttributeGroupList.append(ag)
+			
+			lg = ListOfValuesGroupType(
+				ID = _(id),
+				Name = [
+					NameType(name)
+				]
+			)
+			if parent:
+				lg.ParentID = _(parent)
+				
+			self._LG[lg.ID] = lg
+			STEP.doc.ListOfValuesGroupList.append(lg)
+
+		
+	def write_LOV_Groups(self, STEP):
+		'''
+		write LOVs to STEP
+		'''
+		# todo: use ID on LOV
+
+		sys.stdout.write(f'{colours.Teal}Write ListsOfValues{colours.Off}\n')
+
+		for id in self.LG.keys():
+			(name, package) = self.LG[id]
+
+			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+			LG = ListOfValuesGroupType(
+				ID = _(id),
+				Name = [
+					NameType(name)
+				],
+				ParentID = _(package)
+			)
+								
+			STEP.doc.ListOfValuesGroupList.append(LG)
+
+
+	def write_LOVs(self, STEP):
+		'''
+		write LOVs to STEP
+		'''
+		# todo: use ID on LOV
+
+		sys.stdout.write(f'{colours.Teal}Write ListOfValues{colours.Off}\n')
+
+		for id in self.LOV.keys():
+			(name, package, values, usesID) = self.LOV[id]
+
+			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+			LOV = ListOfValueType(
+				ID = _(id),
+				UseValueID = 'false',
+				Name = [
+					NameType(name)
+				],
+				Validation = ValidationType(
+					BaseType='text', 
+					MaxLength=None
+				),
+				ParentID = _(package)
+			)
+			
+			for lov_name, lov_id in values:
+				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
+
+				LOV.Value.append(
+					ValueType(
+						lov_name,
+						#ID=lov_id
+					)
+				)
+
+			self._LOV[LOV.ID] = LOV
+			STEP.doc.ListsOfValues.append(LOV)
+
+
+	def write_Attribute_Groups(self, STEP):
+		'''
+		write attributes to STEP
+		'''
+		sys.stdout.write(f'{colours.Teal}Write AttributeGroups{colours.Off}\n')
+
+		for id in self.AG.keys():
+			(name, package) = self.AG[id]
+			print(f'\t{name} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+			
+			AG = AttributeGroupType(
+				ID = _(id),
+				ShowInWorkbench = 'true',
+				ManuallySorted = 'false',
+				Name = [
+					NameType(name)
+				],
+				ParentID = _(package)
+			)
+	
+			self._AG[AG.ID] = AG
+			STEP.doc.AttributeGroupList.append(AG)
+	
+		
+	def write_Attributes(self, STEP):
+		pass
+
+	
+	def write_UserTypes(self, STEP):
+		pass
+
+	
+	def write_References(self, STEP):
+		pass
+
+
+	def write_Associations(self, STEP):
+		pass
+
+	
 	@args.operation
 	@args.parameter(name='file', help='input sparx xmi file')
 	@args.parameter(name='output', short='o', help='output step xml file')
@@ -186,25 +364,42 @@ class STEP2UML(object):
 		make a STEP XML file using a sparx enterprise architect xmi file 
 		'''
 
-		STEP = Converter()
-		
+		horizon = '-'*int(os.environ['COLUMNS'])
+
+		print(horizon)
+
 		XMI = XML(*getContextFromFile(file, argsNS=[
 			'UML="omg.org/UML1.3"'
 		]))
 
-		self.Packages(XMI, STEP)
-		self.ListsOfValues(XMI, STEP)
-		self.AttributeGroups(XMI, STEP)
-		self.AttributeTypes(XMI, STEP)
-		self.UserTypes(XMI, STEP)
-		self.References(XMI, STEP)
-		self.Associations(XMI, STEP)
+		self.read_Packages(XMI)
+		self.read_LOV_Groups(XMI)
+		self.read_LOVs(XMI)
+		self.read_Attribute_Groups(XMI)
+		self.read_Attributes(XMI)
+		self.read_UserTypes(XMI)
+		self.read_References(XMI)
+		self.read_Associations(XMI)
+
+		print(horizon)
+
+		STEP = Converter()
+
+		self.write_Packages(STEP)
+		self.write_LOV_Groups(STEP)
+		self.write_LOVs(STEP)
+		self.write_Attribute_Groups(STEP)
+		self.write_Attributes(STEP)
+		self.write_UserTypes(STEP)
+		self.write_References(STEP)
+		self.write_Associations(STEP)
+
+		print(horizon)
 
 		# export the results
-
 		name = output or f'{file}.step.xml'
 		STEP.save(name)
-
+		print(name)
 
 #_________________________________________________________________
 if __name__ == '__main__': args.execute()

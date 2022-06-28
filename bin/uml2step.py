@@ -196,7 +196,11 @@ class STEP2UML(object):
 
 				for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
 					attr_name = getAttribute(attr, 'name')
-					attr_id = getAttribute(attr, 'xmi.id') or ''
+
+					attr_element = getElement(XMI.ctx, 'UML:StructuralFeature.type/UML:Classifier', attr)
+					attr_id = None
+					if attr_element:
+						attr_id = getAttribute(attr_element, 'xmi.idref')
 
 					tipe_element = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="type"]', attr)
 					attr_tipe = None
@@ -204,7 +208,7 @@ class STEP2UML(object):
 						attr_tipe = getAttribute(tipe_element, 'value')
 
 					attrs.append((attr_name, attr_id, attr_tipe))
-					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_tipe} : {attr_id}')
+					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
 			
 
 	def read_References(self, XMI):
@@ -364,6 +368,39 @@ class STEP2UML(object):
 			self._AG[AG.ID] = AG
 			STEP.doc.AttributeGroupList.append(AG)
 	
+
+	def write_Attribute(self, STEP, id, name, package, tipe, base, length, lov):
+		print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+		attr = AttributeType(
+			ID = _(id), 
+			Name = [NameType(name)],
+			MultiValued = 'false',
+			ProductMode = 'Normal' if tipe == 'Specification' else 'Property', # for description
+			FullTextIndexed = 'false',
+			ExternallyMaintained = 'false',
+			Derived = 'false',
+
+			AttributeGroupLink = [
+				AttributeGroupLinkType(
+					AttributeGroupID = _(package)
+				)
+			],
+		)
+
+		if lov and _(lov) in self._LOV.keys():
+			attr.ListOfValueLink = ListOfValueLinkType(
+				ListOfValueID=_(lov)
+			)
+		else:
+			attr.Validation = ValidationType(
+				BaseType = base,
+				MaxLength = length,
+			)
+
+		self._attr[attr.ID] = attr
+		STEP.doc.AttributeList.append(attr)
+
 		
 	def write_Attributes(self, STEP):
 		'''
@@ -373,38 +410,9 @@ class STEP2UML(object):
 					
 		for id in self.attr.keys():
 			(name, package, tipe, base, length, lov) = self.attr[id]
-			print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
-
-			attr = AttributeType(
-				ID = _(id), 
-				Name = [NameType(name)],
-				MultiValued = 'false',
-				ProductMode = 'Normal' if tipe == 'Specification' else 'Property', # for description
-				FullTextIndexed = 'false',
-				ExternallyMaintained = 'false',
-				Derived = 'false',
-
-				AttributeGroupLink = [
-					AttributeGroupLinkType(
-						AttributeGroupID = _(package)
-					)
-				],
-			)
+			self.write_Attribute(STEP, id, name, package, tipe, base, length, lov)
 			
-			if lov:
-				attr.ListOfValueLink = ListOfValueLinkType(
-					ListOfValueID=_(lov)
-				)
-			else:
-				attr.Validation = ValidationType(
-					BaseType = base,
-					MaxLength = length,
-				)
 			
-			self._attr[attr.ID] = attr
-			STEP.doc.AttributeList.append(attr)
-
-	
 	def write_UserTypes(self, STEP):
 		pass
 

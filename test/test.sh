@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-rscp='rsync -i --perms --times --partial'
-
 file='Buy Side Sell Side.xmi'
 
-$rscp ~/git/gitlab.stibo.dk/step/misc/javascript-snippets/Stibo/StepModeler/"${file}" .
+rsync -ai ~/git/gitlab.stibo.dk/step/misc/javascript-snippets/Stibo/StepModeler/"${file}" .
+
+if [  -e "${file}.step.xml" ]
+then
+	rm "${file}.step.xml"
+fi
 
 pushd ../bin
 

@@ -32,7 +32,7 @@ class STEP2UML(object):
 		self.LG       = dict() # id: (name, parent)
 		self.LOV      = dict() # id: (name, parent, usesID, values=[(lov_name, lov_id)]) 
 		self.AG       = dict() # id: (name, parent) 
-		self.attr     = dict() # id: (name, parent, tipe, lov) 
+		self.attr     = dict() # id: (name, parent, tipe, base, length, lov) 
 		self.tipe     = dict() # id: (name, parent, tipe, attrs=[(attr_name, attr_id, attr_tipe)]) 
 		self.refs     = dict() # id: (name, parent, source, target) 
 
@@ -84,7 +84,7 @@ class STEP2UML(object):
 		'''
 		get LOVs as class enums
 		'''
-		sys.stdout.write(f'{colours.Teal}ListsOfValues{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read ListsOfValues{colours.Off}\n')
 
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP ListOfValues" or UML:ModelElement.stereotype/UML:Stereotype/@name = "enumeration"]'):
 			name = getAttribute(node, 'name')
@@ -98,7 +98,7 @@ class STEP2UML(object):
 		'''
 		get LOVs as class enums
 		'''
-		sys.stdout.write(f'{colours.Teal}ListsOfValues{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read ListsOfValues{colours.Off}\n')
 
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP ListOfValues" or UML:ModelElement.stereotype/UML:Stereotype/@name = "enumeration"]'):
 			name = getAttribute(node, 'name')
@@ -122,7 +122,7 @@ class STEP2UML(object):
 		'''
 		get attributes as classes
 		'''
-		sys.stdout.write(f'{colours.Teal}AttributeGroups{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read AttributeGroups{colours.Off}\n')
 
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP AttributeGroup"]'):
 			name = getAttribute(node, 'name')
@@ -133,20 +133,32 @@ class STEP2UML(object):
 			print(f'\t{name} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 	
 
+	def get_UML_Attribute(self, XMI, node, name):
+		_tipe = getElement(XMI.ctx, f'UML:Classifier.feature/UML:Attribute[@name="{name}"]', node)
+		if _tipe:
+			_value = getElement(XMI.ctx, 'UML:Attribute.initialValue/UML:Expression', _tipe)
+			if _value:
+				return getAttribute(_value, 'body')
+			
+
 	def read_Attributes(self, XMI):
 		'''
 		get attributes as classes
 		'''
-		sys.stdout.write(f'{colours.Teal}AttributeTypes{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read AttributeTypes{colours.Off}\n')
 					
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Attribute"]'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
 			package = self.parent(XMI, node)
-			tipe=None
-			lov=None
-			self.attr[id] = (name, package, tipe, lov)
-			print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+			tipe=self.get_UML_Attribute(XMI, node, '@type')
+			base=self.get_UML_Attribute(XMI, node, '@base')
+			length=self.get_UML_Attribute(XMI, node, '@MaxLength')
+			lov=None # todo
+			
+			self.attr[id] = (name, package, tipe, base, length, lov)
+			print(f'\t{colours.Green}{name}{colours.Off} : {id} [{tipe} -> {base}] ^~ {colours.Blue}{package}{colours.Off}')
 	
 
 	def read_UserTypes(self, XMI):
@@ -154,7 +166,7 @@ class STEP2UML(object):
 		make the user types
 		'''
 		for tipe in ['UserType', 'Entity', 'Classification', 'Asset']:
-			print(f'{colours.Teal}{tipe}{colours.Off}')
+			print(f'{colours.Teal}Read {tipe}{colours.Off}')
 			
 			for node in getElements(XMI.ctx, f'//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP {tipe}"]'):
 
@@ -183,7 +195,7 @@ class STEP2UML(object):
 		'''
 		make references
 		'''
-		sys.stdout.write(f'{colours.Teal}References{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read References{colours.Off}\n')
 
 		for node in getElements(XMI.ctx, '//UML:Class[UML:ModelElement.stereotype/UML:Stereotype/@name = "STEP Reference"]'):
 			name = getAttribute(node, 'name')
@@ -197,7 +209,7 @@ class STEP2UML(object):
 		'''
 		make associations
 		'''
-		sys.stdout.write(f'{colours.Teal}Associations{colours.Off}\n')
+		sys.stdout.write(f'{colours.Teal}Read Associations{colours.Off}\n')
 
 		for node in getElements(XMI.ctx, '//UML:Association'):
 			name = getAttribute(node, 'name')
@@ -341,7 +353,43 @@ class STEP2UML(object):
 	
 		
 	def write_Attributes(self, STEP):
-		pass
+		'''
+		write attributes
+		'''
+		sys.stdout.write(f'{colours.Teal}Write AttributeTypes{colours.Off}\n')
+					
+		for id in self.attr.keys():
+			(name, package, tipe, base, length, lov) = self.attr[id]
+			print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+			attr = AttributeType(
+				ID = _(id), 
+				Name = [NameType(name)],
+				MultiValued = 'false',
+				ProductMode = 'Normal' if tipe == 'Specification' else 'Property', # for description
+				FullTextIndexed = 'false',
+				ExternallyMaintained = 'false',
+				Derived = 'false',
+
+				AttributeGroupLink = [
+					AttributeGroupLinkType(
+						AttributeGroupID = _(package)
+					)
+				],
+			)
+			
+			if lov:
+				attr.ListOfValueLink = ListOfValueLinkType(
+					ListOfValueID=lov
+				)
+			else:
+				attr.Validation = ValidationType(
+					BaseType = base,
+					MaxLength = length,
+				)
+			
+			self._attr[attr.ID] = attr
+			STEP.doc.AttributeList.append(attr)
 
 	
 	def write_UserTypes(self, STEP):

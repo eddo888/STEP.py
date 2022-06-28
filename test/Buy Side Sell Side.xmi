@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2022-06-28 15:31:44">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2022-06-28 15:54:18">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -2989,13 +2989,12 @@
 								</UML:Attribute>
 								<UML:Attribute name="@base" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
 									<UML:Attribute.initialValue>
-										<UML:Expression/>
+										<UML:Expression body="text"/>
 									</UML:Attribute.initialValue>
 									<UML:StructuralFeature.type>
-										<UML:Classifier xmi.idref="EAID_FCEFD631_F9AE_431e_B18C_BA289A0E7840"/>
+										<UML:Classifier xmi.idref="eaxmiid1"/>
 									</UML:StructuralFeature.type>
 									<UML:ModelElement.taggedValue>
-										<UML:TaggedValue tag="type" value="text"/>
 										<UML:TaggedValue tag="length" value="0"/>
 										<UML:TaggedValue tag="ordered" value="0"/>
 										<UML:TaggedValue tag="precision" value="0"/>
@@ -3682,6 +3681,5 @@
 		<EAStub xmi.id="EAID_5AEA2097_C02D_4444_8BA4_8DF15512BA5D" name="currency" UMLType="DataType"/>
 		<EAStub xmi.id="EAID_E28B2739_78B6_43c9_8F0D_C7EEC522E14D" name="integer" UMLType="DataType"/>
 		<EAStub xmi.id="EAID_FFBBAB42_D5B2_4061_BAFC_F8ABA38D4E1F" name="float" UMLType="DataType"/>
-		<EAStub xmi.id="EAID_FCEFD631_F9AE_431e_B18C_BA289A0E7840" name="text" UMLType="Class"/>
 	</XMI.extensions>
 </XMI>

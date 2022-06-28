@@ -93,7 +93,7 @@ class STEP2UML(object):
 			self.LG[id] = (name, package)
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
-
+			
 	def read_LOVs(self, XMI):
 		'''
 		get LOVs as class enums
@@ -112,7 +112,11 @@ class STEP2UML(object):
 
 			for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
 				lov_name = getAttribute(attr, 'name')
-				lov_id = getAttribute(attr, 'xmi.id') or ''
+				if lov_name.startswith('@'): continue
+				lov_id = None
+				value = getElement(XMI.ctx, 'UML:Attribute.initialValue/UML:Expression', attr)
+				if value:
+					lov_id = getAttribute(value, 'body')
 
 				values.append((lov_name, lov_id))
 				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
@@ -133,12 +137,20 @@ class STEP2UML(object):
 			print(f'\t{name} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 	
 
-	def get_UML_Attribute(self, XMI, node, name):
+	def read_Attribute(self, XMI, node, name):
 		_tipe = getElement(XMI.ctx, f'UML:Classifier.feature/UML:Attribute[@name="{name}"]', node)
 		if _tipe:
 			_value = getElement(XMI.ctx, 'UML:Attribute.initialValue/UML:Expression', _tipe)
 			if _value:
 				return getAttribute(_value, 'body')
+			
+
+	def read_LOV(self, XMI, node):
+		_tipe = getElement(XMI.ctx, f'UML:Classifier.feature/UML:Attribute[@name="@base"]', node)
+		if _tipe:
+			_value = getElement(XMI.ctx, 'UML:StructuralFeature.type/UML:Classifier', _tipe)
+			if _value:
+				return getAttribute(_value, 'xmi.idref')
 			
 
 	def read_Attributes(self, XMI):
@@ -152,11 +164,11 @@ class STEP2UML(object):
 			id = getAttribute(node, 'xmi.id')
 			package = self.parent(XMI, node)
 
-			tipe=self.get_UML_Attribute(XMI, node, '@type')
-			base=self.get_UML_Attribute(XMI, node, '@base')
-			length=self.get_UML_Attribute(XMI, node, '@MaxLength')
-			lov=None # todo
-			
+			tipe=self.read_Attribute(XMI, node, '@type')
+			base=self.read_Attribute(XMI, node, '@base')
+			length=self.read_Attribute(XMI, node, '@MaxLength')
+			lov=self.read_LOV(XMI, node) # assuming only LOV is referenced from an attribute
+
 			self.attr[id] = (name, package, tipe, base, length, lov)
 			print(f'\t{colours.Green}{name}{colours.Off} : {id} [{tipe} -> {base}] ^~ {colours.Blue}{package}{colours.Off}')
 	
@@ -317,12 +329,9 @@ class STEP2UML(object):
 			for lov_name, lov_id in values:
 				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
 
-				LOV.Value.append(
-					ValueType(
-						lov_name,
-						#ID=lov_id
-					)
-				)
+				value = ValueType(lov_name)
+				if lov_id: value.ID = lov_id
+				LOV.Value.append(value)
 
 			self._LOV[LOV.ID] = LOV
 			STEP.doc.ListsOfValues.append(LOV)
@@ -380,7 +389,7 @@ class STEP2UML(object):
 			
 			if lov:
 				attr.ListOfValueLink = ListOfValueLinkType(
-					ListOfValueID=lov
+					ListOfValueID=_(lov)
 				)
 			else:
 				attr.Validation = ValidationType(

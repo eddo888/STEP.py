@@ -216,7 +216,7 @@ class STEP2UML(object):
 				if lovl:
 					cid = getAttribute(lovl, 'ListOfValueID')
 					ctype = self.lovs[cid]
-			xmi.makeAttribute('@base', ctype, None, _attribute, array=False)
+			xmi.makeAttribute('@base', ctype, cid.lower(), _attribute, array=False)
 
 			spec_desc = getAttribute(attribute, 'ProductMode')
 			if spec_desc == 'Normal':

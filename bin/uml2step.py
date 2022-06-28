@@ -105,9 +105,9 @@ class STEP2UML(object):
 			id = getAttribute(node, 'xmi.id')
 
 			package = self.parent(XMI, node)
+			usesID = False
 			values = list()
 
-			self.LOV[id] = (name, package, False, values)
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
 			for attr in getElements(XMI.ctx, 'UML:Classifier.feature/UML:Attribute', node):
@@ -117,10 +117,14 @@ class STEP2UML(object):
 				value = getElement(XMI.ctx, 'UML:Attribute.initialValue/UML:Expression', attr)
 				if value:
 					lov_id = getAttribute(value, 'body')
+					if lov_id:
+						usesID = True
 
 				values.append((lov_name, lov_id))
 				print(f'\t\t@{colours.Red}{lov_name}{colours.Off} : {lov_id}')
-	
+
+			self.LOV[id] = (name, package, usesID, values)
+				
 
 	def read_Attribute_Groups(self, XMI):
 		'''
@@ -315,7 +319,7 @@ class STEP2UML(object):
 
 			LOV = ListOfValueType(
 				ID = _(id),
-				UseValueID = 'false',
+				UseValueID = 'true' if usesID else 'false',
 				Name = [
 					NameType(name)
 				],

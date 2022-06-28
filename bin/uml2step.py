@@ -414,7 +414,63 @@ class STEP2UML(object):
 			
 			
 	def write_UserTypes(self, STEP):
-		pass
+		'''
+		write types to STEP, have to find the top of the inheritance tree for parent layout
+		'''
+		for id in self.tipe.keys():
+			(name, package, tipe, attrs) = self.tipe[id]
+			print(f'\t{colours.Orange}Write {name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+
+			user_type = UserTypeType(
+				ID = _(id),
+				Name = [NameType(name)],
+				ReferenceTargetLockPolicy='Strict',
+				Referenced='true',
+				Selected='true',
+				UserTypeLink = [
+					UserTypeLinkType(
+						UserTypeID=_(package)
+					)
+				]
+			)
+
+			if tipe == 'UserType':
+				user_type.AllowInDesignTemplate='false'
+				user_type.AllowQuarkTemplate='false'
+				user_type.ManuallySorted='false'
+				user_type.IsCategory='true'
+				
+			if tipe == 'Entity':
+				user_type.AllowInDesignTemplate='false'
+				user_type.AllowQuarkTemplate='false'
+				user_type.ManuallySorted='false'
+				user_type.IsCategory='false'
+				user_type.Revisability='Global'
+				
+			if tipe == 'Classification':
+				user_type.AllowInDesignTemplate='false'
+				user_type.AllowQuarkTemplate='false'
+				user_type.ManuallySorted='false'
+				user_type.ClassificationOwnsProductLinks='false'
+				
+			if tipe == 'Asset':
+				pass
+				
+			for attr_name, attr_id, attr_tipe in attrs:
+				print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
+
+				if _(attr_id) not in self._attr.keys():
+					self.write_Attribute(STEP, attr_id, attr_name, package, 'Description', attr_tipe, None, None)
+					
+				attr = self._attr[_(attr_id)]
+				attr.UserTypeLink.append(
+					UserTypeLinkType(
+						UserTypeID = user_type.ID
+					)
+				)
+					
+			self._tipe[user_type.ID] = user_type
+			STEP.doc.UserTypes.append(user_type)
 
 	
 	def write_References(self, STEP):

@@ -3,6 +3,7 @@
 # PYTHON_ARGCOMPLETE_OK
 
 import sys, os, re
+from collections import OrderedDict
 
 if os.path.dirname(sys.argv[0]) == '.': sys.path.insert(0, '..')
 
@@ -33,7 +34,7 @@ class STEP2UML(object):
 		self.LOV      = dict() # id: (name, parent, usesID, values=[(lov_name, lov_id)]) 
 		self.AG       = dict() # id: (name, parent) 
 		self.attr     = dict() # id: (name, parent, tipe, base, length, lov) 
-		self.tipe     = dict() # id: (name, parent, tipe, attrs=[(attr_name, attr_id, attr_tipe)]) 
+		self.tipe     = OrderedDict() # id: (name, parent, tipe, attrs=[(attr_name, attr_id, attr_tipe)]) 
 		self.refs     = dict() # id: (name, parent, source, target) 
 
 		self._LG      = dict() # ID: STEP
@@ -43,14 +44,13 @@ class STEP2UML(object):
 		self._tipe    = dict() # ID: STEP
 		self._refs    = dict() # ID: STEP
 		
-
 	def parent(self, XMI, node):
 		package = getElement(XMI.ctx, 'UML:ModelElement.taggedValue/UML:TaggedValue[@tag="package"]', node)
 		if package:
 			package = getAttribute(package, 'value')
 		return package
 
-	
+
 	def read_Packages(self, XMI):
 		'''
 		get packages
@@ -79,7 +79,6 @@ class STEP2UML(object):
 			self.packages[id] = (name, parent)
 			print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
 
-
 	def read_LOV_Groups(self, XMI):
 		'''
 		get LOVs as class enums
@@ -93,7 +92,6 @@ class STEP2UML(object):
 			self.LG[id] = (name, package)
 			print(f'\t{colours.Orange}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
-			
 	def read_LOVs(self, XMI):
 		'''
 		get LOVs as class enums
@@ -125,7 +123,6 @@ class STEP2UML(object):
 
 			self.LOV[id] = (name, package, usesID, values)
 				
-
 	def read_Attribute_Groups(self, XMI):
 		'''
 		get attributes as classes
@@ -140,7 +137,6 @@ class STEP2UML(object):
 			self.AG[id] = (name, package)
 			print(f'\t{name} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 	
-
 	def read_Attribute(self, XMI, node, name):
 		_tipe = getElement(XMI.ctx, f'UML:Classifier.feature/UML:Attribute[@name="{name}"]', node)
 		if _tipe:
@@ -148,7 +144,6 @@ class STEP2UML(object):
 			if _value:
 				return getAttribute(_value, 'body')
 			
-
 	def read_LOV(self, XMI, node):
 		_tipe = getElement(XMI.ctx, f'UML:Classifier.feature/UML:Attribute[@name="@base"]', node)
 		if _tipe:
@@ -156,7 +151,6 @@ class STEP2UML(object):
 			if _value:
 				return getAttribute(_value, 'xmi.idref')
 			
-
 	def read_Attributes(self, XMI):
 		'''
 		get attributes as classes
@@ -176,7 +170,6 @@ class STEP2UML(object):
 			self.attr[id] = (name, package, tipe, base, length, lov)
 			print(f'\t{colours.Green}{name}{colours.Off} : {id} [{tipe} -> {base}] ^~ {colours.Blue}{package}{colours.Off}')
 	
-
 	def read_UserTypes(self, XMI):
 		'''
 		make the user types
@@ -210,7 +203,6 @@ class STEP2UML(object):
 					attrs.append((attr_name, attr_id, attr_tipe))
 					print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
 			
-
 	def read_References(self, XMI):
 		'''
 		make references
@@ -224,7 +216,6 @@ class STEP2UML(object):
 			self.refs[id] = (name, package, None, None)
 			print(f'\t{colours.Purple}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 			
-
 	def read_Associations(self, XMI):
 		'''
 		make associations
@@ -247,6 +238,11 @@ class STEP2UML(object):
 			print(f'\t{source} -> {target}')
 
 
+	def transform(self):
+		'''
+		update usertype id's to have p,e,c,a prefix accross all ID references
+		'''
+		
 	def write_Packages(self, STEP):
 		'''
 		create groups for namespace for each package
@@ -256,7 +252,7 @@ class STEP2UML(object):
 		for id in self.packages.keys():
 			(name, parent) = self.packages[id]
 			print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
-			
+
 			ag = AttributeGroupType(
 				ID = _(id),
 				ShowInWorkbench = 'true',
@@ -267,6 +263,8 @@ class STEP2UML(object):
 			)
 			if parent:
 				ag.ParentID = _(parent)
+			else:
+				ag.ParentID = 'Attribute group root'
 	
 			self._AG[ag.ID] = ag
 			STEP.doc.AttributeGroupList.append(ag)
@@ -279,10 +277,17 @@ class STEP2UML(object):
 			)
 			if parent:
 				lg.ParentID = _(parent)
+			else:
+				lg.ParentID = 'List Of Values group root'
 				
 			self._LG[lg.ID] = lg
 			STEP.doc.ListOfValuesGroupList.append(lg)
 
+			if parent == None: # bootstrap usertypes
+				self.tipe[f'p{id}'] = (name, 'Product user-type root', 'UserType', []) 
+				self.tipe[f'e{id}'] = (name, 'Entity user-type root', 'Entity', []) 
+				self.tipe[f'c{id}'] = (name, 'Classification 1 user-type root', 'Classification', []) 
+				self.tipe[f'a{id}'] = (name, 'Asset user-type root', 'Asset', []) 
 		
 	def write_LOV_Groups(self, STEP):
 		'''
@@ -306,7 +311,6 @@ class STEP2UML(object):
 			)
 								
 			STEP.doc.ListOfValuesGroupList.append(LG)
-
 
 	def write_LOVs(self, STEP):
 		'''
@@ -344,7 +348,6 @@ class STEP2UML(object):
 			self._LOV[LOV.ID] = LOV
 			STEP.doc.ListsOfValues.append(LOV)
 
-
 	def write_Attribute_Groups(self, STEP):
 		'''
 		write attributes to STEP
@@ -368,7 +371,6 @@ class STEP2UML(object):
 			self._AG[AG.ID] = AG
 			STEP.doc.AttributeGroupList.append(AG)
 	
-
 	def write_Attribute(self, STEP, id, name, package, tipe, base, length, lov):
 		print(f'\t{colours.Green}{name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
@@ -401,7 +403,6 @@ class STEP2UML(object):
 		self._attr[attr.ID] = attr
 		STEP.doc.AttributeList.append(attr)
 
-		
 	def write_Attributes(self, STEP):
 		'''
 		write attributes
@@ -412,11 +413,12 @@ class STEP2UML(object):
 			(name, package, tipe, base, length, lov) = self.attr[id]
 			self.write_Attribute(STEP, id, name, package, tipe, base, length, lov)
 			
-			
 	def write_UserTypes(self, STEP):
 		'''
 		write types to STEP, have to find the top of the inheritance tree for parent layout
 		'''
+		# bootstrap root
+
 		for id in self.tipe.keys():
 			(name, package, tipe, attrs) = self.tipe[id]
 			print(f'\t{colours.Orange}Write {name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
@@ -427,11 +429,6 @@ class STEP2UML(object):
 				ReferenceTargetLockPolicy='Strict',
 				Referenced='true',
 				Selected='true',
-				UserTypeLink = [
-					UserTypeLinkType(
-						UserTypeID=_(package)
-					)
-				]
 			)
 
 			if tipe == 'UserType':
@@ -439,43 +436,47 @@ class STEP2UML(object):
 				user_type.AllowQuarkTemplate='false'
 				user_type.ManuallySorted='false'
 				user_type.IsCategory='true'
-				
+
 			if tipe == 'Entity':
 				user_type.AllowInDesignTemplate='false'
 				user_type.AllowQuarkTemplate='false'
 				user_type.ManuallySorted='false'
 				user_type.IsCategory='false'
 				user_type.Revisability='Global'
-				
+
 			if tipe == 'Classification':
 				user_type.AllowInDesignTemplate='false'
 				user_type.AllowQuarkTemplate='false'
 				user_type.ManuallySorted='false'
 				user_type.ClassificationOwnsProductLinks='false'
-				
+
 			if tipe == 'Asset':
 				pass
-				
+
+			user_type.UserTypeLink.append(
+				UserTypeLinkType(
+					UserTypeID=_(package)
+				)
+			)
+
 			for attr_name, attr_id, attr_tipe in attrs:
 				print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
 
 				if _(attr_id) not in self._attr.keys():
 					self.write_Attribute(STEP, attr_id, attr_name, package, 'Description', attr_tipe, None, None)
-					
+
 				attr = self._attr[_(attr_id)]
 				attr.UserTypeLink.append(
 					UserTypeLinkType(
 						UserTypeID = user_type.ID
 					)
 				)
-					
+
 			self._tipe[user_type.ID] = user_type
 			STEP.doc.UserTypes.append(user_type)
-
-	
+			
 	def write_References(self, STEP):
 		pass
-
 
 	def write_Associations(self, STEP):
 		pass
@@ -508,6 +509,8 @@ class STEP2UML(object):
 
 		print(horizon)
 
+		self.transform()
+		
 		STEP = Converter()
 
 		self.write_Packages(STEP)

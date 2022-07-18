@@ -238,11 +238,6 @@ class STEP2UML(object):
 			print(f'\t{source} -> {target}')
 
 
-	def transform(self):
-		'''
-		update usertype id's to have p,e,c,a prefix accross all ID references
-		'''
-		
 	def write_Packages(self, STEP):
 		'''
 		create groups for namespace for each package
@@ -509,8 +504,6 @@ class STEP2UML(object):
 
 		print(horizon)
 
-		self.transform()
-		
 		STEP = Converter()
 
 		self.write_Packages(STEP)

@@ -31,10 +31,10 @@ class STEP2UML(object):
 		self.name     = None   # root package name
 		self.root     = None   # root package id
 		self.roots    = {
-			'Product user-type root' : 'UserType',
-			'Entity user-type root' : 'Entity',
-			'Classification 1 user-type root' : 'Classification',
-			'Asset user-type root' : 'Asset',
+			'Product user-type root'          : ('p', 'UserType'),
+			'Entity user-type root'           : ('e', 'Entity'),
+			'Classification 1 user-type root' : ('c', 'Classification'),
+			'Asset user-type root'            : ('a', 'Asset'),
 		}
 		self.packages = dict() # id: (name, parent)
 
@@ -68,7 +68,7 @@ class STEP2UML(object):
 
 		root = getElement(XMI.ctx, '//UML:Model')
 		
-		self.root = _(getAttribute(root, 'xmi.id'))
+		self.root = getAttribute(root, 'xmi.id')
 		self.name = getAttribute(root, 'name')
 		self.packages[self.root] = (self.name, None)
 		print(f'\t{self.name} : {self.root}')
@@ -471,12 +471,19 @@ class STEP2UML(object):
 		'''
 		write types to STEP, have to find the top of the inheritance tree for parent layout
 		'''
+		sys.stdout.write(f'{colours.Teal}Write UserTypes{colours.Off}\n')
+
+		prefixes = {}
+		
 		for id in self.roots.keys():
-			tipe = self.roots[id]
-			self.write_UserType(STEP, self.root, self.name, id, tipe, []) # the package root, may have duplicated id issues
+			(prefix, tipe) = self.roots[id]
+			prefixes[tipe] = prefix
+			self.write_UserType(STEP, f'{prefix}{self.root}', self.name, id, tipe, []) # the package root, may have duplicated id issues
 			
 		for id in self.tipe.keys():
 			(name, package, tipe, attrs) = self.tipe[id]
+			if package == self.root:
+				package = f'{prefix}{package}'
 			self.write_UserType(STEP, id, name, package, tipe, attrs)
 			
 	def write_References(self, STEP):

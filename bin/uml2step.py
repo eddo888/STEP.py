@@ -28,6 +28,14 @@ class STEP2UML(object):
 	'''
 
 	def __init__(self):
+		self.name     = None   # root package name
+		self.root     = None   # root package id
+		self.roots    = {
+			'Product user-type root' : 'UserType',
+			'Entity user-type root' : 'Entity',
+			'Classification 1 user-type root' : 'Classification',
+			'Asset user-type root' : 'Asset',
+		}
 		self.packages = dict() # id: (name, parent)
 
 		self.LG       = dict() # id: (name, parent)
@@ -60,13 +68,11 @@ class STEP2UML(object):
 
 		root = getElement(XMI.ctx, '//UML:Model')
 		
-		id = getAttribute(root, 'xmi.id')
-		name = getAttribute(root, 'name')
-		parent = None
+		self.root = _(getAttribute(root, 'xmi.id'))
+		self.name = getAttribute(root, 'name')
+		self.packages[self.root] = (self.name, None)
+		print(f'\t{self.name} : {self.root}')
 		
-		self.packages[id] = (name, parent)
-		print(f'\t{name} : {id} ^~ {colours.Blue}{parent}{colours.Off}')
-
 		for node in getElements(XMI.ctx, '//UML:Package'):
 			name = getAttribute(node, 'name')
 			id = getAttribute(node, 'xmi.id')
@@ -278,11 +284,6 @@ class STEP2UML(object):
 			self._LG[lg.ID] = lg
 			STEP.doc.ListOfValuesGroupList.append(lg)
 
-			if parent == None: # bootstrap usertypes
-				self.tipe[f'p{id}'] = (name, 'Product user-type root', 'UserType', []) 
-				self.tipe[f'e{id}'] = (name, 'Entity user-type root', 'Entity', []) 
-				self.tipe[f'c{id}'] = (name, 'Classification 1 user-type root', 'Classification', []) 
-				self.tipe[f'a{id}'] = (name, 'Asset user-type root', 'Asset', []) 
 		
 	def write_LOV_Groups(self, STEP):
 		'''
@@ -408,67 +409,75 @@ class STEP2UML(object):
 			(name, package, tipe, base, length, lov) = self.attr[id]
 			self.write_Attribute(STEP, id, name, package, tipe, base, length, lov)
 			
-	def write_UserTypes(self, STEP):
-		'''
-		write types to STEP, have to find the top of the inheritance tree for parent layout
-		'''
-		# bootstrap root
+	def write_UserType(self, STEP, id, name, package, tipe, attrs):
+		print(f'\t{colours.Orange}Write {name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
 
-		for id in self.tipe.keys():
-			(name, package, tipe, attrs) = self.tipe[id]
-			print(f'\t{colours.Orange}Write {name}{colours.Off} : {id} ^~ {colours.Blue}{package}{colours.Off}')
+		user_type = UserTypeType(
+			ID = _(id),
+			ReferenceTargetLockPolicy='Strict',
+			Referenced='true',
+			Selected='true',
+		)
 
-			user_type = UserTypeType(
-				ID = _(id),
-				Name = [NameType(name)],
-				ReferenceTargetLockPolicy='Strict',
-				Referenced='true',
-				Selected='true',
-			)
+		if name:
+			user_type.Name = [NameType(name)]
 
-			if tipe == 'UserType':
-				user_type.AllowInDesignTemplate='false'
-				user_type.AllowQuarkTemplate='false'
-				user_type.ManuallySorted='false'
-				user_type.IsCategory='true'
+		if tipe == 'UserType':
+			user_type.AllowInDesignTemplate='false'
+			user_type.AllowQuarkTemplate='false'
+			user_type.ManuallySorted='false'
+			user_type.IsCategory='true'
 
-			if tipe == 'Entity':
-				user_type.AllowInDesignTemplate='false'
-				user_type.AllowQuarkTemplate='false'
-				user_type.ManuallySorted='false'
-				user_type.IsCategory='false'
-				user_type.Revisability='Global'
+		if tipe == 'Entity':
+			user_type.AllowInDesignTemplate='false'
+			user_type.AllowQuarkTemplate='false'
+			user_type.ManuallySorted='false'
+			user_type.IsCategory='false'
+			user_type.Revisability='Global'
 
-			if tipe == 'Classification':
-				user_type.AllowInDesignTemplate='false'
-				user_type.AllowQuarkTemplate='false'
-				user_type.ManuallySorted='false'
-				user_type.ClassificationOwnsProductLinks='false'
+		if tipe == 'Classification':
+			user_type.AllowInDesignTemplate='false'
+			user_type.AllowQuarkTemplate='false'
+			user_type.ManuallySorted='false'
+			user_type.ClassificationOwnsProductLinks='false'
 
-			if tipe == 'Asset':
-				pass
+		if tipe == 'Asset':
+			pass
 
+		if package:
 			user_type.UserTypeLink.append(
 				UserTypeLinkType(
 					UserTypeID=_(package)
 				)
 			)
 
-			for attr_name, attr_id, attr_tipe in attrs:
-				print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
+		for attr_name, attr_id, attr_tipe in attrs:
+			print(f'\t\t@{colours.Green}{attr_name}{colours.Off} : {attr_id} : {attr_tipe}')
 
-				if _(attr_id) not in self._attr.keys():
-					self.write_Attribute(STEP, attr_id, attr_name, package, 'Description', attr_tipe, None, None)
+			if _(attr_id) not in self._attr.keys():
+				self.write_Attribute(STEP, attr_id, attr_name, package, 'Description', attr_tipe, None, None)
 
-				attr = self._attr[_(attr_id)]
-				attr.UserTypeLink.append(
-					UserTypeLinkType(
-						UserTypeID = user_type.ID
-					)
+			attr = self._attr[_(attr_id)]
+			attr.UserTypeLink.append(
+				UserTypeLinkType(
+					UserTypeID = user_type.ID
 				)
+			)
 
-			self._tipe[user_type.ID] = user_type
-			STEP.doc.UserTypes.append(user_type)
+		self._tipe[user_type.ID] = user_type
+		STEP.doc.UserTypes.append(user_type)
+		
+	def write_UserTypes(self, STEP):
+		'''
+		write types to STEP, have to find the top of the inheritance tree for parent layout
+		'''
+		for id in self.roots.keys():
+			tipe = self.roots[id]
+			self.write_UserType(STEP, self.root, self.name, id, tipe, []) # the package root, may have duplicated id issues
+			
+		for id in self.tipe.keys():
+			(name, package, tipe, attrs) = self.tipe[id]
+			self.write_UserType(STEP, id, name, package, tipe, attrs)
 			
 	def write_References(self, STEP):
 		pass

@@ -284,7 +284,6 @@ class STEP2UML(object):
 			self._LG[lg.ID] = lg
 			STEP.doc.ListOfValuesGroupList.append(lg)
 
-		
 	def write_LOV_Groups(self, STEP):
 		'''
 		write LOVs to STEP
@@ -479,11 +478,21 @@ class STEP2UML(object):
 			(prefix, tipe) = self.roots[id]
 			prefixes[tipe] = prefix
 			self.write_UserType(STEP, f'{prefix}{self.root}', self.name, id, tipe, []) # the package root, may have duplicated id issues
-			
+
+		renamed = dict()
+		
+		for id in self.packages.keys():
+			(name, parent) = self.packages[id]
+			if parent == self.root:
+				for tipe in prefixes.keys():
+					prefix = prefixes[tipe]
+					self.write_UserType(STEP, f'{prefix}{id}', name, f'{prefix}{parent}', tipe, []) # the package root, may have duplicated id issues
+					renamed[id] = f'{prefix}{id}'
+				
 		for id in self.tipe.keys():
 			(name, package, tipe, attrs) = self.tipe[id]
-			if package == self.root:
-				package = f'{prefix}{package}'
+			if package in renamed.keys():
+				package = renamed[package]
 			self.write_UserType(STEP, id, name, package, tipe, attrs)
 			
 	def write_References(self, STEP):

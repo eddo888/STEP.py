@@ -32,7 +32,7 @@ Assets All
 
 Exported by database exporter.
 -->
-<STEP-ProductInformation AutoApprove="Y" ContextID="Australian" ExportContext="GL" ExportTime="2022-05-26 15:57:07" UseContextLocale="false" WorkspaceID="Main" xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd">
+<STEP-ProductInformation AutoApprove="Y" ContextID="Context1" ExportContext="GL" ExportTime="2022-05-26 15:57:07" UseContextLocale="false" WorkspaceID="Main" xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd">
 	<UserTypes>
 		<UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XMI_Root" IsCategory="false" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
 			<Name>XMI_Root</Name>

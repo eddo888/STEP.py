@@ -2,10 +2,10 @@
 
 # PYTHON_ARGCOMPLETE_OK
 
-import sys, json
+import os, re, sys, json
 
-# remove before flight
-#sys.path.insert(0, '..')
+if os.path.dirname(sys.argv[0]) == '.':
+	sys.path.insert(0, '..')
 
 from STEP.REST import *
 

@@ -124,7 +124,7 @@ class STEP(object):
 		if self.verbose:
 			json.dump(dict(url=url, headers=headers, params=params), sys.stderr, indent=4)
 		result = requests.put(url=url, auth=auth, headers=headers, params=params, data=body)
-		if result.status_code != 200 or self.verbose:
+		if result.status_code not in [200,201] or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result
 
@@ -145,7 +145,7 @@ class STEP(object):
 		result = requests.post(url=url, auth=auth, headers=headers, params=params, data=body)
 		if result.status_code not in [200,201] or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result.json()
+		return result
 
 
 	def delete(self, path, body=None, params=None, headers=None):
@@ -705,3 +705,72 @@ class Endpoints(STEP):
 		return super().put('%s/%s/invoke'%(self.base, id))
 											   
 
+#________________________________________________________________
+@args.command(name='imports')
+class Imports(STEP):
+	'''
+	MIME type imports
+	'''
+	
+	base = 'import'
+	
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
+
+	@args.operation(name='import')
+	@args.parameter(name='id', help='importConfigurationId')
+	@args.parameter(name='process', short='p', help='process BGP description')
+	def importer(self, id, file, process=None):
+		'''
+		returns the process BGP ID for the import process
+		'''
+		params = {
+			"context" : self.context,
+			"workspace": self.workspace,
+		}
+		if process:
+			params['processDescription'] = process
+		with open(file,'rb') as input:
+			body = input.read()
+			headers = { 'Content-Type' : 'application/octet-stream' }
+			result = super().post('%s/%s'%(self.base, id), body=body, headers=headers, params=params)
+			return result.json()
+		
+
+#________________________________________________________________
+@args.command(name='exports')
+class Exports(STEP):
+	'''
+	MIME type exports
+	'''
+	
+	base = 'export'
+	
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
+
+	@args.operation(name='export')
+	@args.parameter(name='id', help='exportConfigurationId')
+	@args.parameter(name='use_context', short='c', flag=True, help='useRequestContextWorkspace')
+	@args.parameter(name='process', short='p', help='process BGP description', default='triggered by rest')
+	@args.parameter(name='urls', short='u', nargs='*', help='STEP URLs')
+	def importer(self, id, use_context=None, process=None, urls=[]):
+		'''
+		returns the process BGP ID for the import process
+		'''
+		params = {
+			"context" : self.context,
+			"workspace": self.workspace,
+		}
+		if use_context:
+			params['useRequestContextWorkspace'] = json.dumps(use_context)
+		body = {
+			'stepUrls': urls,
+			'processDescription': process,
+		}
+		headers = { 'Content-Type' : 'application/json' }
+		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
+		return result.json()
+		

@@ -13,6 +13,9 @@ import pyxb.utils.utility
 import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
+
+pyxb.utils.domutils.BindingDOMSupport.SetDefaultNamespace('http://www.stibosystems.com/step')
+
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:e90af89e-731a-11ea-a754-80e65012546e')
 

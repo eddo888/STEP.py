@@ -907,9 +907,14 @@ class Task(STEP):
 		
 		for item in items:
 			instance = base64.b64decode(item)		
-			instances.append(instance.decode('UTF-8'))
+			instances.append(json.loads(instance.decode('UTF-8')))
 		
 		return instances
+		
+	@args.operation(help='get workflow task by id')
+	@args.parameter(name='id', help='the ID of workflow task')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
 		
 #________________________________________________________________
 def main_task():		
@@ -921,9 +926,10 @@ def main_task():
 		'-C','GL',
 		'search',
 		'WX_Product_WF',
+		'-s','WX_OnHold',
 	])
 	results = args.execute()
 	if results:
-		print(results)
+		print(json.dumps(results, indent='\t'))
 		
 if __name__ == '__main__': main_task() 		

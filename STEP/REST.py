@@ -706,6 +706,19 @@ class Endpoints(STEP):
 											   
 
 #________________________________________________________________
+def main_ep():		
+	args.parse([
+		'endpoints',
+		'-H','https://stibo-australia-demo.scloud.stibo.com',
+		'-U','DAVE',
+		'-x',
+		'list',	
+	])
+	results = args.execute()
+	if results:
+		print(results)
+		
+#________________________________________________________________
 @args.command(name='imports')
 class Imports(STEP):
 	'''
@@ -773,4 +786,67 @@ class Exports(STEP):
 		headers = { 'Content-Type' : 'application/json' }
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
 		return result.json()
+
+#________________________________________________________________
+@args.command(name='workflow')
+class Workflow(STEP):
+
+	base = 'workflows'
+
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 		
+
+	@args.operation(help='get a list of workflows')
+	def list(self):
+		return super().get('%s'%self.base)				
+
+	@args.operation(help='get workflow by id')
+	@args.parameter(name='id', help='the ID of workflow definition')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
+
+	@args.operation(help='update values of entity by id')
+	@args.parameter(name='workflow_id', help='the ID of workflow')
+	@args.parameter(name='node_id', help='the node ID')
+	@args.parameter(name='node_type', flag=True, oneof=['P','E','C','A','a'], help='core node type', default='P')
+	@args.parameter(name='message', short='m', help='process instance message')
+	def start(self, workflow_id, node_id, node_type='P', message=''):
+		'''
+		instantiate a workflow process instance for node
+		'''
+		node_types = {
+			'P': 'product',
+			'E': 'entity',
+			'C': 'classification',
+			'A' : 'asset',
+			'a' : 'attribute',
+		}
+		
+		body = json.dumps(dict(
+			node=dict(
+				id=node_id,
+				type=node_types[node_type]
+			),
+			message=message
+		))
+		headers = { 'Content-Type' : 'application/json' }
+		return super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
+		
+#________________________________________________________________
+def main_wf():		
+	args.parse([
+		'workflow',
+		'-H','https://stibo-australia-demo.scloud.stibo.com',
+		'-U','DAVE',
+		'-C','GL',
+		'start',
+		'WX_Product_WF',
+		'WX_0',
+		'-m','go for it'			
+	])
+	results = args.execute()
+	if results:
+		print(results)
+		
+if __name__ == '__main__': main_wf() 		

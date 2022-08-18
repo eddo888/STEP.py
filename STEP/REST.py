@@ -787,6 +787,14 @@ class Exports(STEP):
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
 		return result.json()
 
+node_types = {
+	'P': 'product',
+	'E': 'entity',
+	'C': 'classification',
+	'A' : 'asset',
+	'a' : 'attribute',
+}
+
 #________________________________________________________________
 @args.command(name='workflow')
 class Workflow(STEP):
@@ -809,19 +817,12 @@ class Workflow(STEP):
 	@args.operation(help='instantiate a workflow instance')
 	@args.parameter(name='workflow_id', help='the ID of workflow')
 	@args.parameter(name='node_id', help='the node ID')
-	@args.parameter(name='node_type', flag=True, oneof=['P','E','C','A','a'], help='core node type', default='P')
+	@args.parameter(name='node_type', short=True, flag=True, oneof=node_types, help='core node type', default='P')
 	@args.parameter(name='message', short='m', help='process instance message')
 	def start(self, workflow_id, node_id, node_type='P', message=''):
 		'''
 		instantiate a workflow process instance for node
 		'''
-		node_types = {
-			'P': 'product',
-			'E': 'entity',
-			'C': 'classification',
-			'A' : 'asset',
-			'a' : 'attribute',
-		}
 		
 		body = json.dumps(dict(
 			node=dict(
@@ -830,9 +831,14 @@ class Workflow(STEP):
 			),
 			message=message
 		))
-		headers = { 'Content-Type' : 'application/json' }
-		return super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
 		
+		headers = { 'Content-Type' : 'application/json' }
+		result = super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
+
+		response = json.loads(result)
+		instance = base64.b64decode(response['id']).decode('UTF-8')
+
+		return json.loads(instance)
 		
 	@args.operation(help='terminate a workflow instance')
 	@args.parameter(name='workflow_id', help='the ID of workflow')
@@ -873,19 +879,12 @@ class Task(STEP):
 	@args.parameter(name='workflow_id', help='the ID of workflow')
 	@args.parameter(name='state_id', short='s', help='state id', default='')
 	@args.parameter(name='node_id', help='the node ID')
-	@args.parameter(name='node_type', flag=True, oneof=['P','E','C','A','a'], help='core node type', default='P')
+	@args.parameter(name='node_type', short=True, flag=True, oneof=node_types, help='core node type', default='P')
 	@args.parameter(name='message', short='m', help='process instance message')
 	def search(self, workflow_id, state_id='', node_id=None, node_type='P', message=''):
 		'''
 		search for workflow instances
 		'''
-		node_types = {
-			'P': 'product',
-			'E': 'entity',
-			'C': 'classification',
-			'A' : 'asset',
-			'a' : 'attribute',
-		}
 		
 		body = json.dumps(dict(
 			workflow=workflow_id,

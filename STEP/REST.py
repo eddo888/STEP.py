@@ -2,7 +2,7 @@
 
 # PYTHON_ARGCOMPLETE_OK
 
-import os, sys, re, json, requests, xmltodict, shutil, base64
+import os, sys, re, json, requests, xmltodict, shutil, base64, time
 
 from copy import copy
 from datetime import datetime
@@ -787,6 +787,7 @@ class Exports(STEP):
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
 		return result.json()
 
+#________________________________________________________________
 node_types = {
 	'P': 'product',
 	'E': 'entity',
@@ -819,7 +820,8 @@ class Workflow(STEP):
 	@args.parameter(name='node_id', help='the node ID')
 	@args.parameter(name='node_type', short=True, flag=True, oneof=node_types, help='core node type', default='P')
 	@args.parameter(name='message', short='m', help='process instance message')
-	def start(self, workflow_id, node_id, node_type='P', message=''):
+	@args.parameter(name='id_as_base64', short='b', flag=True, help='return ID raw, do not decode base64 json')
+	def start(self, workflow_id, node_id, node_type='P', message='', id_as_base64=False):
 		'''
 		instantiate a workflow process instance for node
 		'''
@@ -836,8 +838,13 @@ class Workflow(STEP):
 		result = super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
 
 		response = json.loads(result)
+		if not 'id' in response.keys():
+			return response
+				
+		if id_as_base64:
+			return response['id']
+			
 		instance = base64.b64decode(response['id']).decode('UTF-8')
-
 		return json.loads(instance)
 		
 	@args.operation(help='terminate a workflow instance')
@@ -848,22 +855,6 @@ class Workflow(STEP):
 		terminate workflow process instance
 		'''
 		return super().delete('%s/%s/instances/%s'%(self.base, workflow_id, instance_id))		
-
-				
-#________________________________________________________________
-def main_wf():		
-	args.parse([
-		'workflow',
-		'-H','https://stibo-australia-demo.scloud.stibo.com',
-		'-U','DAVE',
-		'-C','GL',
-		'terminate',
-		'WX_Product_WF',
-		'WX_1073868143',
-	])
-	results = args.execute()
-	if results:
-		print(results)
 		
 #________________________________________________________________
 @args.command(name='tasks')
@@ -881,15 +872,24 @@ class Task(STEP):
 	@args.parameter(name='node_id', help='the node ID')
 	@args.parameter(name='node_type', short=True, flag=True, oneof=node_types, help='core node type', default='P')
 	@args.parameter(name='message', short='m', help='process instance message')
-	def search(self, workflow_id, state_id='', node_id=None, node_type='P', message=''):
+	@args.parameter(name='id_as_base64', short='b', flag=True, help='return ID raw, do not decode base64 json')
+	def search(self, workflow_id, state_id='', node_id=None, node_type='P', message='', id_as_base64=False):
 		'''
 		search for workflow instances
 		'''
 		
-		body = json.dumps(dict(
+		query = dict(
 			workflow=workflow_id,
 			state=state_id,
-		))
+		)
+		
+		if node_id:
+			query['node'] = dict(
+				id=node_id,
+				type=node_types[node_type]
+			)
+				
+		body = json.dumps(query)
 		
 		headers = { 
 			'Content-Type' : 'application/json',
@@ -902,6 +902,9 @@ class Task(STEP):
 		
 		items = json.loads(result)
 		
+		if id_as_base64:
+			return items
+			
 		instances=[]
 		
 		for item in items:
@@ -916,19 +919,45 @@ class Task(STEP):
 		return super().get('%s/%s'%(self.base,id))
 		
 #________________________________________________________________
-def main_task():		
-	args.parse([
-		'tasks',
-		#'-v',
-		'-H','https://stibo-australia-demo.scloud.stibo.com',
-		'-U','DAVE',
-		'-C','GL',
-		'search',
-		'WX_Product_WF',
-		'-s','WX_OnHold',
-	])
-	results = args.execute()
-	if results:
-		print(json.dumps(results, indent='\t'))
+def main():
+
+	c = {
+		'-H':'https://stibo-australia-demo.scloud.stibo.com',
+		'-U':'DAVE',
+		'-C':'GL',
+	}
 		
-if __name__ == '__main__': main_task() 		
+	workflows = Workflow()
+	workflows.hostname = c['-H']
+	workflows.username = c['-U']
+	workflows.context = c['-C']
+	
+	tasks = Task()
+	tasks.hostname = c['-H']
+	tasks.username = 'WX_CORE_1'
+	tasks.context = c['-C']
+
+	workflow_id = 'WX_Product_WF'
+	state_id = 'WX_Manual_Approve'
+	product_id = 'WX_0'
+	
+	if False:
+		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
+		print(instance_id)
+		time.sleep(3)
+	
+	if True:
+		instances = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+		for id in instances:
+			#print(id)
+			instance = tasks.get(id)
+			print(json.dumps(instance, indent='\n'))
+
+				
+			#workflows.terminate(workflow_id, id)
+			
+			
+	
+	
+#________________________________________________________________
+if __name__ == '__main__': main()

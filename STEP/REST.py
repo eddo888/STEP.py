@@ -2,7 +2,7 @@
 
 # PYTHON_ARGCOMPLETE_OK
 
-import os, sys, re, json, requests, xmltodict, shutil
+import os, sys, re, json, requests, xmltodict, shutil, base64
 
 from copy import copy
 from datetime import datetime
@@ -126,7 +126,7 @@ class STEP(object):
 		result = requests.put(url=url, auth=auth, headers=headers, params=params, data=body)
 		if result.status_code not in [200,201] or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result
+		return result.text
 
 	
 	def post(self, path, body=None, params=None, headers=None):
@@ -145,7 +145,7 @@ class STEP(object):
 		result = requests.post(url=url, auth=auth, headers=headers, params=params, data=body)
 		if result.status_code not in [200,201] or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result
+		return result.text
 
 
 	def delete(self, path, body=None, params=None, headers=None):
@@ -164,7 +164,7 @@ class STEP(object):
 		result = requests.delete(url=url, auth=auth, headers=headers, params=params, data=body)
 		if result.status_code != 200 or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result
+		return result.text
 
 	
 	def file(self, path, destination):
@@ -806,7 +806,7 @@ class Workflow(STEP):
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
 
-	@args.operation(help='update values of entity by id')
+	@args.operation(help='instantiate a workflow instance')
 	@args.parameter(name='workflow_id', help='the ID of workflow')
 	@args.parameter(name='node_id', help='the node ID')
 	@args.parameter(name='node_type', flag=True, oneof=['P','E','C','A','a'], help='core node type', default='P')
@@ -833,6 +833,17 @@ class Workflow(STEP):
 		headers = { 'Content-Type' : 'application/json' }
 		return super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
 		
+		
+	@args.operation(help='terminate a workflow instance')
+	@args.parameter(name='workflow_id', help='the ID of workflow')
+	@args.parameter(name='instance_id', help='the ID of instance')
+	def terminate(self, workflow_id, instance_id):
+		'''
+		terminate workflow process instance
+		'''
+		return super().delete('%s/%s/instances/%s'%(self.base, workflow_id, instance_id))		
+
+				
 #________________________________________________________________
 def main_wf():		
 	args.parse([
@@ -840,13 +851,79 @@ def main_wf():
 		'-H','https://stibo-australia-demo.scloud.stibo.com',
 		'-U','DAVE',
 		'-C','GL',
-		'start',
+		'terminate',
 		'WX_Product_WF',
-		'WX_0',
-		'-m','go for it'			
+		'WX_1073868143',
 	])
 	results = args.execute()
 	if results:
 		print(results)
 		
-if __name__ == '__main__': main_wf() 		
+#________________________________________________________________
+@args.command(name='tasks')
+class Task(STEP):
+
+	base = 'workflow-tasks'
+
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
+
+	@args.operation(help='get a list of workflows')
+	@args.parameter(name='workflow_id', help='the ID of workflow')
+	@args.parameter(name='state_id', short='s', help='state id', default='')
+	@args.parameter(name='node_id', help='the node ID')
+	@args.parameter(name='node_type', flag=True, oneof=['P','E','C','A','a'], help='core node type', default='P')
+	@args.parameter(name='message', short='m', help='process instance message')
+	def search(self, workflow_id, state_id='', node_id=None, node_type='P', message=''):
+		'''
+		search for workflow instances
+		'''
+		node_types = {
+			'P': 'product',
+			'E': 'entity',
+			'C': 'classification',
+			'A' : 'asset',
+			'a' : 'attribute',
+		}
+		
+		body = json.dumps(dict(
+			workflow=workflow_id,
+			state=state_id,
+		))
+		
+		headers = { 
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+		}
+			
+		result = super().post('%s/search'%(self.base), body=body, headers=headers)
+		
+		#print(result)
+		
+		items = json.loads(result)
+		
+		instances=[]
+		
+		for item in items:
+			instance = base64.b64decode(item)		
+			instances.append(instance.decode('UTF-8'))
+		
+		return instances
+		
+#________________________________________________________________
+def main_task():		
+	args.parse([
+		'tasks',
+		#'-v',
+		'-H','https://stibo-australia-demo.scloud.stibo.com',
+		'-U','DAVE',
+		'-C','GL',
+		'search',
+		'WX_Product_WF',
+	])
+	results = args.execute()
+	if results:
+		print(results)
+		
+if __name__ == '__main__': main_task() 		

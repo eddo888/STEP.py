@@ -24,9 +24,6 @@ workflow_id = 'WX_Product_WF'
 state_id = 'WX_Manual_Approve'
 product_id = 'WX_0'
 
-
-
-
 #________________________________________________________________
 def render(result):
 	if not result: 
@@ -37,8 +34,8 @@ def render(result):
 		print(result)
 
 
-
-class TestREST(unittest.TestCase):
+#________________________________________________________________
+class Test_01_Workflows(unittest.TestCase):
 
 	file = 'cache.json'
 	cache = dict()
@@ -53,32 +50,10 @@ class TestREST(unittest.TestCase):
 			json.dump(self.cache, output, indent='\t')
 		gc.collect()
 
-
 	#________________________________________________________________
-	def _test_01_endpoints(self):
+	def test_01_start_workflow(self):
 
-		endpoints = Endpoints(asXML=True)
-		endpoints.hostname = config['-H']
-		endpoints.username = config['-U']
-		#endpoints.verbose = True
-
-		print(endpoints)
-		assert endpoints
-
-		result = endpoints.list()
-		assert(result)
-
-		_result = xmltodict.parse(result)
-		assert('IntegrationEndpoints' in _result.keys())
-		assert(len(_result['IntegrationEndpoints']))
-
-		del endpoints
-
-		
-	#________________________________________________________________
-	def test_02_start_workflow(self):
-
-		workflows = Workflow(asXML=False)
+		workflows = Workflow()
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']
 		workflows.context = config['-C']
@@ -97,12 +72,10 @@ class TestREST(unittest.TestCase):
 		print('waiting ...')
 		time.sleep(5)
 
-
-
 	#________________________________________________________________
-	def test_03_search_tasks(self):
+	def test_02_search_tasks(self):
 
-		tasks = Task(asXML=False)
+		tasks = Task()
 		tasks.hostname = config['-H']
 		tasks.username = 'WX_CORE_1'
 		tasks.context = config['-C']
@@ -121,9 +94,9 @@ class TestREST(unittest.TestCase):
 		del tasks
 
 	#________________________________________________________________
-	def test_04_terminate_instance(self):
+	def test_03_terminate_instance(self):
 
-		workflows = Workflow(asXML=False)
+		workflows = Workflow()
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']
 		workflows.context = config['-C']
@@ -136,6 +109,36 @@ class TestREST(unittest.TestCase):
 			print(f'{colours.Red}{instance_id}{colours.Off}')
 
 		del workflows
+
+
+#________________________________________________________________
+class Test_02_Endpoints(unittest.TestCase):
+
+	def setUp(self):
+		pass
+
+	def tearDown(self):
+		gc.collect()
+
+	#________________________________________________________________
+	def test_01_endpoints(self):
+
+		endpoints = Endpoints(asXML=True)
+		endpoints.hostname = config['-H']
+		endpoints.username = config['-U']
+		#endpoints.verbose = True
+
+		print(f'{colours.Green}{endpoints}{colours.Off}')
+		assert endpoints
+
+		result = endpoints.list()
+		assert(result)
+
+		_result = xmltodict.parse(result)
+		assert('IntegrationEndpoints' in _result.keys())
+		assert(len(_result['IntegrationEndpoints']))
+
+		del endpoints
 
 #________________________________________________________________
 def main():

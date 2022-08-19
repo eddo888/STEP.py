@@ -904,11 +904,13 @@ class Workflow(STEP):
 	def list(self):
 		return super().get('%s'%self.base)				
 
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get workflow by id')
 	@args.parameter(name='id', help='the ID of workflow definition')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='instantiate a workflow instance')
@@ -943,6 +945,7 @@ class Workflow(STEP):
 		instance = base64.b64decode(response['id']).decode('UTF-8')
 		return json.loads(instance)
 		
+
 	#________________________________________________________________________________________________
 	@args.operation(help='terminate a workflow instance')
 	@args.parameter(name='workflow_id', help='the ID of workflow')
@@ -1013,6 +1016,7 @@ class Task(STEP):
 		
 		return instances
 		
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get workflow task by id')
 	@args.parameter(name='id', help='the ID of workflow task')
@@ -1020,3 +1024,56 @@ class Task(STEP):
 		return super().get('%s/%s'%(self.base,id))
 		
 
+	#________________________________________________________________________________________________
+	@args.operation(help='claim workflow task by id')
+	@args.parameter(name='id', help='the ID of workflow task')
+	def claim(self, id):
+		return super().post('%s/%s/claim'%(self.base,id))
+		
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get events for workflow task by id')
+	@args.parameter(name='id', help='the ID of workflow task')
+	def events(self, id):
+		return super().get('%s/%s/events'%(self.base,id))
+		
+
+	#________________________________________________________________________________________________
+	@args.operation(help='trigger events workflow task by id')
+	@args.parameter(name='id', help='the ID of workflow task')
+	@args.parameter(name='event_id', help='id of event transition')
+	@args.parameter(name='anonymous', short='a', help='anonymously')
+	@args.parameter(name='message', short='m', help='optional message for transition')
+	def trigger(self, id, event_id, anonymous=False, message=None):
+		
+		payload = dict(
+			event = dict(
+				id=event_id,
+				anonymous=anonymous
+			)
+		)
+
+		if message:
+			payload['message'] = message
+		
+		if self.verbose:
+			print(json.dumps(payload, indent='\t'))
+
+		body = json.dumps(payload)
+
+		headers = { 
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+		}
+			
+		result = super().post('%s/%s/trigger-event'%(self.base, id), body=body, headers=headers)
+		return json.loads(result)
+		
+
+	#________________________________________________________________________________________________
+	@args.operation(help='release workflow task by id')
+	@args.parameter(name='id', help='the ID of workflow task')
+	def release(self, id):
+		return super().post('%s/%s/release'%(self.base,id))
+		
+	

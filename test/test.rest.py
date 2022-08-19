@@ -26,6 +26,7 @@ workflow_id = 'WX_Product_WF'
 state_id = 'WX_Manual_Approve'
 product_id = 'WX_0'
 reference_id = 'WX_Product_Tag_Classification'
+event_id = 'On_Hold'
 
 
 #____________________________________________________________________________________________________
@@ -80,7 +81,7 @@ class Test_01_Workflows(TestWrapper):
 		del workflows
 
 		print('waiting ...')
-		time.sleep(5)
+		time.sleep(3)
 
 	#________________________________________________________________________________________________
 	def test_02_search_tasks(self):
@@ -90,8 +91,7 @@ class Test_01_Workflows(TestWrapper):
 		tasks.username = 'WX_CORE_1'
 		tasks.context = config['-C']
 
-		if 'tasks' not in self.cache.keys():
-			self.cache['tasks'] = list()
+		self.cache['tasks'] = list()
 
 		task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
 		for task_id in task_ids:
@@ -101,13 +101,12 @@ class Test_01_Workflows(TestWrapper):
 			if 'instance' in task.keys():
 				assert(task['instance'] in self.cache['instances'])
 
-				print(f'{colours.Green}Task: {task["state"]}{colours.Off}')
+				print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
 				assert(task['state'] == state_id)
 			
 				self.cache['tasks'].append(task['id'])
 
 		del tasks
-
 
 	#________________________________________________________________________________________________
 	def test_03_interact_tasks(self):
@@ -117,6 +116,41 @@ class Test_01_Workflows(TestWrapper):
 		tasks.username = 'WX_CORE_1'
 		tasks.context = config['-C']
 
+		task_ids = self.cache['tasks']
+		for i in range(len(task_ids)):
+			#task_id = task_ids[i]
+			task_id = task_ids.pop(0)
+
+			claimed = tasks.claim(task_id)
+			render(dict(claimed=claimed))
+
+			events = tasks.events(task_id)
+			render(dict(events=events))
+			event_ids = list(map(lambda x:x['id'], events))
+			assert(event_id in event_ids)
+
+			now = datetime.now()
+			dts = f'{now:%Y-%m-%d %H:%M:%S}'
+			render(dict(triggering=dts))
+
+			if True: # either trigger of release here
+				triggered = tasks.trigger(task_id, event_id, message=f'triggered at {dts}')
+				render(dict(triggered=triggered))
+
+				print('waiting ...')
+				time.sleep(3)
+
+				task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+				for task_id in task_ids:
+					task = tasks.get(task_id)
+					render(dict(search=task))
+					print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
+					assert(task['state'] == 'WX_OnHold')
+			
+			else:
+				released = tasks.release(task_id)
+				render(dict(released=released))
+			
 		del tasks 
 
 	#________________________________________________________________________________________________

@@ -4,6 +4,7 @@
 
 import os, re, sys, gc, time, json, xmltodict, unittest, logging
 from collections import OrderedDict
+from datetime import datetime
 from Perdy.pretty import prettyPrintLn
 from Baubles.Colours import Colours
 
@@ -134,13 +135,66 @@ class Test_02_Products(unittest.TestCase):
 		products.context = config['-C']
 
 		root = products.get('WX_Root')
-		#render(root)
+		print(f'{colours.Green}{root["name"]}{colours.Off}')
 		assert(root)
+		#render(root)
 		assert(root['id'] == 'WX_Root')
 
 		children = products.children(root['id'])
 		render(children)
 		assert(children)
+		assert(len(children))
+
+		l1 = products.children(children[0])
+		render(l1)
+		assert(l1)
+		assert(len(l1))
+
+		l2 = products.children(l1[0])
+		render(l2)
+		assert(l2)
+		assert(len(l2))
+		
+		l3 = products.children(l2[0])
+		render(l3)
+		assert(l3)
+		assert(len(l3))
+		
+		product = products.get(l3[0])
+		#render(product)
+		assert(product)
+		assert('id' in product.keys())
+		assert(product['id'] == product_id)
+
+		parent_id = product['parent']
+		self.cache['parent_id'] = parent_id
+		render(dict(parent_id=parent_id))
+
+		del products
+
+	#________________________________________________________________
+	def test_02_create_product(self):
+
+		products = Products()
+		products.hostname = config['-H']
+		products.username = config['-U']
+		products.context = config['-C']
+
+		assert('parent_id' in self.cache.keys())
+		parent_id = self.cache['parent_id']
+
+		now = datetime.now()
+		dts = f'{now:%Y-%m-%d %H:%M:%S}'
+		render(dict(dts=dts))
+
+		child = products.create(parent_id, 'WX_Product', f'created {dts}', values=[
+			f'WX_activation_date={dts}',
+			f'WX_brand_name=created by rest',
+		])
+
+		render(child)
+		assert(child)
+		assert('id' in child.keys())
 
 		del products
 

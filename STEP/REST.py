@@ -19,7 +19,6 @@ squirrel = Squirrel()
 
 dts = '%Y-%m-%dT%H:%M:%S'
 
-
 #________________________________________________________________
 class Silencer(object):
 	def write(self, *args, **kwargs):
@@ -314,7 +313,6 @@ class Processes(STEP):
 		return super().get('background-processes/%s/attachments/%s/content'%(id,attachmentId))
 
 	
-
 #________________________________________________________________
 @args.command(name='instances')
 class Instances(STEP):
@@ -706,19 +704,6 @@ class Endpoints(STEP):
 											   
 
 #________________________________________________________________
-def main_ep():		
-	args.parse([
-		'endpoints',
-		'-H','https://stibo-australia-demo.scloud.stibo.com',
-		'-U','DAVE',
-		'-x',
-		'list',	
-	])
-	results = args.execute()
-	if results:
-		print(results)
-		
-#________________________________________________________________
 @args.command(name='imports')
 class Imports(STEP):
 	'''
@@ -786,6 +771,7 @@ class Exports(STEP):
 		headers = { 'Content-Type' : 'application/json' }
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
 		return result.json()
+
 
 #________________________________________________________________
 node_types = {
@@ -856,6 +842,7 @@ class Workflow(STEP):
 		'''
 		return super().delete('%s/%s/instances/%s'%(self.base, workflow_id, instance_id))		
 		
+
 #________________________________________________________________
 @args.command(name='tasks')
 class Task(STEP):
@@ -918,46 +905,4 @@ class Task(STEP):
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
 		
-#________________________________________________________________
-def main():
 
-	c = {
-		'-H':'https://stibo-australia-demo.scloud.stibo.com',
-		'-U':'DAVE',
-		'-C':'GL',
-	}
-		
-	workflows = Workflow()
-	workflows.hostname = c['-H']
-	workflows.username = c['-U']
-	workflows.context = c['-C']
-	
-	tasks = Task()
-	tasks.hostname = c['-H']
-	tasks.username = 'WX_CORE_1'
-	tasks.context = c['-C']
-
-	workflow_id = 'WX_Product_WF'
-	state_id = 'WX_Manual_Approve'
-	product_id = 'WX_0'
-	
-	if False:
-		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
-		print(instance_id)
-		time.sleep(3)
-	
-	if True:
-		instances = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
-		for id in instances:
-			#print(id)
-			instance = tasks.get(id)
-			print(json.dumps(instance, indent='\n'))
-
-				
-			#workflows.terminate(workflow_id, id)
-			
-			
-	
-	
-#________________________________________________________________
-if __name__ == '__main__': main()

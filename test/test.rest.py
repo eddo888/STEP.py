@@ -33,7 +33,6 @@ def render(result):
 	else:
 		print(result)
 
-
 #________________________________________________________________
 class Test_01_Workflows(unittest.TestCase):
 
@@ -110,9 +109,43 @@ class Test_01_Workflows(unittest.TestCase):
 
 		del workflows
 
+#________________________________________________________________
+class Test_02_Products(unittest.TestCase):
+
+	file = 'cache.json'
+	cache = dict()
+
+	def setUp(self):
+		if os.path.exists(self.file):
+			with open(self.file) as input:
+				self.cache = json.load(input)
+
+	def tearDown(self):
+		with open(self.file, 'w') as output:
+			json.dump(self.cache, output, indent='\t')
+		gc.collect()
+
+	#________________________________________________________________
+	def test_01_find_hierarchy(self):
+
+		products = Products()
+		products.hostname = config['-H']
+		products.username = config['-U']
+		products.context = config['-C']
+
+		root = products.get('WX_Root')
+		#render(root)
+		assert(root)
+		assert(root['id'] == 'WX_Root')
+
+		children = products.children(root['id'])
+		render(children)
+		assert(children)
+
+		del products
 
 #________________________________________________________________
-class Test_02_Endpoints(unittest.TestCase):
+class Test_03_Endpoints(unittest.TestCase):
 
 	def setUp(self):
 		pass

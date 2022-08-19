@@ -20,6 +20,15 @@ squirrel = Squirrel()
 dts = '%Y-%m-%dT%H:%M:%S'
 
 #________________________________________________________________
+node_types = {
+	'P': 'product',
+	'E': 'entity',
+	'C': 'classification',
+	'A' : 'asset',
+	'a' : 'attribute',
+}
+
+#________________________________________________________________
 class Silencer(object):
 	def write(self, *args, **kwargs):
 		pass
@@ -417,8 +426,7 @@ class Products(STEP):
 		if self.verbose:
 			json.dump(body, sys.stderr, indent=4)
 		result = super().post('%s'%self.base, body=json.dumps(body))
-		result = json.loads(result.text)
-		return result
+		return json.loads(result)
 
 			
 	@args.operation(help='delete product by id')
@@ -733,7 +741,7 @@ class Imports(STEP):
 			body = input.read()
 			headers = { 'Content-Type' : 'application/octet-stream' }
 			result = super().post('%s/%s'%(self.base, id), body=body, headers=headers, params=params)
-			return result.json()
+			return result
 		
 
 #________________________________________________________________
@@ -770,17 +778,8 @@ class Exports(STEP):
 		}
 		headers = { 'Content-Type' : 'application/json' }
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
-		return result.json()
+		return json.loads(result)
 
-
-#________________________________________________________________
-node_types = {
-	'P': 'product',
-	'E': 'entity',
-	'C': 'classification',
-	'A' : 'asset',
-	'a' : 'attribute',
-}
 
 #________________________________________________________________
 @args.command(name='workflow')

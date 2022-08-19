@@ -13,6 +13,7 @@ if os.path.dirname(sys.argv[0]) == '.':
 
 from STEP.REST import *
 
+#____________________________________________________________________________________________________
 colours = Colours()
 
 config = {
@@ -27,7 +28,7 @@ product_id = 'WX_0'
 reference_id = 'WX_Product_Tag_Classification'
 
 
-#________________________________________________________________
+#____________________________________________________________________________________________________
 def render(result):
 	if not result: 
 		return
@@ -36,8 +37,8 @@ def render(result):
 	else:
 		print(result)
 
-#________________________________________________________________
-class Test_01_Workflows(unittest.TestCase):
+#====================================================================================================
+class TestWrapper(unittest.TestCase):
 
 	file = 'cache.json'
 	cache = dict()
@@ -51,8 +52,12 @@ class Test_01_Workflows(unittest.TestCase):
 		with open(self.file, 'w') as output:
 			json.dump(self.cache, output, indent='\t')
 		gc.collect()
+		
 
-	#________________________________________________________________
+#====================================================================================================
+class Test_01_Workflows(TestWrapper):
+
+	#________________________________________________________________________________________________
 	def test_01_start_workflow(self):
 
 		workflows = Workflow()
@@ -64,17 +69,20 @@ class Test_01_Workflows(unittest.TestCase):
 		render(workflow)
 		assert workflow
 
+		if 'instances' not in self.cache.keys():
+			self.cache['instances'] = list()
+
 		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
-		print(f'{colours.Green}{instance_id}{colours.Off}')
+		print(f'{colours.Green}Starting: {instance_id}{colours.Off}')
 		assert(instance_id)
-		self.cache['instance_id'] = instance_id
+		self.cache['instances'].append(instance_id)
 
 		del workflows
 
 		print('waiting ...')
 		time.sleep(5)
 
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_02_search_tasks(self):
 
 		tasks = Task()
@@ -82,53 +90,58 @@ class Test_01_Workflows(unittest.TestCase):
 		tasks.username = 'WX_CORE_1'
 		tasks.context = config['-C']
 
+		if 'tasks' not in self.cache.keys():
+			self.cache['tasks'] = list()
+
 		task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
 		for task_id in task_ids:
 			task = tasks.get(task_id)
 			render(task)
+
+			if 'instance' in task.keys():
+				assert(task['instance'] in self.cache['instances'])
+
+				print(f'{colours.Green}Task: {task["state"]}{colours.Off}')
+				assert(task['state'] == state_id)
 			
-			if 'instance_id' in self.cache.keys():
-				instance_id = self.cache['instance_id']
-				if 'instance' in task.keys():
-					print(f'{colours.Green}{task["state"]}{colours.Off}')
-					assert(task['state'] == state_id)
-		
+				self.cache['tasks'].append(task['id'])
+
 		del tasks
 
-	#________________________________________________________________
-	def test_03_terminate_instance(self):
+
+	#________________________________________________________________________________________________
+	def test_03_interact_tasks(self):
+		
+		tasks = Task()
+		tasks.hostname = config['-H']
+		tasks.username = 'WX_CORE_1'
+		tasks.context = config['-C']
+
+		del tasks 
+
+	#________________________________________________________________________________________________
+	def test_04_terminate_instance(self):
 
 		workflows = Workflow()
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']
 		workflows.context = config['-C']
 
-		if 'instance_id' in self.cache.keys():
-			instance_id = self.cache['instance_id']
+		instances = self.cache['instances']
+		for i in range(len(instances)):
+			instance_id = instances.pop(0)
 			result = workflows.terminate(workflow_id, instance_id)
 			#assert(result)
 			render(result)
-			print(f'{colours.Red}{instance_id}{colours.Off}')
+			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
 
 		del workflows
 
-#________________________________________________________________
-class Test_02_Classifications(unittest.TestCase):
 
-	file = 'cache.json'
-	cache = dict()
+#====================================================================================================
+class Test_02_Classifications(TestWrapper):
 
-	def setUp(self):
-		if os.path.exists(self.file):
-			with open(self.file) as input:
-				self.cache = json.load(input)
-
-	def tearDown(self):
-		with open(self.file, 'w') as output:
-			json.dump(self.cache, output, indent='\t')
-		gc.collect()
-
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_01_create_hierarchy(self):
 
 		classifications = Classifications()
@@ -155,23 +168,11 @@ class Test_02_Classifications(unittest.TestCase):
 		
 		self.cache['classifications'].append(classification['id'])
 
-#________________________________________________________________
-class Test_03_Products(unittest.TestCase):
 
-	file = 'cache.json'
-	cache = dict()
+#====================================================================================================
+class Test_03_Products(TestWrapper):
 
-	def setUp(self):
-		if os.path.exists(self.file):
-			with open(self.file) as input:
-				self.cache = json.load(input)
-
-	def tearDown(self):
-		with open(self.file, 'w') as output:
-			json.dump(self.cache, output, indent='\t')
-		gc.collect()
-
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_01_find_hierarchy(self):
 
 		products = Products()
@@ -217,7 +218,7 @@ class Test_03_Products(unittest.TestCase):
 
 		del products
 
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_02_create_product(self):
 
 		products = Products()
@@ -248,7 +249,7 @@ class Test_03_Products(unittest.TestCase):
 
 		del products
 
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_03_update_product(self):
 
 		products = Products()
@@ -270,7 +271,7 @@ class Test_03_Products(unittest.TestCase):
 
 		del products
 
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_04_range_product(self):
 
 		products = Products()
@@ -285,22 +286,21 @@ class Test_03_Products(unittest.TestCase):
 		render(dict(ranged=dts))
 
 		for product_id in self.cache['products']:
-			result = products.references(product_id, reference_id)
-			assert('references' in result.keys())
 
-			for reference in result['references']:
-				render(dict(existing=reference))
-				if reference['target'] in self.cache['classifications']:
-					removed = products.reference(product_id, reference_id, reference['target'], targetType='C', remove=True)
-					render(removed)
+			result = products.references(product_id, reference_id)
+			if 'references' in result.keys():
+				for reference in result['references']:
+					render(dict(existing=reference))
+					if reference['target'] in self.cache['classifications']:
+						removed = products.reference(product_id, reference_id, reference['target'], targetType='C', remove=True)
+						render(removed)
 
 			for classification_id in self.cache['classifications']:
 				reference = products.reference(product_id, reference_id, classification_id, targetType='C')
 				render(dict(creating=reference))
 
-
-	#________________________________________________________________
-	def test_05_delete_product(self):
+	#________________________________________________________________________________________________
+	def _test_05_delete_product(self):
 
 		products = Products()
 		products.hostname = config['-H']
@@ -316,25 +316,20 @@ class Test_03_Products(unittest.TestCase):
 		items = self.cache['products']
 
 		for i in range(len(items)):
-			#product_id = items.pop(0)
-			product_id = items[i]
+			product_id = items.pop(0)
+			#product_id = items[i]
 			print(product_id)
-			#update = products.delete(product_id)
-			#render(update)
+			update = products.delete(product_id)
+			render(update)
 			#assert(update)
 
 		del products
 
-#________________________________________________________________
-class Test_04_Endpoints(unittest.TestCase):
 
-	def setUp(self):
-		pass
+#====================================================================================================
+class Test_04_Endpoints(TestWrapper):
 
-	def tearDown(self):
-		gc.collect()
-
-	#________________________________________________________________
+	#________________________________________________________________________________________________
 	def test_01_endpoints(self):
 
 		endpoints = Endpoints(asXML=True)
@@ -354,7 +349,8 @@ class Test_04_Endpoints(unittest.TestCase):
 
 		del endpoints
 
-#________________________________________________________________
+
+#====================================================================================================
 def main():
 	level = logging.INFO
 	#level = logging.DEBUG
@@ -362,6 +358,5 @@ def main():
 	logging.getLogger('botocore.credentials').setLevel(logging.CRITICAL)
 	unittest.main(exit=True)
 
-#________________________________________________________________
 if __name__ == '__main__': main()
 

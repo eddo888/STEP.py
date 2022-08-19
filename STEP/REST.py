@@ -464,7 +464,8 @@ class Products(STEP):
 	@args.parameter(name='values', short='m', metavar='attr=value', nargs='*', help='metadata attribute on reference')
 	@args.parameter(name='asid', short='i', flag=True, help='reference valus as lov id')
 	@args.parameter(name='overwrite', short='w', flag=True, help='allow overwrite')
-	def reference(self, id, referenceID, targetID, targetType='product', values=[], asid=False, overwrite=False):
+	@args.parameter(name='remove', short='r', flag=True, help='allow overwrite')
+	def reference(self, id, referenceID, targetID, targetType='product', values=[], asid=False, overwrite=False, remove=False):
 		headers={
 			"accept": "application/json",
 			"Content-Type": "application/json",
@@ -486,16 +487,25 @@ class Products(STEP):
 					"unit": None
 				}
 			}
+
 		params = {
 			"context" : self.context,
 			"workspace": self.workspace,
-			"allow-overwrite" : overwrite
 		}
-		result =super().put('%s/%s/references/%s/%s'%(
+
+		if remove:
+			method = super().delete
+		else:
+			params["allow-overwrite"] = overwrite
+			method = super().put
+
+		result = method('%s/%s/references/%s/%s'%(
 			self.base, id, referenceID, targetID), body=json.dumps(payload), params=params, headers=headers
 		)
-		return json.loads(result)
-
+		try:
+			return json.loads(result)
+		except:
+			return result
 
 	@args.operation(help='set values of product by id')
 	@args.parameter(name='id', help='the ID of product')

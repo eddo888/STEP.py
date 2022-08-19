@@ -285,13 +285,18 @@ class Test_03_Products(unittest.TestCase):
 		render(dict(ranged=dts))
 
 		for product_id in self.cache['products']:
-			reference = products.references(product_id, reference_id)
-			render(reference)
-			#todo skip if done already
+			result = products.references(product_id, reference_id)
+			assert('references' in result.keys())
+
+			for reference in result['references']:
+				render(dict(existing=reference))
+				if reference['target'] in self.cache['classifications']:
+					removed = products.reference(product_id, reference_id, reference['target'], targetType='C', remove=True)
+					render(removed)
 
 			for classification_id in self.cache['classifications']:
-				reference = products.reference(product_id, reference_id, classification_id, targetType='C', overwrite=True)
-				render(reference)
+				reference = products.reference(product_id, reference_id, classification_id, targetType='C')
+				render(dict(creating=reference))
 
 
 	#________________________________________________________________

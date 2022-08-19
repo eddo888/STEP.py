@@ -78,7 +78,7 @@ class TestREST(unittest.TestCase):
 	#________________________________________________________________
 	def test_02_start_workflow(self):
 
-		workflows = Workflow()
+		workflows = Workflow(asXML=False)
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']
 		workflows.context = config['-C']
@@ -102,7 +102,7 @@ class TestREST(unittest.TestCase):
 	#________________________________________________________________
 	def test_03_search_tasks(self):
 
-		tasks = Task()
+		tasks = Task(asXML=False)
 		tasks.hostname = config['-H']
 		tasks.username = 'WX_CORE_1'
 		tasks.context = config['-C']
@@ -123,7 +123,7 @@ class TestREST(unittest.TestCase):
 	#________________________________________________________________
 	def test_04_terminate_instance(self):
 
-		workflows = Workflow()
+		workflows = Workflow(asXML=False)
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']
 		workflows.context = config['-C']

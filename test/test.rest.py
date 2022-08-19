@@ -24,6 +24,8 @@ config = {
 workflow_id = 'WX_Product_WF'
 state_id = 'WX_Manual_Approve'
 product_id = 'WX_0'
+reference_id = 'WX_Product_Tag_Classification'
+
 
 #________________________________________________________________
 def render(result):
@@ -111,7 +113,50 @@ class Test_01_Workflows(unittest.TestCase):
 		del workflows
 
 #________________________________________________________________
-class Test_02_Products(unittest.TestCase):
+class Test_02_Classifications(unittest.TestCase):
+
+	file = 'cache.json'
+	cache = dict()
+
+	def setUp(self):
+		if os.path.exists(self.file):
+			with open(self.file) as input:
+				self.cache = json.load(input)
+
+	def tearDown(self):
+		with open(self.file, 'w') as output:
+			json.dump(self.cache, output, indent='\t')
+		gc.collect()
+
+	#________________________________________________________________
+	def test_01_create_hierarchy(self):
+
+		classifications = Classifications()
+		classifications.hostname = config['-H']
+		classifications.username = config['-U']
+		classifications.context = config['-C']
+
+		root = classifications.get('WX_Tags')
+		print(f'{colours.Green}{root["name"]}{colours.Off}')
+		assert(root)
+		#render(root)
+		assert(root['id'] == 'WX_Tags')
+
+		now = datetime.now()
+		dts = f'{now:%Y-%m-%d %H:%M:%S}'
+		render(dict(created=dts))
+
+		classification = classifications.create(root['id'], 'WX_Tag', f'created {dts}')
+		render(classification)
+		assert(classification)
+		
+		if 'classifications' not in self.cache.keys():
+			self.cache['classifications'] = list()
+		
+		self.cache['classifications'].append(classification['id'])
+
+#________________________________________________________________
+class Test_03_Products(unittest.TestCase):
 
 	file = 'cache.json'
 	cache = dict()
@@ -185,7 +230,7 @@ class Test_02_Products(unittest.TestCase):
 
 		now = datetime.now()
 		dts = f'{now:%Y-%m-%d %H:%M:%S}'
-		render(dict(dts=dts))
+		render(dict(created=dts))
 
 		child = products.create(parent_id, 'WX_Product', f'created {dts}', values=[
 			f'WX_activation_date={dts}',
@@ -196,10 +241,87 @@ class Test_02_Products(unittest.TestCase):
 		assert(child)
 		assert('id' in child.keys())
 
+		if 'products' not in self.cache.keys():
+			self.cache['products'] = list()
+
+		self.cache['products'].append(child['id'])
+
+		del products
+
+	#________________________________________________________________
+	def test_03_update_product(self):
+
+		products = Products()
+		products.hostname = config['-H']
+		products.username = config['-U']
+		products.context = config['-C']
+
+		assert('products' in self.cache.keys())
+
+		now = datetime.now()
+		dts = f'{now:%Y-%m-%d %H:%M:%S}'
+		render(dict(updated=dts))
+
+		for product_id in self.cache['products']:
+
+			update = products.update(product_id, 'WX_description', f'modified {dts}')
+			render(update)
+			assert(update)
+
+		del products
+
+	#________________________________________________________________
+	def test_04_range_product(self):
+
+		products = Products()
+		products.hostname = config['-H']
+		products.username = config['-U']
+		products.context = config['-C']
+
+		assert('products' in self.cache.keys())
+
+		now = datetime.now()
+		dts = f'{now:%Y-%m-%d %H:%M:%S}'
+		render(dict(ranged=dts))
+
+		for product_id in self.cache['products']:
+			reference = products.references(product_id, reference_id)
+			render(reference)
+			#todo skip if done already
+
+			for classification_id in self.cache['classifications']:
+				reference = products.reference(product_id, reference_id, classification_id, targetType='C', overwrite=True)
+				render(reference)
+
+
+	#________________________________________________________________
+	def test_05_delete_product(self):
+
+		products = Products()
+		products.hostname = config['-H']
+		products.username = config['-U']
+		products.context = config['-C']
+
+		assert('products' in self.cache.keys())
+
+		now = datetime.now()
+		dts = f'{now:%Y-%m-%d %H:%M:%S}'
+		render(dict(deleted=dts))
+
+		items = self.cache['products']
+
+		for i in range(len(items)):
+			#product_id = items.pop(0)
+			product_id = items[i]
+			print(product_id)
+			#update = products.delete(product_id)
+			#render(update)
+			#assert(update)
+
 		del products
 
 #________________________________________________________________
-class Test_03_Endpoints(unittest.TestCase):
+class Test_04_Endpoints(unittest.TestCase):
 
 	def setUp(self):
 		pass

@@ -455,21 +455,23 @@ class Products(STEP):
 	def references(self, id, referenceID):
 		return super().get('%s/%s/references/%s'%(self.base, id, referenceID))
 	
+
 	@args.operation(help='get references of product by id')
 	@args.parameter(name='id', help='the ID of product')
 	@args.parameter(name='referenceID', help='the ID of reference')
 	@args.parameter(name='targetID', help='the ID of target')
+	@args.parameter(name='targetType', short=True, oneof=node_types, help='target type')
 	@args.parameter(name='values', short='m', metavar='attr=value', nargs='*', help='metadata attribute on reference')
 	@args.parameter(name='asid', short='i', flag=True, help='reference valus as lov id')
 	@args.parameter(name='overwrite', short='w', flag=True, help='allow overwrite')
-	def reference(self, id, referenceID, targetID, values=[], asid=False, overwrite=False):
+	def reference(self, id, referenceID, targetID, targetType='product', values=[], asid=False, overwrite=False):
 		headers={
 			"accept": "application/json",
 			"Content-Type": "application/json",
 		}
 		payload={
 			"target": targetID,
-			"targetType": "product",
+			"targetType": node_types[targetType],
 			"values": {
 			}
 		}
@@ -489,9 +491,10 @@ class Products(STEP):
 			"workspace": self.workspace,
 			"allow-overwrite" : overwrite
 		}
-		return super().put('%s/%s/references/%s/%s'%(
+		result =super().put('%s/%s/references/%s/%s'%(
 			self.base, id, referenceID, targetID), body=json.dumps(payload), params=params, headers=headers
 		)
+		return json.loads(result)
 
 
 	@args.operation(help='set values of product by id')
@@ -508,9 +511,10 @@ class Products(STEP):
 				"value":value
 			}
 		}
-		return super().put('%s/%s/values/%s'%(
+		result = super().put('%s/%s/values/%s'%(
 			self.base, id, attributeID), body=json.dumps(payload), headers=headers
 		)
+		return json.loads(result)
 
 
 	@args.operation(help='get tables of product by id')
@@ -621,6 +625,25 @@ class Classifications(STEP):
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
 
+
+	@args.operation(help='create a new classification')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create(self, parent, objectType, name=None, values=[]):
+		body=dict(
+			parent=parent,
+			objectType=objectType,
+			name=name,
+			values=dict()
+		)
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().post('%s'%self.base, body=json.dumps(body))
+		return json.loads(result)
+		
 
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')

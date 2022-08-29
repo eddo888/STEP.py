@@ -27,7 +27,7 @@ state_id = 'WX_Manual_Approve'
 product_id = 'WX_0'
 reference_id = 'WX_Product_Tag_Classification'
 event_id = 'On_Hold'
-
+file='test/cache.json'
 
 #____________________________________________________________________________________________________
 def render(result):
@@ -59,7 +59,28 @@ class TestWrapper(unittest.TestCase):
 class Test_01_Workflows(TestWrapper):
 
 	#________________________________________________________________________________________________
-	def test_01_start_workflow(self):
+	def test_01_terminate_existing(self):
+		'''
+		kill any existing session
+		'''
+		
+		workflows = Workflow()
+		workflows.hostname = config['-H']
+		workflows.username = config['-U']
+		workflows.context = config['-C']
+
+		instances = self.cache['instances']
+		for i in range(len(instances)):
+			instance_id = instances.pop(0)
+			result = workflows.terminate(workflow_id, instance_id)
+			#assert(result)
+			render(result)
+			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
+
+		del workflows
+
+	#________________________________________________________________________________________________
+	def test_02_start_workflow(self):
 
 		workflows = Workflow()
 		workflows.hostname = config['-H']
@@ -84,7 +105,7 @@ class Test_01_Workflows(TestWrapper):
 		time.sleep(3)
 
 	#________________________________________________________________________________________________
-	def test_02_search_tasks(self):
+	def test_03_search_tasks(self):
 
 		tasks = Task()
 		tasks.hostname = config['-H']
@@ -109,7 +130,7 @@ class Test_01_Workflows(TestWrapper):
 		del tasks
 
 	#________________________________________________________________________________________________
-	def test_03_interact_tasks(self):
+	def test_04_interact_tasks(self):
 		
 		tasks = Task()
 		tasks.hostname = config['-H']
@@ -154,8 +175,11 @@ class Test_01_Workflows(TestWrapper):
 		del tasks 
 
 	#________________________________________________________________________________________________
-	def test_04_terminate_instance(self):
-
+	def test_05_terminate_instance(self):
+		'''
+		kill any existing session
+		'''
+		
 		workflows = Workflow()
 		workflows.hostname = config['-H']
 		workflows.username = config['-U']

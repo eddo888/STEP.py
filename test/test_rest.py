@@ -38,6 +38,7 @@ def render(result):
 	else:
 		print(result)
 
+
 #====================================================================================================
 class TestWrapper(unittest.TestCase):
 
@@ -56,17 +57,28 @@ class TestWrapper(unittest.TestCase):
 		
 
 #====================================================================================================
+class Test_00_DeleteCache(TestWrapper):
+
+	def test_00_delete_cache(self):
+		self.cache = dict()
+
+
+#====================================================================================================
 class Test_01_Classifications(TestWrapper):
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		self.classifications = Classifications(asXML=False)
+		self.classifications.hostname = config['-H']
+		self.classifications.username = config['-U']
+		self.classifications.context = config['-C']
+
+		
 	#________________________________________________________________________________________________
 	def test_01_create_hierarchy(self):
 
-		classifications = Classifications()
-		classifications.hostname = config['-H']
-		classifications.username = config['-U']
-		classifications.context = config['-C']
-
-		root = classifications.get('WX_Tags')
+		root = self.classifications.get('WX_Tags')
 		print(f'{colours.Green}{root["name"]}{colours.Off}')
 		assert(root)
 		#render(root)
@@ -76,7 +88,7 @@ class Test_01_Classifications(TestWrapper):
 		dts = f'{now:%Y-%m-%d %H:%M:%S}'
 		render(dict(created=dts))
 
-		classification = classifications.create(root['id'], 'WX_Tag', f'created {dts}')
+		classification = self.classifications.create(root['id'], 'WX_Tag', f'created {dts}')
 		render(classification)
 		assert(classification)
 		
@@ -89,41 +101,45 @@ class Test_01_Classifications(TestWrapper):
 #====================================================================================================
 class Test_02_Products(TestWrapper):
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		self.products = Products(asXML=False)
+		self.products.hostname = config['-H']
+		self.products.username = config['-U']
+		self.products.context = config['-C']
+
+		
 	#________________________________________________________________________________________________
 	def test_01_find_hierarchy(self):
 
-		products = Products()
-		products.hostname = config['-H']
-		products.username = config['-U']
-		products.context = config['-C']
-
-		root = products.get('WX_Root')
+		root = self.products.get('WX_Root')
 		print(f'{colours.Green}{root["name"]}{colours.Off}')
 		assert(root)
 		#render(root)
 		assert(root['id'] == 'WX_Root')
 
-		children = products.children(root['id'])
+		children = self.products.children(root['id'])
 		render(children)
 		assert(children)
 		assert(len(children))
 
-		l1 = products.children(children[0])
+		l1 = self.products.children(children[0])
 		render(l1)
 		assert(l1)
 		assert(len(l1))
 
-		l2 = products.children(l1[0])
+		l2 = self.products.children(l1[0])
 		render(l2)
 		assert(l2)
 		assert(len(l2))
 		
-		l3 = products.children(l2[0])
+		l3 = self.products.children(l2[0])
 		render(l3)
 		assert(l3)
 		assert(len(l3))
 		
-		product = products.get(l3[0])
+		product = self.products.get(l3[0])
 		#render(product)
 		assert(product)
 		assert('id' in product.keys())
@@ -133,15 +149,9 @@ class Test_02_Products(TestWrapper):
 		self.cache['parent_id'] = parent_id
 		render(dict(parent_id=parent_id))
 
-		del products
 
 	#________________________________________________________________________________________________
 	def test_02_create_product(self):
-
-		products = Products()
-		products.hostname = config['-H']
-		products.username = config['-U']
-		products.context = config['-C']
 
 		assert('parent_id' in self.cache.keys())
 		parent_id = self.cache['parent_id']
@@ -150,7 +160,7 @@ class Test_02_Products(TestWrapper):
 		dts = f'{now:%Y-%m-%d %H:%M:%S}'
 		render(dict(created=dts))
 
-		child = products.create(parent_id, 'WX_Product', f'created {dts}', values=[
+		child = self.products.create(parent_id, 'WX_Product', f'created {dts}', values=[
 			f'WX_activation_date={dts}',
 			f'WX_brand_name=created by rest',
 		])
@@ -164,15 +174,9 @@ class Test_02_Products(TestWrapper):
 
 		self.cache['products'].append(child['id'])
 
-		del products
 
 	#________________________________________________________________________________________________
 	def test_03_update_product(self):
-
-		products = Products()
-		products.hostname = config['-H']
-		products.username = config['-U']
-		products.context = config['-C']
 
 		assert('products' in self.cache.keys())
 
@@ -182,19 +186,13 @@ class Test_02_Products(TestWrapper):
 
 		for product_id in self.cache['products']:
 
-			update = products.update(product_id, 'WX_description', f'modified {dts}')
+			update = self.products.update(product_id, 'WX_description', f'modified {dts}')
 			render(update)
 			assert(update)
 
-		del products
-
+			
 	#________________________________________________________________________________________________
 	def test_04_range_product(self):
-
-		products = Products()
-		products.hostname = config['-H']
-		products.username = config['-U']
-		products.context = config['-C']
 
 		assert('products' in self.cache.keys())
 
@@ -204,25 +202,21 @@ class Test_02_Products(TestWrapper):
 
 		for product_id in self.cache['products']:
 
-			result = products.references(product_id, reference_id)
+			result = self.products.references(product_id, reference_id)
 			if 'references' in result.keys():
 				for reference in result['references']:
 					render(dict(existing=reference))
 					if reference['target'] in self.cache['classifications']:
-						removed = products.reference(product_id, reference_id, reference['target'], targetType='C', remove=True)
+						removed = self.products.reference(product_id, reference_id, reference['target'], targetType='C', remove=True)
 						render(removed)
 
 			for classification_id in self.cache['classifications']:
-				reference = products.reference(product_id, reference_id, classification_id, targetType='C')
+				reference = self.products.reference(product_id, reference_id, classification_id, targetType='C')
 				render(dict(creating=reference))
+
 
 	#________________________________________________________________________________________________
 	def _test_05_delete_product(self):
-
-		products = Products()
-		products.hostname = config['-H']
-		products.username = config['-U']
-		products.context = config['-C']
 
 		assert('products' in self.cache.keys())
 
@@ -236,75 +230,72 @@ class Test_02_Products(TestWrapper):
 			product_id = items.pop(0)
 			#product_id = items[i]
 			print(product_id)
-			update = products.delete(product_id)
+			update = self.products.delete(product_id)
 			render(update)
-			#assert(update)
-
-		del products
 
 
 #====================================================================================================
 class Test_03_Workflows(TestWrapper):
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		self.workflows = Workflow(asXML=False)
+		self.workflows.hostname = config['-H']
+		self.workflows.username = config['-U']
+		self.workflows.context = config['-C']
+
+		self.tasks = Task(asXML=False)
+		self.tasks.hostname = config['-H']
+		self.tasks.username = 'WX_CORE_1'
+		self.tasks.context = config['-C']
+
+		
 	#________________________________________________________________________________________________
 	def test_01_terminate_existing(self):
 		'''
 		kill any existing session
 		'''
 		
-		workflows = Workflow()
-		workflows.hostname = config['-H']
-		workflows.username = config['-U']
-		workflows.context = config['-C']
+		task_ids = self.tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+		for task_id in task_ids:
+			task = self.tasks.get(task_id)
+			#render(task)
 
-		instances = self.cache['instances']
-		for i in range(len(instances)):
-			instance_id = instances.pop(0)
-			result = workflows.terminate(workflow_id, instance_id)
-			#assert(result)
-			render(result)
-			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
+			if 'instance' in task.keys():
+				instance_id = task['instance']
+				self.workflows.terminate(workflow_id, instance_id)
+				print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
 
-		del workflows
 
 	#________________________________________________________________________________________________
 	def test_02_start_workflow(self):
 
-		workflows = Workflow()
-		workflows.hostname = config['-H']
-		workflows.username = config['-U']
-		workflows.context = config['-C']
-
-		workflow = workflows.get(workflow_id)
+		workflow = self.workflows.get(workflow_id)
 		render(workflow)
 		assert workflow
 
 		if 'instances' not in self.cache.keys():
 			self.cache['instances'] = list()
 
-		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
+		instance_id = self.workflows.start(workflow_id, product_id, id_as_base64=True)
 		print(f'{colours.Green}Starting: {instance_id}{colours.Off}')
 		assert(instance_id)
 		self.cache['instances'].append(instance_id)
 
-		del workflows
-
 		print('waiting ...')
 		time.sleep(3)
+		print('assumed started')
+
 
 	#________________________________________________________________________________________________
 	def test_03_search_tasks(self):
 
-		tasks = Task()
-		tasks.hostname = config['-H']
-		tasks.username = 'WX_CORE_1'
-		tasks.context = config['-C']
-
 		self.cache['tasks'] = list()
 
-		task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+		task_ids = self.tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
 		for task_id in task_ids:
-			task = tasks.get(task_id)
+			task = self.tasks.get(task_id)
 			render(task)
 
 			if 'instance' in task.keys():
@@ -315,25 +306,19 @@ class Test_03_Workflows(TestWrapper):
 			
 				self.cache['tasks'].append(task['id'])
 
-		del tasks
 
 	#________________________________________________________________________________________________
 	def test_04_interact_tasks(self):
 		
-		tasks = Task()
-		tasks.hostname = config['-H']
-		tasks.username = 'WX_CORE_1'
-		tasks.context = config['-C']
-
 		task_ids = self.cache['tasks']
 		for i in range(len(task_ids)):
 			#task_id = task_ids[i]
 			task_id = task_ids.pop(0)
 
-			claimed = tasks.claim(task_id)
+			claimed = self.tasks.claim(task_id)
 			render(dict(claimed=claimed))
 
-			events = tasks.events(task_id)
+			events = self.tasks.events(task_id)
 			render(dict(events=events))
 			event_ids = list(map(lambda x:x['id'], events))
 			assert(event_id in event_ids)
@@ -343,48 +328,49 @@ class Test_03_Workflows(TestWrapper):
 			render(dict(triggering=dts))
 
 			if True: # either trigger of release here
-				triggered = tasks.trigger(task_id, event_id, message=f'triggered at {dts}')
+				triggered = self.tasks.trigger(task_id, event_id, message=f'triggered at {dts}')
 				render(dict(triggered=triggered))
 
 				print('waiting ...')
 				time.sleep(3)
-
-				task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+				print('assumed triggered')
+				
+				task_ids = self.tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
 				for task_id in task_ids:
-					task = tasks.get(task_id)
+					task = self.tasks.get(task_id)
 					render(dict(search=task))
 					print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
 					assert(task['state'] == 'WX_OnHold')
 			
 			else:
-				released = tasks.release(task_id)
+				released = self.tasks.release(task_id)
 				render(dict(released=released))
 			
-		del tasks 
-
 
 #====================================================================================================
 class Test_04_Endpoints(TestWrapper):
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		self.endpoints = Endpoints(asXML=True)
+		#self.endpoints.verbose = True
+		self.endpoints.hostname = config['-H']
+		self.endpoints.username = config['-U']
+
+		
 	#________________________________________________________________________________________________
 	def test_01_endpoints(self):
 
-		endpoints = Endpoints(asXML=True)
-		endpoints.hostname = config['-H']
-		endpoints.username = config['-U']
-		#endpoints.verbose = True
+		print(f'{colours.Green}{self.endpoints}{colours.Off}')
+		assert self.endpoints
 
-		print(f'{colours.Green}{endpoints}{colours.Off}')
-		assert endpoints
-
-		result = endpoints.list()
+		result = self.endpoints.list()
 		assert(result)
 
 		_result = xmltodict.parse(result)
 		assert('IntegrationEndpoints' in _result.keys())
 		assert(len(_result['IntegrationEndpoints']))
-
-		del endpoints
 
 
 #====================================================================================================

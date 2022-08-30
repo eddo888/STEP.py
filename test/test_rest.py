@@ -56,148 +56,7 @@ class TestWrapper(unittest.TestCase):
 		
 
 #====================================================================================================
-class Test_01_Workflows(TestWrapper):
-
-	#________________________________________________________________________________________________
-	def test_01_terminate_existing(self):
-		'''
-		kill any existing session
-		'''
-		
-		workflows = Workflow()
-		workflows.hostname = config['-H']
-		workflows.username = config['-U']
-		workflows.context = config['-C']
-
-		instances = self.cache['instances']
-		for i in range(len(instances)):
-			instance_id = instances.pop(0)
-			result = workflows.terminate(workflow_id, instance_id)
-			#assert(result)
-			render(result)
-			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
-
-		del workflows
-
-	#________________________________________________________________________________________________
-	def test_02_start_workflow(self):
-
-		workflows = Workflow()
-		workflows.hostname = config['-H']
-		workflows.username = config['-U']
-		workflows.context = config['-C']
-
-		workflow = workflows.get(workflow_id)
-		render(workflow)
-		assert workflow
-
-		if 'instances' not in self.cache.keys():
-			self.cache['instances'] = list()
-
-		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
-		print(f'{colours.Green}Starting: {instance_id}{colours.Off}')
-		assert(instance_id)
-		self.cache['instances'].append(instance_id)
-
-		del workflows
-
-		print('waiting ...')
-		time.sleep(3)
-
-	#________________________________________________________________________________________________
-	def test_03_search_tasks(self):
-
-		tasks = Task()
-		tasks.hostname = config['-H']
-		tasks.username = 'WX_CORE_1'
-		tasks.context = config['-C']
-
-		self.cache['tasks'] = list()
-
-		task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
-		for task_id in task_ids:
-			task = tasks.get(task_id)
-			render(task)
-
-			if 'instance' in task.keys():
-				assert(task['instance'] in self.cache['instances'])
-
-				print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
-				assert(task['state'] == state_id)
-			
-				self.cache['tasks'].append(task['id'])
-
-		del tasks
-
-	#________________________________________________________________________________________________
-	def test_04_interact_tasks(self):
-		
-		tasks = Task()
-		tasks.hostname = config['-H']
-		tasks.username = 'WX_CORE_1'
-		tasks.context = config['-C']
-
-		task_ids = self.cache['tasks']
-		for i in range(len(task_ids)):
-			#task_id = task_ids[i]
-			task_id = task_ids.pop(0)
-
-			claimed = tasks.claim(task_id)
-			render(dict(claimed=claimed))
-
-			events = tasks.events(task_id)
-			render(dict(events=events))
-			event_ids = list(map(lambda x:x['id'], events))
-			assert(event_id in event_ids)
-
-			now = datetime.now()
-			dts = f'{now:%Y-%m-%d %H:%M:%S}'
-			render(dict(triggering=dts))
-
-			if True: # either trigger of release here
-				triggered = tasks.trigger(task_id, event_id, message=f'triggered at {dts}')
-				render(dict(triggered=triggered))
-
-				print('waiting ...')
-				time.sleep(3)
-
-				task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
-				for task_id in task_ids:
-					task = tasks.get(task_id)
-					render(dict(search=task))
-					print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
-					assert(task['state'] == 'WX_OnHold')
-			
-			else:
-				released = tasks.release(task_id)
-				render(dict(released=released))
-			
-		del tasks 
-
-	#________________________________________________________________________________________________
-	def test_05_terminate_instance(self):
-		'''
-		kill any existing session
-		'''
-		
-		workflows = Workflow()
-		workflows.hostname = config['-H']
-		workflows.username = config['-U']
-		workflows.context = config['-C']
-
-		instances = self.cache['instances']
-		for i in range(len(instances)):
-			instance_id = instances.pop(0)
-			result = workflows.terminate(workflow_id, instance_id)
-			#assert(result)
-			render(result)
-			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
-
-		del workflows
-
-
-#====================================================================================================
-class Test_02_Classifications(TestWrapper):
+class Test_01_Classifications(TestWrapper):
 
 	#________________________________________________________________________________________________
 	def test_01_create_hierarchy(self):
@@ -228,7 +87,7 @@ class Test_02_Classifications(TestWrapper):
 
 
 #====================================================================================================
-class Test_03_Products(TestWrapper):
+class Test_02_Products(TestWrapper):
 
 	#________________________________________________________________________________________________
 	def test_01_find_hierarchy(self):
@@ -382,6 +241,126 @@ class Test_03_Products(TestWrapper):
 			#assert(update)
 
 		del products
+
+
+#====================================================================================================
+class Test_03_Workflows(TestWrapper):
+
+	#________________________________________________________________________________________________
+	def test_01_terminate_existing(self):
+		'''
+		kill any existing session
+		'''
+		
+		workflows = Workflow()
+		workflows.hostname = config['-H']
+		workflows.username = config['-U']
+		workflows.context = config['-C']
+
+		instances = self.cache['instances']
+		for i in range(len(instances)):
+			instance_id = instances.pop(0)
+			result = workflows.terminate(workflow_id, instance_id)
+			#assert(result)
+			render(result)
+			print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
+
+		del workflows
+
+	#________________________________________________________________________________________________
+	def test_02_start_workflow(self):
+
+		workflows = Workflow()
+		workflows.hostname = config['-H']
+		workflows.username = config['-U']
+		workflows.context = config['-C']
+
+		workflow = workflows.get(workflow_id)
+		render(workflow)
+		assert workflow
+
+		if 'instances' not in self.cache.keys():
+			self.cache['instances'] = list()
+
+		instance_id = workflows.start(workflow_id, product_id, id_as_base64=True)
+		print(f'{colours.Green}Starting: {instance_id}{colours.Off}')
+		assert(instance_id)
+		self.cache['instances'].append(instance_id)
+
+		del workflows
+
+		print('waiting ...')
+		time.sleep(3)
+
+	#________________________________________________________________________________________________
+	def test_03_search_tasks(self):
+
+		tasks = Task()
+		tasks.hostname = config['-H']
+		tasks.username = 'WX_CORE_1'
+		tasks.context = config['-C']
+
+		self.cache['tasks'] = list()
+
+		task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+		for task_id in task_ids:
+			task = tasks.get(task_id)
+			render(task)
+
+			if 'instance' in task.keys():
+				assert(task['instance'] in self.cache['instances'])
+
+				print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
+				assert(task['state'] == state_id)
+			
+				self.cache['tasks'].append(task['id'])
+
+		del tasks
+
+	#________________________________________________________________________________________________
+	def test_04_interact_tasks(self):
+		
+		tasks = Task()
+		tasks.hostname = config['-H']
+		tasks.username = 'WX_CORE_1'
+		tasks.context = config['-C']
+
+		task_ids = self.cache['tasks']
+		for i in range(len(task_ids)):
+			#task_id = task_ids[i]
+			task_id = task_ids.pop(0)
+
+			claimed = tasks.claim(task_id)
+			render(dict(claimed=claimed))
+
+			events = tasks.events(task_id)
+			render(dict(events=events))
+			event_ids = list(map(lambda x:x['id'], events))
+			assert(event_id in event_ids)
+
+			now = datetime.now()
+			dts = f'{now:%Y-%m-%d %H:%M:%S}'
+			render(dict(triggering=dts))
+
+			if True: # either trigger of release here
+				triggered = tasks.trigger(task_id, event_id, message=f'triggered at {dts}')
+				render(dict(triggered=triggered))
+
+				print('waiting ...')
+				time.sleep(3)
+
+				task_ids = tasks.search(workflow_id, state_id='', node_id=product_id, id_as_base64=True)
+				for task_id in task_ids:
+					task = tasks.get(task_id)
+					render(dict(search=task))
+					print(f'Task State: {colours.Green}{task["state"]}{colours.Off}')
+					assert(task['state'] == 'WX_OnHold')
+			
+			else:
+				released = tasks.release(task_id)
+				render(dict(released=released))
+			
+		del tasks 
 
 
 #====================================================================================================

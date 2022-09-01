@@ -13,8 +13,10 @@ if os.path.dirname(sys.argv[0]) == '.':
 
 from STEP.REST import *
 
+colour = 'PYDEV_CONSOLE_ENCODING' not in os.environ
+
 #____________________________________________________________________________________________________
-colours = Colours()
+colours = Colours(colour=colour)
 
 config = {
 	'-H':'https://stibo-australia-demo.scloud.stibo.com',
@@ -27,14 +29,13 @@ state_id = 'WX_Manual_Approve'
 product_id = 'WX_0'
 reference_id = 'WX_Product_Tag_Classification'
 event_id = 'On_Hold'
-file='test/cache.json'
 
 #____________________________________________________________________________________________________
 def render(result):
 	if not result: 
 		return
 	if type(result) in [OrderedDict, list, dict]:
-		prettyPrintLn(result)
+		prettyPrintLn(result, colour=colour)
 	else:
 		print(result)
 
@@ -42,8 +43,10 @@ def render(result):
 #====================================================================================================
 class TestWrapper(unittest.TestCase):
 
-	file = 'cache.json'
-	cache = dict()
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.file = 'cache.json'
+		self.cache = dict()
 
 	def setUp(self):
 		if os.path.exists(self.file):
@@ -57,30 +60,35 @@ class TestWrapper(unittest.TestCase):
 		
 
 #====================================================================================================
-class Test_00_DeleteCache(TestWrapper):
+class Test_1_DeleteCache(TestWrapper):
 
-	def test_00_delete_cache(self):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		
+	def test_01_delete_cache(self):
 		self.cache = dict()
 
 
 #====================================================================================================
-class Test_01_Classifications(TestWrapper):
+class Test_2_Classifications(TestWrapper):
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-
+	def setUp(self):
+		super().setUp()
 		self.classifications = Classifications(asXML=False)
 		self.classifications.hostname = config['-H']
 		self.classifications.username = config['-U']
 		self.classifications.context = config['-C']
 
+	def tearDown(self):
+		super().tearDown()
+		del self.classifications
 		
-	#________________________________________________________________________________________________
-	def test_01_create_hierarchy(self):
+	def test_02_create_hierarchy(self):
 
 		root = self.classifications.get('WX_Tags')
-		print(f'{colours.Green}{root["name"]}{colours.Off}')
+		print(root)
 		assert(root)
+		print(f'{colours.Green}{root["name"]}{colours.Off}')
 		#render(root)
 		assert(root['id'] == 'WX_Tags')
 
@@ -99,19 +107,20 @@ class Test_01_Classifications(TestWrapper):
 
 
 #====================================================================================================
-class Test_02_Products(TestWrapper):
+class Test_3_Products(TestWrapper):
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-
+	def setUp(self):
+		super().setUp()
 		self.products = Products(asXML=False)
 		self.products.hostname = config['-H']
 		self.products.username = config['-U']
 		self.products.context = config['-C']
-
 		
-	#________________________________________________________________________________________________
-	def test_01_find_hierarchy(self):
+	def tearDown(self):
+		super().tearDown()
+		del self.products
+	
+	def test_03_find_hierarchy(self):
 
 		root = self.products.get('WX_Root')
 		print(f'{colours.Green}{root["name"]}{colours.Off}')
@@ -149,9 +158,7 @@ class Test_02_Products(TestWrapper):
 		self.cache['parent_id'] = parent_id
 		render(dict(parent_id=parent_id))
 
-
-	#________________________________________________________________________________________________
-	def test_02_create_product(self):
+	def test_04_create_product(self):
 
 		assert('parent_id' in self.cache.keys())
 		parent_id = self.cache['parent_id']
@@ -174,9 +181,7 @@ class Test_02_Products(TestWrapper):
 
 		self.cache['products'].append(child['id'])
 
-
-	#________________________________________________________________________________________________
-	def test_03_update_product(self):
+	def test_05_update_product(self):
 
 		assert('products' in self.cache.keys())
 
@@ -190,9 +195,7 @@ class Test_02_Products(TestWrapper):
 			render(update)
 			assert(update)
 
-			
-	#________________________________________________________________________________________________
-	def test_04_range_product(self):
+	def test_06_range_product(self):
 
 		assert('products' in self.cache.keys())
 
@@ -214,8 +217,6 @@ class Test_02_Products(TestWrapper):
 				reference = self.products.reference(product_id, reference_id, classification_id, targetType='C')
 				render(dict(creating=reference))
 
-
-	#________________________________________________________________________________________________
 	def _test_05_delete_product(self):
 
 		assert('products' in self.cache.keys())
@@ -235,10 +236,10 @@ class Test_02_Products(TestWrapper):
 
 
 #====================================================================================================
-class Test_03_Workflows(TestWrapper):
+class Test_4_Workflows(TestWrapper):
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
+	def setUp(self):
+		super().setUp()
 
 		self.workflows = Workflow(asXML=False)
 		self.workflows.hostname = config['-H']
@@ -249,10 +250,13 @@ class Test_03_Workflows(TestWrapper):
 		self.tasks.hostname = config['-H']
 		self.tasks.username = 'WX_CORE_1'
 		self.tasks.context = config['-C']
+	
+	def tearDown(self):
+		super().tearDown()
+		del self.workflows
+		del self.tasks
 
-		
-	#________________________________________________________________________________________________
-	def test_01_terminate_existing(self):
+	def test_07_terminate_existing(self):
 		'''
 		kill any existing session
 		'''
@@ -267,9 +271,7 @@ class Test_03_Workflows(TestWrapper):
 				self.workflows.terminate(workflow_id, instance_id)
 				print(f'{colours.Green}Killing: {instance_id}{colours.Off}')
 
-
-	#________________________________________________________________________________________________
-	def test_02_start_workflow(self):
+	def test_08_start_workflow(self):
 
 		workflow = self.workflows.get(workflow_id)
 		render(workflow)
@@ -287,9 +289,7 @@ class Test_03_Workflows(TestWrapper):
 		time.sleep(3)
 		print('assumed started')
 
-
-	#________________________________________________________________________________________________
-	def test_03_search_tasks(self):
+	def test_09_search_tasks(self):
 
 		self.cache['tasks'] = list()
 
@@ -306,9 +306,7 @@ class Test_03_Workflows(TestWrapper):
 			
 				self.cache['tasks'].append(task['id'])
 
-
-	#________________________________________________________________________________________________
-	def test_04_interact_tasks(self):
+	def test_10_interact_tasks(self):
 		
 		task_ids = self.cache['tasks']
 		for i in range(len(task_ids)):
@@ -348,19 +346,20 @@ class Test_03_Workflows(TestWrapper):
 			
 
 #====================================================================================================
-class Test_04_Endpoints(TestWrapper):
+class Test_5_Endpoints(TestWrapper):
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-
+	def setUp(self):
+		super().setUp()
 		self.endpoints = Endpoints(asXML=True)
 		#self.endpoints.verbose = True
 		self.endpoints.hostname = config['-H']
 		self.endpoints.username = config['-U']
 
-		
-	#________________________________________________________________________________________________
-	def test_01_endpoints(self):
+	def tearDown(self):
+		super().tearDown()
+		del self.endpoints
+
+	def test_11_endpoints(self):
 
 		print(f'{colours.Green}{self.endpoints}{colours.Off}')
 		assert self.endpoints
@@ -375,11 +374,8 @@ class Test_04_Endpoints(TestWrapper):
 
 #====================================================================================================
 def main():
-	level = logging.INFO
-	#level = logging.DEBUG
-	logging.basicConfig(level=level)
-	logging.getLogger('botocore.credentials').setLevel(logging.CRITICAL)
-	unittest.main(exit=True)
-
+	unittest.main()
+					  
 if __name__ == '__main__': main()
+
 

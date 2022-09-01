@@ -109,9 +109,10 @@ class STEP(object):
 		}
 		if self.verbose:
 			json.dump(dict(url=url, headers=self.headers, params=params), sys.stderr, indent=4)
-		result = requests.get(url=url, auth=auth, headers=self.headers, params=params, **kwargs)
-		if result.status_code != 200 or self.verbose:
-			sys.stderr.write('%s: %s\n'%(result, result.text))
+		result = None
+		with requests.get(url=url, auth=auth, headers=self.headers, params=params, **kwargs) as result:
+			if result.status_code != 200 or self.verbose:
+				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result
 
 	
@@ -135,9 +136,10 @@ class STEP(object):
 			headers['Content-Type'] = headers['Accept']
 		if self.verbose:
 			json.dump(dict(url=url, headers=headers, params=params), sys.stderr, indent=4)
-		result = requests.put(url=url, auth=auth, headers=headers, params=params, data=body)
-		if result.status_code not in [200,201] or self.verbose:
-			sys.stderr.write('%s: %s\n'%(result, result.text))
+		result = None
+		with requests.put(url=url, auth=auth, headers=headers, params=params, data=body) as result:
+			if result.status_code not in [200,201] or self.verbose:
+				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result.text
 
 	
@@ -155,9 +157,10 @@ class STEP(object):
 			headers['Content-Type'] = headers['Accept']
 		if self.verbose:
 			json.dump(dict(url=url, headers=headers, params=params), sys.stderr, indent=4)
-		result = requests.post(url=url, auth=auth, headers=headers, params=params, data=body)
-		if result.status_code not in [200,201] or self.verbose:
-			sys.stderr.write('%s: %s\n'%(result, result.text))
+		result = None
+		with requests.post(url=url, auth=auth, headers=headers, params=params, data=body) as result:
+			if result.status_code not in [200,201] or self.verbose:
+				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result.text
 
 
@@ -175,9 +178,10 @@ class STEP(object):
 			headers['Content-Type'] = headers['Accept']
 		if self.verbose:
 			json.dump(dict(url=url, headers=headers, params=params), sys.stderr, indent=4)
-		result = requests.delete(url=url, auth=auth, headers=headers, params=params, data=body)
-		if result.status_code != 200 or self.verbose:
-			sys.stderr.write('%s: %s\n'%(result, result.text))
+		result = None
+		with requests.delete(url=url, auth=auth, headers=headers, params=params, data=body) as result:
+			if result.status_code != 200 or self.verbose:
+				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result.text
 
 	

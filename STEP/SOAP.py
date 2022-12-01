@@ -356,6 +356,30 @@ class StepSoapClient(object):
 
 	#.............................................................
 	@args.operation
+	def getGroups(self, nodeURL):
+		request = self.createAccessControl()
+		response = self.client.service.getGroups(request, nodeURL)
+		return response
+
+
+	#.............................................................
+	@args.operation
+	def getUsers(self, nodeURL):
+		request = self.createAccessControl()
+		response = self.client.service.getUsers(request, nodeURL)
+		return response
+
+
+	#.............................................................
+	@args.operation
+	def getUserInfo(self, nodeURL):
+		request = self.createAccessControl()
+		response = self.client.service.getUserInfo(request, nodeURL)
+		return response
+
+
+	#.............................................................
+	@args.operation
 	def getValidChildTypes(self, nodeURL):
 		request = self.createAccessControl()
 		response = self.client.service.getValidChildTypes(request, nodeURL)

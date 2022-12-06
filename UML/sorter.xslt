@@ -9,7 +9,7 @@
     <xsl:template match="DataSet">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:for-each select="DataRow[starts-with(Column[@name='Stereotype']/@value,'STEP')]">
+            <xsl:for-each select="DataRow[starts-with(Column[@name='Stereotype']/@value,'STEP ')]">
                 <xsl:sort select="Column[@name='Stereotype']/@value"></xsl:sort>
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>

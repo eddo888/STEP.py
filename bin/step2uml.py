@@ -47,7 +47,8 @@ class STEP2UML(object):
 		types = [
 			'condition',
 			'date', 
-			'datetime', 
+			'datetime',
+			'gtin',
 			'integer',
 			'isodate', 
 			'isodatetime', 
@@ -56,6 +57,7 @@ class STEP2UML(object):
 			'number',
 			'numberrange',
 			'numeric_text',
+			'numeric_text_exclude_tags',
 			'regexp',
 			'text',
 			'text_exclude_tags',

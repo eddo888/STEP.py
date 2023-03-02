@@ -1,21 +1,46 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="STEP Types" name="STEP Types" version="1.0" notes="Stibo"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="1.1" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Attribute">
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Asset Reference" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Source" type="Classifier:Source" description="" unit="Entity" values="" default=""/>
+					<Tag name="Target" type="Classifier:Target" description="" unit="Asset" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,DateTime,Date,URL" default="text"/>
+					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
+					<Tag name="LOV"/>
+					<Tag name="UOMs"/>
+				</TaggedValues>
+			</Stereotype>
 			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Attribute">
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -23,8 +48,17 @@
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -32,8 +66,13 @@
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Entity Types" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -53,13 +92,34 @@
 			</Stereotype>
 			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Enumeration"/>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
 				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Multi Select" type="boolean" description="" unit="" values="true,false" default="false"/>
+					<Tag name="Values"/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Enumeration"/>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="LOV Value" notes="" cx="0" cy="0" bgcolor="9498256" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -72,29 +132,67 @@
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Attributes"/>
+					<Tag name="Parent"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Reference" notes="" cx="0" cy="0" bgcolor="13850042" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Association">
-						<Property name="compositionKind" value="none"/>
-						<Property name="direction" value="Source -&gt; Destination"/>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Targets"/>
+					<Tag name="Sources"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Rule" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Action">
+						<Property name="context" value=""/>
+						<Property name="effect" value=""/>
+						<Property name="kind" value=""/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Attribute">
-						<Property name="@ID" value=""/>
-						<Property name="Name" value=""/>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
 					</Apply>
 				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Base" type="float" description="" unit="" values="" default=""/>
+					<Tag name="Conversion" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 		</Stereotypes>
-		<TaggedValueTypes/>
+		<TaggedValueTypes>
+			<TaggedValueType property="LOV" description="" notes="Type=RefGUID;Stereotypes=LOV;"/>
+			<TaggedValueType property="UOMs" description="" notes="Type=RefGUIDList;Stereotypes=UOM;"/>
+			<TaggedValueType property="Values" description="" notes="Type=RefGUIDList;Stereotypes=LOV Value;"/>
+			<TaggedValueType property="Attributes" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
+			<TaggedValueType property="Parent" description="" notes="Type=Classifier;Stereotypes=Product;"/>
+			<TaggedValueType property="Targets" description="" notes="Type=RefGUIDList;Stereotypes=Classification;"/>
+			<TaggedValueType property="Sources" description="" notes="Type=RefGUIDList;Stereotypes=Product;"/>
+		</TaggedValueTypes>
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>

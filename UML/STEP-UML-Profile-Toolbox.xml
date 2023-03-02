@@ -1,0 +1,73 @@
+<?xml  version='1.0' encoding='windows-1252' ?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="1.1" notes="STEP Toolbox"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="Actions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::GIEP(UML::Component)" type="" description="" unit="" values="" default="GIEP"/>
+					<Tag name="STEP Types::IIEP(UML::Component)" type="" description="" unit="" values="" default="IIEP"/>
+					<Tag name="STEP Types::OIEP(UML::Component)" type="" description="" unit="" values="" default="OIEP"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attribute Group"/>
+					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classification Types"/>
+					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entity Types"/>
+					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOV Group"/>
+					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Product Types"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="References" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Valid Parent(UML::Association)" type="" description="" unit="" values="" default="Valid Parent"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Asset Reference(UML::Association)" type="" description="" unit="" values="" default="Asset Reference"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Asset(UML::Class)" type="" description="" unit="" values="" default="Asset"/>
+					<Tag name="STEP Types::Attribute(UML::Class)" type="" description="" unit="" values="" default="Attribute"/>
+					<Tag name="STEP Types::Classification(UML::Class)" type="" description="" unit="" values="" default="Classification"/>
+					<Tag name="STEP Types::Entity(UML::Class)" type="" description="" unit="" values="" default="Entity"/>
+					<Tag name="STEP Types::LOV Value(UML::Class)" type="" description="" unit="" values="" default="LOV Value"/>
+					<Tag name="STEP Types::LOV(UML::Class)" type="" description="" unit="" values="" default="LOV"/>
+					<Tag name="STEP Types::Product(UML::Class)" type="" description="" unit="" values="" default="Product"/>
+					<Tag name="STEP Types::Reference(UML::Class)" type="" description="" unit="" values="" default="Reference"/>
+					<Tag name="STEP Types::UOM(UML::Class)" type="" description="" unit="" values="" default="UOM"/>
+				</TaggedValues>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>

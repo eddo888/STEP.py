@@ -13,15 +13,15 @@ function IncludedMissingElements(diagram, depth, recurse) {
 	LayoutThisDiagram(_diagram);
 
 	_diagram.ShowPackageContents = true
-
+	
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
-	Session.Output(depth+"/ "+package.Name);
+	Session.Output(depth+"package["+package.PackageID+"]="+package.Name);
 
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
-
+		
 		add_diagram_element(_diagram, element);		
 	}
 
@@ -31,7 +31,15 @@ function IncludedMissingElements(diagram, depth, recurse) {
 
 		add_diagram_package(_diagram, _package);
 	}
-	
+		
+	for (var d=0; d<_diagram.DiagramObjects.Count; d++) {
+		var diagram_element as EA.DiagramObject;
+		diagram_element = _diagram.DiagramObjects.GetAt(d);
+		diagram_element.ShowTags = true;
+		diagram_element.ShowInheritedTags = true;
+		diagram_element.Update();
+	}
+
 	_diagram.Update();
 	Repository.ReloadDiagram(_diagram.DiagramID);
 	LayoutThisDiagram(_diagram);
@@ -68,3 +76,4 @@ function IncludedMissingParts() {
 }
 
 IncludedMissingParts();
+

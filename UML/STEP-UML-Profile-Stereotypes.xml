@@ -18,8 +18,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="Source" type="Classifier:Source" description="" unit="Entity" values="" default=""/>
-					<Tag name="Target" type="Classifier:Target" description="" unit="Asset" values="" default=""/>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -45,6 +45,9 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -63,6 +66,9 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Entity" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Asset Reference" constraint="STEP Types::Asset"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -182,6 +188,14 @@
 					<Tag name="Base" type="float" description="" unit="" values="" default=""/>
 					<Tag name="Conversion" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Valid Parent" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Generalization">
+						<Property name="direction" value="Source -&gt; Destination"/>
+						<Property name="isSubstitutable" value="true"/>
+					</Apply>
+				</AppliesTo>
 			</Stereotype>
 		</Stereotypes>
 		<TaggedValueTypes>

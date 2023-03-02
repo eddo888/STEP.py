@@ -33,20 +33,13 @@
 					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Product Types"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="References" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="ToolboxPage"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="STEP Types::Valid Parent(UML::Association)" type="" description="" unit="" values="" default="Valid Parent"/>
-				</TaggedValues>
-			</Stereotype>
 			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Asset Reference(UML::Association)" type="" description="" unit="" values="" default="Asset Reference"/>
+					<Tag name="STEP Types::Asset Reference(UML::Association)" type="" description="" unit="" values="" default="Asset Refernce"/>
+					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

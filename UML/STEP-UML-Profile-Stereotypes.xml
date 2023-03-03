@@ -60,7 +60,6 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -186,7 +185,6 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="LOV Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -230,6 +228,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="version" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>

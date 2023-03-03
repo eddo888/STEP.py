@@ -1,14 +1,25 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="1.1" notes="STEP Toolbox"/>
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="1.2" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Actions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::Group(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
+					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
 					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
+					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Attributes" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Valid Attribute(UML::Attribute)" type="" description="" unit="" values="" default="Valid Attribute"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -16,9 +27,16 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::DaaS(UML::Component)" type="" description="" unit="" values="" default="DaaS"/>
 					<Tag name="STEP Types::GIEP(UML::Component)" type="" description="" unit="" values="" default="GIEP"/>
 					<Tag name="STEP Types::IIEP(UML::Component)" type="" description="" unit="" values="" default="IIEP"/>
 					<Tag name="STEP Types::OIEP(UML::Component)" type="" description="" unit="" values="" default="OIEP"/>
+					<Tag name="STEP Types::PDX(UML::Component)" type="" description="" unit="" values="" default="PDX"/>
+					<Tag name="STEP Types::REST API(UML::Component)" type="" description="" unit="" values="" default="REST"/>
+					<Tag name="STEP Types::SOAP API(UML::Component)" type="" description="" unit="" values="" default="SOAP"/>
+					<Tag name="STEP Types::STEP(UML::Component)" type="" description="" unit="" values="" default="STEP"/>
+					<Tag name="STEP Types::WebUI(UML::Component)" type="" description="" unit="" values="" default="WebUI"/>
+					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -26,11 +44,14 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attribute Group"/>
-					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classification Types"/>
-					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entity Types"/>
-					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOV Group"/>
-					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Product Types"/>
+					<Tag name="STEP Types::Asset Types(UML::Package)" type="" description="" unit="" values="" default="Assets"/>
+					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attributes"/>
+					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classifications"/>
+					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entites"/>
+					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOVs"/>
+					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Products"/>
+					<Tag name="STEP Types::Roles(UML::Package)" type="" description="" unit="" values="" default="Roles"/>
+					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -38,7 +59,14 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Asset Reference(UML::Association)" type="" description="" unit="" values="" default="Asset Refernce"/>
+					<Tag name="STEP Types::Asset Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Asset Reference"/>
+					<Tag name="STEP Types::Attribute Link(UML::Association)" type="" description="" unit="" values="" default="Attribute Link"/>
+					<Tag name="STEP Types::Classification Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Classification Reference"/>
+					<Tag name="STEP Types::Entity Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Entity Reference"/>
+					<Tag name="STEP Types::LOV Type(UML::Association)" type="" description="" unit="" values="" default="LOV Type"/>
+					<Tag name="STEP Types::Product Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product Reference"/>
+					<Tag name="STEP Types::Product to Classification Link Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product to Classification Link"/>
+					<Tag name="STEP Types::UOM Type(UML::Association)" type="" description="" unit="" values="" default="UOM Type"/>
 					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
 				</TaggedValues>
 			</Stereotype>
@@ -51,10 +79,8 @@
 					<Tag name="STEP Types::Attribute(UML::Class)" type="" description="" unit="" values="" default="Attribute"/>
 					<Tag name="STEP Types::Classification(UML::Class)" type="" description="" unit="" values="" default="Classification"/>
 					<Tag name="STEP Types::Entity(UML::Class)" type="" description="" unit="" values="" default="Entity"/>
-					<Tag name="STEP Types::LOV Value(UML::Class)" type="" description="" unit="" values="" default="LOV Value"/>
-					<Tag name="STEP Types::LOV(UML::Class)" type="" description="" unit="" values="" default="LOV"/>
+					<Tag name="STEP Types::LOV(UML::Enumeration)" type="" description="" unit="" values="" default="LOV"/>
 					<Tag name="STEP Types::Product(UML::Class)" type="" description="" unit="" values="" default="Product"/>
-					<Tag name="STEP Types::Reference(UML::Class)" type="" description="" unit="" values="" default="Reference"/>
 					<Tag name="STEP Types::UOM(UML::Class)" type="" description="" unit="" values="" default="UOM"/>
 				</TaggedValues>
 			</Stereotype>

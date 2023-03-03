@@ -1,11 +1,12 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="727D11BD-7" name="STEP Diagrms" version="1.1" notes="STEP Diagrms"/>
+	<Documentation id="727D11BD-7" name="STEP Diagrms" version="1.2" notes="STEP Diagrms"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Component Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Component">
+						<Property name="pdata" value="ShowTags=1;"/>
 						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
 					</Apply>
 				</AppliesTo>
@@ -13,6 +14,15 @@
 			<Stereotype name="Packages Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Package">
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="pdata" value="ShowTags=1;"/>
 						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
 					</Apply>
 				</AppliesTo>
@@ -21,6 +31,19 @@
 				<AppliesTo>
 					<Apply type="Diagram_Logical">
 						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
 						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
 					</Apply>
 				</AppliesTo>

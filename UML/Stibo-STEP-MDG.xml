@@ -1,51 +1,11 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
-<MDG.Technology version="1.0"><Documentation id="STEP" name="Stibo" version="1.1" notes="Stibo MDG" infoURI="https://github.com/eddo888/STEP.py" supportURI="dave@stibosystems.com"/><UMLProfiles><UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="1.1" notes="STEP Types"/>
+<MDG.Technology version="1.0"><Documentation id="STEP" name="Stibo" version="1.2" notes="Stibo MDG" infoURI="https://github.com/eddo888/STEP.py" supportURI="dave@stibosystems.com"/><UMLProfiles><UMLProfile profiletype="uml2">
+	<Documentation id="8017159A-0" name="STEP Types" version="1.2" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Asset Reference" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Association">
-						<Property name="compositionKind" value="none"/>
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,DateTime,Date,URL" default="text"/>
-					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
-					<Tag name="LOV"/>
-					<Tag name="UOMs"/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
 				</stereotypedrelationships>
 				<AppliesTo>
@@ -58,6 +18,76 @@
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
+			<Stereotype name="Asset Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Asset Types" notes="" cx="0" cy="0" bgcolor="12632256" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::LOV Type" constraint="STEP Types::LOV"/>
+					<stereotypedrelationship stereotype="STEP Types::UOM Type" constraint="STEP Types::UOM"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,DateTime,Date,URL" default="text"/>
+					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
+					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
+					<stereotypedrelationship stereotype="STEP Types::Classification Reference Type" constraint="STEP Types::Classification"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Classification Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
@@ -65,13 +95,34 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="DaaS" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="Entity" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Asset Reference" constraint="STEP Types::Asset"/>
+					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
+					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
+					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Entity"/>
 				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Entity Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -89,6 +140,11 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Group" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="IIEP" notes="Inbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -98,15 +154,12 @@
 			</Stereotype>
 			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
+					<Apply type="Enumeration"/>
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Multi Select" type="boolean" description="" unit="" values="true,false" default="false"/>
-					<Tag name="Values"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -116,16 +169,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="LOV Value" notes="" cx="0" cy="0" bgcolor="9498256" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="LOV Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -134,7 +184,26 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="PDX" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="UseCase"/>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
+					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
+					<stereotypedrelationship stereotype="STEP Types::Product Reference Type" constraint="STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Product to Classification Link Type" constraint="STEP Types::Classification"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Product"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -143,9 +212,21 @@
 				<TaggedValues>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Attributes"/>
-					<Tag name="Parent"/>
 				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Product Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Product to Classification Link Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -154,18 +235,19 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Reference" notes="" cx="0" cy="0" bgcolor="13850042" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="REST API" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Targets"/>
-					<Tag name="Sources"/>
-				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Rule" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -173,6 +255,20 @@
 						<Property name="context" value=""/>
 						<Property name="effect" value=""/>
 						<Property name="kind" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="SOAP API" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="STEP" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -189,6 +285,22 @@
 					<Tag name="Conversion" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
+			<Stereotype name="UOM Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Valid Attribute" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Attribute">
+						<Property name="@ID" value=""/>
+						<Property name="Name" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="Valid Parent" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Generalization">
@@ -197,27 +309,52 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="WebUI" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Workflows" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Workspace" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 		</Stereotypes>
-		<TaggedValueTypes>
-			<TaggedValueType property="LOV" description="" notes="Type=RefGUID;Stereotypes=LOV;"/>
-			<TaggedValueType property="UOMs" description="" notes="Type=RefGUIDList;Stereotypes=UOM;"/>
-			<TaggedValueType property="Values" description="" notes="Type=RefGUIDList;Stereotypes=LOV Value;"/>
-			<TaggedValueType property="Attributes" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
-			<TaggedValueType property="Parent" description="" notes="Type=Classifier;Stereotypes=Product;"/>
-			<TaggedValueType property="Targets" description="" notes="Type=RefGUIDList;Stereotypes=Classification;"/>
-			<TaggedValueType property="Sources" description="" notes="Type=RefGUIDList;Stereotypes=Product;"/>
-		</TaggedValueTypes>
+		<TaggedValueTypes/>
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>
 </UMLProfile></UMLProfiles><TaggedValueTypes><RefData version="1.0" exporter="EA.25">
 </RefData></TaggedValueTypes><DiagramProfile><UMLProfile profiletype="uml2">
-	<Documentation id="727D11BD-7" name="STEP Diagrms" version="1.1" notes="STEP Diagrms"/>
+	<Documentation id="727D11BD-7" name="STEP Diagrms" version="1.2" notes="STEP Diagrms"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Component Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Component">
+						<Property name="pdata" value="ShowTags=1;"/>
 						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
 					</Apply>
 				</AppliesTo>
@@ -225,6 +362,15 @@
 			<Stereotype name="Packages Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Package">
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="pdata" value="ShowTags=1;"/>
 						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
 					</Apply>
 				</AppliesTo>
@@ -237,21 +383,45 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 		</Stereotypes>
 		<TaggedValueTypes/>
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>
 </UMLProfile></DiagramProfile><UIToolboxes><UMLProfile profiletype="uml2">
-	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="1.1" notes="STEP Toolbox"/>
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="1.2" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Actions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::Group(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
+					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
 					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
+					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Attributes" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Valid Attribute(UML::Attribute)" type="" description="" unit="" values="" default="Valid Attribute"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -259,9 +429,16 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::DaaS(UML::Component)" type="" description="" unit="" values="" default="DaaS"/>
 					<Tag name="STEP Types::GIEP(UML::Component)" type="" description="" unit="" values="" default="GIEP"/>
 					<Tag name="STEP Types::IIEP(UML::Component)" type="" description="" unit="" values="" default="IIEP"/>
 					<Tag name="STEP Types::OIEP(UML::Component)" type="" description="" unit="" values="" default="OIEP"/>
+					<Tag name="STEP Types::PDX(UML::Component)" type="" description="" unit="" values="" default="PDX"/>
+					<Tag name="STEP Types::REST API(UML::Component)" type="" description="" unit="" values="" default="REST"/>
+					<Tag name="STEP Types::SOAP API(UML::Component)" type="" description="" unit="" values="" default="SOAP"/>
+					<Tag name="STEP Types::STEP(UML::Component)" type="" description="" unit="" values="" default="STEP"/>
+					<Tag name="STEP Types::WebUI(UML::Component)" type="" description="" unit="" values="" default="WebUI"/>
+					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -269,11 +446,14 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attribute Group"/>
-					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classification Types"/>
-					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entity Types"/>
-					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOV Group"/>
-					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Product Types"/>
+					<Tag name="STEP Types::Asset Types(UML::Package)" type="" description="" unit="" values="" default="Assets"/>
+					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attributes"/>
+					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classifications"/>
+					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entites"/>
+					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOVs"/>
+					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Products"/>
+					<Tag name="STEP Types::Roles(UML::Package)" type="" description="" unit="" values="" default="Roles"/>
+					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -281,7 +461,14 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Asset Reference(UML::Association)" type="" description="" unit="" values="" default="Asset Refernce"/>
+					<Tag name="STEP Types::Asset Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Asset Reference"/>
+					<Tag name="STEP Types::Attribute Link(UML::Association)" type="" description="" unit="" values="" default="Attribute Link"/>
+					<Tag name="STEP Types::Classification Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Classification Reference"/>
+					<Tag name="STEP Types::Entity Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Entity Reference"/>
+					<Tag name="STEP Types::LOV Type(UML::Association)" type="" description="" unit="" values="" default="LOV Type"/>
+					<Tag name="STEP Types::Product Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product Reference"/>
+					<Tag name="STEP Types::Product to Classification Link Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product to Classification Link"/>
+					<Tag name="STEP Types::UOM Type(UML::Association)" type="" description="" unit="" values="" default="UOM Type"/>
 					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
 				</TaggedValues>
 			</Stereotype>
@@ -294,10 +481,8 @@
 					<Tag name="STEP Types::Attribute(UML::Class)" type="" description="" unit="" values="" default="Attribute"/>
 					<Tag name="STEP Types::Classification(UML::Class)" type="" description="" unit="" values="" default="Classification"/>
 					<Tag name="STEP Types::Entity(UML::Class)" type="" description="" unit="" values="" default="Entity"/>
-					<Tag name="STEP Types::LOV Value(UML::Class)" type="" description="" unit="" values="" default="LOV Value"/>
-					<Tag name="STEP Types::LOV(UML::Class)" type="" description="" unit="" values="" default="LOV"/>
+					<Tag name="STEP Types::LOV(UML::Enumeration)" type="" description="" unit="" values="" default="LOV"/>
 					<Tag name="STEP Types::Product(UML::Class)" type="" description="" unit="" values="" default="Product"/>
-					<Tag name="STEP Types::Reference(UML::Class)" type="" description="" unit="" values="" default="Reference"/>
 					<Tag name="STEP Types::UOM(UML::Class)" type="" description="" unit="" values="" default="UOM"/>
 				</TaggedValues>
 			</Stereotype>
@@ -306,7 +491,7 @@
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>
-</UMLProfile></UIToolboxes><Scripts><Script name="Set Link Style" type="normal" language="JScript" guid="{1C6EFBF0-125A-4f39-96D9-4747500E5463}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
+</UMLProfile></UIToolboxes><ModelViews/><Scripts><Script name="Set Link Style" type="normal" language="JScript" guid="{1C6EFBF0-125A-4f39-96D9-4747500E5463}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
 AG4AcwB0AGEAbgB0AHMALQBKAFMAYwByAGkAcAB0AA0ACgANAAoAIQBJAE4A
 QwAgAFUAcwBlAHIAIABTAGMAcgBpAHAAdABzAC4ATABpAGIAcgBhAHIAeQAN
 AAoADQAKAGYAdQBuAGMAdABpAG8AbgAgAFMAZQB0AEwAaQBuAGUAUwB0AHkA
@@ -329,80 +514,83 @@ AHQAOwAgAGwAKwArACkAIAB7AA0ACgAJAAkAdgBhAHIAIABkAGkAYQBnAHIA
 YQBtAF8AbABpAG4AawAgAGEAcwAgAEUAQQAuAEQAaQBhAGcAcgBhAG0ATABp
 AG4AawA7AA0ACgAJAAkAZABpAGEAZwByAGEAbQBfAGwAaQBuAGsAIAA9ACAA
 XwBkAGkAYQBnAHIAYQBtAC4ARABpAGEAZwByAGEAbQBMAGkAbgBrAHMALgBH
-AGUAdABBAHQAKABsACkAOwANAAoACQAJAA0ACgAJAAkAaQBmACAAKABkAGkA
-YQBnAHIAYQBtAF8AbABpAG4AawAuAFMAdAB5AGwAZQAuAGkAbgBkAGUAeABP
-AGYAKAAnAFQAUgBFAEUAPQAnACkAIAA9AD0AIAAtADEAKQAgAHsADQAKAAkA
-CQAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoAGQAaQBhAGcAcgBh
-AG0AXwBsAGkAbgBrAC4AUwB0AHkAbABlACkAOwANAAoACQAJAAkAZABpAGEA
-ZwByAGEAbQBfAGwAaQBuAGsALgBTAHQAeQBsAGUAIAA9ACAAZABpAGEAZwBy
-AGEAbQBfAGwAaQBuAGsALgBTAHQAeQBsAGUAIAArACIAOwBUAFIARQBFAD0A
-VgAiADsADQAKAAkACQAJAGQAaQBhAGcAcgBhAG0AXwBsAGkAbgBrAC4AVQBw
-AGQAYQB0AGUAKAApADsADQAKAAkACQB9AA0ACgAJAH0ACQAJAA0ACgAJAA0A
-CgAJAF8AZABpAGEAZwByAGEAbQAuAFUAcABkAGEAdABlACgAKQA7AA0ACgAJ
-AFIAZQBwAG8AcwBpAHQAbwByAHkALgBSAGUAbABvAGEAZABEAGkAYQBnAHIA
-YQBtACgAXwBkAGkAYQBnAHIAYQBtAC4ARABpAGEAZwByAGEAbQBJAEQAKQA7
-AA0ACgAJAA0ACgAJAGYAbwByACAAKAB2AGEAcgAgAGkAPQAwADsAIABpADwA
-XwBkAGkAYQBnAHIAYQBtAC4ARABpAGEAZwByAGEAbQBPAGIAagBlAGMAdABz
-AC4AQwBvAHUAbgB0ADsAIABpACsAKwApACAAewANAAoACQAJAHYAYQByACAA
-ZABpAGEAZwByAGEAbQBfAG8AYgBqAGUAYwB0ACAAYQBzACAARQBBAC4ARABp
-AGEAZwByAGEAbQBPAGIAagBlAGMAdAA7AA0ACgAJAAkAZABpAGEAZwByAGEA
-bQBfAG8AYgBqAGUAYwB0ACAAPQAgAF8AZABpAGEAZwByAGEAbQAuAEQAaQBh
-AGcAcgBhAG0ATwBiAGoAZQBjAHQAcwAuAEcAZQB0AEEAdAAoAGkAKQA7AA0A
-CgAJAAkALwAvAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACIAZABv
-AHQAPQAiACsAZABpAGEAZwByAGEAbQBfAG8AYgBqAGUAYwB0AC4ATwBiAGoA
-ZQBjAHQAVAB5AHAAZQApADsADQAKAAkACQANAAoACQAJAC8AKgANAAoACQAJ
-AHYAYQByACAAZQBsAGUAbQBlAG4AdAAgAGEAcwAgAEUAQQAuAEUAbABlAG0A
-ZQBuAHQAOwANAAoACQAJAGUAbABlAG0AZQBuAHQAIAA9ACAAUgBlAHAAbwBz
-AGkAdABvAHIAeQAuAEcAZQB0AEUAbABlAG0AZQBuAHQAQgB5AEkARAAoAGQA
-aQBhAGcAcgBhAG0AXwBvAGIAagBlAGMAdAAuAEUAbABlAG0AZQBuAHQASQBE
-ACkAOwANAAoACQAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACIA
-aQBkAD0AIgArAGUAbABlAG0AZQBuAHQALgBFAGwAZQBtAGUAbgB0AEkARAAr
-ACIALAAgAGUAbwB0AD0AIgArAGUAbABlAG0AZQBuAHQALgBUAHkAcABlACkA
-OwANAAoACQAJACoALwANAAoACQAJAA0ACgAJAAkALwAqAA0ACgAJAAkAZgBv
-AHIAIAAoAHYAYQByACAAYwA9ADAAOwAgAGMAPABlAGwAZQBtAGUAbgB0AC4A
-QwBvAG4AbgBlAGMAdABvAHIAcwAuAEMAbwB1AG4AdAA7ACAAYwArACsAKQAg
-AHsADQAKAAkACQAJAHYAYQByACAAYwBvAG4AbgBlAGMAdABvAHIAIABhAHMA
-IABFAEEALgBDAG8AbgBuAGUAYwB0AG8AcgA7AA0ACgAJAAkACQBjAG8AbgBu
-AGUAYwB0AG8AcgAgAD0AIABlAGwAZQBtAGUAbgB0AC4AQwBvAG4AbgBlAGMA
-dABvAHIAcwAuAEcAZQB0AEEAdAAoAGMAKQA7AA0ACgAJAAkACQANAAoACQAJ
-AAkAaQBmACAAKABjAG8AbgBuAGUAYwB0AG8AcgAuAFQAeQBwAGUAIAA9AD0A
-IAAiAEcAZQBuAGUAcgBhAGwAaQB6AGEAdABpAG8AbgAiACkAIAB7AA0ACgAJ
-AAkACQAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoAGQAZQBwAHQA
-aAArACIAIAAgACAAIAA6ACAAIgArAGMAbwBuAG4AZQBjAHQAbwByAC4AUwB0
-AHkAbABlACkAOwANAAoACQAJAAkAfQANAAoACQAJAAkADQAKAAkACQAJAHYA
-YQByACAAbwB0AGgAZQByACAAYQBzACAARQBBAC4ARQBsAGUAbQBlAG4AdAA7
-AAkACQAJAA0ACgAJAAkACQBTAGUAcwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQA
-KABkAGUAcAB0AGgAKwAiACAAIAAgACAAPgAgACIAKwBvAHQAaABlAHIALgBO
-AGEAbQBlACkAOwANAAoACQAJAH0ADQAKAAkACQAqAC8ADQAKAAkACQANAAoA
-CQAJAC8AKgANAAoACQAJAHYAYQByACAAcgBlAGYAZQByAGUAbgBjAGUAcwAg
-AD0AIABlAGwAZQBtAGUAbgB0AC4ARwBlAHQAUgBlAGwAYQB0AGkAbwBuAFMA
-ZQB0ACgAcgBzAEcAZQBuAGUAcgBhAGwAaQB6AGUAUwB0AGEAcgB0ACkAOwAN
-AAoACQAJAGkAZgAgACgAcgBlAGYAZQByAGUAbgBjAGUAcwApACAAewANAAoA
-CQAJAAkAdgBhAHIAIABwAGEAcgB0AHMAIAA9ACAAcgBlAGYAZQByAGUAbgBj
-AGUAcwAuAHMAcABsAGkAdAAoACIALAAiACkAOwANAAoACQAJAAkAUwBlAHMA
-cwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgAcABhAHIAdABzACkAOwANAAoACQAJ
-AAkAZgBvAHIAIAAoAHYAYQByACAAcgA9ADAAOwAgAHIAPABwAGEAcgB0AHMA
-LgBsAGUAbgBnAHQAaAA7ACAAcgArACsAKQAgAHsADQAKAAkACQAJAAkAdgBh
-AHIAIABzAG8AdQByAGMAZQAgAGEAcwAgAEUAQQAuAEUAbABlAG0AZQBuAHQA
-OwANAAoACQAJAAkACQBzAG8AdQByAGMAZQAgAD0AIABSAGUAcABvAHMAaQB0
-AG8AcgB5AC4ARwBlAHQARQBsAGUAbQBlAG4AdABCAHkASQBkACgAcABhAHIA
-dABzAFsAcgBdACkAOwANAAoACQAJAAkACQBTAGUAcwBzAGkAbwBuAC4ATwB1
-AHQAcAB1AHQAKAAiACAAIAAgACAAIgArAHMAbwB1AHIAYwBlAC4ATgBhAG0A
-ZQApADsADQAKAAkACQAJAH0ADQAKAAkACQB9AA0ACgAJAAkAKgAvAA0ACgAJ
-AAkADQAKAAkAfQANAAoACQANAAoAfQANAAoADQAKAGYAdQBuAGMAdABpAG8A
-bgAgAFMAZQB0AEwAaQBuAGUAUwB0AHkAbABlAHMAKAApACAAewANAAoACQBS
-AGUAcABvAHMAaQB0AG8AcgB5AC4ARQBuAHMAdQByAGUATwB1AHQAcAB1AHQA
-VgBpAHMAaQBiAGwAZQAoACAAIgBTAGMAcgBpAHAAdAAiACAAKQA7AA0ACgAJ
-AFIAZQBwAG8AcwBpAHQAbwByAHkALgBDAGwAZQBhAHIATwB1AHQAcAB1AHQA
-KAAiAFMAYwByAGkAcAB0ACIAKQA7AA0ACgAJAFMAZQBzAHMAaQBvAG4ALgBP
-AHUAdABwAHUAdAAoACAAIgBTAHQAYQByAHQAaQBuAGcAIgAgACkAOwANAAoA
-CQB2AGEAcgAgAGQAaQBhAGcAcgBhAG0AIABhAHMAIABFAEEALgBEAGkAYQBn
-AHIAYQBtADsADQAKAAkAZABpAGEAZwByAGEAbQAgAD0AIABSAGUAcABvAHMA
-aQB0AG8AcgB5AC4ARwBlAHQAQwB1AHIAcgBlAG4AdABEAGkAYQBnAHIAYQBt
-ACgAKQA7AA0ACgAJAFMAZQB0AEwAaQBuAGUAUwB0AHkAbABlACgAZABpAGEA
-ZwByAGEAbQApADsADQAKAAkAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0
-ACgAIAAiAEUAbgBkAGUAZAAiACAAKQA7AA0ACgB9AA0ACgANAAoAUwBlAHQA
-TABpAG4AZQBTAHQAeQBsAGUAcwAoACkAOwANAAoA
+AGUAdABBAHQAKABsACkAOwANAAoACQAJAA0ACgAJAAkAUwBlAHMAcwBpAG8A
+bgAuAE8AdQB0AHAAdQB0ACgAZABpAGEAZwByAGEAbQBfAGwAaQBuAGsALgBT
+AHQAeQBsAGUAKQA7AA0ACgAJAAkAaQBmACAAKABkAGkAYQBnAHIAYQBtAF8A
+bABpAG4AawAuAFMAdAB5AGwAZQAuAGkAbgBkAGUAeABPAGYAKAAnAFQAUgBF
+AEUAPQAnACkAIAA+AD0AIAAwACkAIAB7AA0ACgAJAAkACQB2AGEAcgAgAHMA
+dAB5AGwAZQAgAD0AIABkAGkAYQBnAHIAYQBtAF8AbABpAG4AawAuAFMAdAB5
+AGwAZQA7AA0ACgAJAAkACQBzAHQAeQBsAGUAIAA9ACAAcwB0AHkAbABlAC4A
+cgBlAHAAbABhAGMAZQAoACcAOwBUAFIARQBFAD0ASAAnACwAJwBUAFIARQBF
+AD0AVgAnACkAOwANAAoACQAJAAkAZABpAGEAZwByAGEAbQBfAGwAaQBuAGsA
+LgBTAHQAeQBsAGUAIAA9ACAAcwB0AHkAbABlADsADQAKAAkACQAJAGQAaQBh
+AGcAcgBhAG0AXwBsAGkAbgBrAC4AVQBwAGQAYQB0AGUAKAApADsADQAKAAkA
+CQB9AA0ACgAJAH0ACQAJAA0ACgAJAA0ACgAJAF8AZABpAGEAZwByAGEAbQAu
+AFUAcABkAGEAdABlACgAKQA7AA0ACgAJAFIAZQBwAG8AcwBpAHQAbwByAHkA
+LgBSAGUAbABvAGEAZABEAGkAYQBnAHIAYQBtACgAXwBkAGkAYQBnAHIAYQBt
+AC4ARABpAGEAZwByAGEAbQBJAEQAKQA7AA0ACgAJAA0ACgAJAGYAbwByACAA
+KAB2AGEAcgAgAGkAPQAwADsAIABpADwAXwBkAGkAYQBnAHIAYQBtAC4ARABp
+AGEAZwByAGEAbQBPAGIAagBlAGMAdABzAC4AQwBvAHUAbgB0ADsAIABpACsA
+KwApACAAewANAAoACQAJAHYAYQByACAAZABpAGEAZwByAGEAbQBfAG8AYgBq
+AGUAYwB0ACAAYQBzACAARQBBAC4ARABpAGEAZwByAGEAbQBPAGIAagBlAGMA
+dAA7AA0ACgAJAAkAZABpAGEAZwByAGEAbQBfAG8AYgBqAGUAYwB0ACAAPQAg
+AF8AZABpAGEAZwByAGEAbQAuAEQAaQBhAGcAcgBhAG0ATwBiAGoAZQBjAHQA
+cwAuAEcAZQB0AEEAdAAoAGkAKQA7AA0ACgAJAAkALwAvAFMAZQBzAHMAaQBv
+AG4ALgBPAHUAdABwAHUAdAAoACIAZABvAHQAPQAiACsAZABpAGEAZwByAGEA
+bQBfAG8AYgBqAGUAYwB0AC4ATwBiAGoAZQBjAHQAVAB5AHAAZQApADsADQAK
+AAkACQANAAoACQAJAC8AKgANAAoACQAJAHYAYQByACAAZQBsAGUAbQBlAG4A
+dAAgAGEAcwAgAEUAQQAuAEUAbABlAG0AZQBuAHQAOwANAAoACQAJAGUAbABl
+AG0AZQBuAHQAIAA9ACAAUgBlAHAAbwBzAGkAdABvAHIAeQAuAEcAZQB0AEUA
+bABlAG0AZQBuAHQAQgB5AEkARAAoAGQAaQBhAGcAcgBhAG0AXwBvAGIAagBl
+AGMAdAAuAEUAbABlAG0AZQBuAHQASQBEACkAOwANAAoACQAJAFMAZQBzAHMA
+aQBvAG4ALgBPAHUAdABwAHUAdAAoACIAaQBkAD0AIgArAGUAbABlAG0AZQBu
+AHQALgBFAGwAZQBtAGUAbgB0AEkARAArACIALAAgAGUAbwB0AD0AIgArAGUA
+bABlAG0AZQBuAHQALgBUAHkAcABlACkAOwANAAoACQAJACoALwANAAoACQAJ
+AA0ACgAJAAkALwAqAA0ACgAJAAkAZgBvAHIAIAAoAHYAYQByACAAYwA9ADAA
+OwAgAGMAPABlAGwAZQBtAGUAbgB0AC4AQwBvAG4AbgBlAGMAdABvAHIAcwAu
+AEMAbwB1AG4AdAA7ACAAYwArACsAKQAgAHsADQAKAAkACQAJAHYAYQByACAA
+YwBvAG4AbgBlAGMAdABvAHIAIABhAHMAIABFAEEALgBDAG8AbgBuAGUAYwB0
+AG8AcgA7AA0ACgAJAAkACQBjAG8AbgBuAGUAYwB0AG8AcgAgAD0AIABlAGwA
+ZQBtAGUAbgB0AC4AQwBvAG4AbgBlAGMAdABvAHIAcwAuAEcAZQB0AEEAdAAo
+AGMAKQA7AA0ACgAJAAkACQANAAoACQAJAAkAaQBmACAAKABjAG8AbgBuAGUA
+YwB0AG8AcgAuAFQAeQBwAGUAIAA9AD0AIAAiAEcAZQBuAGUAcgBhAGwAaQB6
+AGEAdABpAG8AbgAiACkAIAB7AA0ACgAJAAkACQAJAFMAZQBzAHMAaQBvAG4A
+LgBPAHUAdABwAHUAdAAoAGQAZQBwAHQAaAArACIAIAAgACAAIAA6ACAAIgAr
+AGMAbwBuAG4AZQBjAHQAbwByAC4AUwB0AHkAbABlACkAOwANAAoACQAJAAkA
+fQANAAoACQAJAAkADQAKAAkACQAJAHYAYQByACAAbwB0AGgAZQByACAAYQBz
+ACAARQBBAC4ARQBsAGUAbQBlAG4AdAA7AAkACQAJAA0ACgAJAAkACQBTAGUA
+cwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQAKABkAGUAcAB0AGgAKwAiACAAIAAg
+ACAAPgAgACIAKwBvAHQAaABlAHIALgBOAGEAbQBlACkAOwANAAoACQAJAH0A
+DQAKAAkACQAqAC8ADQAKAAkACQANAAoACQAJAC8AKgANAAoACQAJAHYAYQBy
+ACAAcgBlAGYAZQByAGUAbgBjAGUAcwAgAD0AIABlAGwAZQBtAGUAbgB0AC4A
+RwBlAHQAUgBlAGwAYQB0AGkAbwBuAFMAZQB0ACgAcgBzAEcAZQBuAGUAcgBh
+AGwAaQB6AGUAUwB0AGEAcgB0ACkAOwANAAoACQAJAGkAZgAgACgAcgBlAGYA
+ZQByAGUAbgBjAGUAcwApACAAewANAAoACQAJAAkAdgBhAHIAIABwAGEAcgB0
+AHMAIAA9ACAAcgBlAGYAZQByAGUAbgBjAGUAcwAuAHMAcABsAGkAdAAoACIA
+LAAiACkAOwANAAoACQAJAAkAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0
+ACgAcABhAHIAdABzACkAOwANAAoACQAJAAkAZgBvAHIAIAAoAHYAYQByACAA
+cgA9ADAAOwAgAHIAPABwAGEAcgB0AHMALgBsAGUAbgBnAHQAaAA7ACAAcgAr
+ACsAKQAgAHsADQAKAAkACQAJAAkAdgBhAHIAIABzAG8AdQByAGMAZQAgAGEA
+cwAgAEUAQQAuAEUAbABlAG0AZQBuAHQAOwANAAoACQAJAAkACQBzAG8AdQBy
+AGMAZQAgAD0AIABSAGUAcABvAHMAaQB0AG8AcgB5AC4ARwBlAHQARQBsAGUA
+bQBlAG4AdABCAHkASQBkACgAcABhAHIAdABzAFsAcgBdACkAOwANAAoACQAJ
+AAkACQBTAGUAcwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQAKAAiACAAIAAgACAA
+IgArAHMAbwB1AHIAYwBlAC4ATgBhAG0AZQApADsADQAKAAkACQAJAH0ADQAK
+AAkACQB9AA0ACgAJAAkAKgAvAA0ACgAJAAkADQAKAAkAfQANAAoACQANAAoA
+fQANAAoADQAKAGYAdQBuAGMAdABpAG8AbgAgAFMAZQB0AEwAaQBuAGUAUwB0
+AHkAbABlAHMAKAApACAAewANAAoACQBSAGUAcABvAHMAaQB0AG8AcgB5AC4A
+RQBuAHMAdQByAGUATwB1AHQAcAB1AHQAVgBpAHMAaQBiAGwAZQAoACAAIgBT
+AGMAcgBpAHAAdAAiACAAKQA7AA0ACgAJAFIAZQBwAG8AcwBpAHQAbwByAHkA
+LgBDAGwAZQBhAHIATwB1AHQAcAB1AHQAKAAiAFMAYwByAGkAcAB0ACIAKQA7
+AA0ACgAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBTAHQA
+YQByAHQAaQBuAGcAIgAgACkAOwANAAoACQB2AGEAcgAgAGQAaQBhAGcAcgBh
+AG0AIABhAHMAIABFAEEALgBEAGkAYQBnAHIAYQBtADsADQAKAAkAZABpAGEA
+ZwByAGEAbQAgAD0AIABSAGUAcABvAHMAaQB0AG8AcgB5AC4ARwBlAHQAQwB1
+AHIAcgBlAG4AdABEAGkAYQBnAHIAYQBtACgAKQA7AA0ACgAJAFMAZQB0AEwA
+aQBuAGUAUwB0AHkAbABlACgAZABpAGEAZwByAGEAbQApADsADQAKAAkAUwBl
+AHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgAIAAiAEUAbgBkAGUAZAAiACAA
+KQA7AA0ACgB9AA0ACgANAAoAUwBlAHQATABpAG4AZQBTAHQAeQBsAGUAcwAo
+ACkAOwANAAoA
 </Content></Script><Script name="Include Missing Parts" type="normal" language="JScript" guid="{59E173F6-807B-4b3f-80A7-3C4244FCF9FA}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
 AG4AcwB0AGEAbgB0AHMALQBKAFMAYwByAGkAcAB0AA0ACgANAAoAIQBJAE4A
 QwAgAFUAcwBlAHIAIABTAGMAcgBpAHAAdABzAC4ATABpAGIAcgBhAHIAeQAN
@@ -443,48 +631,60 @@ YQBnAGUAOwANAAoACQAJAF8AcABhAGMAawBhAGcAZQAgAD0AIABwAGEAYwBr
 AGEAZwBlAC4AUABhAGMAawBhAGcAZQBzAC4ARwBlAHQAQQB0ACgAcAApADsA
 DQAKAA0ACgAJAAkAYQBkAGQAXwBkAGkAYQBnAHIAYQBtAF8AcABhAGMAawBh
 AGcAZQAoAF8AZABpAGEAZwByAGEAbQAsACAAXwBwAGEAYwBrAGEAZwBlACkA
-OwANAAoACQB9AA0ACgAJAA0ACgAJAF8AZABpAGEAZwByAGEAbQAuAFUAcABk
-AGEAdABlACgAKQA7AA0ACgAJAFIAZQBwAG8AcwBpAHQAbwByAHkALgBSAGUA
-bABvAGEAZABEAGkAYQBnAHIAYQBtACgAXwBkAGkAYQBnAHIAYQBtAC4ARABp
-AGEAZwByAGEAbQBJAEQAKQA7AA0ACgAJAEwAYQB5AG8AdQB0AFQAaABpAHMA
-RABpAGEAZwByAGEAbQAoAF8AZABpAGEAZwByAGEAbQApADsADQAKAAkADQAK
-AAkAaQBmACAAKAByAGUAYwB1AHIAcwBlACkAIAB7AA0ACgAJAAkAZgBvAHIA
-IAAoAHYAYQByACAAcAA9ADAAOwAgAHAAPABwAGEAYwBrAGEAZwBlAC4AUABh
-AGMAawBhAGcAZQBzAC4AQwBvAHUAbgB0ADsAIABwACsAKwApACAAewANAAoA
-CQAJAAkAdgBhAHIAIABfAHAAYQBjAGsAYQBnAGUAIABhAHMAIABFAEEALgBQ
-AGEAYwBrAGEAZwBlADsADQAKAAkACQAJAF8AcABhAGMAawBhAGcAZQAgAD0A
-IABwAGEAYwBrAGEAZwBlAC4AUABhAGMAawBhAGcAZQBzAC4ARwBlAHQAQQB0
-ACgAcAApADsADQAKAA0ACgAJAAkACQB2AGEAcgAgAF8AXwBkAGkAYQBnAHIA
-YQBtACAAYQBzACAARQBBAC4ARABpAGEAZwByAGEAbQA7AA0ACgANAAoACQAJ
-AAkAaQBmACAAKABfAHAAYQBjAGsAYQBnAGUALgBEAGkAYQBnAHIAYQBtAHMA
-LgBDAG8AdQBuAHQAIAA9AD0AIAAwACkAIAB7AA0ACgAJAAkACQAJAF8AXwBk
-AGkAYQBnAHIAYQBtACAAPQAgAF8AcABhAGMAawBhAGcAZQAuAEQAaQBhAGcA
-cgBhAG0AcwAuAEEAZABkAE4AZQB3ACgAcABhAGMAawBhAGcAZQAuAE4AYQBt
-AGUALAAgACIAQwBvAG0AcABvAG4AZQBuAHQAIgApADsADQAKAAkACQAJAAkA
-XwBfAGQAaQBhAGcAcgBhAG0ALgBVAHAAZABhAHQAZQAoACkAOwANAAoACQAJ
-AAkAfQANAAoACQAJAAkADQAKAAkACQAJAGYAbwByACAAKAB2AGEAcgAgAGQA
-PQAwADsAIABkADwAXwBwAGEAYwBrAGEAZwBlAC4ARABpAGEAZwByAGEAbQBz
-AC4AQwBvAHUAbgB0ADsAIABkACsAKwApACAAewANAAoACQAJAAkACQBfAF8A
-ZABpAGEAZwByAGEAbQAgAD0AIABfAHAAYQBjAGsAYQBnAGUALgBEAGkAYQBn
-AHIAYQBtAHMALgBHAGUAdABBAHQAKABkACkAOwANAAoACQAJAAkACQBJAG4A
-YwBsAHUAZABlAGQATQBpAHMAcwBpAG4AZwBFAGwAZQBtAGUAbgB0AHMAKABf
-AF8AZABpAGEAZwByAGEAbQAsACAAZABlAHAAdABoACsAJwAgACAAJwAsACAA
-cgBlAGMAdQByAHMAZQApADsADQAKAAkACQAJAH0ADQAKAAkACQAJAA0ACgAJ
-AAkAfQANAAoACQB9AA0ACgB9AA0ACgANAAoAZgB1AG4AYwB0AGkAbwBuACAA
-SQBuAGMAbAB1AGQAZQBkAE0AaQBzAHMAaQBuAGcAUABhAHIAdABzACgAKQAg
-AHsADQAKAAkAUgBlAHAAbwBzAGkAdABvAHIAeQAuAEUAbgBzAHUAcgBlAE8A
-dQB0AHAAdQB0AFYAaQBzAGkAYgBsAGUAKAAgACIAUwBjAHIAaQBwAHQAIgAg
-ACkAOwANAAoACQBSAGUAcABvAHMAaQB0AG8AcgB5AC4AQwBsAGUAYQByAE8A
-dQB0AHAAdQB0ACgAIgBTAGMAcgBpAHAAdAAiACkAOwANAAoACQBTAGUAcwBz
-AGkAbwBuAC4ATwB1AHQAcAB1AHQAKAAgACIAUwB0AGEAcgB0AGkAbgBnACIA
-IAApADsADQAKAAkAdgBhAHIAIABkAGkAYQBnAHIAYQBtACAAYQBzACAARQBB
-AC4ARABpAGEAZwByAGEAbQA7AA0ACgAJAGQAaQBhAGcAcgBhAG0AIAA9ACAA
-UgBlAHAAbwBzAGkAdABvAHIAeQAuAEcAZQB0AEMAdQByAHIAZQBuAHQARABp
-AGEAZwByAGEAbQAoACkAOwANAAoACQBJAG4AYwBsAHUAZABlAGQATQBpAHMA
-cwBpAG4AZwBFAGwAZQBtAGUAbgB0AHMAKABkAGkAYQBnAHIAYQBtACkAOwAN
-AAoACQBTAGUAcwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQAKAAgACIARQBuAGQA
-ZQBkACIAIAApADsADQAKAH0ADQAKAA0ACgBJAG4AYwBsAHUAZABlAGQATQBp
-AHMAcwBpAG4AZwBQAGEAcgB0AHMAKAApADsADQAKAA0ACgA=
+OwANAAoACQB9AA0ACgANAAoACQBmAG8AcgAgACgAdgBhAHIAIABkAD0AMAA7
+ACAAZAA8AF8AZABpAGEAZwByAGEAbQAuAEQAaQBhAGcAcgBhAG0ATwBiAGoA
+ZQBjAHQAcwAuAEMAbwB1AG4AdAA7ACAAZAArACsAKQAgAHsADQAKAAkACQB2
+AGEAcgAgAGQAaQBhAGcAcgBhAG0AXwBlAGwAZQBtAGUAbgB0ACAAYQBzACAA
+RQBBAC4ARABpAGEAZwByAGEAbQBPAGIAagBlAGMAdAA7AA0ACgAJAAkAZABp
+AGEAZwByAGEAbQBfAGUAbABlAG0AZQBuAHQAIAA9ACAAXwBkAGkAYQBnAHIA
+YQBtAC4ARABpAGEAZwByAGEAbQBPAGIAagBlAGMAdABzAC4ARwBlAHQAQQB0
+ACgAZAApADsADQAKAAkACQANAAoACQAJAGQAaQBhAGcAcgBhAG0AXwBlAGwA
+ZQBtAGUAbgB0AC4AUwBoAG8AdwBUAGEAZwBzACAAPQAgAHQAcgB1AGUAOwAN
+AAoACQAJAGQAaQBhAGcAcgBhAG0AXwBlAGwAZQBtAGUAbgB0AC4AUwBoAG8A
+dwBJAG4AaABlAHIAaQB0AGUAZABUAGEAZwBzACAAPQAgAHQAcgB1AGUAOwAN
+AAoACQAJAGQAaQBhAGcAcgBhAG0AXwBlAGwAZQBtAGUAbgB0AC4AVQBwAGQA
+YQB0AGUAKAApADsADQAKAAkAfQANAAoACQANAAoACQBfAGQAaQBhAGcAcgBh
+AG0ALgBVAHAAZABhAHQAZQAoACkAOwANAAoACQBSAGUAcABvAHMAaQB0AG8A
+cgB5AC4AUgBlAGwAbwBhAGQARABpAGEAZwByAGEAbQAoAF8AZABpAGEAZwBy
+AGEAbQAuAEQAaQBhAGcAcgBhAG0ASQBEACkAOwANAAoACQBMAGEAeQBvAHUA
+dABUAGgAaQBzAEQAaQBhAGcAcgBhAG0AKABfAGQAaQBhAGcAcgBhAG0AKQA7
+AA0ACgAJAA0ACgAJAGkAZgAgACgAcgBlAGMAdQByAHMAZQApACAAewANAAoA
+CQAJAGYAbwByACAAKAB2AGEAcgAgAHAAPQAwADsAIABwADwAcABhAGMAawBh
+AGcAZQAuAFAAYQBjAGsAYQBnAGUAcwAuAEMAbwB1AG4AdAA7ACAAcAArACsA
+KQAgAHsADQAKAAkACQAJAHYAYQByACAAXwBwAGEAYwBrAGEAZwBlACAAYQBz
+ACAARQBBAC4AUABhAGMAawBhAGcAZQA7AA0ACgAJAAkACQBfAHAAYQBjAGsA
+YQBnAGUAIAA9ACAAcABhAGMAawBhAGcAZQAuAFAAYQBjAGsAYQBnAGUAcwAu
+AEcAZQB0AEEAdAAoAHAAKQA7AA0ACgANAAoACQAJAAkAdgBhAHIAIABfAF8A
+ZABpAGEAZwByAGEAbQAgAGEAcwAgAEUAQQAuAEQAaQBhAGcAcgBhAG0AOwAN
+AAoADQAKAAkACQAJAGkAZgAgACgAXwBwAGEAYwBrAGEAZwBlAC4ARABpAGEA
+ZwByAGEAbQBzAC4AQwBvAHUAbgB0ACAAPQA9ACAAMAApACAAewANAAoACQAJ
+AAkACQBfAF8AZABpAGEAZwByAGEAbQAgAD0AIABfAHAAYQBjAGsAYQBnAGUA
+LgBEAGkAYQBnAHIAYQBtAHMALgBBAGQAZABOAGUAdwAoAHAAYQBjAGsAYQBn
+AGUALgBOAGEAbQBlACwAIAAiAEMAbwBtAHAAbwBuAGUAbgB0ACIAKQA7AA0A
+CgAJAAkACQAJAF8AXwBkAGkAYQBnAHIAYQBtAC4AVQBwAGQAYQB0AGUAKAAp
+ADsADQAKAAkACQAJAH0ADQAKAAkACQAJAA0ACgAJAAkACQBmAG8AcgAgACgA
+dgBhAHIAIABkAD0AMAA7ACAAZAA8AF8AcABhAGMAawBhAGcAZQAuAEQAaQBh
+AGcAcgBhAG0AcwAuAEMAbwB1AG4AdAA7ACAAZAArACsAKQAgAHsADQAKAAkA
+CQAJAAkAXwBfAGQAaQBhAGcAcgBhAG0AIAA9ACAAXwBwAGEAYwBrAGEAZwBl
+AC4ARABpAGEAZwByAGEAbQBzAC4ARwBlAHQAQQB0ACgAZAApADsADQAKAAkA
+CQAJAAkASQBuAGMAbAB1AGQAZQBkAE0AaQBzAHMAaQBuAGcARQBsAGUAbQBl
+AG4AdABzACgAXwBfAGQAaQBhAGcAcgBhAG0ALAAgAGQAZQBwAHQAaAArACcA
+IAAgACcALAAgAHIAZQBjAHUAcgBzAGUAKQA7AA0ACgAJAAkACQB9AA0ACgAJ
+AAkACQANAAoACQAJAH0ADQAKAAkAfQANAAoAfQANAAoADQAKAGYAdQBuAGMA
+dABpAG8AbgAgAEkAbgBjAGwAdQBkAGUAZABNAGkAcwBzAGkAbgBnAFAAYQBy
+AHQAcwAoACkAIAB7AA0ACgAJAFIAZQBwAG8AcwBpAHQAbwByAHkALgBFAG4A
+cwB1AHIAZQBPAHUAdABwAHUAdABWAGkAcwBpAGIAbABlACgAIAAiAFMAYwBy
+AGkAcAB0ACIAIAApADsADQAKAAkAUgBlAHAAbwBzAGkAdABvAHIAeQAuAEMA
+bABlAGEAcgBPAHUAdABwAHUAdAAoACIAUwBjAHIAaQBwAHQAIgApADsADQAK
+AAkAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgAIAAiAFMAdABhAHIA
+dABpAG4AZwAiACAAKQA7AA0ACgAJAHYAYQByACAAZABpAGEAZwByAGEAbQAg
+AGEAcwAgAEUAQQAuAEQAaQBhAGcAcgBhAG0AOwANAAoACQBkAGkAYQBnAHIA
+YQBtACAAPQAgAFIAZQBwAG8AcwBpAHQAbwByAHkALgBHAGUAdABDAHUAcgBy
+AGUAbgB0AEQAaQBhAGcAcgBhAG0AKAApADsADQAKAAkASQBuAGMAbAB1AGQA
+ZQBkAE0AaQBzAHMAaQBuAGcARQBsAGUAbQBlAG4AdABzACgAZABpAGEAZwBy
+AGEAbQApADsADQAKAAkAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgA
+IAAiAEUAbgBkAGUAZAAiACAAKQA7AA0ACgB9AA0ACgANAAoASQBuAGMAbAB1
+AGQAZQBkAE0AaQBzAHMAaQBuAGcAUABhAHIAdABzACgAKQA7AA0ACgANAAoA
 </Content></Script><Script name="Set Stereotype" type="normal" language="JScript" guid="{B57EE350-3252-4c6c-B598-CC8C37FBE5FE}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
 AG4AcwB0AGEAbgB0AHMALQBKAFMAYwByAGkAcAB0AA0ACgAhAEkATgBDACAA
 VQBzAGUAcgAgAFMAYwByAGkAcAB0AHMALgBMAGkAYgByAGEAcgB5AA0ACgAh
@@ -721,4 +921,490 @@ AGwAdQBkAGUATABpAG4AawBlAGQARQBsAGUAbQBlAG4AdABzACgAZABpAGEA
 ZwByAGEAbQApADsADQAKAAkAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0
 ACgAIAAiAEUAbgBkAGUAZAAiACAAKQA7AA0ACgB9AA0ACgANAAoASQBuAGMA
 bAB1AGQAZQBMAGkAbgBrAGUAZABQAGEAcgB0AHMAKAApADsADQAKAA==
-</Content></Script></Scripts></MDG.Technology>
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAERrY1aRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHavUB
+ZGr1AWRq9QFk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
+4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
+/yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
++H//MPxm/P/fjs/62fj/vxv/+2F4N5b254nF45jy4+Enw+fjv9/Pd/94TPvZ
+mIa//NPw6/HuX453fz6mfTb+/uPhX6enfjL8Yvh65PjdWOavxrIfxjI/Gf73
++N8/T7wfhr8ZWdb/novx74a/Ha/+bvz7MHImHX8Y/jCmUbn/OOn321H79FuR
+7Vfjb/8+ydGS6XKWifK/H+9eyv/pWOpz6+DzSe5vx7I8bfz1+O8CavjbUT9k
+l++HuzHPUg1fnLx0FwdI9/z2uyzd5VlLd3Xm0r06c+t8debSXa+W7yW0nK9X
+S/cSau/1mfve67F9Oe/2880ZS3c1tS/n3H6ShNfD2zOX8ObMJbwcbfScY1CS
+8O2Z++HVyPLmzGvxauwPb85awlejnV4eENOcfkRaZFxvqS9Dxusxslkfe78c
+Gc87fmMZ148QX4aMNwNZ3DnL+HpqVc95JMV947n3HW/GvmO9N74ECa9Hnucd
+qd5MY8bzlvDyzNuam+G856VIwkNamtOX8NXI8bzlez2ypPZ0rYyn31uQjDSS
+Wj/OeBn1SDKe8zijyHjOs4xFxvX++HJkPOc5KpaRZsXPX8b1c1QvQ8arg2Kc
+l9A/vpninLUSvoRapBm4816fovni8x4Ts4TnHcWRhOvbmpch4euz98ND1t9e
+Qn/xdlqbOmcJr6dZ1PPuE6+n+O3cJTzv/oJ2FZ13f3E9tqXnLCFZKPE8dwnX
+j4RPv79gCc+5LWUJz3ktgyU85/ETS3jO/SFLeM5z4CzhOY+fWMLz7/HXjxBf
+hoQXw3nHNLS2T39rZXwJUQ3LSHtt1kr5Mmry/Ht+lvG8e0aW8bz7RpbxvPsO
+kvG836ctMp53LM4ynn+bc977NFnG894xzTKe926NIuM5z1LRig29pfmyYwBf
+tvrsmp8aOd6pfyL/z8dSPoylfBzoHJ+vzJ2eBvhOOinoL+Ndfxz//nuU7iF5
+769G6X47Svl+zPNx+LfwrrcV188nfl+OdxDXXE19Mj7pcbgf/0hjPx9z3o5s
+H0et/mEs7asxlf6PfotKo3GqX9oXY94/D3QSFJ3/9JewBI8P3S0l/XS85374
+j+81+G9TeX8z7YL7q4FslvDT7/Fx1Aldv1HpN3P6W5V+Mdo2XV9X6TEfsYgc
+m1cuG9qlSNcPhg1fWzan6Ff1qUnWr4i7/Lvb/SrpVzRr4Jf2fH5VbFX7T8mp
+0+9G2/At2efj+9Xt7D83qvT7Of1KpdMpA3T9aPLfTtd81+n7FUYaS351v/tV
+0q9Osb96Hr+6GX+nO9krsHRO0X71bvYc7islnfaj0XXdv52uX+Gc85JfPex+
+lfSrvb8SNlyu9itaOyas+x96KnuU7q/ezdcvpb/SZxS2fItG0rtvZX2L3i7w
+Szu+b9Fd2o7Zankspa2ZdmDTtfbFN3N/YnsJn4/vW9fmeYUNR4f619ezL2s2
+VwN7W90CnK5v4Wx+y6/o3+PuV0m/2vuswobe0aI77RiL03UsWGZMuA1ANszy
+pfRZ9bmsbc+6GXPvnnX6nnU7x1naU6JZwXgebotZwbuBR1maDb1R56XzrAaN
+/ut0sj6fzWl6Fq7Ntv2KWpHdr07fr06rxyrerHush9nfdI/1MKfoHqv0cC+l
+x6rPom57Fr2xu9azeNX5aTyL/tEs73N6Fn2vwy+tz7OKFJ4lR55FY2fPZiN8
+mPsOnf9isHMO/Z5FJ0rSndpvH+Z0zebd4I2laB6eWbK3I5tT9az6tKmWb70e
+We3zF1nfes4599cD9061Ff7VKIOO9xj78sd8fN+6mvsfPYf+Zk7XT6U9J3TN
+fZqkX7ywXgt3sbX8im1l96ucXz1nNEh3WX+g0RRHZNqSH+drPUN3P7Bf1VFl
+zMf3qzLbXseUNBvJ6TpmvZ1zar+6n6/rnvVU/cp++aHlWzSyvN59K+lbz9ln
+0V21XTJGvhXNuW/jW2WEpOM7enfeli789Mjscu716ijylH2r/uZI27fejnes
+9a2nHmvReVXP6VvPOdaiMx59q/WR2iEv/3HHWvQ1GLrWnv4wp+j8d/P1yxhr
+2a/dLPnWPtbK+ta+VlzY/DDXiu13ltq+dTvwd2f7NOu3ifRkutbzUtdzTq3x
+EkHYUazPJrK7p5uZPh2/XN8SPmVrtr7VPVXfqr/w1fYt8q5Da2u9Bp+2pk/N
+P3raD7pLtxDcHuz91tP5lv22XOxd1/PMx+5du3dFfHbvqr2rPlU19i2Kmi6+
+t9fdt3bfsnx230Lfst/TjL2Lxjy31Yzf7l0t73reeXg9kmW8HHjdSM/OlVk7
+bc9lFSo7zvW9q+y/0KPW68CLLgce/ep5yoeQzSl7VzYuJF1f7t6V9K5T7LvK
+qpVOv5rXj7TXPc4pds3W5+N717vAu+isdrrW3kXfF6Rrvcr1euC+y/akp+pd
++hvCLe+ic933vusleNflbIfalx5ni9W74Avq/bFb7YLn+/VTi7do7yqra3o/
+R9nb/1LWkO3Xq5e8a++7st71nLufnm7FIeNdtD5Kd+q+6HHuE3UUW+JU3TbQ
+DBxdv5zIUH83fcm79hnDrHc9Z99Fd9WWybjPajytd90MFG1nvYtOrd69K+dd
+z9l30V2ePUdIpwJ69lwiyTp/zMf3Lts7FfTT38w9ph4FvjF9a2Fzmt7FZ4Lm
+3jfhb/jse6Cy3vWcfVfZA6NHOu+CXuH1nF9b7zazGrfz/TrSI+l9Njyy0qPA
+24FnPG1PeqreRSvJ2b7rfqC3KnfvynnXc/ZdveOu4574+WbwZykeZja2B2P/
+0W+dUNtO1y9lVoP62tyoq/zbfSvnW8+72oWWmkfdVzyavq/Nx/ctu25V0E9/
+M+jz01rpp+tb1LpmdxhSDe4nf2Z96yX1W8edL/yh9lu0Zpftt+i003KSWl6z
+UesUpfutU5Qes4nsTpewjDwa0aPrS1XHls96v9zqbbDDV06yrRn9o/muQ1qz
+9a3uqfrWZXI2g3yLztqIrfll+5bvK7SvwX+n75XL33rDc/rW4TO7Pb5F/dDu
+W+hb+ZNpyLeK9jxrPk/fKukv0bfePKlv7f2W9q38XAbN4fa/LXlpRsiMZeZX
+jwnoJCrPli8G72S7mE2/b/n9U7S6uny6xHrf2noe5Pi+tcUI97x8i1Zhsp5F
+O1LWn03z1Odn0IkEh9Tzod6xVc+z5vwMus9rPSK8HDgi0K3Kcc/PiFaJaVcD
+XduZD27F6vyn61n0FVuaK8x41+1AJzT2z2WUs+p0jdK8CF3r/iCKwej0N7o+
+vN+y81L83K3fxljvmXu/1dfunqp30Xxtbk88nbxzO1raofW1XodPW9eHeshz
+7s2gu7wWZN9X+PTeldsTz961n6KR9a59jauwKfut9B7F6Hx42gVE13r+6mWd
+D1+8K3e2GnvX/k3W3btiPr53vZ1jfT2Gu52vtXcVP9QjindzH/qyvCs37mLv
+2vdnZL1rjwz3yJC8K3dKDXvXvic+610vqe+ivQSenW/Td5U98ToyvHfnqcjX
+maXuuwqbl9R30dv7ee8qFrt71zl513Ejw9Jjau96GHjHvfau8r0VPe56Ned8
+GXsLi3flTqkh76K/3bt274r4+N5V3sW03sXlau+6GniEpvuu+znny+m76Au1
+2XEXnQ16+G7QH4p3bb1m5Vlz7F3c7uv3E8veGH+3l7XnctLFYeOud7PXajbl
+3WLtXbxTh/SXZXOa3kXfA/k05Vv0XVrafbD7Vs63nnNO47R6Lnrzgu7UX74r
+J0Np37qbWwD9zon/Rucp+9abaY9hxrvu5ty7d+W8a48LJS7kiFDPx5P0dK29
+69XE0vZc5R2FlxIX0jxs7m1J6rkoet59K+dbz9lz0V21XTLus/FP7Vu5PVDs
+W2UX7ilp1mfz/HZ3On65viV8ytZsfat7ur6Vm81g39rPLXwu/+hpP17N7YQ+
+/6KsLOl2pexE1jHhxcAxpI3CfD5+62qjvoJ++o2ZVSzs9ZitsDlV33o95MZb
+5Fv0hfWX4Fv0j05ZfE7f2uq9k/LGo2fLkW/RfdYK4zdCy9tyum9+NfuctWaf
+T+RbXimEfrr/XmyUftq+ldufwb5V3pM6dd+imdzn7be28q3WuQq9vrWEehbe
+98WYj+9b0TkJJcq36XytezXaHWTzn7Jv0XdOsr51u8eEad96zpiQ7rI+EY8p
+o35rmxMLjz/iPk3forPfafYv4113kw5LpJXX7f2sPasrbpl0+1TWOLXO47V5
+n01keU83Q73eM7eewV/fFj5le7a+3T1V76LdTxnfop6LTlY7tLbWa/Bpa/pQ
+/3hJPdf62dBM6/rD7bnoTO68b72MEdcp+NbWfY9ny5FvPV3fnPGtsitDz13c
+zc/TkQu9707Xeu6i7M14KXt26WuR2Vl4GmWWMzR239p9y/Lxfavse9dz6w9z
+ivatt4FvldGFHRWcqm/RiU5Z36I6233r/HyrL3/Mx/et69lDtW+VlSz91Lez
+t+n9vSW2fBm+RfEg8cv5Fq2F7e8gZ33rOffCU62S5em14sc5qkLvYWtmK9c+
+V2YKrTX7fHzfstFgQT/dX8mK0k/bt3LvSLJv7W8g774V89l9S/tWdp6QfGsf
+b+2+FfPZfUv7Vu6MePatYq+7b+2+ZfnsvqV9K/uWCa07oIfsvrX71u5bbd/K
+rm+Rb+3fad19K+az+5b2rdw5u+xb+xz87lsxn923tG9l3zIh3yr7snff2n3L
+8tl9S/tWdu2YfGvfT/iyfcu35t23juVb2Te4yLdextuRu2+x5e2+9by+RTaQ
+963Dv/y5+9buWwX9dN+HovTT9S36BjL9Zbyr/Nu96/S9i+6ydhi97yiox2Pl
+a4WH7daNvChK970oSj9176KVq4x/0duRcorDafsXWTeN3p/Tv7Z6t79lz73+
+FSO/vaH9i0431zlbfHb/qv0rv4ZM3kXv0r0M76LR5P41ZI3+SRj01gdf653p
+r1z7j/ns3mW9K7fSxd61r3RlveslvW1y3De53s2l2LdNmI3uH6/nPlT7En1X
+h67tOPCUvSu31sXetX6tC3d3HNu76B99ZeY5vWurvuspT33S5y9duL1LzMf3
+rjdzj6l99/Xgf92dvp/j5S/l1G3GqXtXbkaevWufkc9619537X0Xzcn3jLvW
+f2v8qfuum++f+DzetVXftW7cxbPxtR3GSG+Y07UelR2373p0vJ/w3cB+pfOX
+lYOXcWJh8a7c7l32rvXfGn9a76IzCcr85sv2rhIteNYcedfjbIG6V4iQWiK6
+flrvKinax8r3XfXKAZ31YvOfunf1zGqsf8//ab2LYqPzGHet8a7IbiOMvLGc
+FFrnj/n0eVc5E0OzvJmvdSR5P0eGL8u7crsM2btextvI9E++F/FD9C7tP4zR
+jHw5J1DPL+wz8od61+WQO0eDvGt/ryvvXc+5W+NyYDvUJyiVEwS1FxXUq8mv
+5nLsSYE+H9+77uY+UbMpsxe673o391ral25n3nWfdtreddXlXevHXT8079rn
+DAubh/mpehx1Pz9Vx6P381Otd0VfMzpl78qdU8PetX7c9UPzruftu07Ju8rZ
+unocRdZE19q7Sh+qx3wvy7voGwyXA33rJOdddwOdVbN7V8679r6rsKF3K+hO
+Pcoqp/Fq73oz5bTfQ76c/c3Gqc/rXaUWyKq/Hv++Gssl/6Iz4GVOo+RiX/ls
+vPsnkwV8OVkUWcI3o2eg3qIInmYUSD+2dnV0wEieUNY5+JpbLn6X4ncTvx+N
+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
+W5ukdVub5Sw//RTL73jo10nbWoSftZu4ddA51+WP7XXJ/iKZ7L5CRqwp9DMe
+ERc2pL/oPCoeW/FIimcU+Fr48biax6c8guL5AB698v77cifG+sKAv2NVRrta
+knVfaET9WT37yC2T1a4XP7eRYw5M0dIKv0hufPsKMZK7zG9kpb0xJTC2x79t
+XJY7krb3G9JWf9k64tmTY9ey8GvLXVL0s/u+kBgjfc/Tk1b4bSt3W9r8F+u0
+/fnfrouRTwK3cm8lrebXlrvMSmnr5jUIW8sPM0udP8KbuQTP/vj/t5Kbr9vS
+ltPwNPuHOYXya36Mxdv1nRGWmVA9t9cvrUafn0bKQ3/P95WBXw/fjSXS9xU+
+DP/x/Tc8qAcnqypfGfBzfzb+37fj/38Y/jj+xl8o0N8a8KSO8Pm18ZuxrG9H
+yb6d5Pl6LJW+FkSRzKff6+LLMfXjUL5Ocoi8hLI6kkmP3onn9JbNlVUeHbWX
+9010/rKOYH3Tn6+NECNI4WdHOh7KikA9JvJXK23OXuzlp9FyKijtUcmPqx28
+w0o0Wq/nyOgEYxbZsxDtFsqs6+EKkceMfs0wYz7a/iTHKXu2fGNvnWdHfY3v
+wVH67tm7Z++eva1ny/f91nl2hL4HR+m7Z++evXv2tp59tXv2hLtnx2g5Fdw9
++3Q9+9Xu2RPunh2j5VRw9+zT9ezXu2dPuHt2jJZTwd2zT9ez3+yePeHu2TFa
+TgV3zz5dz367e/aEu2fHaDkV3D37dD1b1vbPzbP9J52uZxcGrSetw15+Gi2n
+grtnn65n3+yePeHu2TFaTgV3zz5Vz6a3aHbPJtw9O0bLqeDu2afp2TcDndnV
+swst/3YpnwVi3x+7nnWrdzm/mz1Oe7j9ZoYejUZvqkVvoxbUNrv0ZpvGQ3yn
+z7d70Zbcy0+jfUbBtm9T+1l7kJSG1+jbeLqIWEl9yp+8dXDIU/PPqn37uf35
+i9FD78Z/H0Y/LfvmrwY6aUjG1r8Y/fdXkye/H/44/v33+OSHyaMfRiYfxnse
+Zq/Gf3zv/x2+G++4H9uLn4xI5+N9O/77zUB77/8wPpee+NlAe+//OLUmD6at
+EF3yiXP2tATib9Pzz//1+FxK+dOCTBff6+PrsTR6h+DDWGvvx5yPC3cWNl9O
+GvzT+OT3Yz2+n/SINZAp5dSshdr+q+lP2v6P428fp/cqOFfpKXTdYl09p1zF
+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
+tTVaKnr6J8M/jH79x1Eu+u7wJ8NPxyuKGr4b/jB8HJmVrxfTd4k5/6+Hb4b3
+w1fj39djvj8MvxjzPY4l1F8u3vZLxJmvnmBryKVwW8EjQG5/sBSqyd4vEXu+
+i2jtWUpuW6PFLKel/Nhq0XX01awWP0/WrNw5XM4f8YvuRLnJniK5LXoSLksb
+8WtjltNSfpTWx2V+nqxtuXsxYk/Y5hfdKXL3fqvVk7AlLfKL2ES4VX6R1n6r
+ta0/QU/Wltwxmwj9/Bl+/p213MuWjuhJ6Etr+UVsItwqv0iI32q1/FroyerL
+vcQmQp0/z0/fielFbh4BRzk1ehJqaYXftnIvYZRf23Fef4KerFruWtpeFPa9
+/DJy07hsq1rG+rVyZ5+xdX6RFvXHMz7H6qliNhFS/t76bT8Ja5nnLKOcGj0J
+df1uKbeXHmGUv9ZfvndCtBIv1XIfHiN+kVru/VarldDWbyR3xCbCbfJr/bHc
+9qutbbRybyWt9d/snUv5RVrv1xZm6jeSuxcj9hHq/L7+WO7er516Eral1Wws
+Wn7ZO3P5D63ldv1GcvdixD5Cyd/SH8sdzXNG6EnYlrbFPuK3fKeHXn4qX+bv
+vhj5fTv+ffxBzeBFGNeZYLuG8hhx9dNj3csMs93Psr4Wiu5pdptntFnTXA+Z
+OmGWNuLL6E/fU+ugVTuHYW1/UQ4vvRejcjBddu/wGuKxZwB474j4cr2SITFd
+nc51TddsA5pfvRONxnqY2ytR9nL1Y6RXQc0vf2cOM+VQntLD6FnpiJ9Ff+To
+1azOcwgiv0jWVvpSz+rf69mub8d5/fWiz6ydXmIKmZXu5eePpazcNs86tPxa
+8kXpLLedn15CaRMQUVodYdrch2FLqii9SEvXwq9Hbmn/EI9Ry7Z+GVvyReks
+Ic5Pezkt4j4rQe2/28pdY8S1lc7SCr/e+WmeA7Pp29ZyVL+MEddW+pId+/d6
+rbSu3y3l9tBn1k63/ts3P81vMdn0raRt1y9jxLWVXqTtm5Vm7WCK5reV3DG2
+pLLpOn4pcvfNT19PbZ5NP1xarb8YI66t9MN92fov4nq5l9BnZtOt/kTu3vlp
+HhPZ9EOktfzaqOXLpLO0vbPS+n1Am+MQuXMYcZX0iN821u1hn7QRvzb6zKJ0
+5Id5+Mx7vo5m4oRf/2wQlVLy8MwQ56EUfhJfl53gy7NEdk49rz9/nmBdreVR
+9x82R5Rev1+AyO0R3VX2ahN6ttiySy4/rz8fo9I9Bvxrn+f5/Gy5bVm3Q11X
+lp/OgellfE+4pANEksemZ6S1/NZhSyqdTk+kv38Z/n745fCz4Z+H3w+fDb8d
+vhj//Wz4h+E34///dvhyvP5i5Pfl8GHk/nH48+jV34yy/G748fCT4fPx3+/n
+u388pv1sTMNf/mn49Xj3L8e7Px/TPht/p1x/O1793ff7j/92KvGvR/+gN9co
+ZvvXidcn4y/fjU/8OOb6Wq1gsBQ4C7mE0q5YO+f0/IoHtrb5dna53byd43TL
+3sfLYFRio7mW7R2GnmUtpQs/lpXfcbs2o44I+U0em76VtBlvbMkXpbO0d1OL
+no/g+A1DTNH8tpI7xoirn657U5a7vP2aHYXyDJRNP1xarb8Yffna6Uv+69+L
+rZL1X8T1ci+hz8ymW/2J3Nye9Vi3vNeCeIi0ll8bI66tdJb2cbLRpRoX5HPH
+W/wOkTuHLan4OuK3jXV72CdtxK+NPrN2OkvLZ7csSS6I/dvy2kde7h5sSdXW
+n8jNI88eX/Yl6ZW2za+NEddWeumXCTO1rPnh+VOIvXL3oy+V7n9tjuf1Za2/
+fvSZtdNLrMlvDNs8gj4/PBERMS/3WtTPtfx0jjZ6jGV0w3nqU5BEqsxJ8MIP
+94PgiWqClFO/qfr5OB78MPz7QKfIfOx8O3XbkV5mfIfSHmuk5/lZ2+dEWmst
+beyzpTg/+lxrfNfi58malTuHy/kjftGdInfvSM+TcFnaiF8bs5yW8ou00fhu
+mZ8n67LctpwYW/nb/KI7RW7v1xZ6ErakbfNrY8Q+wii/SGvHd1l+nqwtuWM2
+Efr5M/z8O1Hu3pGeJ6EvreUXsYlwq/y+TVt+LfRk9eW29+ZQs8/z03diOsvd
+O9LzJNTSCr9a7ohNhFvlF2l5fCf8jt1T2XJilPz5+tV32vTSLxNuVctYv1vK
+ncMov0jbqz9BK+tSLfcisVzHb1nuzEgP0ZNQ128kd8Qmwi3yE6v8Oz/nOS6K
+VsDimhJcZ3cWvbpZSi8WunZcdOwVsBhFqojfsty94yK7AsbYljbitw4jrq30
+0ssSrhkXHW8FbAlr/41yROlL/uvfa1veGrW0bX7r0GfWTmdp14+LjrEClkHk
+15IvSme5e8dF+OVdRCttVn/92JIqSrcSRvz8UjyLbln34Wj5+cza6Sx377go
+s+6l4yqb+zBsSRWllxZ77bhoqxWwDNr6ZYy4ttJLv0yYr+X2uhfW75Zy19iS
+KkpnCSP96dw23fPf7X25zc9n1k4vUWffuCha99L+u5XcHvoM/HRiRX+nta+R
+zlw4xr5G0TbaIGomP6qTGs2M7/KjOlwzzOArt15P1+JKOvYYlFp6TR35R8i6
+tOlbSdtuURhb8kXpS22Jf69tOW39biN3jD6zKF1HzCXyJ342d4T+OvgW0mbq
+l9GXr51epPXj9wj9rxphjsPlXsKWVJhi+Ync/H7ZXTAit4hf40U8RFrLr41a
+vkw6S1vO1ffbI4v6q0Y2xyFy57AlFV9H/LZsww5puSJ+bfSZtdNZ2ncDf9Eh
+yqlR+HHUYHOsk7sHI66U3tafyP04zzJHZWnk78PY9F5p2/zaGHFtpRdpqeXK
+SKv54ck+iL1y96PPVfe/NgfKzd8b5q/veDk18hdmbHpeWq2/fmxJFaXnWy6f
+n9durW/DelBLZfnpHJhe5KY+Kn82/KugB89Ia/mtw5ZUUTpLy98cjGy6xQ+/
+yoiYkfswXLK/WG4fPcaEGFfX33QW26h3teLuVSpN88Pdq/WJZ3in6DU68cw+
+yZZ/42qB+OjdsZ8N3w3fTHMVX0/fcfnZ8IeB1nv5/3t3y0qNo9djneTnDzKz
+BqLj480feK0YorX1ZRuN0Ku1Fkb5xcfbswYtfp6sWblzuJw/4hfdKXJ7v7bQ
+k7AtbYtfGyP2EUb5Rdpo1mCZnydrW+6ITYSt/G1+0Z0od9/8gSdhS9pMjBjh
+VvlFWjtr0NafoCdrS+6YTYR+/gw//06Uu3f+wJPQl9byi9hEuFV+kRbTLb8W
+erL6ctt7c6jZ5/npOzF93fyBJ6GWVvjVcmefsXV+kZZnDYTftnJvJW2+fvWd
+Nr13/oDRk1AQ63dLuXMY5RdphV/v/IGV9Ri13Fu/7SeJ3N6vLfQk1PUbyd2L
+EfsIo/y1/tbNH1iJt63lY8QvUsvt+QOLVkJbv9vIvU1+4tazJ1r4ojRY9ssb
+/Uar53FNCa5rXSz6DNrph45+j716HqNIFfFbltv7tXWv9cwlf2zxW4c+s3b6
+oaPf462eL2Htv1GOKH3d6BdXzxEjadv81mFLqij90NHvMVbPM5jpfVvp60a/
+vHpu0620Wf31Y0uqKN22XBE/vxSv3Vpuww5By89n1k5fN/rNrJnr6MrmPgwj
+rq30Q0e/W62eZ9DWL2PEtZW+bvTbXjPH+t1S7hojrq30Q0e/h6+eZzCqX8aW
+fFG6bcNsHpvutVa6freU20OfWTsd/ZdT+0a/h6yeZ7Bdv4wt+aL0daNfu2au
++W0ld4wtqXQ6caO/U9v5/voIO9+p1HKNHoiayY/dpV4zo/iesXvf+8z45T/E
+l9auvJnk6JF7OTY6RFrttx625IvSi7TEvkdaHRFpflvJHWNLKpuO/FBujoB1
+7ggvmrHRIdJq/cXoy9dOZwnZ63ukXfr+weFyL2FLKkyx/FBuufbK0nhxhBjB
+8mujli+TviShfy9LYttni2vkzqHPDNMj/Yncr+dxji3FR/46r01fJ23Er43L
+ctv0Ii311Hlphd9FMIO3Tu4ebEnV1p/IfTvVWn5m6mKSx6b3Stvm18aW3FH6
+Us3qezU/z3+f05d1/2tz1NbdG3X6kuSl1frrx5ZUUXqRdjnW9PlFo4283GtR
+S2X56RyYzrLyCCM/M3UZ5MxIa/mtQ59BO52lfZyYRdK2+F0GrV1G7sNQuEb8
+fGlQ7vvZl6OcGi+D2Y22tBG/dRhxbaXn/dcvxWulEX25t0Di09afzxjlfjf3
+y1FOjZdT/GLTI2nb/NZhxLWVXlouPvdMfs3yu4RZH8RI7q1w2f7a6UVWjrH9
+9sjiZTAbZKXN6q8fW1JF6Szt9cSMr/v4XR55Nsii5deSz0v30WNMsuG6/huY
+FeH5xXItWhB+9RtMmFvGJVez3dRcqQT9LtFPh/fj/381fDOl9r07tO0MbGbe
+VWvhGDOwXt+BaG1PpLVW1MY+W4rzi8+1511b/DxZs3LncDl/xC+6E+Xum4H1
+JFyWNuLXxoh9hFF+lNafd13m58m6LLctJ8ZW/ja/6E6Ru3cG1pOwJW2ml49w
+q/worVzzr239CXqytuSO2UTo58/w8+9Eub1fW+hJ6Eub4dfGiH2EUX6RFudd
++/h5svpyL7GJUOfP89N3YnqRu28G1pNQSyv8tpV7CaP8Ii3Puwq//BjAk1XL
+vZW0+frVd9r0fM0iehIKYv1auXsxYh9hlF+kFX69M7BW1mPUcm/9tp+EvtyK
+Oi16Eur63VJuLz3CKH+tP5a1dwbWSrxtLR8jfpFabs/AWrQS2vrdRu6t8mv9
+sdy9M7BW7q2ktf6bvXMpv0jr/drCTP1GcvdixD5Cnd/XH8vdOwPrSdiWdrlk
+yy97Zy6/SGtnYNuYqd/1cluWXnqEkr+lvyJr3wysJ+F6aSN+y3d6GOUXaXEG
+1supMVO/a+T2cE3+WH+Unn/v8zxnLqO9o3GdCcaa7cOoVlvppUVqxZAtfsfe
+OxpjruWJ7ixy981c2r2jjG1pI37rsCVVlF6kXTtzeby9o0vYbnlKjiidZe2d
+ucS9o4iRtG1+67AlVZRepJVr/jXL7xh7RzOI/FryRelLNevfi32PhyJtVn/9
+6DNrp7O062cut907mkHLryVflF7k7pu5zOwY1ZGXzX0YtqSK0lnC9TOXW+0d
+zaCtX8aWfFH6Us3693r+K4j1u6XcGWbtdO2/vTOXh+8dzWBUv4wt+aL04sut
+qNNitGNU++9WcnvYkipKR/+l1N6Zy0P2jmawXb+MPoN2OkvbO3Npd4xqflvJ
+HWPE1U/X8QvL3TtzuW7vaAa1/mKMuLbSl/zXvzdqnyX1cLmX0Gdm063+RO7e
+mcvevaMZtPzaGHFtpZeWq2/mkneMtvgdIncOW1LxdcQPrbtv5jK/d9TmsRjx
+a+Oy3DadpV0/c/n0e0cLtqSK9Ufp9Hdq7+y/OcI7+7z3la+xhUXd4cxHe94V
+Y9blGdgy70qllDzUkpQ8lMJP4uu3A81UZeZp74KIOa5zQd8On8ZW2/x8a74J
+WhVunfia7YHr6NMgvych6RVPkRF+uM/5LZSI6TEzHy/gXo8N2Q+epPgGJGQb
+0Pqr93FLreFZdzxn4pUo7TqW83ZCfGrMmORHxsKvLl2eiidS4blFyNJ7Ej0D
+z+Hz8oi3cR6MLTkPxlx4J/s53ilzgnjtPZV1gHvrZaUHv9SBeuU56XItWrAx
+YctaMzbqlUMl9JbD9WPtb1t7Ygll7gpPqeOTdEq66BXL0fr7dKoLLJHPmEKZ
+Sjr6nV86Wktpa5iN1Cam23tRfyQZ5kZmqKfaVpgBX4uP2yd9Ot3FvVTJL3YZ
+vdGB7R/eifbhp3sM6Hk828F58LTUV8C+ZtayENQf1RGWXtsc1iz6o1/L9Zd2
+fN1gmXW7K+na/mp90PXrQdo/rM26RqTFQQ+ov/uD90qZ7dbe+u86PyVOVxUb
+rE3fRrGWryAdUfM7Ndz5FfSsAtM16viPY9e7yZJsHBvhhUlps+nFjP6kRcik
+xzEiRhuE3BfgHhBE3f7ZHgljEGzDruA6ZuMjfUG8ZtB+rvCLGHil8Kgnasmx
+XcSWPIo2MF2zj/THDLBNx3YLmYlt1U/CL68hG+m7Pck5dvTiv5qBtO+RPrB3
+8p5Ez4gkrPt0P0rg+tT+EfePUorHht9HRZ1hOX7NYp7I1tv9L9eyPBX7ymjc
+VV/7+l7SPT2Rn6v1dwwGGMug511V6XjtvfPryXGMWJo9IPIqrRGtv+hLiN6T
+aLyD8Xbty8gevWHZ81By4ZcZrRRmhFhKdC/WbB3n+T5bj+Uoj9Yf5u63G7ne
+SirU3xr5bJ5+qVpWhPpbI9+xpRJ+sXztHum4Umn7i3JH8tWSCLOlCIPH2stS
+Yf8bjcZb9lFameUn5XWGebT+MDe24x4zrQNsvetoal2fTpL7/nvIk+qRueSv
+e842Mxmtav1tNW7dCjW/U8OdX0HPzjDdRx1f1atQ4u3tVaietSdebyILZpvm
+2bBojQnbPy6X7rmdfDu/2o/rHEs6I6lw3bgeo2CsSajrNxqPYYvdjz77TLrm
+txajJ2HrQxLyzAn3E9fBPmZEze8+0JNXU2Rh0Ril7iGxBqV+MmtSwi8aBUaz
+lNthpHtK1/o7DKMnIUot0xr5khf6/Pj7Zja3V8vS4nCeaH/WOrT8Immi9F7M
+lCM6Fn68PtbWNuJtYsd10TG356hjf7XRotVfL0byROl9iPwyJaJ1cxuWuYvw
+FloWRE/fPMdQ92+cG2O73rXa7XC5/8hqZQkz5Uid8JdXsE4ifhrvTAqjVzv0
+vN7V6Aiz/DyMSo/Se5HKyfOTWrifWoprsMI2+ifx+bqnknFODNs/f017O9T8
+ltIJ8/rLllgQWyLKn4mmGHnHM1/7/DzN82hc8hyy+p9Hn5+Hkc6i9F70y4n4
+YZvEb3P691u8C3J6dULtf3tHgeb3lHsLMqj5LaGvmzi9F3U5bX7Y5pH+empZ
+9Iro1TJ7Ho445V7hdwn+hXtVcK4Jd9dsh5HMlN7WXy9GT0LEUSb3Q2LZFn1+
+ZWZSP8+rHcqDsfF2uKw/zW8tZsoRvWJ6m5/cyddFfxGiXm05GdSSZPj5d67F
+TDne+O2+s5+I9GR1ySd5tOepSrqUyfMZWn/Y09f9BEYA2Ath/4F9TzQXoxmU
+aykzWn+TUuKnyvV2GNXYsv/2YvQkRLGth9mi/FMSGH1+5f0Q3Ud5tmV3omRt
+q1xHFuXZH9oWzsLW6x+ip4wN1fs6hCXuxqnjJn/9DdeAhE10vR1GVvHc9nc/
+6bLdokX8+B59p2d/NOo5hv3xLirNr25Z0FbkqbVtSZ5oD1A9s4b3YruINi3p
+aH+YA6NzlFtstJYE82/ZRmr92TpdSu/F5XIw5kB+cue251qVlS1Cu4KF61Z8
+15r5q/YuzC0iKx99/dXop/NOTW4peP94u6Wo7/XjbSttVn/9GHH102tpCVna
+Pn64uxXRym3zrEPLz5cvSke5eTdJTy37LRFKK/y2lbtgxDVK16j159UUIfYB
+UQwS7zLBNzQwTsGYyG/5o/4Dn7q8OlrW3Oo2iErW31L5bPgw9pSP4/P+bsSv
+xz/6qsrH4f305mzft1Vyb8pu2ZKLtvJtevTma4QoiYfWx/t7C3tnDqP8lM4S
+tt+PaPHzZM3KncPl/BG/6E6Ru3fHiSfhsrQRvzZmOS3lF2ltnMK4zM+TdVlu
+W06MrfxtftGdKHdfnOJJ2JI2E01FuFV+lJZwTTTqydqSO2YToZ8/w8+/E+Xu
+jVM8CX1pLb/sM7bMX/exS+cA53rZ7HkU63pZKqXk5v2BnJtS+El8ffh5FDGK
+tdpaRN1Y294Kvbr00jW/+B06Pe/AdeTZMKKWMC7fR82PMSrdY8C/ise2ow6L
+7bcyhZ9lsx3qWmuno459/T1XbSIu689joLFuWXDd89CWRa9p9O42xhakN+LL
+7zHG+u3bbVzSRd/RTGc/CvvI/nz54vRejMohzZVrklD4cYuQ323MeOw9xsIv
+Gk9Hu42fZo9xVL+MUS1E6b24XA7yI1m5ljO7jRGPt8e4rb8MRjJE6X2I/DIl
+io6fZo+x1l9+t/FajOTx0zW/HvRLrBFtmluuzF2EvMe4xc/TPD1jq/OgMtji
+52EkfZTei7qcNj/0hr7ZgK32GAu/3t3G/RiVGaUTtvUXYavEgqL7Q/YY+/y8
+WqBnZM7N2g5jfpjDS+/FTDnYElF+jqHa/DTibmNET99UR4fvMe7j14ORzqJ0
+HzP8MiViS9S3d6y9x1j42Vi3vdu4XGP/IU/aao+x8OvdbZxDXzdxusZM/eZL
+xDavb14y2mOM9Rv5II44pZSn2WPc1l8kfZTei8vlID+pncxuY8Tj7TFu6y9C
+zWMpvRelnAw/0av3q0WxuaK/CFGvtpwsP8Ze3fTm9xH5ZUrEFqSvn4j0ZHWJ
+e4y1/g6Zp4r3w63fY4z9R8TA3yn6NHuMtf5qjOouSu/F5XL89i+z2xjxeHuM
+tf5ytuXPrB1jj7Fvf5ndxk+zx1jrr8bIPqL0Xlwux7e/zG5j70k6v2d/fXuM
+tf4y9odnNh57j7Hwi1tXtO4oHaNzbEfFRtftMdb660ddp0vpfdjX/2L0gfm3
+3ZmG+9GEX3sFK9rFE+FWe4wPqd+Iq5++bo+x5pffbWzzHIY+12X7i3Yb25wW
+D99jrPXXjxFXP713j7HPL7PbuC33WtRcLT+dg5Dy0N+pfRPn+tm+iZNtT0W/
+vS1ruz3lJ7VtD/EqiJWF39PbXjudOWh+dS1sv1+jd5eG8Ktrh57aUzv+SqNX
+JyQzjhTqsySlPeXRgfbvKMLvx0i2vnTNrwf9EnFvUvlGG10/TPaQ/16bb38e
+Yu3wHg2MYtfPHdSzAXiveKeOv2wpdS1HOovw0PyH1K9foodYyzwzkK3lTP1G
+tSzMYt1LTWVq05aj9Ve/ISOjbzyLO6czxPX5Nb+1mGGAtUxayNSy5ufVbFTL
+0s/yvXXt+D6bGUNj7ev+w3uS35o8Te1r/eXv7MFMOZSHa/9xQq79Nj+N+FUe
+RK/2dZ51aPlFsrbSy3iDezB/hGjxKrEjSrd/Nvdh2JIqSi9rXMRe+GW8nTE6
+h/oYtWzrl7ElX5Reapnk7IkdfUlYQqzfLeWuMeIapUtLjvVL/39dtWQt5Bjb
+pm9by1H9MkbyRem9GJUjvQPyE62+neefsrr0ekJE1CUh7puJ+iTu8bT+otFK
+vMYRxcPIQGo5YoPloF41vyWMaiTC3vwaLb9MiWgJPEd1DEuo2+e8TfA17uOo
+Y5kta3yd/hCPm9/ys5gpUWrc+9Wi6NirZcFt+4+MJH35M/rrK7H2HpL5EO/R
+8ZXnRzRi7feeaASJbSruWPUlz+jPvzPG3vwRUjkZfoxYa6SPQ2otX1fCL1dr
+2M5JrdXt35bzNXn96TvXYl85Pj+reX6jLR6NY8QQzbLpvoGv6/qR8rl+NL+6
+pvxai+bzaj9FlhibFKTn2hNNvhu+mdZUvh4+jpzohJOvp5NN7qe1j2/O8lST
+3rUOz4cjf+a7pGRd30uY5bSUn9LL+I8wkrbFz5M1K3cOl/NH/KI7RW6c1fFy
+avQkXJY24tfGiH2EUX6sZX8uZ5mfJ+uy3LacGFv52/yiO0VuntU5Xi0jv4hN
+hFvlx1rWczlt/Ql6srbkjtlE6OfP8PPvRLl753I8CX1pLb+ITYRb5K/72G1O
+NXlpvWy0o8DWmc1ja3EdRlz99Fj3eh+B8DukFtbtKKjrhJ5l62RZf8fbUcDX
+7X0Ey/w81FKuTV/GiF9UIvbSMs5ct6MgRr+Ve+odBfHaoz/rrKVcwkjHEfbm
+J2zzy5SItdy3o8CrWV3Lwq/44NPtKCh5/NkKXklu6y+DGR2vz5/hlykRazm7
+o4DRq1lBrF9saaWf5VKOsaMgU/vCr20HVu4cZnTfyp+p3zbqEj2kPOvGnsLv
+6XcUFIwkpPS2/kTuaBQaYWZHQUbaNr82tuSO0nvHnprfU+4oqNGXCvn5Oepa
+JoltFBlhe0dBRlqtv36MuEbp0pJnxp4+v6fZUeChlsry0znWYlQORvCiy2gf
+geWn0faJNaIuCXvXv6Ixih7/lhzi83E8jAykliM2WE4vZvw3wt78EbbK0fp7
+yh0FGUsQfk+/o8BKaNHqD7GleQ9780co5bT5MUqNe79aFN14tRzVuC0ny4+x
+Vze9+X3s9V/0HpL+ON4ja9Naf5FFH7ajoBf77M+/8zDMlEN1JfxKrZE+jl1r
+fG+mroRf/46CXszoTOfvrd82LjGgZ9Hfc7+deDeV+PmEvGpPqwHfDN9+/5Yi
+rdf/cfx3O3w99nXfjqy+Ha+/Gnh9v6wXlFPMZEaW8Qa87/WUxzuTzh/dcLtz
+5/RgS/V1NY8exCoL2hTOz62dZebX4+2UfmfGoPwONV/7/O7mORu7DuHrgM9h
+905G9Jnxu758V/2rfqLmdzWh1cEFeGXNjBjnmXGbbMuP8gs/bsnyTypvsuv0
+esQgyGsptjY/DdYj9Cmi9knRG/GPU4l3Trm+JLx64c11+PmL/dFdun7bdxaL
+1ulR/ofZl7VVRXbM64mPUJrl5z/p9XSn1XGUn/v7fP6r2WN0K7McL13Ovmkl
+timEjxMzr/b9/PeTdu0cCJ96a/UnyO2fZ9G6fWa8ndtLGyv4zHglsa1jn19p
+me2dWv+MHAfY/Lj+Wef3Wyt7LrLmdzlp26sd/0mXs8dYHdsSCMvZ0FbHvuTY
+/nFt2ny2LH4SpXttkLYkRj679M4pzZ855dMPsf3T88kXQT/L6wWeznwd8/m9
++VaJ+zD2SF2/BX2L5lUK/k4GpkdfJSg7D2xd6xIYuaXE3s/y87XNEbJX+74k
+l7Mk9lerdcLboE6Qn3024dWsG/urLouRLcyrTcuVy+e2wkYMrfpl9PuM6AyT
+x7k2bV1ryy7lsIS2rVlq/yje9mWyzyZ8mNK9+X8/P5/C5eXXkmt+ZTynazP6
+FgxbpFebvh3fTjLfGY2Wcz51fmxfeCSrc0R2VvY42NhEy1aYUfkcZda/Wi0S
+3kwSCj/rO1HtcC+EURAjrqIj8ojJa5l9SS7nOqG7dP22mV3M60y23fZ1wDGp
+l98vv5wF3xof+U8qz7Pl2hTCh7kf1zqLTufiVWNrXcvxH39NK1/7t5P0+fxl
+J5XlTT5k9YdIz7B25rU7hJeBb0bMcE0fEdtXn185U83KZFOYGVmYF5VZLRJe
+ze3fsl1aftRzZ+5k5DPCPWa+JG+c9oiwnPOp0zH+Y9+xdecz43Qbm0Tr/hwB
+eHXitzIXyv7yvslnb1pfi/KzpXseY1MIX889RSs+8J8UnwLnP4lXlGwrE5Vf
+1rPj9i/qB3ls5unA9ldcTjTPYlMIy5cLdDry82NatgPvrHybQlhibB2JRPnL
+vI+1wqXxb3zKne+Dj7Pt21bNlkDI33P06mSp/eMRhhc1Rcx4/Gt5WC0S3sw6
+08zsqfOaH0fz1m44prBP4v2aXq+qn81YctqY2ZZQ8yu9ky3XphC+nueNdXpU
+m6wz6wEeV0L2SIz/dI5IptKb6V89LXI6j5isnFFbwe1rf/tXWmZd+6+hxULk
+FZ+8ztj+sL20/KyUhPczM8vbphC+m1sl22b5zO7nHl/3jcjPrx3+wqFXOz6z
+mwm9KMuWQMhnHns6btUvIX9/zdpZxIxl8GIZP//DVLKXX6Inn18ZN1hmNoXz
+R+MSv/3jGXZPZ5qr5vd29jV7p6+DMtdk687P/zChNyr1JcH4j3szrQPPJwhL
+e6kljphF5xzzjKjNf7G4/hE96XZuBazOovaMMB9lMZN2+2efzff0xdgcMVw7
+rYyfnz0D7d7y8/vZdxMnWzuRx3AM7EVNtgTCt3O6tq7l+I/7jJ5Whu1Sp0f5
+H4PekvNb/RWkdPp7+rV1frf941iOnPz77fDXY67v5jX0b4b/gvN/+XdaR38Y
+n0/vwj/Mp//iP8795dgKED96j/6z4f817noX3vXPjbtoZeI5dffz4f2os8fh
+p+N/6e3/D8NX32uK3lakOIB0+/NJtw8D7VLgEwbK+QFfDn8af3k/nalMv/56
+oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
+YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
+/U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
+f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACABEa2NWkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHavUBZFBLBQYAAAAAAQABAD4A
+AAD1VAAAAAA=
+</Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

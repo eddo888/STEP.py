@@ -1,10 +1,8 @@
 <MDG.Selections model="model --- DBType=11;Connect=Provider=SSDB;SRC=C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\model.qea;UID=;PWD=;">
 	<Technology id="STEP" name="Stibo" version="1.2" notes="Stibo MDG" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="dave@stibosystems.com"/>
 	<Profiles directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Stereotypes.xml"/>
-	<TagVals tags=""/>
 	<DiagramProfile directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Diagram.xml"/>
 	<UIToolboxes directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Toolbox.xml"/>
-	<ModelViews2/>
 	<Scripts>
 		<Script id="{1C6EFBF0-125A-4f39-96D9-4747500E5463}" name="Set Link Style" type="normal" language="JScript"/>
 		<Script id="{59E173F6-807B-4b3f-80A7-3C4244FCF9FA}" name="Include Missing Parts" type="normal" language="JScript"/>

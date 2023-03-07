@@ -1,5 +1,5 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
-<MDG.Technology version="1.0"><Documentation id="STEP" name="Stibo" version="1.2" notes="Stibo MDG" infoURI="https://github.com/eddo888/STEP.py" supportURI="dave@stibosystems.com"/><UMLProfiles><UMLProfile profiletype="uml2">
+<MDG.Technology version="1.0"><Documentation id="Stibo STEP" name="Stibo STEP" version="1.3" notes="Stibo STEP MDG for Sparx Enterprise Architect" infoURI="https://github.com/eddo888/STEP.py" supportURI="dave@stibosystems.com"/><UMLProfiles><UMLProfile profiletype="uml2">
 	<Documentation id="8017159A-0" name="STEP Types" version="1.2" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
@@ -1156,8 +1156,8 @@ AGsAZQBkAEUAbABlAG0AZQBuAHQAcwAoAGQAaQBhAGcAcgBhAG0AKQA7AA0A
 CgAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBFAG4AZABl
 AGQAIgAgACkAOwANAAoAfQANAAoADQAKAEkAbgBjAGwAdQBkAGUATABpAG4A
 awBlAGQAUABhAHIAdABzACgAKQA7AA0ACgA=
-</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAHhnZ1aRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHIDUH
-ZCA1B2QgNQdk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIACRzZ1aRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHbkkH
+ZG5JB2RuSQdk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
 EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
 4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
 /yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
@@ -1639,7 +1639,7 @@ oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
 YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
 /U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
 f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
-YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACAB4Z2dWkUXXPL9UAABKCwQABwAJ
-AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHIDUHZFBLBQYAAAAAAQABAD4A
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACAAkc2dWkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHbkkHZFBLBQYAAAAAAQABAD4A
 AAD1VAAAAAA=
 </Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

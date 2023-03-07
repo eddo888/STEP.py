@@ -111,6 +111,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="DaaS" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -159,11 +166,6 @@
 					<Apply type="Component">
 						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Group" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="IIEP" notes="Inbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -218,6 +220,13 @@
 			<Stereotype name="Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="UseCase"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -276,6 +285,39 @@
 						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Role" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Role 2 Permission" constraint="STEP Types::Permission"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Role 2 Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Usage">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Can Create" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Delete" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Read" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Update" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Role 2 Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Usage">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Can Instantiate" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Join" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Terminate" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>

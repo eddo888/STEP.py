@@ -19,7 +19,14 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Permissions Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Roles Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Activity">
 						<Property name="pdata" value="ShowTags=1;"/>
@@ -35,7 +42,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Workflow Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Activity">
 						<Property name="isReadOnly" value="false"/>

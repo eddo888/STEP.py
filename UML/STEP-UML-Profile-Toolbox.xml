@@ -8,8 +8,8 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Group(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
+					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
 					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
 				</TaggedValues>
@@ -47,8 +47,10 @@
 					<Tag name="STEP Types::Asset Types(UML::Package)" type="" description="" unit="" values="" default="Assets"/>
 					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attributes"/>
 					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classifications"/>
+					<Tag name="STEP Types::Components(UML::Package)" type="" description="" unit="" values="" default="Components"/>
 					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entites"/>
 					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOVs"/>
+					<Tag name="STEP Types::Permissions(UML::Package)" type="" description="" unit="" values="" default="Permissions"/>
 					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Products"/>
 					<Tag name="STEP Types::Roles(UML::Package)" type="" description="" unit="" values="" default="Roles"/>
 					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
@@ -66,6 +68,8 @@
 					<Tag name="STEP Types::LOV Type(UML::Association)" type="" description="" unit="" values="" default="LOV Type"/>
 					<Tag name="STEP Types::Product Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product Reference"/>
 					<Tag name="STEP Types::Product to Classification Link Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product to Classification Link"/>
+					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
+					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>
 					<Tag name="STEP Types::UOM Type(UML::Association)" type="" description="" unit="" values="" default="UOM Type"/>
 					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
 				</TaggedValues>

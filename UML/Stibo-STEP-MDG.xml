@@ -111,6 +111,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="DaaS" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -159,11 +166,6 @@
 					<Apply type="Component">
 						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Group" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="IIEP" notes="Inbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -218,6 +220,13 @@
 			<Stereotype name="Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="UseCase"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -276,6 +285,39 @@
 						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Role" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Role 2 Permission" constraint="STEP Types::Permission"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Role 2 Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Usage">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Can Create" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Delete" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Read" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Update" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Role 2 Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Usage">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Can Instantiate" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Join" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Terminate" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -384,7 +426,7 @@
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>
-</UMLProfile></UMLProfiles><DiagramProfile><UMLProfile profiletype="uml2">
+</UMLProfile></UMLProfiles><TaggedValueTypes><RefData version="1.0" exporter="EA.25"><DataSet name="Property Types" table="t_propertytypes" filter="Property='#Property#'"><DataRow><Column name="Property" value="Can Instantiate"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Terminate"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Read"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Create"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Update"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Delete"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow><DataRow><Column name="Property" value="Can Join"/><Column name="Notes" value="Type=Boolean;&#xA;Default=False;"/></DataRow></DataSet></RefData></TaggedValueTypes><DiagramProfile><UMLProfile profiletype="uml2">
 	<Documentation id="727D11BD-7" name="STEP Diagrms" version="1.2" notes="STEP Diagrms"/>
 	<Content>
 		<Stereotypes>
@@ -404,7 +446,14 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Permissions Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Activity">
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Roles Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Activity">
 						<Property name="pdata" value="ShowTags=1;"/>
@@ -420,7 +469,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Workflow Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Activity">
 						<Property name="isReadOnly" value="false"/>
@@ -447,8 +496,8 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="STEP Types::Group(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
+					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
 					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
 				</TaggedValues>
@@ -486,8 +535,10 @@
 					<Tag name="STEP Types::Asset Types(UML::Package)" type="" description="" unit="" values="" default="Assets"/>
 					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attributes"/>
 					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classifications"/>
+					<Tag name="STEP Types::Components(UML::Package)" type="" description="" unit="" values="" default="Components"/>
 					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entites"/>
 					<Tag name="STEP Types::LOV Group(UML::Package)" type="" description="" unit="" values="" default="LOVs"/>
+					<Tag name="STEP Types::Permissions(UML::Package)" type="" description="" unit="" values="" default="Permissions"/>
 					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Products"/>
 					<Tag name="STEP Types::Roles(UML::Package)" type="" description="" unit="" values="" default="Roles"/>
 					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
@@ -505,6 +556,8 @@
 					<Tag name="STEP Types::LOV Type(UML::Association)" type="" description="" unit="" values="" default="LOV Type"/>
 					<Tag name="STEP Types::Product Reference Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product Reference"/>
 					<Tag name="STEP Types::Product to Classification Link Type(UML::Aggregation)" type="" description="" unit="" values="" default="Product to Classification Link"/>
+					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
+					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>
 					<Tag name="STEP Types::UOM Type(UML::Association)" type="" description="" unit="" values="" default="UOM Type"/>
 					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
 				</TaggedValues>
@@ -846,6 +899,49 @@ cgApACAAewANAAoACQBTAGUAcwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQAKABh
 AG4AcwB3AGUAcgApADsADQAKAAkAcwBlAHQAXwBzAHQAZQByAGUAbwB0AHkA
 cABlACgAJwBTAFQARQBQACAAJwArAGEAbgBzAHcAZQByACkAOwANAAoAfQAN
 AAoA
+</Content></Script><Script name="Set Element Stereotype" type="normal" language="JScript" guid="{8398B450-448E-4dec-8B9D-7EB5CB590D30}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
+AG4AcwB0AGEAbgB0AHMALQBKAFMAYwByAGkAcAB0AA0ACgAhAEkATgBDACAA
+UwB0AGkAYgBvAC4ATABpAGIAcgBhAHIAeQANAAoADQAKAHYAYQByACAAZABp
+AGEAZwByAGEAbQAgAGEAcwAgAEUAQQAuAEQAaQBhAGcAcgBhAG0AOwANAAoA
+dgBhAHIAIABwAGEAYwBrAGEAZwBlACAAYQBzACAARQBBAC4AUABhAGMAawBh
+AGcAZQA7AA0ACgB2AGEAcgAgAGQAaQBhAGcAcgBhAG0AXwBvAGIAagBlAGMA
+dAAgAGEAcwAgAEUAQQAuAEQAaQBhAGcAcgBhAG0ATwBiAGoAZQBjAHQAOwAN
+AAoAdgBhAHIAIABlAGwAZQBtAGUAbgB0ACAAYQBzACAARQBBAC4ARQBsAGUA
+bQBlAG4AdAA7AA0ACgB2AGEAcgAgAHMAdABlAHIAZQBvAHQAeQBwAGUAIABh
+AHMAIABFAEEALgBTAHQAZQByAGUAbwB0AHkAcABlADsADQAKAHYAYQByACAA
+dABhAGcAZwBlAGQAdgBhAGwAdQBlACAAYQBzACAARQBBAC4AVABhAGcAZwBl
+AGQAVgBhAGwAdQBlADsADQAKAA0ACgBSAGUAcABvAHMAaQB0AG8AcgB5AC4A
+RQBuAHMAdQByAGUATwB1AHQAcAB1AHQAVgBpAHMAaQBiAGwAZQAoACAAIgBT
+AGMAcgBpAHAAdAAiACAAKQA7AA0ACgBSAGUAcABvAHMAaQB0AG8AcgB5AC4A
+QwBsAGUAYQByAE8AdQB0AHAAdQB0ACgAIgBTAGMAcgBpAHAAdAAiACkAOwAN
+AAoAUwBlAHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgAIAAiAFMAdABhAHIA
+dABpAG4AZwAiACAAKQA7AA0ACgBkAGkAYQBnAHIAYQBtACAAPQAgAFIAZQBw
+AG8AcwBpAHQAbwByAHkALgBHAGUAdABDAHUAcgByAGUAbgB0AEQAaQBhAGcA
+cgBhAG0AKAApADsACQANAAoAcABhAGMAawBhAGcAZQAgAD0AIABSAGUAcABv
+AHMAaQB0AG8AcgB5AC4ARwBlAHQAUABhAGMAawBhAGcAZQBCAHkASQBEACgA
+ZABpAGEAZwByAGEAbQAuAFAAYQBjAGsAYQBnAGUASQBEACkAOwANAAoAUwBl
+AHMAcwBpAG8AbgAuAE8AdQB0AHAAdQB0ACgAIgAvACAAIgArAHAAYQBjAGsA
+YQBnAGUALgBOAGEAbQBlACkAOwAgAA0ACgANAAoAZgBvAHIAIAAoAHYAYQBy
+ACAAZAA9ADAAOwAgAGQAPABkAGkAYQBnAHIAYQBtAC4AUwBlAGwAZQBjAHQA
+ZQBkAE8AYgBqAGUAYwB0AHMALgBDAG8AdQBuAHQAOwAgAGQAKwArACkAIAB7
+AA0ACgAJAGQAaQBhAGcAcgBhAG0AXwBvAGIAagBlAGMAdAAgAD0AIABkAGkA
+YQBnAHIAYQBtAC4AUwBlAGwAZQBjAHQAZQBkAE8AYgBqAGUAYwB0AHMALgBH
+AGUAdABBAHQAKABkACkAOwANAAoACQBlAGwAZQBtAGUAbgB0ACAAPQAgAFIA
+ZQBwAG8AcwBpAHQAbwByAHkALgBHAGUAdABFAGwAZQBtAGUAbgB0AEIAeQBJ
+AEQAKABkAGkAYQBnAHIAYQBtAF8AbwBiAGoAZQBjAHQALgBFAGwAZQBtAGUA
+bgB0AEkARAApADsADQAKAAkAcwB0AGUAcgBlAG8AdAB5AHAAZQAgAD0AIABl
+AGwAZQBtAGUAbgB0AC4AUwB0AGUAcgBlAG8AdAB5AHAAZQA7AA0ACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACcAZQBsAGUAbQBlAG4AdAAg
+AG4AYQBtAGUAPQAnACsAZQBsAGUAbQBlAG4AdAAuAE4AYQBtAGUAKwAnACwA
+IABzAHQAZQByAGUAbwB0AHkAcABlAD0AJwArAHMAdABlAHIAZQBvAHQAeQBw
+AGUAKQA7AA0ACgAJAA0ACgAJAGUAbABlAG0AZQBuAHQALgBTAHQAZQByAGUA
+bwB0AHkAcABlACAAPQAgACcAUwBUAEUAUAAgAFQAeQBwAGUAcwA6ADoAUABl
+AHIAbQBpAHMAcwBpAG8AbgAnADsADQAKAAkAZQBsAGUAbQBlAG4AdAAuAFUA
+cABkAGEAdABlACgAKQA7AA0ACgB9AA0ACgANAAoAZABpAGEAZwByAGEAbQAu
+AFUAcABkAGEAdABlACgAKQA7AA0ACgBSAGUAcABvAHMAaQB0AG8AcgB5AC4A
+UgBlAGwAbwBhAGQARABpAGEAZwByAGEAbQAoAGQAaQBhAGcAcgBhAG0ALgBE
+AGkAYQBnAHIAYQBtAEkARAApADsADQAKAAkADQAKAFMAZQBzAHMAaQBvAG4A
+LgBPAHUAdABwAHUAdAAoACAAIgBFAG4AZABlAGQAIgAgACkAOwANAAoA
 </Content></Script><Script name="Library" type="normal" language="JScript" guid="{B00A2572-E59F-4953-861E-21B0D7363F52}"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">IQBJAE4AQwAgAEwAbwBjAGEAbAAgAFMAYwByAGkAcAB0AHMALgBFAEEAQwBv
 AG4AcwB0AGEAbgB0AHMALQBKAFMAYwByAGkAcAB0AA0ACgANAAoAZgB1AG4A
 YwB0AGkAbwBuACAATABhAHkAbwB1AHQAVABoAGkAcwBEAGkAYQBnAHIAYQBt
@@ -1060,8 +1156,8 @@ AGsAZQBkAEUAbABlAG0AZQBuAHQAcwAoAGQAaQBhAGcAcgBhAG0AKQA7AA0A
 CgAJAFMAZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBFAG4AZABl
 AGQAIgAgACkAOwANAAoAfQANAAoADQAKAEkAbgBjAGwAdQBkAGUATABpAG4A
 awBlAGQAUABhAHIAdABzACgAKQA7AA0ACgA=
-</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAM5ZZ1aRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHfxwH
-ZH8cB2R/HAdk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAHhnZ1aRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHIDUH
+ZCA1B2QgNQdk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
 EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
 4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
 /yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
@@ -1543,7 +1639,7 @@ oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
 YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
 /U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
 f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
-YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACADOWWdWkUXXPL9UAABKCwQABwAJ
-AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHfxwHZFBLBQYAAAAAAQABAD4A
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACAB4Z2dWkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHIDUHZFBLBQYAAAAAAQABAD4A
 AAD1VAAAAAA=
 </Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

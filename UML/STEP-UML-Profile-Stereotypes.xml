@@ -25,6 +25,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
@@ -97,6 +99,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
@@ -118,7 +122,7 @@
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
 					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
-					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Entity"/>
 				</stereotypedrelationships>
 				<AppliesTo>
@@ -138,6 +142,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
@@ -240,6 +246,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
@@ -250,6 +258,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>

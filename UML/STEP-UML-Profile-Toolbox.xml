@@ -30,6 +30,9 @@
 					<Tag name="STEP Types::DaaS(UML::Component)" type="" description="" unit="" values="" default="DaaS"/>
 					<Tag name="STEP Types::GIEP(UML::Component)" type="" description="" unit="" values="" default="GIEP"/>
 					<Tag name="STEP Types::IIEP(UML::Component)" type="" description="" unit="" values="" default="IIEP"/>
+					<Tag name="STEP Types::InDesign Client(UML::Component)" type="" description="" unit="" values="" default="InDesign Client"/>
+					<Tag name="STEP Types::InDesign Server(UML::Component)" type="" description="" unit="" values="" default="InDesign Server"/>
+					<Tag name="STEP Types::Java SDK(UML::Component)" type="" description="" unit="" values="" default="Java SDK"/>
 					<Tag name="STEP Types::OIEP(UML::Component)" type="" description="" unit="" values="" default="OIEP"/>
 					<Tag name="STEP Types::PDX(UML::Component)" type="" description="" unit="" values="" default="PDX"/>
 					<Tag name="STEP Types::REST API(UML::Component)" type="" description="" unit="" values="" default="REST"/>
@@ -38,6 +41,7 @@
 					<Tag name="STEP Types::STEP(UML::Component)" type="" description="" unit="" values="" default="STEP"/>
 					<Tag name="STEP Types::WebUI(UML::Component)" type="" description="" unit="" values="" default="WebUI"/>
 					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
+					<Tag name="STEP Types::XSLT(UML::Component)" type="" description="" unit="" values="" default="XSLT"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

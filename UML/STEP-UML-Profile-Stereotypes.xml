@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="1.4" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="1.5" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -34,18 +34,6 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Asset Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Asset Side Car" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -91,7 +79,7 @@
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="7451452" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Association">
 						<Property name="compositionKind" value="none"/>
@@ -99,6 +87,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="Attributes"/>
 					<Tag name="Attribute Groups"/>
 				</TaggedValues>
 			</Stereotype>
@@ -113,8 +102,6 @@
 			</Stereotype>
 			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
-					<stereotypedrelationship stereotype="STEP Types::Classification Reference Type" constraint="STEP Types::Classification"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
 				</stereotypedrelationships>
@@ -140,18 +127,6 @@
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Classification Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Attribute Links"/>
-				</TaggedValues>
-			</Stereotype>
 			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
@@ -175,8 +150,7 @@
 			</Stereotype>
 			<Stereotype name="Entity" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
-					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Classification;STEP Types::Product"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Entity"/>
 				</stereotypedrelationships>
@@ -197,18 +171,6 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Entity Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Entity Types" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -383,9 +345,6 @@
 			</Stereotype>
 			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
-					<stereotypedrelationship stereotype="STEP Types::Product Reference Type" constraint="STEP Types::Product"/>
-					<stereotypedrelationship stereotype="STEP Types::Product to Classification Link Type" constraint="STEP Types::Classification"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Product"/>
 				</stereotypedrelationships>
 				<AppliesTo>
@@ -411,36 +370,29 @@
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Product Reference Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Attribute Links"/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Product to Classification Link Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Attribute Links"/>
-				</TaggedValues>
-			</Stereotype>
 			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Reference Definition" notes="" cx="0" cy="0" bgcolor="14053594" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Source" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Target" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Type" type="enumeration" description="" unit="" values="Product Reference Type,Asset Reference Type,Classification Reference Type,Product to Classification Link Type,Entity Reference Type" default=""/>
+					<Tag name="Attribute Links"/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="reference instance" notes="" cx="0" cy="0" bgcolor="13353215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -449,8 +401,14 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Type" type="Aggregation" description="" unit="" values="" default=""/>
 				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Reference Types" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="REST" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -559,6 +517,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Source" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="SQL API" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -570,6 +535,13 @@
 				<AppliesTo>
 					<Apply type="Component">
 						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Target" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -689,8 +661,9 @@
 			</Stereotype>
 		</Stereotypes>
 		<TaggedValueTypes>
-			<TaggedValueType property="Attribute Links" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
+			<TaggedValueType property="Attributes" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
 			<TaggedValueType property="Attribute Groups" description="" notes="Type=RefGUIDList;Stereotypes=Attribute Group;"/>
+			<TaggedValueType property="Attribute Links" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
 		</TaggedValueTypes>
 		<ViewDefinitions/>
 		<Metamodel/>

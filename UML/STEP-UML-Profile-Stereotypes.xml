@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="1.3" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="1.4" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -12,7 +12,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
@@ -64,7 +64,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::LOV Type" constraint="STEP Types::LOV"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Type" constraint="STEP Types::UOM"/>
@@ -81,7 +81,7 @@
 					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
@@ -111,7 +111,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
 					<stereotypedrelationship stereotype="STEP Types::Classification Reference Type" constraint="STEP Types::Classification"/>
@@ -305,7 +305,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Enumeration"/>
 				</AppliesTo>
@@ -315,7 +315,7 @@
 					<Tag name="Multi Select" type="boolean" description="" unit="" values="true,false" default="false"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
@@ -381,7 +381,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Asset Reference Type" constraint="STEP Types::Asset"/>
 					<stereotypedrelationship stereotype="STEP Types::Product Reference Type" constraint="STEP Types::Product"/>
@@ -435,12 +435,22 @@
 					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="reference instance" notes="" cx="0" cy="0" bgcolor="13353215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Object"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Type" type="Aggregation" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="REST" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -502,7 +512,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Rule" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Rule" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Action">
 						<Property name="context" value=""/>
@@ -563,7 +573,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="16777215" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -573,7 +583,16 @@
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Base" type="float" description="" unit="" values="" default=""/>
-					<Tag name="Conversion" type="char" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="UOM instance" notes="" cx="0" cy="0" bgcolor="755384" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Object"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Conversion" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="UOM Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -584,7 +603,14 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Valid Attribute" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="UOM Types" notes="" cx="0" cy="0" bgcolor="2139610" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Valid Attribute" notes="" cx="0" cy="0" bgcolor="3329434" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Attribute">
 						<Property name="@ID" value=""/>

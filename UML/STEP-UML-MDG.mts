@@ -1,5 +1,5 @@
 <MDG.Selections model="STEP-Model --- DBType=11;Connect=Provider=SSDB;SRC=C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\STEP-Model.qea;UID=;PWD=;">
-	<Technology id="Stibo STEP" name="Stibo STEP" version="1.3" notes="Stibo Systems STEP design model" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au" icon="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp" logo="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp"/>
+	<Technology id="Stibo STEP" name="Stibo STEP" version="1.4" notes="Stibo Systems STEP design model" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au" icon="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp" logo="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp"/>
 	<Profiles directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Stereotypes.xml"/>
 	<Patterns directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Pattern.xml"/>
 	<TagVals tags="Can Create,Can Delete,Can Instantiate,Can Join,Can Read,Can Terminate,Can Update"/>

@@ -2328,6 +2328,10 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
@@ -2573,6 +2577,9 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Library" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Library"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -3801,8 +3808,8 @@ AGQAZQBMAGkAbgBrAGUAZABFAGwAZQBtAGUAbgB0AHMAKABkAGkAYQBnAHIA
 YQBtACkAOwANAAoACQBTAGUAcwBzAGkAbwBuAC4ATwB1AHQAcAB1AHQAKAAg
 ACIARQBuAGQAZQBkACIAIAApADsADQAKAH0ADQAKAA0ACgBJAG4AYwBsAHUA
 ZABlAEwAaQBuAGsAZQBkAFAAYQByAHQAcwAoACkAOwANAAoA
-</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAMBydlaRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHOA8b
-ZDgPG2Q4Dxtk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADZ6dlaRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHBxwb
+ZAccG2QHHBtk7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
 EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
 4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
 /yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
@@ -4284,7 +4291,7 @@ oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
 YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
 /U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
 f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
-YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACADAcnZWkUXXPL9UAABKCwQABwAJ
-AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHOA8bZFBLBQYAAAAAAQABAD4A
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACAA2enZWkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHBxwbZFBLBQYAAAAAAQABAD4A
 AAD1VAAAAAA=
 </Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

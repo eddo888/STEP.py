@@ -140,6 +140,10 @@
 						<Property name="URI" value=""/>
 					</Apply>
 				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
@@ -385,6 +389,9 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Library" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Library"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>

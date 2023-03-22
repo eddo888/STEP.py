@@ -34,7 +34,6 @@ class STEP2UML(object):
 		self.references           = dict() # id: xmi.class
 		self.keys                 = dict() # id: xmi.class
 
-
 	def BaseTypes(self, xmi, parent):
 		'''
 		make the fundamentals
@@ -72,13 +71,11 @@ class STEP2UML(object):
 
 		return package
 	
-
 	def Validation(self, xmi, validation, target):
 		for property in ['MinValue', 'MaxValue', 'MaxLength', 'InputMask']:
 			value = getAttribute(validation, property)
 			xmi.makeAttribute(f'@{property}', None, value, target, array=False)
 			
-
 	def ListOfValuesGroup(self, xmi, STEP, lov_group, package, diagram, indent=''):
 		lname = getElementText(STEP.ctx, 'step:Name', lov_group)
 		if lname: lname = lname.replace("'","&apos;")
@@ -98,7 +95,6 @@ class STEP2UML(object):
 		for child in getElements(STEP.ctx, 'step:ListOfValuesGroup', lov_group):
 			self.ListOfValuesGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
 			
-		
 	def ListOfValuesGroups(self, xmi, STEP, parent):
 		'''
 		get LOV groups as packages
@@ -114,7 +110,6 @@ class STEP2UML(object):
 
 		return package
 			
-
 	def ListOfValues(self, xmi, STEP):
 		'''
 		get LOVs as class enums
@@ -149,7 +144,6 @@ class STEP2UML(object):
 				id = getAttribute(value, 'ID')
 				xmi.makeAttribute(name, None, id, _lov, array=False)
 
-	
 	def AttributeGroup(self, xmi, STEP, attr_group, package, diagram, indent=''):
 		lname = getElementText(STEP.ctx, 'step:Name', attr_group)
 		if lname: lname = lname.replace("'","&apos;")
@@ -168,7 +162,6 @@ class STEP2UML(object):
 		for child in getElements(STEP.ctx, 'step:AttributeGroup', attr_group):
 			self.AttributeGroup(xmi, STEP, child, _package, _diagram, indent=f'\t{indent}')
 
-			
 	def AttributeGroups(self, xmi, STEP, parent):
 		'''
 		get LOV groups as packages
@@ -183,7 +176,6 @@ class STEP2UML(object):
 
 		return package
 	
-			
 	def Attributes(self, xmi, STEP):
 		'''
 		get attributes as classes
@@ -234,7 +226,6 @@ class STEP2UML(object):
 				_lov = self.lovs[lid]
 				xmi.makeAssociation('LOV', _attribute, _lov, package)
 					
-	
 	def UserTypes(self, xmi, STEP, parent):
 		'''
 		make the user types
@@ -304,7 +295,6 @@ class STEP2UML(object):
 
 		return package
 	
-	
 	def References(self, xmi, STEP, parent):
 		'''
 		make references
@@ -366,7 +356,6 @@ class STEP2UML(object):
 			self.references[rid] = _reference
 
 		return package
-
 
 	def Keys(self, xmi, STEP, parent):
 		'''

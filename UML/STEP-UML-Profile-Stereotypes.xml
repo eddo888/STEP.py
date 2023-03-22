@@ -30,6 +30,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -41,6 +42,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Asset Side Car" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -127,6 +129,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -141,6 +144,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -190,6 +194,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -201,6 +206,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Entity Types" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -413,7 +419,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="version" type="" description="" unit="" values="" default=""/>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -428,6 +434,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">

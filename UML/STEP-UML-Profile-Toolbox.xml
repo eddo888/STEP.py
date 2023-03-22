@@ -8,11 +8,16 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::Business Action(UML::Action)" type="" description="" unit="" values="" default="Action"/>
+					<Tag name="STEP Types::Condition(UML::Class)" type="" description="" unit="" values="" default="Condition"/>
+					<Tag name="STEP Types::Depends On(UML::Dependency)" type="" description="" unit="" values="" default="Depends On"/>
+					<Tag name="STEP Types::Event Processor(UML::Class)" type="" description="" unit="" values="" default="Event Processor"/>
+					<Tag name="STEP Types::Library(UML::Class)" type="" description="" unit="" values="" default="Library"/>
 					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
 					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
 					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>
 					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
-					<Tag name="STEP Types::Rule(UML::Action)" type="" description="" unit="" values="" default="Rule"/>
+					<Tag name="STEP Types::Rule(UML::Class)" type="" description="" unit="" values="" default="Rule"/>
 					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
 				</TaggedValues>
 			</Stereotype>
@@ -52,6 +57,7 @@
 					<Tag name="STEP Types::STEP(UML::Component)" type="" description="" unit="" values="" default="STEP"/>
 					<Tag name="STEP Types::Types(UML::Component)" type="" description="" unit="" values="" default="Types"/>
 					<Tag name="STEP Types::WebUI(UML::Component)" type="" description="" unit="" values="" default="WebUI"/>
+					<Tag name="STEP Types::Widgets(UML::Component)" type="" description="" unit="" values="" default="Widgets"/>
 					<Tag name="STEP Types::Workbench(UML::Component)" type="" description="" unit="" values="" default="Workbench"/>
 					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
 					<Tag name="STEP Types::WSDL(UML::Component)" type="" description="" unit="" values="" default="WSDL"/>
@@ -78,6 +84,7 @@
 				<TaggedValues>
 					<Tag name="STEP Types::Asset Types(UML::Package)" type="" description="" unit="" values="" default="Assets"/>
 					<Tag name="STEP Types::Attribute Group(UML::Package)" type="" description="" unit="" values="" default="Attributes"/>
+					<Tag name="STEP Types::Business Rules(UML::Package)" type="" description="" unit="" values="" default="Rules"/>
 					<Tag name="STEP Types::Classification Types(UML::Package)" type="" description="" unit="" values="" default="Classifications"/>
 					<Tag name="STEP Types::Components(UML::Package)" type="" description="" unit="" values="" default="Components"/>
 					<Tag name="STEP Types::Entity Types(UML::Package)" type="" description="" unit="" values="" default="Entites"/>

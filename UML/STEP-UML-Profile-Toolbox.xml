@@ -32,20 +32,29 @@
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="STEP Types::Analytics(UML::Component)" type="" description="" unit="" values="" default="Analytics"/>
+					<Tag name="STEP Types::Cosmos DB(UML::Component)" type="" description="" unit="" values="" default="Cosmos DB"/>
 					<Tag name="STEP Types::DaaS(UML::Component)" type="" description="" unit="" values="" default="DaaS"/>
+					<Tag name="STEP Types::eCommerce(UML::Component)" type="" description="" unit="" values="" default="eCommerce"/>
+					<Tag name="STEP Types::ERP(UML::Component)" type="" description="" unit="" values="" default="ERP"/>
 					<Tag name="STEP Types::GIEP(UML::Component)" type="" description="" unit="" values="" default="GIEP"/>
 					<Tag name="STEP Types::IIEP(UML::Component)" type="" description="" unit="" values="" default="IIEP"/>
 					<Tag name="STEP Types::InDesign Client(UML::Component)" type="" description="" unit="" values="" default="InDesign Client"/>
 					<Tag name="STEP Types::InDesign Server(UML::Component)" type="" description="" unit="" values="" default="InDesign Server"/>
 					<Tag name="STEP Types::Java SDK(UML::Component)" type="" description="" unit="" values="" default="Java SDK"/>
+					<Tag name="STEP Types::Kafka Server(UML::Component)" type="" description="" unit="" values="" default="Kafka Server"/>
+					<Tag name="STEP Types::Mongo DB(UML::Component)" type="" description="" unit="" values="" default="Mongo DB"/>
 					<Tag name="STEP Types::OIEP(UML::Component)" type="" description="" unit="" values="" default="OIEP"/>
 					<Tag name="STEP Types::PDX(UML::Component)" type="" description="" unit="" values="" default="PDX"/>
-					<Tag name="STEP Types::REST API(UML::Component)" type="" description="" unit="" values="" default="REST"/>
-					<Tag name="STEP Types::SOAP API(UML::Component)" type="" description="" unit="" values="" default="SOAP"/>
+					<Tag name="STEP Types::Profile(UML::Component)" type="" description="" unit="" values="" default="Profile"/>
+					<Tag name="STEP Types::REST(UML::Component)" type="" description="" unit="" values="" default="REST"/>
 					<Tag name="STEP Types::SQL API(UML::Component)" type="" description="" unit="" values="" default="SQL API"/>
 					<Tag name="STEP Types::STEP(UML::Component)" type="" description="" unit="" values="" default="STEP"/>
+					<Tag name="STEP Types::Types(UML::Component)" type="" description="" unit="" values="" default="Types"/>
 					<Tag name="STEP Types::WebUI(UML::Component)" type="" description="" unit="" values="" default="WebUI"/>
+					<Tag name="STEP Types::Workbench(UML::Component)" type="" description="" unit="" values="" default="Workbench"/>
 					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
+					<Tag name="STEP Types::WSDL(UML::Component)" type="" description="" unit="" values="" default="WSDL"/>
 					<Tag name="STEP Types::XSLT(UML::Component)" type="" description="" unit="" values="" default="XSLT"/>
 				</TaggedValues>
 			</Stereotype>
@@ -89,19 +98,20 @@
 				<TaggedValues>
 					<Tag name="STEP Types::Active MQ(UML::Port)" type="" description="" unit="" values="" default="Active MQ"/>
 					<Tag name="STEP Types::Asset Side Car(UML::Port)" type="" description="" unit="" values="" default="Asset Side Car"/>
-					<Tag name="STEP Types::Azure Blob Adapter(UML::Port)" type="" description="" unit="" values="" default="Azure Blob"/>
+					<Tag name="STEP Types::Azure Blobs(UML::Port)" type="" description="" unit="" values="" default="Azure Blobs"/>
+					<Tag name="STEP Types::Azure ESB(UML::Port)" type="" description="" unit="" values="" default="Azure ESB"/>
+					<Tag name="STEP Types::GraphQL(UML::Port)" type="" description="" unit="" values="" default="GraphQL"/>
 					<Tag name="STEP Types::Hot Folder(UML::Port)" type="" description="" unit="" values="" default="Hot Folder"/>
+					<Tag name="STEP Types::HTTPs(UML::Port)" type="" description="" unit="" values="" default="HTTPs"/>
 					<Tag name="STEP Types::JDBC(UML::Port)" type="" description="" unit="" values="" default="JDBC"/>
-					<Tag name="STEP Types::JMS Adapter(UML::Port)" type="" description="" unit="" values="" default="JMS Adapter"/>
-					<Tag name="STEP Types::Kafka Adapter(UML::Port)" type="" description="" unit="" values="" default="Kafka Adapter"/>
-					<Tag name="STEP Types::Mongo Adapter(UML::Port)" type="" description="" unit="" values="" default="Mongo Adapter"/>
+					<Tag name="STEP Types::JMS(UML::Port)" type="" description="" unit="" values="" default="JMS"/>
+					<Tag name="STEP Types::Kafka Events(UML::Port)" type="" description="" unit="" values="" default="Kafka Events"/>
+					<Tag name="STEP Types::Mongo API(UML::Port)" type="" description="" unit="" values="" default="Mongo API"/>
 					<Tag name="STEP Types::Oracle AQ(UML::Port)" type="" description="" unit="" values="" default="Oracle AQ"/>
-					<Tag name="STEP Types::REST(UML::Port)" type="" description="" unit="" values="" default="REST"/>
-					<Tag name="STEP Types::S3 Adapter(UML::Port)" type="" description="" unit="" values="" default="S3 Adapter"/>
+					<Tag name="STEP Types::S3(UML::Port)" type="" description="" unit="" values="" default="S3"/>
 					<Tag name="STEP Types::Server Side Delivery(UML::Port)" type="" description="" unit="" values="" default="Server Side Delivery"/>
 					<Tag name="STEP Types::sFTP(UML::Port)" type="" description="" unit="" values="" default="sFTP"/>
 					<Tag name="STEP Types::WebSphere MQ(UML::Port)" type="" description="" unit="" values="" default="WebSphere MQ"/>
-					<Tag name="STEP Types::WSDL(UML::Port)" type="" description="" unit="" values="" default="WSDL"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

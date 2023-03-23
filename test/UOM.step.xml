@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Configuration:
+<STEP-ProductInformation ResolveInlineRefs="true" Validation="XSD">
+<UnitList ExportSize="Selected"/>
+</STEP-ProductInformation>
+
+Export from Primary Hierarchy
+Classifications All
+Products All
+Assets All
+
+Exported by database exporter.
+-->
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ExportTime="2023-03-23 12:41:34" ExportContext="GL" ContextID="GL" WorkspaceID="Main" UseContextLocale="false">
+
+  <UnitList>
+    <UnitFamily ID="Temperature" Selected="true" Referenced="true">
+      <Name>Temperature</Name>
+      <Unit ID="unece.unit.CEL">
+        <Name>°C</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor="1" Offset="273.15"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">°C</Value>
+          <Value AttributeID="ETIM6 ID">EU570073</Value>
+          <Value AttributeID="ETIM6 Description">Degrees celsius</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.A48">
+        <Name>°R</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.KEL">
+        <Name>K</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Kelvin</Value>
+          <Value AttributeID="ETIM6 ID">EU570076</Value>
+          <Value AttributeID="ETIM6 Abbreviation">K</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FAH">
+        <Name>°F</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">degree Fahrenheit</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Length" Selected="true" Referenced="true">
+      <Name>Length</Name>
+      <Unit ID="unece.unit.SMI">
+        <Name>mile</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1609.344" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.A11">
+        <Name>Å</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0000000001" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.INH">
+        <Name>in</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0254" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">Zoll</Value>
+          <Value AttributeID="ETIM6 ID">EU000051</Value>
+          <Value AttributeID="ETIM6 Description">Inch</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.4H">
+        <Name>µm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">µm</Value>
+          <Value AttributeID="ETIM6 ID">EU570499</Value>
+          <Value AttributeID="ETIM6 Description">Micrometer</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MTR">
+        <Name>m</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">m</Value>
+          <Value AttributeID="ETIM6 Description">Meter</Value>
+          <Value AttributeID="ETIM6 ID">EU570036</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FOT">
+        <Name>ft</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".3048" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.C45">
+        <Name>nm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU000056</Value>
+          <Value AttributeID="ETIM6 Description">Nanometer</Value>
+          <Value AttributeID="ETIM6 Abbreviation">nm</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CMT">
+        <Name>cm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="0.01" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU570399</Value>
+          <Value AttributeID="ETIM6 Description">Centimeter</Value>
+          <Value AttributeID="ETIM6 Abbreviation">cm</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.KTM">
+        <Name>km</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1000" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.MMT">
+        <Name>mm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Millimeter</Value>
+          <Value AttributeID="ETIM6 ID">EU570448</Value>
+          <Value AttributeID="ETIM6 Abbreviation">mm</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.YRD">
+        <Name>yd</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".9144" Offset="0"/>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Volume" Selected="true" Referenced="true">
+      <Name>Volume</Name>
+      <Unit ID="unece.unit.QTI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0011365225" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">quart (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.DLT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">decilitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MTQ">
+        <Name>m³</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic metre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MMQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic millimetre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.OZI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002841306" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">fluid ounce (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CLT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">centilitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CMQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic centimetre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.GLL">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".003785412" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">gallon (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MLT">
+        <Name>ml</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Milliliter</Value>
+          <Value AttributeID="ETIM6 ID">EU570380</Value>
+          <Value AttributeID="UnitDescription">millilitre</Value>
+          <Value AttributeID="ETIM6 Abbreviation">ml</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.INQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000016387064" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic inch</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.PT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000473176" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">pint (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.4G">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">microlitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FTQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0283168467117" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic foot</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.QT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0009463529" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">quart (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.GLI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".004546092" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">gallon (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.YDQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".764554861216" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic yard</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.OZA">
+        <Name>fl.oz.</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002957353" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">fluid ounce (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.PTI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000568261" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">pint (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.LTR">
+        <Name>l</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Liter</Value>
+          <Value AttributeID="UnitDescription">litre</Value>
+          <Value AttributeID="ETIM6 ID">EU570403</Value>
+          <Value AttributeID="ETIM6 Abbreviation">l</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Time" Selected="true" Referenced="true">
+      <Name>Time</Name>
+      <Unit ID="unece.unit.DAY">
+        <Name>day(s)</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="86400" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">day</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C26">
+        <Name>millisecond</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">millisecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.WEE">
+        <Name>week</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="604800" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">week</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C47">
+        <Name>nanosecond</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">nanosecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MIN">
+        <Name>minute</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="60" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">min</Value>
+          <Value AttributeID="ETIM6 Description">Minute</Value>
+          <Value AttributeID="ETIM6 ID">EU570422</Value>
+          <Value AttributeID="UnitDescription">minute [unit of time]</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.SEC">
+        <Name>second</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU570103</Value>
+          <Value AttributeID="UnitDescription">second [unit of time]</Value>
+          <Value AttributeID="ETIM6 Description">Second</Value>
+          <Value AttributeID="ETIM6 Abbreviation">s</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MON">
+        <Name>month</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="2629800" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">month</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.HUR">
+        <Name>hour</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="3600" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">hour</Value>
+          <Value AttributeID="ETIM6 ID">EU570410</Value>
+          <Value AttributeID="ETIM6 Description">Hour</Value>
+          <Value AttributeID="ETIM6 Abbreviation">h</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.B98">
+        <Name>microsecond</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">microsecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.ANN">
+        <Name>year</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="31557600" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">year</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+  </UnitList>
+</STEP-ProductInformation>

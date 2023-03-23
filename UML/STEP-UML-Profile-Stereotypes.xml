@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="1.5" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="1.6" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -30,7 +30,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -42,7 +42,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Asset Side Car" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -72,9 +72,14 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,DateTime,Date,URL" default="text"/>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="InputMask" type="" description="" unit="" values="" default=""/>
+					<Tag name="MaxLength" type="" description="" unit="" values="" default=""/>
+					<Tag name="MaxValue" type="" description="" unit="" values="" default=""/>
+					<Tag name="MinValue" type="" description="" unit="" values="" default=""/>
+					<Tag name="MultiValued" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,datetime,date,url,gtin,integer,isodate,isodatetime,numberrange,numeric_text,regexp" default="text"/>
 					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
 				</TaggedValues>
 			</Stereotype>
@@ -156,7 +161,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -171,7 +176,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -242,7 +247,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -254,7 +259,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Entity Types" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -407,9 +412,9 @@
 					<Apply type="Enumeration"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Multi Select" type="boolean" description="" unit="" values="true,false" default="false"/>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="UseValueID" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -495,7 +500,7 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -510,7 +515,7 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -539,6 +544,7 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="MultiValued" type="" description="" unit="" values="" default="Yes"/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Type" type="enumeration" description="" unit="" values="Product Reference Type,Asset Reference Type,Classification Reference Type,Product to Classification Link Type,Entity Reference Type" default=""/>
 					<Tag name="Attribute Links"/>
@@ -688,6 +694,9 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::UOM Base" constraint="STEP Types::UOM instance"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Class">
 						<Property name="isActive" value=""/>
@@ -696,8 +705,15 @@
 				<TaggedValues>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Base" type="float" description="" unit="" values="" default=""/>
 				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="UOM Base" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="UOM instance" notes="" cx="0" cy="0" bgcolor="755384" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -705,8 +721,9 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Conversion" type="" description="" unit="" values="" default=""/>
+					<Tag name="Factor" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Offset" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="UOM Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

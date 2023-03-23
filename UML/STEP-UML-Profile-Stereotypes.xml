@@ -715,7 +715,18 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="UOM Family" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="UOM instance" notes="" cx="0" cy="0" bgcolor="755384" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::UOM Family" constraint="STEP Types::UOM"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="Object"/>
 				</AppliesTo>

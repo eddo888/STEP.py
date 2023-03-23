@@ -29,6 +29,7 @@
 					<Tag name="STEP Types::Attribute Link(UML::Association)" type="" description="" unit="" values="" default="Attribute Link"/>
 					<Tag name="STEP Types::LOV Type(UML::Association)" type="" description="" unit="" values="" default="LOV Type"/>
 					<Tag name="STEP Types::UOM Base(UML::Association)" type="" description="" unit="" values="" default="UOM Base"/>
+					<Tag name="STEP Types::UOM Family(UML::Association)" type="" description="" unit="" values="" default="UOM Family"/>
 					<Tag name="STEP Types::UOM Type(UML::Association)" type="" description="" unit="" values="" default="UOM Type"/>
 					<Tag name="STEP Types::Valid Attribute(UML::Attribute)" type="" description="" unit="" values="" default="Valid Attribute"/>
 				</TaggedValues>

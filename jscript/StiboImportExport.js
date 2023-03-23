@@ -9,6 +9,53 @@ var namespace = 'http://www.stibosystems.com/step';
 var NODE_ELEMENT = 1;
 var FSREAD = 1;
 
+// { type: { @ID: Element }}
+var cache = new ActiveXObject("Scripting.Dictionary");
+
+function fillCache(package, indent) {
+	if (! indent) indent = '';
+	var package as EA.Package;
+	Session.Output(indent+'/'+package.Name);
+	
+	for (var e=0; e<package.Elements.Count; e++) {
+		var element as EA.Element;
+		element = package.Elements.GetAt(e);
+		var stereotype as EA.Stereotype;
+		stereotype = element.StereotypeEx;
+		if (stereotype) {
+			Session.Output(indent+'  >'+element.Name);
+			putCache(stereotype, element);
+		}
+	}
+	for (var p=0; p<package.Packages.Count; p++) {
+		var child as EA.Package;
+		child = package.Packages.GetAt(p);
+		fillCache(child, indent+'  ');
+	}
+}
+
+function putCache(stereotype, element) {
+	var tag as EA.TaggedValue;
+	tag = getTaggedValue(element, '@ID');
+	if (tag && tag.Value) {
+		if (! cache.Exists(''+stereotype)) {
+			cache.Add(stereotype, new ActiveXObject("Scripting.Dictionary"));
+		}
+		cache.Item(''+stereotype).Add(tag.Value, element);
+	}
+}
+
+function getCache(stereotype, id) {
+	var result as EA.Element;
+	if (! id) return;
+	if (cache.Exists(''+stereotype)) {
+		if (cache.Item(''+stereotype).Exists(id)) {
+			result = cache.Item(''+stereotype).Item(id);
+		}
+	}
+	return result;
+}
+
 function AddElementNS(parent, name, ns) {
 	var result;
 	var _doc;
@@ -28,7 +75,7 @@ function AddElementNS(parent, name, ns) {
 	return result;
 }
 
-function findOrCreatePackage(parent, stereotype, name, id) {
+function findPackage(parent, stereotype, name, id) {
 	var parent as EA.Package;
 	var result;
 	var prefix = '=';
@@ -42,6 +89,22 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 		}
 		// recurse ?
 	}
+	
+	if (!result) {
+		for (var c=0; c<parent.Packages.Count; c++) {
+			var child as EA.Package;
+			result = findPackage(child, stereotype, name, id);
+			if (result) break;
+		}
+	}
+	
+	return result;
+}
+
+function findOrCreatePackage(parent, stereotype, name, id) {
+	var result as EA.Package;
+	var prefix = '=';
+	result = findPackage(parent, stereotype, name, id);
 	
 	if (! result) {
 		prefix = '+';
@@ -57,20 +120,10 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 
 function findOrCreateElement(parent, tipe, stereotype, name, id) {
 	var parent as EA.Element;
-	var result;
+	var result as EA.Element;
 	var prefix = '=';
 
-	for (var c=0; c<parent.Elements.Count; c++) {
-		var child as EA.Element;
-		child = parent.Elements.GetAt(c);
-		if (child.StereotypeEx == stereotype) {
-			var tag_id = getTaggedValue(child, '@ID');
-			if (tag_id && tag_id.Value == id) {
-				result = child;
-				break;
-			}
-		}
-	}
+	result = getCache(stereotype, id);
 	
 	if (! result) {
 		prefix = '+';
@@ -79,6 +132,7 @@ function findOrCreateElement(parent, tipe, stereotype, name, id) {
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
 		setTaggedValue('@ID', id);
+		putCache(stereotype, result);
 	}
 	Session.Output(prefix+' element="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
 	
@@ -109,7 +163,7 @@ function setTaggedValue(element, name, value) {
 	}
 	result.Update();
 	
-	Session.Output('tag name="'+result.Name+'" value="'+result.Value+'"');
+	//Session.Output('tag name="'+result.Name+'" value="'+result.Value+'"');
 	return result;
 }
 
@@ -126,7 +180,7 @@ function getTaggedValue(element, name) {
 		}
 	}
 	if (result) {
-		Session.Output(prefix+'tag name="'+result.Name+'" value="'+result.Value+'"');
+		//Session.Output(prefix+'tag name="'+result.Name+'" value="'+result.Value+'"');
 	}
 	return result;
 }
@@ -154,6 +208,7 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	result.StereotypeEx = 'STEP Types::'+stereotype;
 	result.Update();
 	Session.Output(prefix+' connector "'+source.Name+' -> '+target.Name+' : <'+result.StereotypeEx+'>');
+	
 	return result;
 }
 
@@ -185,9 +240,18 @@ function readUnitsOfMeasures(package, doc) {
 			var Unit = Units[u];
 			var Unit_id = XMLGetNamedAttribute(Unit, 'ID');
 			var Unit_name = XMLGetNodeText(Unit, 's:Name');
+			
+			var description = XMLGetNodeText(Unit, 's:MetaData/s:Value[@AttributeID="UnitDescription"]');
+			if (description && description.length > 0) {
+				name = description;
+				uom_item.Name = name;
+				uom_item.Update();
+			}
+			
 			Session.Output('Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
 			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name,Unit_id);
+			
 			setTaggedValue(uom_item, '@ID', Unit_id);
 			setTaggedValue(uom_item, 'Name', Unit_name);
 			
@@ -211,13 +275,19 @@ function readUnitsOfMeasures(package, doc) {
 	}
 }
 
+function readListOfValuesGroup(package, doc) {
+	//todo
+	
+}
+
 function importStepXML(fileName, diagram) {
 	var doc; // as MSXML2.DOMDocument;
 	var node; // as MSXML2.DOMNode;
 
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
-		
+	fillCache(package);
+	
 	doc = XMLReadXMLFromFile(fileName);
 	if (!doc) {
 		Session.Output('failed to load '+fileName);
@@ -236,7 +306,10 @@ function importStepXML(fileName, diagram) {
 		}
 	}
 	
+	// todo: index @ID to Element
 	readUnitsOfMeasures(package, doc);
+	//readListOfValuesGroup(package, doc);
+	
 }
 
 function writeUnitsOfMeasures(package, doc) {}

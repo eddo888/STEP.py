@@ -1,5 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
+!INC Stibo STEP.Library
 
 // https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
 // https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms756987(v=vs.85)#jscript-examples
@@ -12,10 +13,26 @@ var FSREAD = 1;
 // { type: { @ID: Element }}
 var cache = new ActiveXObject("Scripting.Dictionary");
 
+function showCache() {
+	var skeys = cache.Keys().toArray();
+	for (var s=0; s<skeys.length; s++) {
+		var stereotype = skeys[s];
+		Session.Output('/'+stereotype);
+		var ikeys = cache.Item(stereotype).Keys().toArray();
+		for (var i=0; i<ikeys.length; i++) {
+			var id = ikeys[i];
+			var element as EA.Element;
+			element = cache.Item(stereotype).Item(id);
+			Session.Output('  @ID="'+id+'" name="'+element.Name+'"');
+		}
+	}
+
+}
+
 function fillCache(package, indent) {
 	if (! indent) indent = '';
 	var package as EA.Package;
-	Session.Output(indent+'/'+package.Name);
+	//Session.Output(indent+'/'+package.Name);
 	
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
@@ -23,7 +40,7 @@ function fillCache(package, indent) {
 		var stereotype as EA.Stereotype;
 		stereotype = element.StereotypeEx;
 		if (stereotype) {
-			Session.Output(indent+'  >'+element.Name);
+			//Session.Output(indent+'  >'+element.Name);
 			putCache(stereotype, element);
 		}
 	}
@@ -224,6 +241,25 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	return result;
 }
 
+function setupDiagram(package, name, diagram_type) {
+	var package as EA.Package;
+	var diagram as EA.Diagram;
+	if (! package) return;
+		
+	if (package.Diagrams) {
+		for (var d=0; d<package.Diagrams.Count; d++) {
+			diagram = package.Diagrams.GetAt(d);
+			break;
+		}
+	}
+	if (! diagram) {
+		diagram = package.Diagrams.AddNew(name, diagram_type);
+		diagram.Update();
+	}
+
+	return diagram;
+}
+
 function readUnitsOfMeasures(package, doc) {
 	var package as EA.Package;
 	var uom_types as EA.Package;
@@ -231,9 +267,13 @@ function readUnitsOfMeasures(package, doc) {
 	var uom_type as EA.Element;
 	var uom_base as EA.Element;
 	var uom_item as EA.Element;
-		
-	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
 
+	// to posumously link base types
+	var uom_bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source_@ID] }
+	
+	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
+	var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
+		
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
 	for (var uf=0; uf<UnitFamilies.length; uf++) {
 		var UnitFamily = UnitFamilies[uf];
@@ -245,9 +285,11 @@ function readUnitsOfMeasures(package, doc) {
 		setTaggedValue(uom_type, '@ID', UnitFamily_id);
 		setTaggedValue(uom_type, 'Name', UnitFamily_name);
 		
+		add_diagram_element(uom_types_diagram, uom_type);
+		
 		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id);
-
-		var uom_bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source_item] }
+		var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
+		add_diagram_element(uom_items_diagram, uom_type);
 		
 		var Units = UnitFamily.selectNodes('s:Unit');
 		for(var u=0; u<Units.length; u++) {
@@ -266,10 +308,8 @@ function readUnitsOfMeasures(package, doc) {
 			Session.Output('Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
 			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name, Unit_id);
-			
 			setTaggedValue(uom_item, '@ID', Unit_id);
 			setTaggedValue(uom_item, 'Name', Unit_name);
-			
 			
 			var Base = Unit.selectSingleNode('s:UnitConversion');
 			if (Base) {
@@ -283,24 +323,39 @@ function readUnitsOfMeasures(package, doc) {
 					if (! uom_bases.Exists(base_id)) {
 						uom_bases.Add(base_id, []);
 					}
-					uom_bases.Item(base_id).push(uom_item);
+					uom_bases.Item(base_id).push(Unit_id);
+					Session.Output('+ base id="'+base_id+'" source id='+Unit_id+'"');
 				}
 			}
 			
 			createOrReplaceConnector(uom_item, uom_type, 'UOM Family');
+			
+			uom_item.Update();
+			
+			add_diagram_element(uom_items_diagram, uom_item);
+
 		}
 
-		var base_ids = uom_bases.Keys().toArray();
-		for (var k=0; k<base_ids.length; k++) {
-			var base_id = base_ids[k];
-			var uom_base = getCache('UOM Instance', base_id);
-			
-			var items = uom_bases.Item(base_id);
-			for (var i=0; i<items.length; i++) {
-				var item as EA.Element;
-				item = items[i];			
-				createOrReplaceConnector(item, uom_base, 'UOM Base');
-			}
+		uom_type.Update();
+		
+	}
+	
+	var base_ids = uom_bases.Keys().toArray();
+	for (var k=0; k<base_ids.length; k++) {
+		var base_id = base_ids[k];
+		//Session.Output('? base id="'+base_id+'"');
+		
+		var uom_base = getCache('UOM instance', base_id);
+		//Session.Output('? base name="'+uom_base.Name+'"');
+		
+		var items = uom_bases.Item(base_id);
+		for (var i=0; i<items.length; i++) {
+			var item_id = items[i];
+			//Session.Output('-> item id="'+item_id);
+			var item as EA.Element;
+			item = getCache('UOM instance', item_id);
+			//Session.Output('-> item name="'+item.Name+'"');
+			createOrReplaceConnector(item, uom_base, 'UOM Base');
 		}
 	}
 }
@@ -317,6 +372,7 @@ function importStepXML(fileName, diagram) {
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
 	fillCache(package);
+	//showCache(package);
 	
 	doc = XMLReadXMLFromFile(fileName);
 	if (!doc) {

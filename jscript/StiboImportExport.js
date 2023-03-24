@@ -84,10 +84,18 @@ function findPackage(parent, stereotype, name, id) {
 		var child as EA.Package;
 		child = parent.Packages.GetAt(c);
 		if (child.StereotypeEx == stereotype && child.Name == name) {
-			result = child;
-			break;
+			tag = getTaggedValue(child, '@ID');
+			if (id && tag && tag.Value) {
+				if (tag.Value == id) {
+					result = child;
+					break;
+				}
+			}
+			else {
+				result = child;
+				break;
+			}
 		}
-		// recurse ?
 	}
 	
 	if (!result) {
@@ -130,11 +138,11 @@ function findOrCreateElement(parent, tipe, stereotype, name, id) {
 		result = parent.Elements.AddNew(name, tipe);
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
-		result.Update();
 		setTaggedValue('@ID', id);
+		result.Update();
 		putCache(stereotype, result);
 	}
-	Session.Output(prefix+' element="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
+	Session.Output(prefix+' element="'+result.Name+'" stereotype="'+result.StereotypeEx+'" id="'+id+'"');
 	
 	return result;
 	
@@ -171,6 +179,7 @@ function getTaggedValue(element, name) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
 	var prefix = '=';
+	if (! element.TaggedVAlues) return;
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -193,6 +202,9 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	var stereotype as EA.Stereotype;
 	var prefix = '+';
 	
+	if (!target) return;
+	if (!source) return;
+		
 	for (var c=0; c<target.Connectors.Count; c++) {
 		connector = target.Connectors.GetAt(c);
 		if (connector.StereotypeEx == stereotype) {
@@ -221,8 +233,7 @@ function readUnitsOfMeasures(package, doc) {
 	var uom_item as EA.Element;
 		
 	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
-	uom_items = findOrCreatePackage(package, 'Instances', 'UOM instances');
-	
+
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
 	for (var uf=0; uf<UnitFamilies.length; uf++) {
 		var UnitFamily = UnitFamilies[uf];
@@ -234,43 +245,62 @@ function readUnitsOfMeasures(package, doc) {
 		setTaggedValue(uom_type, '@ID', UnitFamily_id);
 		setTaggedValue(uom_type, 'Name', UnitFamily_name);
 		
-		uom_base = null;
+		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id);
+
+		var uom_bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source_item] }
+		
 		var Units = UnitFamily.selectNodes('s:Unit');
 		for(var u=0; u<Units.length; u++) {
 			var Unit = Units[u];
 			var Unit_id = XMLGetNamedAttribute(Unit, 'ID');
 			var Unit_name = XMLGetNodeText(Unit, 's:Name');
 			
-			var description = XMLGetNodeText(Unit, 's:MetaData/s:Value[@AttributeID="UnitDescription"]');
-			if (description && description.length > 0) {
-				name = description;
-				uom_item.Name = name;
-				uom_item.Update();
+			if (! Unit_name || Unit_name.length == 0) {
+				var description = XMLGetNodeText(Unit, 's:MetaData/s:Value[@AttributeID="UnitDescription"]');
+				if (description && description.length > 0) {
+					name = description;
+					uom_item.Name = name;
+					uom_item.Update();
+				}
 			}
-			
 			Session.Output('Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
-			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name,Unit_id);
+			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name, Unit_id);
 			
 			setTaggedValue(uom_item, '@ID', Unit_id);
 			setTaggedValue(uom_item, 'Name', Unit_name);
 			
+			
 			var Base = Unit.selectSingleNode('s:UnitConversion');
-			if (!Base) {
-				uom_base = uom_item;
-			}
-			else {
+			if (Base) {
 				var Factor = XMLGetNamedAttribute(Base, 'Factor');
 				setTaggedValue(uom_item, 'Factor', Factor);
 				var Offset = XMLGetNamedAttribute(Base, 'Offset');
 				setTaggedValue(uom_item, 'Offset', Offset);
+				
+				var base_id = XMLGetNamedAttribute(Base, 'BaseUnitID');
+				if (base_id) {
+					if (! uom_bases.Exists(base_id)) {
+						uom_bases.Add(base_id, []);
+					}
+					uom_bases.Item(base_id).push(uom_item);
+				}
 			}
 			
 			createOrReplaceConnector(uom_item, uom_type, 'UOM Family');
 		}
-		
-		if (uom_base) {
-			createOrReplaceConnector(uom_type, uom_base, 'UOM Base');
+
+		var base_ids = uom_bases.Keys().toArray();
+		for (var k=0; k<base_ids.length; k++) {
+			var base_id = base_ids[k];
+			var uom_base = getCache('UOM Instance', base_id);
+			
+			var items = uom_bases.Item(base_id);
+			for (var i=0; i<items.length; i++) {
+				var item as EA.Element;
+				item = items[i];			
+				createOrReplaceConnector(item, uom_base, 'UOM Base');
+			}
 		}
 	}
 }

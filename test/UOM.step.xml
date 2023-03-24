@@ -11,994 +11,511 @@ Assets All
 
 Exported by database exporter.
 -->
-<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ExportTime="2023-03-23 12:41:34" ExportContext="GL" ContextID="GL" WorkspaceID="Main" UseContextLocale="false">
-    <UnitList>
-        <UnitFamily ID="Temperature" Selected="true" Referenced="true">
-            <Name>Temperature</Name>
-            <Unit ID="unece.unit.CEL">
-                <Name>°C</Name>
-                <UnitConversion BaseUnitID="unece.unit.KEL" Factor="1" Offset="273.15"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Abbreviation">°C</Value>
-                    <Value AttributeID="ETIM6 ID">EU570073</Value>
-                    <Value AttributeID="ETIM6 Description">Degrees celsius</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.A48">
-                <Name>°R</Name>
-                <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="0"/>
-            </Unit>
-            <Unit ID="unece.unit.KEL">
-                <Name>K</Name>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Description">Kelvin</Value>
-                    <Value AttributeID="ETIM6 ID">EU570076</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">K</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.FAH">
-                <Name>°F</Name>
-                <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">degree Fahrenheit</Value>
-                </MetaData>
-            </Unit>
-        </UnitFamily>
-        <UnitFamily ID="Length" Selected="true" Referenced="true">
-            <Name>Length</Name>
-            <Unit ID="unece.unit.SMI">
-                <Name>mile</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1609.344" Offset="0"/>
-            </Unit>
-            <Unit ID="unece.unit.A11">
-                <Name>Å</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0000000001" Offset="0"/>
-            </Unit>
-            <Unit ID="unece.unit.INH">
-                <Name>in</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0254" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Abbreviation">Zoll</Value>
-                    <Value AttributeID="ETIM6 ID">EU000051</Value>
-                    <Value AttributeID="ETIM6 Description">Inch</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.4H">
-                <Name>µm</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Abbreviation">µm</Value>
-                    <Value AttributeID="ETIM6 ID">EU570499</Value>
-                    <Value AttributeID="ETIM6 Description">Micrometer</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MTR">
-                <Name>m</Name>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Abbreviation">m</Value>
-                    <Value AttributeID="ETIM6 Description">Meter</Value>
-                    <Value AttributeID="ETIM6 ID">EU570036</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.FOT">
-                <Name>ft</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".3048" Offset="0"/>
-            </Unit>
-            <Unit ID="unece.unit.C45">
-                <Name>nm</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 ID">EU000056</Value>
-                    <Value AttributeID="ETIM6 Description">Nanometer</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">nm</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.CMT">
-                <Name>cm</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor="0.01" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 ID">EU570399</Value>
-                    <Value AttributeID="ETIM6 Description">Centimeter</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">cm</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.KTM">
-                <Name>km</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1000" Offset="0"/>
-            </Unit>
-            <Unit ID="unece.unit.MMT">
-                <Name>mm</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Description">Millimeter</Value>
-                    <Value AttributeID="ETIM6 ID">EU570448</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">mm</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.YRD">
-                <Name>yd</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".9144" Offset="0"/>
-            </Unit>
-        </UnitFamily>
-        <UnitFamily ID="Volume" Selected="true" Referenced="true">
-            <Name>Volume</Name>
-            <Unit ID="unece.unit.QTI">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0011365225" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">quart (UK)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.DLT">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">decilitre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MTQ">
-                <Name>m³</Name>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic metre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MMQ">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic millimetre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.OZI">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002841306" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">fluid ounce (UK)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.CLT">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">centilitre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.CMQ">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic centimetre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.GLL">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".003785412" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">gallon (US)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MLT">
-                <Name>ml</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Description">Milliliter</Value>
-                    <Value AttributeID="ETIM6 ID">EU570380</Value>
-                    <Value AttributeID="UnitDescription">millilitre</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">ml</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.INQ">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000016387064" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic inch</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.PT">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000473176" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">pint (US)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.4G">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">microlitre</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.FTQ">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0283168467117" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic foot</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.QT">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0009463529" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">quart (US)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.GLI">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".004546092" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">gallon (UK)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.YDQ">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".764554861216" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">cubic yard</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.OZA">
-                <Name>fl.oz.</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002957353" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">fluid ounce (US)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.PTI">
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000568261" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">pint (UK)</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.LTR">
-                <Name>l</Name>
-                <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Description">Liter</Value>
-                    <Value AttributeID="UnitDescription">litre</Value>
-                    <Value AttributeID="ETIM6 ID">EU570403</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">l</Value>
-                </MetaData>
-            </Unit>
-        </UnitFamily>
-        <UnitFamily ID="Time" Selected="true" Referenced="true">
-            <Name>Time</Name>
-            <Unit ID="unece.unit.DAY">
-                <Name>day(s)</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="86400" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">day</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.C26">
-                <Name>millisecond</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">millisecond</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.WEE">
-                <Name>week</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="604800" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">week</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.C47">
-                <Name>nanosecond</Name>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">nanosecond</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MIN">
-                <Name>minute</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="60" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="ETIM6 Abbreviation">min</Value>
-                    <Value AttributeID="ETIM6 Description">Minute</Value>
-                    <Value AttributeID="ETIM6 ID">EU570422</Value>
-                    <Value AttributeID="UnitDescription">minute [unit of time]</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.SEC">
-                <Name>second</Name>
-                <MetaData>
-                    <Value AttributeID="ETIM6 ID">EU570103</Value>
-                    <Value AttributeID="UnitDescription">second [unit of time]</Value>
-                    <Value AttributeID="ETIM6 Description">Second</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">s</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.MON">
-                <Name>month</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="2629800" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">month</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.HUR">
-                <Name>hour</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="3600" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">hour</Value>
-                    <Value AttributeID="ETIM6 ID">EU570410</Value>
-                    <Value AttributeID="ETIM6 Description">Hour</Value>
-                    <Value AttributeID="ETIM6 Abbreviation">h</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.B98">
-                <Name>microsecond</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".000001" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">microsecond</Value>
-                </MetaData>
-            </Unit>
-            <Unit ID="unece.unit.ANN">
-                <Name>year</Name>
-                <UnitConversion BaseUnitID="unece.unit.SEC" Factor="31557600" Offset="0"/>
-                <MetaData>
-                    <Value AttributeID="UnitDescription">year</Value>
-                </MetaData>
-            </Unit>
-        </UnitFamily>
-        <UnitFamily ID="Currency" Referenced="true" Selected="true">
-            <Name>Currency</Name>
-            <Unit ID="iso4217.unit.USD">
-                <Name>United States Dollar</Name>
-            </Unit>
-            <Unit ID="iso4217.unit.GBP">
-                <Name>British Pound Sterling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CAD">
-                <Name>Canadian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.8005668013" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AUD">
-                <Name>Australian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.JPY">
-                <Name>Japanese Yen</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0080716136" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SGD">
-                <Name>Singapore Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7346755856" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CNY">
-                <Name>Chinese Yuan</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1568972502" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NZD">
-                <Name>New Zealand Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.IDR">
-                <Name>Indonesian Rupiah</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000696393" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.DKK">
-                <Name>Danish Krone</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1472290029" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MYR">
-                <Name>Malaysian Ringgit</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2369661508" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.EUR">
-                <Name>Euro</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.0954582302" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AED">
-                <Name>United Arab Emirates Dirham</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2722566400" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AFN">
-                <Name>Afghan Afghani</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0113357098" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ALL">
-                <Name>Albanian Lek</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0089893478" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AMD">
-                <Name>Armenian Dram</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0020404183" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ANG">
-                <Name>Netherlands Antillean Guilder</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.5524523082" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AOA">
-                <Name>Angolan Kwanza</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0021948139" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ARS">
-                <Name>Argentine Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0090594935" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AWG">
-                <Name>Aruban Florin</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.5554012774" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.AZN">
-                <Name>Azerbaijani Manat</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.5880571474" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BAM">
-                <Name>Bosnia-Herzegovina Convertible Mark</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.5616541839" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BBD">
-                <Name>Barbadian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.4931049140" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BDT">
-                <Name>Bangladeshi Taka</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0115555555" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BGN">
-                <Name>Bulgarian Lev</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.5606100783" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BHD">
-                <Name>Bahraini Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="2.6529421128" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BIF">
-                <Name>Burundian Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0004854463" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BMD">
-                <Name>Bermudan Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.0000000000" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BND">
-                <Name>Brunei Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7342645276" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BOB">
-                <Name>Bolivian Boliviano</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1450107598" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BRL">
-                <Name>Brazilian Real</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2108412905" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BSD">
-                <Name>Bahamian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.9956073802" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BTC">
-                <Name>Bitcoin</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="46948.4141154351" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BTN">
-                <Name>Bhutanese Ngultrum</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0130943568" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BWP">
-                <Name>Botswanan Pula</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0869199398" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BYN">
-                <Name>New Belarusian Ruble</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3060997414" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BYR">
-                <Name>Belarusian Ruble</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000510204" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.BZD">
-                <Name>Belize Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.4939486353" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CDF">
-                <Name>Congolese Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0004967709" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CHF">
-                <Name>Swiss Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.0687871404" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CLF">
-                <Name>Chilean Unit of Account (UF)</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="35.4660235494" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CLP">
-                <Name>Chilean Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0012853309" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.COP">
-                <Name>Colombian Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0002635282" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CRC">
-                <Name>Costa Rican Colón</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0015265282" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CUC">
-                <Name>Cuban Convertible Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.0000000000" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CUP">
-                <Name>Cuban Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0377358491" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CVE">
-                <Name>Cape Verdean Escudo</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0099623634" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.CZK">
-                <Name>Czech Republic Koruna</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0444869542" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.DJF">
-                <Name>Djiboutian Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0055926795" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.DOP">
-                <Name>Dominican Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0181555952" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.DZD">
-                <Name>Algerian Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0069820471" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.EGP">
-                <Name>Egyptian Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0545705898" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ERN">
-                <Name>Eritrean Nakfa</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0666666444" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ETB">
-                <Name>Ethiopian Birr</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0193895514" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.FJD">
-                <Name>Fijian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.4791801037" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.FKP">
-                <Name>Falkland Islands Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3038506622" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GEL">
-                <Name>Georgian Lari</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3115436583" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GGP">
-                <Name>Guernsey Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3038506622" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GHS">
-                <Name>Ghanaian Cedi</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1361028818" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GIP">
-                <Name>Gibraltar Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3038506622" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GMD">
-                <Name>Gambian Dalasi</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0184794352" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GNF">
-                <Name>Guinean Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0001112963" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GTQ">
-                <Name>Guatemalan Quetzal</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1296517088" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.GYD">
-                <Name>Guyanaese Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0047648998" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.HKD">
-                <Name>Hong Kong Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1277358627" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.HNL">
-                <Name>Honduran Lempira</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0405599298" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.HRK">
-                <Name>Croatian Kuna</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1446361677" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.HTG">
-                <Name>Haitian Gourde</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0094658188" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.HUF">
-                <Name>Hungarian Forint</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0029310018" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ILS">
-                <Name>Israeli New Sheqel</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3099194364" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.IMP">
-                <Name>Manx pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3038506622" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.INR">
-                <Name>Indian Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0131172485" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.IQD">
-                <Name>Iraqi Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0006830788" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.IRR">
-                <Name>Iranian Rial</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000236407" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ISK">
-                <Name>Icelandic Króna</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0076822687" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.JEP">
-                <Name>Jersey Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3038506622" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.JMD">
-                <Name>Jamaican Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0064977760" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.JOD">
-                <Name>Jordanian Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.4104770233" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KES">
-                <Name>Kenyan Shilling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0087109187" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KGS">
-                <Name>Kyrgystani Som</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0104997460" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KHR">
-                <Name>Cambodian Riel</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0002460217" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KMF">
-                <Name>Comorian Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0022328914" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KPW">
-                <Name>North Korean Won</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0011111107" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KRW">
-                <Name>South Korean Won</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0008149957" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KWD">
-                <Name>Kuwaiti Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="3.2836409010" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KYD">
-                <Name>Cayman Islands Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.1963625792" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.KZT">
-                <Name>Kazakhstani Tenge</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0020227595" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LAK">
-                <Name>Laotian Kip</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000855203" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LBP">
-                <Name>Lebanese Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0006584204" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LKR">
-                <Name>Sri Lankan Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0034378543" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LRD">
-                <Name>Liberian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0065338121" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LSL">
-                <Name>Lesotho Loti</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0687274406" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LTL">
-                <Name>Lithuanian Litas</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3386683763" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LVL">
-                <Name>Latvian Lats</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.6531931426" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.LYD">
-                <Name>Libyan Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2133693842" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MAD">
-                <Name>Moroccan Dirham</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1029377296" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MDL">
-                <Name>Moldovan Leu</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0544040811" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MGA">
-                <Name>Malagasy Ariary</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0002462039" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MKD">
-                <Name>Macedonian Denar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0177711341" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MMK">
-                <Name>Myanma Kyat</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0005599348" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MNT">
-                <Name>Mongolian Tugrik</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0003473702" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MOP">
-                <Name>Macanese Pataca</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1236617786" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MRO">
-                <Name>Mauritanian Ouguiya</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0028011218" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MUR">
-                <Name>Mauritian Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0224740515" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MVR">
-                <Name>Maldivian Rufiyaa</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0649477635" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MWK">
-                <Name>Malawian Kwacha</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0012187308" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MXN">
-                <Name>Mexican Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0498725830" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.MZN">
-                <Name>Mozambican Metical</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0156666954" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NAD">
-                <Name>Namibian Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0687299253" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NGN">
-                <Name>Nigerian Naira</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0024067271" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NIO">
-                <Name>Nicaraguan Córdoba</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0278387640" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NOK">
-                <Name>Norwegian Krone</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1155734669" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NPR">
-                <Name>Nepalese Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0081731930" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.OMR">
-                <Name>Omani Rial</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="2.6007531781" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PAB">
-                <Name>Panamanian Balboa</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.9970049970" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PEN">
-                <Name>Peruvian Nuevo Sol</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2667427773" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PGK">
-                <Name>Papua New Guinean Kina</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2825679322" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PHP">
-                <Name>Philippine Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0191804214" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PKR">
-                <Name>Pakistani Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0054638408" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PLN">
-                <Name>Polish Zloty</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2327760287" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.PYG">
-                <Name>Paraguayan Guarani</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0001430233" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.QAR">
-                <Name>Qatari Rial</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2746522353" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.RON">
-                <Name>Romanian Leu</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2213863657" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.RSD">
-                <Name>Serbian Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0093049035" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.RUB">
-                <Name>Russian Ruble</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0101786370" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.RWF">
-                <Name>Rwandan Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0009797016" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SAR">
-                <Name>Saudi Riyal</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2665985596" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SBD">
-                <Name>Solomon Islands Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1244494976" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SCR">
-                <Name>Seychellois Rupee</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0693686688" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SDG">
-                <Name>Sudanese Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0022371383" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SEK">
-                <Name>Swedish Krona</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1055753275" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SHP">
-                <Name>Saint Helena Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7260076260" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SLL">
-                <Name>Sierra Leonean Leone</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000843526" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SOS">
-                <Name>Somali Shilling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0017094008" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SRD">
-                <Name>Surinamese Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0483605531" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.STD">
-                <Name>São Tomé and Príncipe Dobra</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000483139" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SVC">
-                <Name>Salvadoran Colón</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1139404682" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SYP">
-                <Name>Syrian Pound</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0003980891" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.SZL">
-                <Name>Swazi Lilangeni</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0683356184" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.THB">
-                <Name>Thai Baht</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0296209970" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TJS">
-                <Name>Tajikistani Somoni</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0766595039" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TMT">
-                <Name>Turkmenistani Manat</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.2849002849" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TND">
-                <Name>Tunisian Dinar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3386426862" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TOP">
-                <Name>Tongan Paʻanga</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.4444345681" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TRY">
-                <Name>Turkish Lira</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0673556022" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TTD">
-                <Name>Trinidad and Tobago Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.1465643843" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TWD">
-                <Name>New Taiwan Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0346996951" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.TZS">
-                <Name>Tanzanian Shilling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0004313149" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.UAH">
-                <Name>Ukrainian Hryvnia</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0337221781" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.UGX">
-                <Name>Ugandan Shilling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0002769304" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.UYU">
-                <Name>Uruguayan Peso</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0235492103" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.UZS">
-                <Name>Uzbekistan Som</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000866198" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.VEF">
-                <Name>Venezuelan Bolívar Fuerte</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000000000" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.VND">
-                <Name>Vietnamese Dong</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0000437168" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.VUV">
-                <Name>Vanuatu Vatu</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0087629667" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.WST">
-                <Name>Samoan Tala</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3813815623" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XAF">
-                <Name>CFA Franc BEAC</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0016724572" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XAG">
-                <Name>Silver (troy ounce)</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="25.1193167546" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XAU">
-                <Name>Gold (troy ounce)</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1934.2359767892" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XCD">
-                <Name>East Caribbean Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.3700209062" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XDR">
-                <Name>Special Drawing Rights</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3721825661" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XOF">
-                <Name>CFA Franc BCEAO</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0016724572" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.XPF">
-                <Name>CFP Franc</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0091743180" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.YER">
-                <Name>Yemeni Rial</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0039960078" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ZAR">
-                <Name>South African Rand</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0686175082" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ZMK">
-                <Name>Zambian Kwacha (pre-2013)</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0001110963" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ZMW">
-                <Name>Zambian Kwacha</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0558567444" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.ZWL">
-                <Name>Zimbabwean Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.0031055940" Offset="0"/>
-            </Unit>
-        </UnitFamily>
-    </UnitList>
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ExportTime="2023-03-24 09:59:12" ExportContext="GL" ContextID="GL" WorkspaceID="Main" UseContextLocale="false">
+
+  <UnitList>
+    <UnitFamily ID="Temperature" Selected="true" Referenced="true">
+      <Name>Temperature</Name>
+      <Unit ID="unece.unit.CEL">
+        <Name>°C</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor="1" Offset="273.15"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">°C</Value>
+          <Value AttributeID="ETIM6 ID">EU570073</Value>
+          <Value AttributeID="ETIM6 Description">Degrees celsius</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.A48">
+        <Name>°R</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.KEL">
+        <Name>K</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Kelvin</Value>
+          <Value AttributeID="ETIM6 ID">EU570076</Value>
+          <Value AttributeID="ETIM6 Abbreviation">K</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FAH">
+        <Name>°F</Name>
+        <UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">degree Fahrenheit</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <!--
+      <UnitFamily ID="Length" Selected="true" Referenced="true">
+      <Name>Length</Name>
+      <Unit ID="unece.unit.A11">
+        <Name>Å</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0000000001" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.SMI">
+        <Name>mile</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1609.344" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.INH">
+        <Name>in</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0254" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">Zoll</Value>
+          <Value AttributeID="ETIM6 ID">EU000051</Value>
+          <Value AttributeID="ETIM6 Description">Inch</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.4H">
+        <Name>µm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">µm</Value>
+          <Value AttributeID="ETIM6 ID">EU570499</Value>
+          <Value AttributeID="ETIM6 Description">Micrometer</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FOT">
+        <Name>ft</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".3048" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.MTR">
+        <Name>m</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">m</Value>
+          <Value AttributeID="ETIM6 Description">Meter</Value>
+          <Value AttributeID="ETIM6 ID">EU570036</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C45">
+        <Name>nm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU000056</Value>
+          <Value AttributeID="ETIM6 Description">Nanometer</Value>
+          <Value AttributeID="ETIM6 Abbreviation">nm</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CMT">
+        <Name>cm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="0.01" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU570399</Value>
+          <Value AttributeID="ETIM6 Description">Centimeter</Value>
+          <Value AttributeID="ETIM6 Abbreviation">cm</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.KTM">
+        <Name>km</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor="1000" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.YRD">
+        <Name>yd</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".9144" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.MMT">
+        <Name>mm</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Millimeter</Value>
+          <Value AttributeID="ETIM6 ID">EU570448</Value>
+          <Value AttributeID="ETIM6 Abbreviation">mm</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Volume" Selected="true" Referenced="true">
+      <Name>Volume</Name>
+      <Unit ID="unece.unit.QTI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0011365225" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">quart (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MTQ">
+        <Name>m³</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic metre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.DLT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">decilitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MMQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic millimetre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.OZI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002841306" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">fluid ounce (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CLT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">centilitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.CMQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic centimetre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.GLL">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".003785412" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">gallon (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MLT">
+        <Name>ml</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Milliliter</Value>
+          <Value AttributeID="ETIM6 ID">EU570380</Value>
+          <Value AttributeID="UnitDescription">millilitre</Value>
+          <Value AttributeID="ETIM6 Abbreviation">ml</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.INQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000016387064" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic inch</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.PT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000473176" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">pint (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.4G">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">microlitre</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.FTQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0283168467117" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic foot</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.QT">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".0009463529" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">quart (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.GLI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".004546092" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">gallon (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.YDQ">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".764554861216" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">cubic yard</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.OZA">
+        <Name>fl.oz.</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".00002957353" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">fluid ounce (US)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.PTI">
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".000568261" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">pint (UK)</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.LTR">
+        <Name>l</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTQ" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Liter</Value>
+          <Value AttributeID="UnitDescription">litre</Value>
+          <Value AttributeID="ETIM6 ID">EU570403</Value>
+          <Value AttributeID="ETIM6 Abbreviation">l</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Mass" Selected="true" Referenced="true">
+      <Name>Mass</Name>
+      <Unit ID="GPerCm3">
+        <Name>g/cm3</Name>
+      </Unit>
+      <Unit ID="unece.unit.MGM">
+        <Name>mg</Name>
+        <UnitConversion BaseUnitID="unece.unit.GRM" Factor=".001" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.KGM">
+        <Name>kg</Name>
+        <UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">kg</Value>
+          <Value AttributeID="ETIM6 Description">Kilogram</Value>
+          <Value AttributeID="ETIM6 ID">EU570039</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="ST">
+        <Name>ST</Name>
+      </Unit>
+      <Unit ID="GPerMol">
+        <Name>g/mol</Name>
+      </Unit>
+      <Unit ID="unece.unit.TNE">
+        <Name>t</Name>
+        <UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000000" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU570438</Value>
+          <Value AttributeID="ETIM6 Description">Ton</Value>
+          <Value AttributeID="ETIM6 Abbreviation">t</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="uence.unit.L">
+        <Name>L</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">Liter</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MC">
+        <Name>µg</Name>
+      </Unit>
+      <Unit ID="KG">
+        <Name>KG</Name>
+      </Unit>
+      <Unit ID="HL">
+        <Name>HL</Name>
+      </Unit>
+      <Unit ID="CE">
+        <Name>CE</Name>
+      </Unit>
+      <Unit ID="unece.unit.ONZ">
+        <Name>oz</Name>
+        <UnitConversion BaseUnitID="unece.unit.GRM" Factor="28.34952" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.ML">
+        <Name>ml</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">Milliliter</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.LBR">
+        <Name>lb</Name>
+        <UnitConversion BaseUnitID="unece.unit.GRM" Factor="453.59237" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.GRM">
+        <Name>g</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Gram</Value>
+          <Value AttributeID="ETIM6 ID">EU570408</Value>
+          <Value AttributeID="ETIM6 Abbreviation">g</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Area" Selected="true" Referenced="true">
+      <Name>Area</Name>
+      <Unit ID="unece.unit.MTK">
+        <Name>m²</Name>
+      </Unit>
+      <Unit ID="unece.unit.INK">
+        <Name>in²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor=".00064516" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.MMK">
+        <Name>mm²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">mm²</Value>
+          <Value AttributeID="ETIM6 Description">Square millimeter</Value>
+          <Value AttributeID="ETIM6 ID">EU570126</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MIK">
+        <Name>mile²</Name>
+      </Unit>
+      <Unit ID="unece.unit.FTK">
+        <Name>ft²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor=".09290304" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.CMK">
+        <Name>cm²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor=".0001" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.ACR">
+        <Name>acre</Name>
+      </Unit>
+      <Unit ID="unece.unit.YDK">
+        <Name>yd²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor=".83612736" Offset="0"/>
+      </Unit>
+      <Unit ID="unece.unit.KMK">
+        <Name>km²</Name>
+        <UnitConversion BaseUnitID="unece.unit.MTK" Factor="1000000" Offset="0"/>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Time" Selected="true" Referenced="true">
+      <Name>Time</Name>
+      <Unit ID="unece.unit.DAY">
+        <Name>day(s)</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="86400" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">day</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C26">
+        <Name>millisecond</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">millisecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.WEE">
+        <Name>week</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="604800" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">week</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C47">
+        <Name>nanosecond</Name>
+        <MetaData>
+          <Value AttributeID="UnitDescription">nanosecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MIN">
+        <Name>minute</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="60" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">min</Value>
+          <Value AttributeID="ETIM6 Description">Minute</Value>
+          <Value AttributeID="ETIM6 ID">EU570422</Value>
+          <Value AttributeID="UnitDescription">minute [unit of time]</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MON">
+        <Name>month</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="2629800" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">month</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.SEC">
+        <Name>second</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 ID">EU570103</Value>
+          <Value AttributeID="UnitDescription">second [unit of time]</Value>
+          <Value AttributeID="ETIM6 Description">Second</Value>
+          <Value AttributeID="ETIM6 Abbreviation">s</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.HUR">
+        <Name>hour</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="3600" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">hour</Value>
+          <Value AttributeID="ETIM6 ID">EU570410</Value>
+          <Value AttributeID="ETIM6 Description">Hour</Value>
+          <Value AttributeID="ETIM6 Abbreviation">h</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.B98">
+        <Name>microsecond</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">microsecond</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.ANN">
+        <Name>year</Name>
+        <UnitConversion BaseUnitID="unece.unit.SEC" Factor="31557600" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">year</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Acoustics" Selected="true" Referenced="true">
+      <Name>Acoustics</Name>
+      <Unit ID="unece.unit.D15">
+        <Name>sone(s)</Name>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Electricity and Magnetism" Selected="true" Referenced="true">
+      <Name>Electricity and Magnetism</Name>
+      <Unit ID="unece.unit.VLT">
+        <Name>V</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">V</Value>
+          <Value AttributeID="ETIM6 Description">Volt</Value>
+          <Value AttributeID="ETIM6 ID">EU570079</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.AMP">
+        <Name>A</Name>
+        <MetaData>
+          <Value AttributeID="ETIM6 Description">Ampere</Value>
+          <Value AttributeID="ETIM6 ID">EU570459</Value>
+          <Value AttributeID="ETIM6 Abbreviation">A</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    <UnitFamily ID="Power" Selected="true" Referenced="true">
+      <Name>Power</Name>
+      <Unit ID="unece.unit.KWT">
+        <Name>kW</Name>
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor="1000" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">kilowatt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.C31">
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor=".001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">milliwatt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.WTT">
+        <MetaData>
+          <Value AttributeID="ETIM6 Abbreviation">W</Value>
+          <Value AttributeID="ETIM6 ID">EU570054</Value>
+          <Value AttributeID="UnitDescription">watt</Value>
+          <Value AttributeID="ETIM6 Description">Watt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.D80">
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor=".000001" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">microwatt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.MAW">
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor="1000000" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">megawatt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.A90">
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor="1000000000" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">gigawatt</Value>
+        </MetaData>
+      </Unit>
+      <Unit ID="unece.unit.HJ">
+        <UnitConversion BaseUnitID="unece.unit.WTT" Factor="735.49875" Offset="0"/>
+        <MetaData>
+          <Value AttributeID="UnitDescription">metric horse power</Value>
+        </MetaData>
+      </Unit>
+    </UnitFamily>
+    -->
+  </UnitList>
 </STEP-ProductInformation>

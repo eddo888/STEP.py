@@ -1,6 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC Stibo STEP.Library
+!INC User Scripts.Library
 
 // https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
 // https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms756987(v=vs.85)#jscript-examples
@@ -95,7 +95,6 @@ function AddElementNS(parent, name, ns) {
 function findPackage(parent, stereotype, name, id) {
 	var parent as EA.Package;
 	var result;
-	var prefix = '=';
 
 	for (var c=0; c<parent.Packages.Count; c++) {
 		var child as EA.Package;
@@ -128,17 +127,15 @@ function findPackage(parent, stereotype, name, id) {
 
 function findOrCreatePackage(parent, stereotype, name, id) {
 	var result as EA.Package;
-	var prefix = '=';
 	result = findPackage(parent, stereotype, name, id);
 	
 	if (! result) {
-		prefix = '+';
 		result = parent.Packages.AddNew(name, 'Class');
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
+		Session.Output('+ package="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
 	}
-	Session.Output(prefix+' package="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
 
 	return result;
 }
@@ -146,21 +143,18 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 function findOrCreateElement(parent, tipe, stereotype, name, id) {
 	var parent as EA.Element;
 	var result as EA.Element;
-	var prefix = '=';
 
 	result = getCache(stereotype, id);
 	
 	if (! result) {
-		prefix = '+';
 		result = parent.Elements.AddNew(name, tipe);
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		setTaggedValue('@ID', id);
 		result.Update();
 		putCache(stereotype, result);
-	}
-	Session.Output(prefix+' element="'+result.Name+'" stereotype="'+result.StereotypeEx+'" id="'+id+'"');
-	
+		Session.Output('+ element="'+result.Name+'" stereotype="'+result.StereotypeEx+'" id="'+id+'"');
+	}	
 	return result;
 	
 }
@@ -168,7 +162,6 @@ function findOrCreateElement(parent, tipe, stereotype, name, id) {
 function setTaggedValue(element, name, value) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
-	var prefix = '=';
 	if (! element.TaggedValues) return;
 		
 	for (var t=0; t<element.TaggedValues.Count; t++) {
@@ -180,23 +173,22 @@ function setTaggedValue(element, name, value) {
 		}
 	}
 	if (! result) {
-		prefix = '+';
 		result = element.TaggedValues.AddNew(name, value);
+		Session.Output('+ tag name="'+result.Name+'" value="'+result.Value+'"');
 	}
 	else {
 		result.Value = value;
 	}
 	result.Update();
 	
-	//Session.Output('tag name="'+result.Name+'" value="'+result.Value+'"');
 	return result;
 }
 
 function getTaggedValue(element, name) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
-	var prefix = '=';
 	if (! element.TaggedVAlues) return;
+
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -204,9 +196,6 @@ function getTaggedValue(element, name) {
 			result = tag;
 			break;
 		}
-	}
-	if (result) {
-		//Session.Output(prefix+'tag name="'+result.Name+'" value="'+result.Value+'"');
 	}
 	return result;
 }
@@ -217,25 +206,30 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	var result as EA.Connector;
 	var connector as EA.Connector;
 	var stereotype as EA.Stereotype;
+	var taggedvalue as EA.TaggedValue;
 	var prefix = '+';
-	
-	if (!target) return;
-	if (!source) return;
+		
+	if (! target) return;
+	if (! source) return;
 		
 	for (var c=0; c<target.Connectors.Count; c++) {
 		connector = target.Connectors.GetAt(c);
-		if (connector.StereotypeEx == stereotype) {
+		if (connector.SupplierID == source.ElementID && stereotype == ''+connector.Stereotype ) {
+			result = connector;
 			prefix = '~';
-			target.Connectors.DeleteAt(c, true);
+			break;
 		}
 	}
-	target.Update();
 	
-	result = target.Connectors.AddNew(name, 'Association');
-	result.Direction = true;
-	result.SupplierID = source.ElementID;
-	result.StereotypeEx = 'STEP Types::'+stereotype;
-	result.Update();
+	if (! result) {
+		result = target.Connectors.AddNew(name, 'Association');
+		result.Direction = true;
+		result.SupplierID = source.ElementID;
+		result.StereotypeEx = 'STEP Types::'+stereotype;
+		result.Update();
+		target.Update();
+	}
+	
 	Session.Output(prefix+' connector "'+source.Name+' -> '+target.Name+' : <'+result.StereotypeEx+'>');
 	
 	return result;
@@ -268,27 +262,29 @@ function readUnitsOfMeasures(package, doc) {
 	var uom_base as EA.Element;
 	var uom_item as EA.Element;
 
-	// to posumously link base types
-	var uom_bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source_@ID] }
-	
 	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
 	var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
-		
+	
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
 	for (var uf=0; uf<UnitFamilies.length; uf++) {
 		var UnitFamily = UnitFamilies[uf];
 		var UnitFamily_id = XMLGetNamedAttribute(UnitFamily, 'ID');
 		var UnitFamily_name = XMLGetNodeText(UnitFamily, 's:Name');
 		Session.Output('UnitFamily name="'+UnitFamily_name+'" id="'+UnitFamily_id+'"');
-		
-		uom_type = findOrCreateElement(uom_types, 'Class', 'UOM', UnitFamily_name, UnitFamily_id);
-		setTaggedValue(uom_type, '@ID', UnitFamily_id);
-		setTaggedValue(uom_type, 'Name', UnitFamily_name);
-		
-		add_diagram_element(uom_types_diagram, uom_type);
+
+		// to posumously link base types
+		var uom_bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source_@ID] }
+
+		var items = [];
 		
 		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id);
+		add_diagram_package(uom_types_diagram, uom_items);
 		var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
+
+		uom_type = findOrCreateElement(uom_items, 'Class', 'UOM', UnitFamily_name, UnitFamily_id);
+		setTaggedValue(uom_type, '@ID', UnitFamily_id);
+		setTaggedValue(uom_type, 'Name', UnitFamily_name);
+				
 		add_diagram_element(uom_items_diagram, uom_type);
 		
 		var Units = UnitFamily.selectNodes('s:Unit');
@@ -305,7 +301,7 @@ function readUnitsOfMeasures(package, doc) {
 					uom_item.Update();
 				}
 			}
-			Session.Output('Unit name="'+Unit_name+'" id="'+Unit_id+'"');
+			Session.Output('  Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
 			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name, Unit_id);
 			setTaggedValue(uom_item, '@ID', Unit_id);
@@ -324,38 +320,39 @@ function readUnitsOfMeasures(package, doc) {
 						uom_bases.Add(base_id, []);
 					}
 					uom_bases.Item(base_id).push(Unit_id);
-					Session.Output('+ base id="'+base_id+'" source id='+Unit_id+'"');
+					//Session.Output('+ base id="'+base_id+'" source id='+Unit_id+'"');
 				}
 			}
-			
-			createOrReplaceConnector(uom_item, uom_type, 'UOM Family');
-			
+
 			uom_item.Update();
+			items.push(uom_item);
 			
 			add_diagram_element(uom_items_diagram, uom_item);
-
 		}
 
-		uom_type.Update();
-		
-	}
-	
-	var base_ids = uom_bases.Keys().toArray();
-	for (var k=0; k<base_ids.length; k++) {
-		var base_id = base_ids[k];
-		//Session.Output('? base id="'+base_id+'"');
-		
-		var uom_base = getCache('UOM instance', base_id);
-		//Session.Output('? base name="'+uom_base.Name+'"');
-		
-		var items = uom_bases.Item(base_id);
 		for (var i=0; i<items.length; i++) {
-			var item_id = items[i];
-			//Session.Output('-> item id="'+item_id);
-			var item as EA.Element;
-			item = getCache('UOM instance', item_id);
-			//Session.Output('-> item name="'+item.Name+'"');
-			createOrReplaceConnector(item, uom_base, 'UOM Base');
+			var item = items[i];
+			Session.Output('  family: '+item.Name+' -> '+uom_type.Name);
+			createOrReplaceConnector(item, uom_type, 'UOM Family');
+			item.Update();
+		}
+		
+		// may have to do this in two sweeps. cf latency in model availability from create to update ?
+		var base_ids = uom_bases.Keys().toArray();
+		for (var k=0; k<base_ids.length; k++) {
+			var base_id = base_ids[k];			
+			var uom_base = getCache('UOM instance', base_id);
+			if (! uom_base) continue;
+			
+			var items = uom_bases.Item(base_id);
+			for (var i=0; i<items.length; i++) {
+				var item_id = items[i];
+				var item as EA.Element;
+				item = getCache('UOM instance', item_id);
+				if (!item) continue;
+				Session.Output('  base '+item+' -> '+uom_base);
+				createOrReplaceConnector(item, uom_base, 'UOM Base');
+			}
 		}
 	}
 }

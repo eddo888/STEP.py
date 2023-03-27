@@ -252,6 +252,30 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	return result;
 }
 
+function findOrCreateAttribute(element, stereotype, name, tipe, value) {
+	var element as EA.Element;
+	var result as EA.Attribute;
+	var prefix = '+';
+	for (var a=0; a<element.Attributes.Count; a++) {
+		var attribute as EA.Attribute;
+		attribute = element.Attributes.GetAt(a);
+		if (attribute.Name == name) {
+			prefix = '~';
+			result = attribute;
+			break;
+		}
+	}
+	if (! result) {
+		result = element.Attributes.AddNew(name, tipe);
+		result.Update();
+		result.Default = value;
+		result.Update();
+		result.StereotypeEx = stereotype;
+		result.Update();
+	}
+	return result;
+}
+
 function setupDiagram(package, name, diagram_type) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
@@ -437,6 +461,18 @@ function readListOfValues(package, doc, cache) {
 			setTaggedValue(element, 'UseValueID', UseValueID);
 			diagram = parent.Diagrams.GetAt(0);
 			add_diagram_element(diagram, element);
+			
+			var values = lov.selectNodes('s:Value');
+			for (var v=0; v<values.length; v++) {
+				var value = values[v];
+				var value_name = value.text;
+				var lov_value = findOrCreateAttribute(element, 'enum', value_name, '', '');
+				if (UseValueID == 'true') {
+					var lov_id = XMLGetNamedAttribute(value, 'ID');
+					lov_value.Default = lov_id;
+					lov_value.Update();
+				}
+			}
 		}
 	}
 }

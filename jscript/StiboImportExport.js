@@ -124,14 +124,20 @@ function findPackage(parent, stereotype, name, id) {
 
 function findOrCreatePackage(parent, stereotype, name, id) {
 	var result as EA.Package;
+	var element as EA.Element;
 	result = findPackage(parent, stereotype, name, id);
 	
 	if (! result) {
-		result = parent.Packages.AddNew(name, 'Class');
+		result = parent.Packages.AddNew(name, 'Package');
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
 		Session.Output('+ package="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
+	}
+
+	if (id) {
+		element = result.Element;
+		setTaggedValue(element, '@ID', id);
 	}
 
 	return result;
@@ -159,8 +165,9 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 function setTaggedValue(element, name, value) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
+	
 	if (! element.TaggedValues) return;
-		
+	
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -357,10 +364,51 @@ function readUnitsOfMeasures(package, doc, cache) {
 	}
 }
 
-function readListOfValuesGroup(package, doc, cache) {
-	//todo
+function digListOfValuesGroups(package, diagram, parent, cache) {
+	var package as EA.Package;
+	var diagram as EA.Diagram;
+	var _group as EA.Package;
+	var _diagram as EA.Diagram;	
 	
+	if (!parent) return;
+		
+	var groups = parent.selectNodes('s:ListOfValuesGroup');
+		
+	for (var g=0; g<groups.length; g++) {
+		var group = groups[g];
+		var id = XMLGetNamedAttribute(group, 'ID');
+		var name = XMLGetNodeText(group, 's:Name');
+		Session.Output('LOV group name="'+name+'" id="'+id+'"');
+		
+		_group = findOrCreatePackage(package, 'LOV Group', name, id);
+		setTaggedValue(_group, '@ID', id);
+		setTaggedValue(_group, 'Name', name);
+		
+		add_diagram_package(diagram, _group);
+		
+		_diagram = setupDiagram(_group, 'LOVs', 'Class');	
+		add_diagram_element(_diagram, _group);
+		
+		digListOfValuesGroups(_group, _diagram, group, cache);
+	}
 }
+
+function readListOfValuesGroups(package, diagram, doc, cache) {
+	var package as EA.Package;
+	
+	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
+	if (groups) {
+		digListOfValuesGroups(package, diagram, groups, cache);
+	}
+}
+
+function readListOfValuesGroup(package, doc, cache) {}
+function readAttributeGroups(package, doc, cache) {}
+function readAttributeGroup(package, doc, cache) {}
+function readAttributes(package, doc, cache) {}
+function readUserTypes(package, doc, cache) {}
+function readReferences(package, doc, cache) {}
+function readKeys(package, doc, cache) {}
 
 function importStepXML(fileName, diagram, cache) {
 	var doc; // as MSXML2.DOMDocument;
@@ -390,7 +438,14 @@ function importStepXML(fileName, diagram, cache) {
 	}
 	
 	readUnitsOfMeasures(package, doc, cache);
-	//readListOfValuesGroup(package, doc, cache);
+	readListOfValuesGroups(package, diagram, doc, cache);
+	readListOfValuesGroup(package, doc, cache);
+	readAttributeGroups(package, doc, cache);
+	readAttributeGroup(package, doc, cache);
+	readAttributes(package, doc, cache);
+	readUserTypes(package, doc, cache);
+	readReferences(package, doc, cache);
+	readKeys(package, doc, cache);
 	
 }
 
@@ -414,7 +469,7 @@ function exportStepXML(fileName, diagram, cache) {
 	
 }
 
-var inputFileName = 'C:/Users/eddo8/git/github.com/eddo888/STEP.py/test/UOM.step.xml';
+var inputFileName = 'C:/Users/eddo8/git/github.com/eddo888/STEP.py/test/HeritageMovies.step.xml';
 var outputFileName = 'C:/Users/eddo8/git/github.com/eddo888/STEP.py/test/Sparx.step.xml';
 
 Repository.EnsureOutputVisible( "Debug" );
@@ -425,7 +480,8 @@ Session.Output( "Starting" );
 var cache = new ActiveXObject("Scripting.Dictionary");
 
 var diagram as EA.Diagram;
-diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
+//diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
+diagram = Repository.GetDiagramByGuid('{B12EF0F9-C12A-40e1-A7A3-A73285928984}');
 //diagram = Repository.GetCurrentDiagram();
 
 //exportStepXML(outputFileName, diagram, cache);

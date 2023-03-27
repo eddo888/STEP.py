@@ -31,6 +31,9 @@ function fillCache(cache, package, indent) {
 	var package as EA.Package;
 	//Session.Output(indent+'/'+package.Name);
 	
+	if (package.StereotypeEx) {
+		//putCache(cache, package.StereotypeEx, package);
+	}		
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
@@ -50,21 +53,23 @@ function fillCache(cache, package, indent) {
 
 function putCache(cache, stereotype, element) {
 	var tag as EA.TaggedValue;
+	if (!element) return;
 	tag = getTaggedValue(element, '@ID');
-	if (tag && tag.Value) {
-		if (! cache.Exists(''+stereotype)) {
+	if (tag && tag.Name && tag.Value) {
+		//Session.Output('tag:'+tag.Name+'='+tag.Value);
+		if (! cache.Exists(stereotype)) {
 			cache.Add(stereotype, new ActiveXObject("Scripting.Dictionary"));
 		}
-		cache.Item(''+stereotype).Add(tag.Value, element);
+		cache.Item(stereotype).Add(tag.Value, element);
 	}
 }
 
 function getCache(cache, stereotype, id) {
 	var result as EA.Element;
 	if (! id) return;
-	if (cache.Exists(''+stereotype)) {
-		if (cache.Item(''+stereotype).Exists(id)) {
-			result = cache.Item(''+stereotype).Item(id);
+	if (cache.Exists(stereotype)) {
+		if (cache.Item(stereotype).Exists(id)) {
+			result = cache.Item(stereotype).Item(id);
 		}
 	}
 	return result;
@@ -135,6 +140,10 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 		Session.Output('+ package="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
 	}
 
+	if (stereotype) {
+		putCache(cache, stereotype, result);
+	}
+	
 	if (id) {
 		element = result.Element;
 		setTaggedValue(element, '@ID', id);
@@ -153,6 +162,7 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		result = parent.Elements.AddNew(name, tipe);
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
+		result.Update();
 		setTaggedValue('@ID', id);
 		result.Update();
 		putCache(cache, stereotype, result);
@@ -165,9 +175,10 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 function setTaggedValue(element, name, value) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
-	
-	if (! element.TaggedValues) return;
-	
+	if (element.Element) {
+		element = element.Element;
+	}
+	if (!element.TaggedValues) return;
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -191,7 +202,9 @@ function setTaggedValue(element, name, value) {
 function getTaggedValue(element, name) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
-	if (! element.TaggedVAlues) return;
+	if (element.Element) {
+		element = element.Element;
+	}
 
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
@@ -402,7 +415,32 @@ function readListOfValuesGroups(package, diagram, doc, cache) {
 	}
 }
 
-function readListOfValuesGroup(package, doc, cache) {}
+function readListOfValues(package, doc, cache) {
+	var package as EA.Package;
+	var parent as EA.Package;
+	var element as EA.Element;
+	var diagram as EA.Diagram;
+	
+	var lovs = doc.selectNodes('/s:STEP-ProductInformation/s:ListsOfValues/s:ListOfValue');
+	for (var l=0; l<lovs.length; l++) {
+		var lov = lovs[l];
+		var id = XMLGetNamedAttribute(lov, 'ID');
+		var name = XMLGetNodeText(lov, 's:Name');
+		var ParentID = XMLGetNamedAttribute(lov, 'ParentID');
+		var UseValueID = XMLGetNamedAttribute(lov, 'UseValueID');
+		
+		parent = getCache(cache, 'LOV Group', ParentID);
+		//Session.Output('LOV parent='+parent);
+		if (parent) {
+			element = findOrCreateElement(parent, 'Enum', 'LOV', name, id, cache) ;
+			setTaggedValue(element, '@ID', id);
+			setTaggedValue(element, 'UseValueID', UseValueID);
+			diagram = parent.Diagrams.GetAt(0);
+			add_diagram_element(diagram, element);
+		}
+	}
+}
+
 function readAttributeGroups(package, doc, cache) {}
 function readAttributeGroup(package, doc, cache) {}
 function readAttributes(package, doc, cache) {}
@@ -439,7 +477,7 @@ function importStepXML(fileName, diagram, cache) {
 	
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, diagram, doc, cache);
-	readListOfValuesGroup(package, doc, cache);
+	readListOfValues(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readAttributeGroup(package, doc, cache);
 	readAttributes(package, doc, cache);

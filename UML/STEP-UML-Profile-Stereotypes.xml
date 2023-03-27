@@ -63,6 +63,7 @@
 			</Stereotype>
 			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute Group"/>
 					<stereotypedrelationship stereotype="STEP Types::LOV Type" constraint="STEP Types::LOV"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Default" constraint="STEP Types::UOM instance"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Type" constraint="STEP Types::UOM"/>

@@ -516,7 +516,7 @@ function digAttributeGroups(package, diagram, parent, cache) {
 		add_diagram_package(diagram, _group);
 		
 		_diagram = setupDiagram(_group, 'Attributes', 'Class');	
-		add_diagram_element(_diagram, _group);
+		add_diagram_package(_diagram, _group);
 		
 		digAttributeGroups(_group, _diagram, group, cache);
 	}
@@ -526,10 +526,11 @@ function readAttributeGroups(package, diagram, doc, cache) {
 	var package as EA.Package;
 	
 	var attributes = findOrCreatePackage(package, 'Attribute Group', 'All Attributes', '');
+	var _diagram = setupDiagram(attributes, 'Attributes', 'Package');
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
 	if (groups) {
-		digAttributeGroups(package, diagram, groups, cache);
+		digAttributeGroups(attributes, _diagram, groups, cache);
 	}	
 	
 	return attributes;
@@ -611,6 +612,7 @@ function readAttributes(attributes, package, doc, cache) {
 			var parent_package = getCache(cache, 'Attribute Group', parent_id);
 			diagram = parent_package.Diagrams.GetAt(0);
 			add_diagram_element(diagram, element);
+			createOrReplaceConnector(element, parent_package, 'Attribute Link', '');
 		}
 	}
 }

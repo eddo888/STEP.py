@@ -730,6 +730,26 @@ Exported by database exporter.
             <TargetUserTypeLink UserTypeID="Movie_Classification"/>
         </ClassificationProductLinkType>
     </CrossReferenceTypes>
+    <UnitList>
+        <UnitFamily ID="Currency" Selected="true" Referenced="true">
+            <Name>Currency</Name>
+            <Unit ID="iso4217.unit.AUD">
+                <Name>Australian Dollar</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.GBP">
+                <Name>British Pound Sterling</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.NZD">
+                <Name>New Zealand Dollar</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.USD">
+                <Name>United States Dollar</Name>
+            </Unit>
+        </UnitFamily>
+    </UnitList>
     <ListOfValuesGroupList>
         <ListOfValuesGroup ID="List Of Values group root">
             <Name>Lists of Values / LOVs</Name>

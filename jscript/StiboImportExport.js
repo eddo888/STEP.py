@@ -217,7 +217,8 @@ function getTaggedValue(element, name) {
 	return result;
 }
 
-function createOrReplaceConnector(source, target, stereotype, name) {
+function createOrReplaceConnector(source, target, stereotype, name, tipe) {
+	if (!tipe) tipe = 'Association';
 	var source as EA.Element;
 	var target as EA.Element;
 	var result as EA.Connector;
@@ -239,7 +240,7 @@ function createOrReplaceConnector(source, target, stereotype, name) {
 	}
 	
 	if (! result) {
-		result = target.Connectors.AddNew(name, 'Association');
+		result = target.Connectors.AddNew(name, tipe);
 		result.Direction = true;
 		result.SupplierID = source.ElementID;
 		result.StereotypeEx = 'STEP Types::'+stereotype;
@@ -296,6 +297,26 @@ function setupDiagram(package, name, diagram_type) {
 }
 
 function readUnitsOfMeasures(package, doc, cache) {
+	/*
+        <UnitFamily ID="Currency" Selected="true" Referenced="true">
+            <Name>Currency</Name>
+            <Unit ID="iso4217.unit.AUD">
+                <Name>Australian Dollar</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.GBP">
+                <Name>British Pound Sterling</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.NZD">
+                <Name>New Zealand Dollar</Name>
+                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
+            </Unit>
+            <Unit ID="iso4217.unit.USD">
+                <Name>United States Dollar</Name>
+            </Unit>
+        </UnitFamily>
+	*/
 	var package as EA.Package;
 	var uom_types as EA.Package;
 	var uom_items as EA.Package;
@@ -402,6 +423,15 @@ function readUnitsOfMeasures(package, doc, cache) {
 }
 
 function digListOfValuesGroups(package, diagram, parent, cache) {
+	/*
+		<ListOfValuesGroup 
+			ID="Movie_LOVs" 
+			Selected="true" 
+			Referenced="true"
+		>
+			<Name>Movie LOVs</Name>
+		</ListOfValuesGroup>
+	*/
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	var _group as EA.Package;
@@ -494,6 +524,17 @@ function readListOfValues(package, doc, cache) {
 }
 
 function digAttributeGroups(package, diagram, parent, cache) {
+	/*
+	   <AttributeGroup 
+			ID="Movie_Character" 
+			ShowInWorkbench="true" 
+			ManuallySorted="false" 
+			Selected="true" 
+			Referenced="true"
+		>
+			<Name>Movie Character</Name>
+		</AttributeGroup>
+	*/
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	var _group as EA.Package;
@@ -618,9 +659,110 @@ function readAttributes(attributes, package, doc, cache) {
 }
 
 function readUserTypes(package, doc, cache) {
+	var userTypes as EA.Package;
+	/*
+        <UserType 
+			ID="Movie_Writers" 
+			ManuallySorted="false"
+			AllowInDesignTemplate="false" 
+			AllowQuarkTemplate="false" 
+			IsCategory="true" 
+			ReferenceTargetLockPolicy="Strict" 
+			Selected="true" 
+			Referenced="true"
+		>
+            <Name>Movie Writers</Name>
+            <UserTypeLink UserTypeID="Movie_Root"/>
+        </UserType>
+	*/	
+	var package as EA.Package;
+	var parent as EA.Package;
+	var element as EA.Element;
+	var diagram as EA.Diagram;
+	
+	var userTypes = findOrCreatePackage(package, '', 'setup', '');
+	var userTypes_diagram = setupDiagram(userTypes, 'setup', 'Package');
+	
+	var packages = new ActiveXObject("Scripting.Dictionary");
+	var stereotypes = ['Product','Classification','Entity','Asset'];
+	for (var s=0; s<stereotypes.length; s++) {
+		var stereotype = stereotypes[s];
+		package = findOrCreatePackage(userTypes, stereotype+' Types', 'setup', '');
+		add_diagram_package(userTypes_diagram, package);
+		packages.Add(stereotype, package);
+		var diagram = setupDiagram(package, 'setup', 'Class');
+	}
+	
+	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : element }
+	var child2parents = new ActiveXObject("Scripting.Dictionary");  // { child.@ID : [ parent.@ID ] }
+	
+	var userType_list = doc.selectNodes('/s:STEP-ProductInformation/s:UserTypes/s:UserType');
+	for (var l=0; l<userType_list.length; l++) {
+		var userType = userType_list[l];
+		var id = XMLGetNamedAttribute(userType, 'ID');
+		var name = XMLGetNodeText(userType, 's:Name');
+		var aid  = 'true' == XMLGetNamedAttribute(userType, 'AllowInDesignTemplate');
+		var aqt  = 'true' == XMLGetNamedAttribute(userType, 'AllowQuarkTemplate');
+		var ic   = 'true' == XMLGetNamedAttribute(userType, 'IsCategory');
+		var copl = 'true' == XMLGetNamedAttribute(userType, 'ClassificationOwnsProductLinks');
+		var r    = 'true' == XMLGetNamedAttribute(userType, 'Revisability');
+		
+		Session.Output('id='+id+' aid='+aid+' aqt='+aqt+' ic='+ic+' copl='+copl+' r='+r);
+		
+		var stereotype;
+		if (r) {
+			stereotype = 'Entity';
+		}
+		else if (aid && aqt && ic) {
+			stereotype = 'Product';
+		}	
+		else if (! ic) {
+			stereotype = 'Classification';
+		}
+		else {
+			stereotype = 'Asset';
+		}
+		
+		package = packages.Item(stereotype);
+		element = findOrCreateElement(package, 'Class', stereotype, name, id, cache) ;
+		setTaggedValue(element, '@ID', id);
+		setTaggedValue(element, 'Name', name);
+		
+		//diagram = package.Diagrams.GetAt(0);
+		//add_diagram_element(diagram, element);
+		
+		types.Add(id, element);
+		child2parents.Add(id, []);
+		
+		var UserTypeLinks = userType.selectNodes('s:UserTypeLink');
+		for (var u=0; u<UserTypeLinks.length; u++) {
+			var UserTypeLink = UserTypeLinks[u];
+			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
+			child2parents.Item(id).push(UserTypeID);
+		}
+	}
+
+	var child_ids = child2parents.Keys().toArray();
+	for (var c=0; c<child_ids.length; c++) {
+		var child_id = child_ids[c];
+		var child = types.Item(child_id);
+		
+		var parent_ids = child2parents.Item(child_id); 
+		for (var p=0; p<parent_ids.length; p++) {
+			var parent_id = parent_ids[p];
+			var parent = types.item(parent_id);
+			if (parent) {
+				createOrReplaceConnector(child, parent, 'Valid Parent', '' ,'Generalization');
+			}
+		}
+		
+	}
+	
+	return userTypes;
 }
 
-function readReferences(package, doc, cache) {
+function readReferences(userTypes, package, doc, cache) {
+	
 }
 
 function readKeys(package, doc, cache) {
@@ -653,13 +795,15 @@ function importStepXML(fileName, diagram, cache) {
 		}
 	}
 	
+	/*
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, diagram, doc, cache);
 	readListOfValues(package, doc, cache);
 	var attributes = readAttributeGroups(package, diagram, doc, cache);
 	readAttributes(attributes, package, doc, cache);
-	readUserTypes(package, doc, cache);
-	readReferences(package, doc, cache);
+	*/
+	var userTypes = readUserTypes(package, doc, cache);
+	readReferences(userTypes, package, doc, cache);
 	readKeys(package, doc, cache);
 	
 }

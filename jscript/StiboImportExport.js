@@ -785,6 +785,8 @@ function readUserTypeLinks(package, doc, cache) {
 		var id = XMLGetNamedAttribute(attribute, 'ID');
 		var name = XMLGetNodeText(attribute, 's:Name');
 		var attribute_class = getCache(cache, 'Attribute', id);
+		if (! attribute_class) continue;
+			
 		Session.Output('attribute name='+attribute_class.Name);
 		
 		var UserTypeLinks = attribute.selectNodes('s:UserTypeLink');
@@ -815,6 +817,7 @@ function readReferences(package, doc, cache) {
 			Referenced="true"
 		>
             <Name>Movie_2_Writer</Name>
+			<AttributeLink AttributeID="Movie_Character_Actor"/>
             <UserTypeLink UserTypeID="Movie_Shows"/>
             <UserTypeLink UserTypeID="Movie_Show"/>
             <TargetUserTypeLink UserTypeID="Movie_Writer"/>
@@ -870,6 +873,15 @@ function readReferences(package, doc, cache) {
 			}
 		}
 		
+		var AttributeLinks = reference.selectNodes('s:AttributeLink');
+		for (var a=0; a<AttributeLinks.length; a++) {
+			var AttributeLink = AttributeLinks[a];
+			var AttributeID = XMLGetNamedAttribute(AttributeLink, 'AttributeID');
+			var attribute_element = getCache(cache, 'Attribute', AttributeID);
+			if (attribute_element) {
+				findOrCreateAttribute(reference_element, 'Valid Attribute', attribute_element.Name, attribute_element.Name, '');
+			}
+		}
 	}
 	
 	// link attributes to references, valid attribute

@@ -549,7 +549,6 @@
 					<Tag name="MultiValued" type="" description="" unit="" values="" default="Yes"/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Type" type="enumeration" description="" unit="" values="Product Reference Type,Asset Reference Type,Classification Reference Type,Product to Classification Link Type,Entity Reference Type" default=""/>
-					<Tag name="Attribute Links"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="reference instance" notes="" cx="0" cy="0" bgcolor="13353215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -853,7 +852,6 @@
 		<TaggedValueTypes>
 			<TaggedValueType property="Attributes" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
 			<TaggedValueType property="Attribute Groups" description="" notes="Type=RefGUIDList;Stereotypes=Attribute Group;"/>
-			<TaggedValueType property="Attribute Links" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
 		</TaggedValueTypes>
 		<ViewDefinitions/>
 		<Metamodel/>

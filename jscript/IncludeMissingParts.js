@@ -1,6 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
-
 !INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function IncludedMissingElements(diagram, depth, recurse) {
 	if (depth == null) depth = '';
@@ -21,7 +21,7 @@ function IncludedMissingElements(diagram, depth, recurse) {
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
-		
+
 		add_diagram_element(_diagram, element);		
 	}
 
@@ -31,15 +31,16 @@ function IncludedMissingElements(diagram, depth, recurse) {
 
 		add_diagram_package(_diagram, _package);
 	}
-		
+
 	for (var d=0; d<_diagram.DiagramObjects.Count; d++) {
 		var diagram_element as EA.DiagramObject;
 		diagram_element = _diagram.DiagramObjects.GetAt(d);
+		
 		diagram_element.ShowTags = true;
 		diagram_element.ShowInheritedTags = true;
 		diagram_element.Update();
 	}
-
+	
 	_diagram.Update();
 	Repository.ReloadDiagram(_diagram.DiagramID);
 	LayoutThisDiagram(_diagram);

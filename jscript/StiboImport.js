@@ -32,7 +32,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 	var uom_item as EA.Element;
 
 	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
-	var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
+	//var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
 	
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
 	for (var uf=0; uf<UnitFamilies.length; uf++) {
@@ -45,14 +45,14 @@ function readUnitsOfMeasures(package, doc, cache) {
 		var bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source.@ID] }
 		
 		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id);
-		add_diagram_package(uom_types_diagram, uom_items);
-		var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
+		//add_diagram_package(uom_types_diagram, uom_items);
+		//var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
 
 		uom_type = findOrCreateElement(uom_items, 'Class', 'UOM', UnitFamily_name, UnitFamily_id, cache);
 		setTaggedValue(uom_type, '@ID', UnitFamily_id);
 		setTaggedValue(uom_type, 'Name', UnitFamily_name);
 				
-		add_diagram_element(uom_items_diagram, uom_type);
+		//add_diagram_element(uom_items_diagram, uom_type);
 		
 		var Units = UnitFamily.selectNodes('s:Unit');
 		for(var u=0; u<Units.length; u++) {
@@ -94,7 +94,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 			uom_item.Update();
 			items.Add(Unit_id, uom_item);
 			
-			add_diagram_element(uom_items_diagram, uom_item);
+			//add_diagram_element(uom_items_diagram, uom_item);
 		}
 
 		var item_ids = items.Keys().toArray();
@@ -158,10 +158,10 @@ function digListOfValuesGroups(package, diagram, parent, cache) {
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
-		add_diagram_package(diagram, _group);
+		//add_diagram_package(diagram, _group);
 		
-		_diagram = setupDiagram(_group, 'LOVs', 'Class');	
-		add_diagram_element(_diagram, _group);
+		//_diagram = setupDiagram(_group, 'LOVs', 'Class');	
+		//add_diagram_element(_diagram, _group);
 		
 		digListOfValuesGroups(_group, _diagram, group, cache);
 	}
@@ -212,8 +212,8 @@ function readListOfValues(package, doc, cache) {
 			setTaggedValue(element, '@ID', id);
 			setTaggedValue(element, 'Name', name);
 			setTaggedValue(element, 'UseValueID', UseValueID);
-			diagram = parent.Diagrams.GetAt(0);
-			add_diagram_element(diagram, element);
+			//diagram = parent.Diagrams.GetAt(0);
+			//add_diagram_element(diagram, element);
 			
 			var values = lov.selectNodes('s:Value');
 			for (var v=0; v<values.length; v++) {
@@ -261,10 +261,10 @@ function digAttributeGroups(package, diagram, parent, cache) {
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
-		add_diagram_package(diagram, _group);
+		//add_diagram_package(diagram, _group);
 		
-		_diagram = setupDiagram(_group, 'Attributes', 'Class');	
-		add_diagram_package(_diagram, _group);
+		//_diagram = setupDiagram(_group, 'Attributes', 'Class');	
+		//add_diagram_package(_diagram, _group);
 		
 		digAttributeGroups(_group, _diagram, group, cache);
 	}
@@ -273,9 +273,9 @@ function digAttributeGroups(package, diagram, parent, cache) {
 function readAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
-	
+	var _diagram as EA.Diagram;
 	var attributes = findOrCreatePackage(package, 'Attribute Group', 'All Attributes', '');
-	var _diagram = setupDiagram(attributes, 'Attributes', 'Package');
+	_diagram = setupDiagram(attributes, 'Attributes', 'Package');
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
 	if (groups) {
@@ -360,10 +360,10 @@ function readAttributes(package, doc, cache) {
 			var parent = parents[p];
 			var parent_id = XMLGetNamedAttribute(parent, 'AttributeGroupID');
 			var parent_package = getCache(cache, 'Attribute Group', parent_id);
-			if (parent_package.Diagrams) {
-				diagram = parent_package.Diagrams.GetAt(0);
-				add_diagram_element(diagram, element);
-			}
+			//if (parent_package.Diagrams) {
+			//	diagram = parent_package.Diagrams.GetAt(0);
+			//	add_diagram_element(diagram, element);
+			//}
 			createOrReplaceConnector(element, parent_package, 'Attribute Link', '');
 		}
 	}
@@ -392,18 +392,18 @@ function readUserTypes(package, doc, cache) {
 	var diagram as EA.Diagram;
 	
 	var packages = new ActiveXObject("Scripting.Dictionary");
-	var diagrams = new ActiveXObject("Scripting.Dictionary");
+	//var diagrams = new ActiveXObject("Scripting.Dictionary");
 	var stereotypes = ['Product','Classification','Entity','Asset'];
 	for (var s=0; s<stereotypes.length; s++) {
 		var stereotype = stereotypes[s];
 		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '');
-		if (parent.Diagrams) {
-			diagram = package.Diagrams.GetAt(0);
-			add_diagram_package(diagram, parent);
-		}
+		//if (parent.Diagrams) {
+		//	diagram = package.Diagrams.GetAt(0);
+		//	add_diagram_package(diagram, parent);
+		//}
 		packages.Add(stereotype, parent);
-		var diagram = setupDiagram(parent, 'setup', 'Class');
-		diagrams.Add(stereotype, diagram);
+		//var diagram = setupDiagram(parent, 'setup', 'Class');
+		//diagrams.Add(stereotype, diagram);
 	}
 	
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : element }
@@ -441,8 +441,8 @@ function readUserTypes(package, doc, cache) {
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		
-		diagram = diagrams.Item(stereotype);
-		add_diagram_element(diagram, element);
+		//diagram = diagrams.Item(stereotype);
+		//add_diagram_element(diagram, element);
 		
 		types.Add(id, element);
 		child2parents.Add(id, []);
@@ -528,7 +528,7 @@ function readReferences(package, doc, cache) {
 	var diagram as EA.Element;
 	
 	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '');
-	var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
+	//var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
 	
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @element.name : stereotype }
 	types.Add('ProductCrossReferenceType',        'Product Reference Type'              );
@@ -551,7 +551,7 @@ function readReferences(package, doc, cache) {
 		setTaggedValue(reference_element, 'Name', name);
 		setTaggedValue(reference_element, 'Type', stereotype);
 		
-		add_diagram_element(reference_diagram, reference_element);
+		//add_diagram_element(reference_diagram, reference_element);
 				
 		var UserTypeLinks = reference.selectNodes('s:UserTypeLink');
 		for (var s=0; s<UserTypeLinks.length; s++) {
@@ -622,9 +622,7 @@ function importStepXML(diagram, cache) {
 			Session.Output('name="'+name+'" value="'+value+'"');
 		}
 	}
-	
-	return;
-	
+		
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, diagram, doc, cache);
 	readListOfValues(package, doc, cache);

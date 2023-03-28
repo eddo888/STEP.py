@@ -1,13 +1,12 @@
 !INC Local Scripts.EAConstants-JScript
-
 !INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function IncludeLinkedElements(diagram, depth) {
 	if (depth == null) depth = '';
 		
 	var _diagram as EA.Diagram;
 	_diagram = diagram;
-
 	/*
 	_diagram.Update();
 	Repository.ReloadDiagram(_diagram.DiagramID);
@@ -20,7 +19,7 @@ function IncludeLinkedElements(diagram, depth) {
 		
 		var element as EA.Element;
 		element = Repository.GetElementByID(diagram_object.ElementID);
-		//Session.Output(element.Name+" id="+element.ElementID);
+		Session.Output(element.Name+" id="+element.ElementID);
 		
 		for (var c=0; c<element.Connectors.Count; c++) {
 			var connector as EA.Connector;
@@ -33,7 +32,7 @@ function IncludeLinkedElements(diagram, depth) {
 				other = Repository.GetElementByID(connector.ClientID);
 			}
 			if (other) {
-				//Session.Output("    "+other.Name);
+				Session.Output("    "+other.Name);
 				add_diagram_element(_diagram, other);
 			}
 		}

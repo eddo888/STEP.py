@@ -1,16 +1,43 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
 
-function LayoutThisDiagram(diagram) {
-	var _diagram as EA.Diagram;
-	_diagram = diagram;
+function DoNotDisturb(diagram) {
+	var diagram as EA.Diagram;
+	diagram.t
+	var package as EA.Package;
+	var tag as EA.TaggedValue;
 	
+	package = Repository.GetPackageByID(diagram.PackageID);
+	tag = getTaggedValue(package, 'DoNotLayout');
+	if (!tag) {
+		tag = setTaggedValue(package, 'DoNotLayout', 'true');
+		tag.Update();
+		package.Update();
+	}
+	Session.Output('tag name='+tag.Name+' value='+tag.Value);
+}
+
+function LayoutThisDiagram(diagram) {
+	var diagram as EA.Diagram;
+	var package as EA.Package;
+	var tag as EA.TaggedValue;
+	
+	package = Repository.GetPackageByID(diagram.PackageID);
+	tag = getTaggedValue(package, 'DoNotLayout');
+	if (tag) {
+		Session.Output('tag name='+tag.Name+' value='+tag.Value);
+		if (eval(tag.Value)) {
+			Session.Output('skipping');
+			return;
+		}
+	}
+
 	var DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram;
     var Project as EA.Project;
       
     Project = Repository.GetProjectInterface();
       
-    DiagramGUID = Project.GUIDtoXML( _diagram.DiagramGUID );
+    DiagramGUID = Project.GUIDtoXML( diagram.DiagramGUID );
       
       //See ConstLayoutStyles in EAConstants-JScript
       //LayoutStyle = lsDiagramDefault

@@ -701,13 +701,13 @@ function readUserTypes(package, doc, cache) {
 		var userType = userType_list[l];
 		var id = XMLGetNamedAttribute(userType, 'ID');
 		var name = XMLGetNodeText(userType, 's:Name');
-		var aid  = 'true' == XMLGetNamedAttribute(userType, 'AllowInDesignTemplate');
-		var aqt  = 'true' == XMLGetNamedAttribute(userType, 'AllowQuarkTemplate');
+		var aid  = 'false' == XMLGetNamedAttribute(userType, 'AllowInDesignTemplate');
+		var aqt  = 'false' == XMLGetNamedAttribute(userType, 'AllowQuarkTemplate');
 		var ic   = 'true' == XMLGetNamedAttribute(userType, 'IsCategory');
-		var copl = 'true' == XMLGetNamedAttribute(userType, 'ClassificationOwnsProductLinks');
-		var r    = 'true' == XMLGetNamedAttribute(userType, 'Revisability');
+		var copl = 'false' == XMLGetNamedAttribute(userType, 'ClassificationOwnsProductLinks');
+		var r    = 'Global' == XMLGetNamedAttribute(userType, 'Revisability');
 		
-		Session.Output('id='+id+' aid='+aid+' aqt='+aqt+' ic='+ic+' copl='+copl+' r='+r);
+		//Session.Output('id='+id+' aid='+aid+' aqt='+aqt+' ic='+ic+' copl='+copl+' r='+r);
 		
 		var stereotype;
 		if (r) {
@@ -716,7 +716,7 @@ function readUserTypes(package, doc, cache) {
 		else if (aid && aqt && ic) {
 			stereotype = 'Product';
 		}	
-		else if (! ic) {
+		else if (aid && aqt && ! ic) {
 			stereotype = 'Classification';
 		}
 		else {
@@ -752,7 +752,7 @@ function readUserTypes(package, doc, cache) {
 			var parent_id = parent_ids[p];
 			var parent = types.item(parent_id);
 			if (parent) {
-				createOrReplaceConnector(child, parent, 'Valid Parent', '' ,'Generalization');
+				createOrReplaceConnector(parent, child, 'Valid Parent', '' ,'Generalization');
 			}
 		}
 		

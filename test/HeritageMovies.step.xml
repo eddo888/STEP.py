@@ -25,6 +25,40 @@ Exported by database exporter.
 -->
 <STEP-ProductInformation xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ExportTime="2023-03-27 13:50:41" ExportContext="GL" ContextID="GL" WorkspaceID="Main" UseContextLocale="false">
     <UserTypes>
+        <UserType ID="Product user-type root" ManuallySorted="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="true" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Product UserType root</Name>
+            <Icon>H4sIAAAAAAAAAHP3dLOwTBRgEGBYxMKw//5/ILCPr6/fD2IwwIDiTxZGBgYWBh0QB6SWgVnHY9edfwZejqsDtvEJVDEwK/KkzMxMXrmO+ei+XK7V73xOl82ZvSP2/f47mRmeDAzWAADZTF9nAAAA</Icon>
+
+        </UserType>
+        <UserType ID="Classification 1 user-type root" ClassificationOwnsProductLinks="false" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Classification UserType root</Name>
+            <Icon>H4sIAAAAAAAAAHP3dLOwTBRgEGBYxMqwfy7D/0sM9ZkM/4HgZQOQYAADxZ8sjAwMrAw6IA5ILQOzccSuO/8MvBxXB2xjM/ql4KgokDIz9EDEOp2J2zasPvba+/pn3ddLzy5vXFBgwSLUf/BKpqcnA4M1AA20EiduAAAA</Icon>
+            <DimensionLink DimensionID="Language"/>
+            <UserTypeLink UserTypeID="Classification 1 user-type root"/>
+        </UserType>
+        <UserType ID="Entity user-type root" AllowInDesignTemplate="false" AllowQuarkTemplate="false" Revisability="Global" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Entity user-type root</Name>
+        </UserType>
+        <UserType ID="Asset user-type root" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Assets</Name>
+            <Icon>H4sIAAAAAAAAAHP3dLOwTBRgEGD4zgACaTPPzASCM/+BcOb/mWln0v7//5+Wlvb/TNqZmcb/Z878f+YMUAXDf6BShjNnwJyZQHlj45nGQHAGiIAazjCMglEw5IDiTxZGBgY+Bh0QB5QnGDiKGWQ5ZDQCGBiaONi5BAoeJji18ujzSDwQeHiIW0g8605F4CMXRnanLpsGB4eGTg1HOYYDRipM7GqBfAycDilnpxsG98V4bnpwst8s+1vLz+JlvhP1a5nuWk55ETRPj/OYSMOCVVdXBfmzcRz4tNBpneheqxevTBUYrAFaPp1nlgMAAA==</Icon>
+            <UserTypeLink UserTypeID="Asset user-type root"/>
+        </UserType>
+        <UserType ID="CurrencyType" AllowInDesignTemplate="false" AllowQuarkTemplate="false" Revisability="Global" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>CurrencyType</Name>
+            <Icon>H4sIAAAAAAAAAH1TTWjUQBiNKFpb24MexJ7S9GALbv52s9uExnabpO5iU8t2wT0Vs8lsN7bJxGTWza6CPwfBQ4uoF/Empb0UETz5A0otQgUPCmL1Yg/eFLx58aCTbXcVYTuQzHwf733z5ps3N6cmT3V39nYSBNGdzai5aI6+jv3473/7ehlPx5BWQNOwhKqGD4i0BYuAzDrGLMgBw6pd2ADDBLF3wM4XUEGfkEzo0EaEoUPHI6IxPBJ6hjkHEFkEs7YrUz+evaBI25Kps4LO6p4Cynam7oPp+mTerM+ZokWNnCSHQwkXcAAyyNCZdwMplKlGXQmvozRDkQ0ImpOpbVEFfYpUoA9IgU7GTC4+RKZEmhPEIT5xguRZLsmwIsMlYiwnsaLEcuTOoPBuvlWScur4zl44kqkyQp7EMNVqla7GaejPMpwoigzLMzwfw4hYUHOREcbcoL9ZQQWB6dsesqFLRrFRhBUkU1TzCI7XKusGO23CDWNCw2M4mmX+Aer67lDHaaEDlAOl3dFBvuYBJgcCWPFNfHGl/ojsSYoPDAT9PITzzS5OlSGCQRl6pKJEXUuRA7ph2m6UHGywdF3KugEyXBNkVZnCGdq2LSkhjIm8mkykVFXjOC2V1gRBSWmKonDcWDyebnJVaFYc4KIm1/rLFdpyI0Nss4FvXwTWuA8dsnFwyW6vhW+vZZtrtdcSb8tlsBjmv+tuprCHomXLvDho2R+42PM+Nnfy8JMt/DDcrJrOh5+f3z7dc5XtUO+9vrTxdv3Op/sLHzKryeWlri83zvAT2WvO0r5Cfku0ZgbOF3uPLj9+o9399UDogsdXhsYz/Mtb5Xpqs9b3/dXB0SPy7+rK+nz559PFpcXVngMzowvvrqyZa32HHnWxxMfNwY33pT2V6E1mtUn14di5638Ag1RwnQAEAAA=</Icon>
+            <UserTypeLink UserTypeID="CurrencyRoot"/>
+            <AttributeLink AttributeID="GC_Latitude"/>
+            <AttributeLink AttributeID="CurrencyValue"/>
+            <AttributeLink AttributeID="GC_Longitude"/>
+            <AttributeLink AttributeID="CurrencyDate"/>
+        </UserType>
+        <UserType ID="CurrencyRoot" AllowInDesignTemplate="false" AllowQuarkTemplate="false" Revisability="Global" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>CurrencyRoot</Name>
+            <Icon>H4sIAAAAAAAAAH1TTUzUQBhtUFAgRA0HlYMZi4mYsP1b9qcNC+y2i2y0BJdN3CPddpZtoJ3aDm4hJkYOBhL8wcSTnoxnjRcvHjTKAQ8mIByMxujBxAMHL3oyuE4XdjXGZZJ25nt575tvvnmzODZ6tqOtq42iqI7MiJIN5uA72EL+7taXK2Q6jtN5PI6KuKy5kEoaqABBxtImYRZqxuyl17Cfovb1mLk8zqvnJR1ZjBZwGN9yqGD0D/qOpk9BDApw0rQT9Ldnz2lgGgn6YkTlVEeGJXNkzoXjc6M5fW5KFw16cAD0+xJJYEGsAd+atj3JT9DVvBJZBzBLgyoFTyXonaLy6hiQkQtBhImGdD4cBzGR4SNiXOjrBQLHR1lOZPm+EMdLnChxPNgdNNnNNYpSVhne3YtECbqEsSOxbLlcZsphBrmTLC+KIssJrCCECCPkzdpY80O2113LoEBPd00Hm8gGQawV0AxO0HTtCJZTT2t7u20iDWN9zWF5hmP/Iqrq3lTLqrM9nIXFvdlebtaBbBZ6aMbVycUVuwOxI8ku1DBycwhN17o4VkIYeSXkAFkOuhYDPaqmm3YAnqmqVFXK2B7WbB1mlARNEMY0DSkeCSuCkFJiipLm+XQsmY5E5FhalmWeT4XDyZpWQfqMBW1c0xp/tOmG2sAQO2rompehMewiC1QPLpn/qaUvkhIFJRptXMuO1mhci9xQy5Ji2H+uuwYRDwXLunlJULc/tInnXWLu7Zt3P5GH4WeUZM5/X7jvVn5dbaGHns43dS+92Vxbe0FtjoxtbB449Pl6+NpCrP3onYfLF04NnLCbbqtL505Gl9tW367MM87H9SOPW95s/3zyYWV1dSH56t33H50bW83tx9abK5XKLQJMfH0Zf9DaWlm8cXrY6BzqWlzff3iCutfLj8sbwlLwOjPpUeVRamL+N8jbupIKBAAA</Icon>
+            <UserTypeLink UserTypeID="Entity user-type root"/>
+            <AttributeLink AttributeID="CurrencySource"/>
+        </UserType>
         <UserType ID="Movie_Writers" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="true" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
             <Name>Movie Writers</Name>
             <Icon>H4sIAAAAAAAAAOsM8HPn5ZLiYmBg4PX0cAkC0gIgzMEGJOU//08EUizFTp4hHEBQw5HSAeRzFnhEFgPpzSDMuPNyFwuQIVniGlESnJ9WUp5YlMpQXl6ul5mXXZycWJCql1+UPvudjRRQ0TFPF8cQi967lwz9nAIFWC8Yf1rrcaNFJOryjpb7m1jDGpb2svau5U7gf9e0g2nphakOEtx2zxr1n2Sv2XNS99mze5XGlcIzV7q46BjocbxnT3t2eOL+Sw8iLBzT3CLj5xh/dwy++K6gP32N9VupYJtrbr+O6d0QK+0uPXvb5QjHdvXXPIadP6LKmxJdtrSmt08/oJ33odH3/FX9wlZzjzNZj+cqp504fGP1PP3pER/Z7//ol+Kpmyi7wf7pERuleRveSuYZvN807Vv4VPsnfKf9Z32plT9l5HcF6CMGT1c/l3VOCU0AFvhW/0kBAAA=</Icon>
@@ -299,53 +333,7 @@ Exported by database exporter.
             <UserTypeLink UserTypeID="Movie_Classifications"/>
         </UserType>
     </UserTypes>
-    <EdgeTypes>
-        <EdgeType ID="C"/>
-        <EdgeType ID="CA">
-            <AttributeLink AttributeID="Max Qty"/>
-            <AttributeLink AttributeID="Completeness_Score_Marketing"/>
-            <AttributeLink AttributeID="CompletenessScore"/>
-            <AttributeLink AttributeID="ETIM6 Unit ID"/>
-            <AttributeLink AttributeID="Completeness Status Marketing"/>
-            <AttributeLink AttributeID="CompletenessMetricScore"/>
-            <AttributeLink AttributeID="10111"/>
-            <AttributeLink AttributeID="CompletenessPrimaryImage"/>
-            <AttributeLink AttributeID="CNET.DisplayName"/>
-            <AttributeLink AttributeID="QualityGateRequired.EComm"/>
-            <AttributeLink AttributeID="CNET.DisplayOrder"/>
-            <AttributeLink AttributeID="CompletenessProductOnboarding"/>
-            <AttributeLink AttributeID="QualityGateRequired.Digital"/>
-            <AttributeLink AttributeID="DisplaySequence"/>
-            <AttributeLink AttributeID="59709"/>
-            <AttributeLink AttributeID="CompletenessScoreOutlet"/>
-            <AttributeLink AttributeID="ROP"/>
-            <AttributeLink AttributeID="Reorder Qty"/>
-            <AttributeLink AttributeID="10167"/>
-            <AttributeLink AttributeID="Completeness Score"/>
-            <AttributeLink AttributeID="Quantity"/>
-            <AttributeLink AttributeID="ConditionalAttribute"/>
-            <AttributeLink AttributeID="AttributeCompletenessScore"/>
-            <AttributeLink AttributeID="CompletenessStatus"/>
-            <AttributeLink AttributeID="QualityGateRequired.Commercial"/>
-            <AttributeLink AttributeID="Supplier Completeness Metric Score"/>
-            <AttributeLink AttributeID="CategorySpecificCompleteness"/>
-            <AttributeLink AttributeID="ETIM6 Unit Description"/>
-            <AttributeLink AttributeID="59064"/>
-            <AttributeLink AttributeID="DisplayinWebUIIf"/>
-            <AttributeLink AttributeID="Completeness Score Asset References"/>
-            <AttributeLink AttributeID="POC1OverallCompleteness"/>
-        </EdgeType>
-        <EdgeType ID="P"/>
-        <EdgeType ID="PA">
-            <AttributeLink AttributeID="Completeness Score"/>
-            <AttributeLink AttributeID="62048"/>
-            <AttributeLink AttributeID="59064"/>
-            <AttributeLink AttributeID="RVariantPriority"/>
-            <AttributeLink AttributeID="ConditionalAttribute"/>
-            <AttributeLink AttributeID="59709"/>
-            <AttributeLink AttributeID="CompletenessScore"/>
-        </EdgeType>
-    </EdgeTypes>
+    
     <CrossReferenceTypes>
         <AssetCrossReferenceType ID="PrimaryProductImage" Inherited="true" Accumulated="false" Revised="true" Mandatory="false" MultiValued="true" Selected="true" Referenced="true">
             <Name>Primary Product Image</Name>

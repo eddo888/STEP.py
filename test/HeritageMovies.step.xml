@@ -718,6 +718,7 @@ Exported by database exporter.
             <TargetUserTypeLink UserTypeID="Movie_Classification"/>
         </ClassificationProductLinkType>
     </CrossReferenceTypes>
+    <!--
     <UnitList>
         <UnitFamily ID="Currency" Selected="true" Referenced="true">
             <Name>Currency</Name>
@@ -1501,4 +1502,5 @@ Exported by database exporter.
             <Configuration>H4sIAAAAAAAAAJWT0UvDMBDG3/dXxOBr13S6zUnTF0UYKIoiPkppb9thdynJdZ3+9cZsnaCOuZceDXff9/2OJG/YTAkZc4Z7urLgq57llYPU1RVyBmsoGoanwmLNt7hEhvLB4gormIPTbJuus0LHQPc0XdbGMtjnuvwp5or1stJpKAKDbaXlnVkhuNdNjEoKypfQnYoXY99mlWmlWIF1aEhL1Z9I4RXIablgri/juG3bfnvWN3YeD5QaxmocBxOZpSdRJIQgU0Lk8AOinMqoNs57GRJrrfpKvIdvq0ejc18XejgZ+SqiKOuJNHcO5wQgsNTytGisBWIp+L32IRsH1nvEXVPW8xOOPbco0RWGGKkBPxi2IIPG37jd78HASZKEyONhyJwoFTIPhrvIImWb03YAVj6ulo/gTf0SObdz4F2I7bEn+B7JemkcEI6A6eQ3LDvVgyib7ScX6hiWa0Pwi+QGKWxvL8jsq+EgyEZmy9Fp/hNjMN6DkcbBPOT5upXZ9jl8ArwtEUx9AwAA</Configuration>
         </STEPWorkflow>
     </STEPWorkflows>
+    -->
 </STEP-ProductInformation>

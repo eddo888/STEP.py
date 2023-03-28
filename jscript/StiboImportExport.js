@@ -51,9 +51,17 @@ function fillCache(cache, package, indent) {
 	}
 }
 
+function normalize(stereotype) {
+	if (stereotype == 'Asset' || stereotype == 'Product' || stereotype == 'Classification' || stereotype == 'Entity') {
+		return 'UserType';
+	}
+	return stereotype;
+}
+
 function putCache(cache, stereotype, element) {
 	var tag as EA.TaggedValue;
 	if (!element) return;
+	stereotype = normalize(stereotype);
 	tag = getTaggedValue(element, '@ID');
 	if (tag && tag.Name && tag.Value) {
 		//Session.Output('tag:'+tag.Name+'='+tag.Value);
@@ -67,6 +75,7 @@ function putCache(cache, stereotype, element) {
 function getCache(cache, stereotype, id) {
 	var result as EA.Element;
 	if (! id) return;
+	stereotype = normalize(stereotype);
 	if (cache.Exists(stereotype)) {
 		if (cache.Item(stereotype).Exists(id)) {
 			result = cache.Item(stereotype).Item(id);
@@ -563,8 +572,9 @@ function digAttributeGroups(package, diagram, parent, cache) {
 	}
 }
 
-function readAttributeGroups(package, diagram, doc, cache) {
+function readAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
+	var diagram as EA.Diagram;
 	
 	var attributes = findOrCreatePackage(package, 'Attribute Group', 'All Attributes', '');
 	var _diagram = setupDiagram(attributes, 'Attributes', 'Package');
@@ -574,10 +584,9 @@ function readAttributeGroups(package, diagram, doc, cache) {
 		digAttributeGroups(attributes, _diagram, groups, cache);
 	}	
 	
-	return attributes;
 }
 	
-function readAttributes(attributes, package, doc, cache) {
+function readAttributes(package, doc, cache) {
 	/*
 		<Attribute 
 			ID="Movie_Name" 
@@ -602,6 +611,8 @@ function readAttributes(attributes, package, doc, cache) {
 	var parent as EA.Package;
 	var element as EA.Element;
 	var diagram as EA.Diagram;
+	
+	var attributes = findPackage(package, 'Attribute Group', 'All Attributes', '');
 	
 	var attribute_list = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeList/s:Attribute');
 	for (var l=0; l<attribute_list.length; l++) {
@@ -680,17 +691,19 @@ function readUserTypes(package, doc, cache) {
 	var element as EA.Element;
 	var diagram as EA.Diagram;
 	
-	var userTypes = findOrCreatePackage(package, '', 'setup', '');
-	var userTypes_diagram = setupDiagram(userTypes, 'setup', 'Package');
-	
 	var packages = new ActiveXObject("Scripting.Dictionary");
+	var diagrams = new ActiveXObject("Scripting.Dictionary");
 	var stereotypes = ['Product','Classification','Entity','Asset'];
 	for (var s=0; s<stereotypes.length; s++) {
 		var stereotype = stereotypes[s];
-		package = findOrCreatePackage(userTypes, stereotype+' Types', 'setup', '');
-		add_diagram_package(userTypes_diagram, package);
-		packages.Add(stereotype, package);
-		var diagram = setupDiagram(package, 'setup', 'Class');
+		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '');
+		if (parent.Diagrams) {
+			diagram = package.Diagrams.GetAt(0);
+			add_diagram_package(diagram, parent);
+		}
+		packages.Add(stereotype, parent);
+		var diagram = setupDiagram(parent, 'setup', 'Class');
+		diagrams.Add(stereotype, diagram);
 	}
 	
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : element }
@@ -723,13 +736,13 @@ function readUserTypes(package, doc, cache) {
 			stereotype = 'Asset';
 		}
 		
-		package = packages.Item(stereotype);
-		element = findOrCreateElement(package, 'Class', stereotype, name, id, cache) ;
+		parent = packages.Item(stereotype);
+		element = findOrCreateElement(parent, 'Class', stereotype, name, id, cache) ;
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		
-		//diagram = package.Diagrams.GetAt(0);
-		//add_diagram_element(diagram, element);
+		diagram = diagrams.Item(stereotype);
+		add_diagram_element(diagram, element);
 		
 		types.Add(id, element);
 		child2parents.Add(id, []);
@@ -758,15 +771,115 @@ function readUserTypes(package, doc, cache) {
 		
 	}
 	
-	return userTypes;
 }
 
-function readReferences(userTypes, package, doc, cache) {
+function readUserTypeLinks(package, doc, cache) {
+	/*
+		<Attribute ID="Movie_Name"  ...
+			<UserTypeLink UserTypeID="Movie_Actor"/>
+		</Attribute
+	*/
+	var attribute_list = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeList/s:Attribute');
+	for (var l=0; l<attribute_list.length; l++) {
+		var attribute = attribute_list[l];
+		var id = XMLGetNamedAttribute(attribute, 'ID');
+		var name = XMLGetNodeText(attribute, 's:Name');
+		var attribute_class = getCache(cache, 'Attribute', id);
+		Session.Output('attribute name='+attribute_class.Name);
+		
+		var UserTypeLinks = attribute.selectNodes('s:UserTypeLink');
+		for (var u=0; u<UserTypeLinks.length; u++) {
+			var UserTypeLink = UserTypeLinks[u];
+			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
+		
+			var UserType = getCache(cache, 'UserType', UserTypeID);
+			if (UserType) {
+				Session.Output(' UserType name='+UserType.Name);
+				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
+			}
+		}
+		
+	}
+}
 	
+function readReferences(package, doc, cache) {	
+	/*
+        <ProductCrossReferenceType 
+			ID="Movie_2_Writer" 
+			Inherited="false" 
+			Accumulated="false" 
+			Revised="true" 
+			Mandatory="false" 
+			MultiValued="true" 
+			Selected="true" 
+			Referenced="true"
+		>
+            <Name>Movie_2_Writer</Name>
+            <UserTypeLink UserTypeID="Movie_Shows"/>
+            <UserTypeLink UserTypeID="Movie_Show"/>
+            <TargetUserTypeLink UserTypeID="Movie_Writer"/>
+        </ProductCrossReferenceType>
+	*/	
+	
+	var package as EA.Package;
+	var diagram as EA.Element;
+	
+	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '');
+	var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
+	
+	var types = new ActiveXObject("Scripting.Dictionary");  // { @element.name : stereotype }
+	types.Add('ProductCrossReferenceType',        'Product Reference Type'              );
+	types.Add('AssetCrossReferenceType',          'Asset Reference Type'                );
+	types.Add('ClassificationCrossReferenceType', 'Classification Reference Type'       );
+	types.Add('ClassificationProductLinkType',    'Product to Classification Link Type' );
+	types.Add('EntityCrossReferenceType',         'Entity Reference Type'               );
+	
+	var references = doc.selectNodes('/s:STEP-ProductInformation/s:CrossReferenceTypes/*');
+	
+	for (var r=0; r<references.length; r++) {
+		var reference = references[r];
+		var id = XMLGetNamedAttribute(reference, 'ID');
+		var name = XMLGetNodeText(reference, 's:Name');
+		var MultiValued = XMLGetNamedAttribute(reference, 'MultiValued');
+		
+		var stereotype = types.Item(reference.nodeName);
+		var reference_element = findOrCreateElement(reference_package, 'Class', 'Reference Definition', name, id, cache);
+		setTaggedValue(reference_element, '@ID', id);
+		setTaggedValue(reference_element, 'Name', name);
+		setTaggedValue(reference_element, 'Type', stereotype);
+		
+		add_diagram_element(reference_diagram, reference_element);
+				
+		var UserTypeLinks = reference.selectNodes('s:UserTypeLink');
+		for (var s=0; s<UserTypeLinks.length; s++) {
+			var UserTypeLink = UserTypeLinks[s];
+			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
+			var UserType = getCache(cache, 'UserType', UserTypeID);
+			if (UserType) {
+				createOrReplaceConnector(UserType, reference_element, 'Source', '' ,'Aggregation');
+			}
+		}
+		
+		var TargetUserTypeLinks = reference.selectNodes('s:TargetUserTypeLink');
+		for (var t=0; t<TargetUserTypeLinks.length; t++) {
+			var TargetUserTypeLink = TargetUserTypeLinks[t];
+			var UserTypeID = XMLGetNamedAttribute(TargetUserTypeLink, 'UserTypeID');
+			var UserType = getCache(cache, 'UserType', UserTypeID);
+			if (UserType) {
+				createOrReplaceConnector(UserType, reference_element, 'Target', 'Target' ,'Aggregation');
+			}
+		}
+		
+	}
+	
+	// link attributes to references, valid attribute
 }
 
-function readKeys(package, doc, cache) {
-}
+function readKeys(package, doc, cache) {}
+function readProducts(package, doc, cache) {}
+function readClassifications(package, doc, cache) {}
+function readEntities(package, doc, cache) {}
+function readAssets(package, doc, cache) {}
 
 function importStepXML(fileName, diagram, cache) {
 	var doc; // as MSXML2.DOMDocument;
@@ -794,18 +907,20 @@ function importStepXML(fileName, diagram, cache) {
 			Session.Output('name="'+name+'" value="'+value+'"');
 		}
 	}
-	
-	/*
+
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, diagram, doc, cache);
 	readListOfValues(package, doc, cache);
-	var attributes = readAttributeGroups(package, diagram, doc, cache);
-	readAttributes(attributes, package, doc, cache);
-	*/
-	var userTypes = readUserTypes(package, doc, cache);
-	readReferences(userTypes, package, doc, cache);
+	readAttributeGroups(package, doc, cache);
+	readAttributes(package, doc, cache);
+	readUserTypes(package, doc, cache);
+	readUserTypeLinks(package, doc, cache);
+	readReferences(package, doc, cache);
 	readKeys(package, doc, cache);
-	
+	readProducts(package, doc, cache);
+	readClassifications(package, doc, cache);
+	readEntities(package, doc, cache);
+	readAssets(package, doc, cache);
 }
 
 function writeUnitsOfMeasures(package, doc) {}

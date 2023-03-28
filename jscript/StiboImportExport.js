@@ -1,6 +1,103 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC User Scripts.Library
+
+function LayoutThisDiagram(diagram) {
+	var _diagram as EA.Diagram;
+	_diagram = diagram;
+	
+	var DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram;
+    var Project as EA.Project;
+      
+    Project = Repository.GetProjectInterface();
+      
+    DiagramGUID = Project.GUIDtoXML( _diagram.DiagramGUID );
+      
+      //See ConstLayoutStyles in EAConstants-JScript
+      //LayoutStyle = lsDiagramDefault
+      LayoutStyle 
+		= lsCycleRemoveDFS 
+		| lsLayeringOptimalLinkLength 
+		| lsInitializeDFSOut 
+		| lsLayoutDirectionLeft
+		;
+      
+      Iterations = 4;
+      LayerSpacing = 20;
+      ColumnSpacing = 50;
+      SaveToDiagram = false;
+
+      Project.LayoutDiagramEx( DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram );
+}
+
+function set_stereotype(new_stereotype) {
+	// Show the script output window
+	Repository.EnsureOutputVisible( "Script" );
+		
+	// Create a diagram in the test package
+	var testDiagram as EA.Diagram;
+	testDiagram = Repository.GetCurrentDiagram();
+
+	var testPackage as EA.Package;
+	testPackage = Repository.GetPackageByID(testDiagram.PackageID);
+
+	Session.Output("---------------------------------------------------------------------------------");
+	Session.Output( "diagramPackage[" + testDiagram.Name + "]=" + testPackage.Name );
+	
+	for (var o=0; o<testDiagram.SelectedObjects.Count; o++) {
+		var object as EA.DiagramObject;
+		object = testDiagram.SelectedObjects.GetAt(o);
+		
+		var element as EA.Element;
+		element = Repository.GetElementByID(object.ElementID);
+
+		Session.Output("element["+element.ElementID+"]="+element.Name+":"+element.StereotypeEx);
+		if (element.StereotypeEx != new_stereotype) {
+			element.StereotypeEx = new_stereotype;
+			element.Update();
+		}	
+	}
+
+	//Repository.ReloadDiagram(testDiagram.DiagramID);
+	Session.Output( "Done!" );
+
+}
+
+function add_diagram_package(diagram, package) {
+	var diagram_object as EA.Diagram;
+	if (!diagram) return;
+	if (!package) return;
+	if (!package.Element) return;
+		
+	diagram_object = diagram.FindElementInDiagram(package.Element.ElementID);
+
+	if (diagram_object) {
+		//Session.output("= "+package.Name);
+	}
+	else {
+		//Session.output("? "+package.Name);
+		diagram_object = diagram.DiagramObjects.AddNew("l=1;r=1;t=-20;b=-80","");
+		diagram_object.ElementID = package.Element.ElementID;
+		diagram_object.Update();
+	}
+
+}
+
+function add_diagram_element(diagram, element) {
+	var diagram_object as EA.Diagram;
+
+	diagram_object = diagram.FindElementInDiagram(element.ElementID);
+
+	if (diagram_object) {
+		//Session.output("= "+element.Name);
+	}
+	else {
+		//Session.output("? "+element.Name);
+		diagram_object = diagram.DiagramObjects.AddNew("l=1;r=1;t=-20;b=-80","");
+		diagram_object.ElementID = element.ElementID;
+		diagram_object.Update();
+	}
+
+}
 
 // https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
 // https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms756987(v=vs.85)#jscript-examples
@@ -184,6 +281,8 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 function setTaggedValue(element, name, value) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
+	if (!element) return;
+		
 	if (element.Element) {
 		element = element.Element;
 	}
@@ -214,7 +313,8 @@ function getTaggedValue(element, name) {
 	if (element.Element) {
 		element = element.Element;
 	}
-
+	if (!element.TaggedValues) return;
+		
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -662,8 +762,10 @@ function readAttributes(package, doc, cache) {
 			var parent = parents[p];
 			var parent_id = XMLGetNamedAttribute(parent, 'AttributeGroupID');
 			var parent_package = getCache(cache, 'Attribute Group', parent_id);
-			diagram = parent_package.Diagrams.GetAt(0);
-			add_diagram_element(diagram, element);
+			if (parent_package.Diagrams) {
+				diagram = parent_package.Diagrams.GetAt(0);
+				add_diagram_element(diagram, element);
+			}
 			createOrReplaceConnector(element, parent_package, 'Attribute Link', '');
 		}
 	}
@@ -893,15 +995,29 @@ function readClassifications(package, doc, cache) {}
 function readEntities(package, doc, cache) {}
 function readAssets(package, doc, cache) {}
 
-function importStepXML(fileName, diagram, cache) {
+function importStepXML(diagram, cache) {
 	var doc; // as MSXML2.DOMDocument;
 	var node; // as MSXML2.DOMNode;
+	var fileName;
 
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
 	fillCache(cache, package);
 	//showCache(cache, package);
 	
+	var uri as EA.TaggedValue;
+	var uri = getTaggedValue(package, 'fileName');
+	if (uri && uri.Value) {
+		Session.Output(uri.Name+'='+uri.Value);
+		fileName = uri.Value;
+	}
+	else {
+		var proj = Repository.GetProjectInterface();
+		fileName = proj.GetFileNameDialog( "", "", 1, 0, "", 0 );
+		setTaggedValue(package, 'fileName', fileName);
+		package.Update();
+	}
+
 	doc = XMLReadXMLFromFile(fileName);
 	if (!doc) {
 		Session.Output('failed to load '+fileName);
@@ -919,7 +1035,7 @@ function importStepXML(fileName, diagram, cache) {
 			Session.Output('name="'+name+'" value="'+value+'"');
 		}
 	}
-
+	
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, diagram, doc, cache);
 	readListOfValues(package, doc, cache);
@@ -955,9 +1071,6 @@ function exportStepXML(fileName, diagram, cache) {
 	
 }
 
-var inputFileName = 'C:/Users/eddo8/git/github.com/eddo888/STEP.py/test/HeritageMovies.step.xml';
-var outputFileName = 'C:/Users/eddo8/git/github.com/eddo888/STEP.py/test/Sparx.step.xml';
-
 Repository.EnsureOutputVisible( "Debug" );
 Repository.ClearOutput("Script");
 Session.Output( "Starting" );
@@ -966,11 +1079,10 @@ Session.Output( "Starting" );
 var cache = new ActiveXObject("Scripting.Dictionary");
 
 var diagram as EA.Diagram;
-//diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
 diagram = Repository.GetDiagramByGuid('{B12EF0F9-C12A-40e1-A7A3-A73285928984}');
 //diagram = Repository.GetCurrentDiagram();
+importStepXML(diagram, cache);
 
 //exportStepXML(outputFileName, diagram, cache);
-importStepXML(inputFileName, diagram, cache);
 
 Session.Output("Ended");

@@ -1,10 +1,6 @@
-<STEP-ProductInformation
-	ContextID="Context1"
-	ExportContext="Context1"
-	ExportTime="2022-06-28 16:49:21"
-	UseContextLocale="false"
-	WorkspaceID="Main"
->
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" ContextID="Context1" ExportContext="Context1" ExportTime="2022-06-28 16:49:21" UseContextLocale="false" WorkspaceID="Main">
 	<UserTypes>
 		<UserType
 			AllowInDesignTemplate="false"

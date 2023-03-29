@@ -1,0 +1,9 @@
+tocTab[tocTab.length] = new Array("0.6:1", "", "Entities", "EARoot/EA6/EA185.htm", "175.png", "114", "0", "", "Logical diagram0","{C6AC3AF9-9590-48d3-9312-7DC5FDB3CBA8}");
+tocTab[tocTab.length] = new Array("0.6:2", "", "«Reference Definition» Product 2 Price", "EARoot/EA6/EA188.htm", "5.png", "E1772", "0", "", "Class0","{1535BA9F-3886-43d4-B4B4-B0D0384D9E4C}");
+tocTab[tocTab.length] = new Array("0.6:3", "", "«Entity» Entity user-type root", "EARoot/EA6/EA189.htm", "5.png", "E1613", "0", "", "Class0","{A51F996D-21BD-4b35-BDA2-05AFCA1608B6}");
+tocTab[tocTab.length] = new Array("0.6:4", "", "«Entity» Locations", "EARoot/EA6/EA190.htm", "5.png", "E1643", "0", "", "Class0","{19766EAB-BA7C-45d8-96FF-4A714FFE5B48}");
+tocTab[tocTab.length] = new Array("0.6:5", "", "«Entity» Country", "EARoot/EA6/EA191.htm", "5.png", "E1644", "0", "", "Class0","{0B4D5440-B354-4a27-98D7-2DBD40FA56F3}");
+tocTab[tocTab.length] = new Array("0.6:6", "", "«Entity» State", "EARoot/EA6/EA192.htm", "5.png", "E1645", "0", "", "Class0","{3A64A8F5-E03A-48d0-9C5D-8CD6063147CD}");
+tocTab[tocTab.length] = new Array("0.6:7", "", "«Entity» Suburb", "EARoot/EA6/EA193.htm", "5.png", "E1646", "0", "", "Class0","{AF53671B-A564-474f-B591-0F13BC0B8213}");
+tocTab[tocTab.length] = new Array("0.6:8", "", "«Entity» Address", "EARoot/EA6/EA194.htm", "5.png", "E1648", "0", "", "Class0","{892D840A-46BB-4d3f-A4E5-0AD812380C4E}");
+tocTab[tocTab.length] = new Array("0.6:9", "", "«Entity» Price", "EARoot/EA6/EA195.htm", "5.png", "E1735", "0", "", "Class0","{4EA70723-4034-42b8-A966-B752B6A2B0B6}");

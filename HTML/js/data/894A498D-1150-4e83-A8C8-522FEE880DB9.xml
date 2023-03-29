@@ -1,0 +1,9 @@
+tocTab[tocTab.length] = new Array("0.12:2", "", "Workflows", "EARoot/EA12/EA249.htm", "181.png", "119", "0", "", "Activity diagram0","{26A93EEA-BC24-4c0a-A996-F60C765D00F8}");
+tocTab[tocTab.length] = new Array("0.12:3", "", "«Workflow» Create New Product", "EARoot/EA12/EA252.htm", "21.png", "E1621", "0", "", "Activity0","{DB038002-BA31-4590-95DA-A7279D984AD1}");
+tocTab[tocTab.length] = new Array("0.12:1", "", "Create New Product", "EARoot/EA12/EA247.htm", "181.png", "137", "E1621", "", "Activity diagram0","{7930F905-87B3-446d-B33A-D311330B189B}");
+tocTab[tocTab.length] = new Array("0.12:4", "", "Start", "EARoot/EA12/EA253.htm", "68.png", "E1653", "E1621", "", "StateNode0","{F3C9C7B2-AD9A-452c-BC18-7B01BBE77748}");
+tocTab[tocTab.length] = new Array("0.12:5", "", "«Rule» Load", "EARoot/EA12/EA254.htm", "104.png", "E1649", "E1621", "", "Action0","{E090FE9F-4623-445f-8EE8-5CBDC46C51A4}");
+tocTab[tocTab.length] = new Array("0.12:6", "", "«Rule» Enrich", "EARoot/EA12/EA255.htm", "104.png", "E1650", "E1621", "", "Action0","{A5EBB42C-F810-4821-95B3-45B85308D99E}");
+tocTab[tocTab.length] = new Array("0.12:7", "", "«Rule» Approve", "EARoot/EA12/EA256.htm", "104.png", "E1651", "E1621", "", "Action0","{23EB9D33-AFE7-49f8-A19E-D24B24BB6E9C}");
+tocTab[tocTab.length] = new Array("0.12:8", "", "«Rule» Publish", "EARoot/EA12/EA257.htm", "104.png", "E1652", "E1621", "", "Action0","{BEE430F4-6B68-4a54-84E4-15405B9197E2}");
+tocTab[tocTab.length] = new Array("0.12:9", "", "End", "EARoot/EA12/EA258.htm", "69.png", "E1654", "E1621", "", "StateNode0","{29B43EB6-17F4-4b08-AB1E-F6C25AF9C8F2}");

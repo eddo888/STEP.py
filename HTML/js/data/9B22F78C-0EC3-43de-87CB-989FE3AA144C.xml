@@ -1,0 +1,2 @@
+tocTab[tocTab.length] = new Array("0.3.2:1", "", "LOVs", "EARoot/EA3/EA2/EA581.htm", "175.png", "374", "0", "", "Class diagram0","{39EAF324-2D5B-437c-A866-BB59063AB941}");
+tocTab[tocTab.length] = new Array("0.3.2.1", "1", "«LOV Group» UML Lists of Values", "EARoot/EA3/EA2/EA1/EA587.htm", "4.png", "", "", "{BFBC0497-677E-43bc-8455-D74F7A0C3843}", "Package");

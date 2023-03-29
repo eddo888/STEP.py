@@ -1,0 +1,12 @@
+tocTab[tocTab.length] = new Array("0.3.7:1", "", "references", "EARoot/EA3/EA7/EA632.htm", "175.png", "382", "0", "", "Class diagram0","{5F3428A9-636B-4709-BC21-CD02015355B4}");
+tocTab[tocTab.length] = new Array("0.3.7:2", "", "«Reference Definition» UML Capability", "EARoot/EA3/EA7/EA635.htm", "5.png", "E4459", "0", "", "Class0","{ED20DF91-B82A-45b9-8EA4-FF62BC0FB477}");
+tocTab[tocTab.length] = new Array("0.3.7:3", "", "«Reference Definition» UML Dependency", "EARoot/EA3/EA7/EA636.htm", "5.png", "E4454", "0", "", "Class0","{1E4BBB09-FBE7-45c3-83E2-FF6779AE41F4}");
+tocTab[tocTab.length] = new Array("0.3.7:4", "", "«Reference Definition» UML Feature", "EARoot/EA3/EA7/EA637.htm", "5.png", "E4460", "0", "", "Class0","{E31B32C0-7F9D-4954-B7F1-444479A8711B}");
+tocTab[tocTab.length] = new Array("0.3.7:5", "", "«Reference Definition» UML Inherits", "EARoot/EA3/EA7/EA638.htm", "5.png", "E4457", "0", "", "Class0","{4BF53A75-4122-46a7-82EF-1E15B0F0CDDF}");
+tocTab[tocTab.length] = new Array("0.3.7:6", "", "«Reference Definition» UML Iniative", "EARoot/EA3/EA7/EA639.htm", "5.png", "E4458", "0", "", "Class0","{F1E57CE8-AE64-46b6-A679-FA7DA8197BB3}");
+tocTab[tocTab.length] = new Array("0.3.7:7", "", "«Reference Definition» UML Owns", "EARoot/EA3/EA7/EA640.htm", "5.png", "E4462", "0", "", "Class0","{34D92849-F308-459f-BA89-2D4B3A9C41C6}");
+tocTab[tocTab.length] = new Array("0.3.7:8", "", "«Reference Definition» UML Relationship", "EARoot/EA3/EA7/EA641.htm", "5.png", "E4456", "0", "", "Class0","{E9229383-BF52-4d62-A4E4-392383970C96}");
+tocTab[tocTab.length] = new Array("0.3.7:9", "", "«Reference Definition» UML Service", "EARoot/EA3/EA7/EA642.htm", "5.png", "E4461", "0", "", "Class0","{E60E3F7F-6B22-4e8a-9849-D005809D5056}");
+tocTab[tocTab.length] = new Array("0.3.7:10", "", "«Reference Definition» UML Uses", "EARoot/EA3/EA7/EA643.htm", "5.png", "E4455", "0", "", "Class0","{9549F52B-1467-4071-BD5C-C94B89C99EFE}");
+tocTab[tocTab.length] = new Array("0.3.7:11", "", "«Reference Definition» UML_Assets", "EARoot/EA3/EA7/EA644.htm", "5.png", "E4453", "0", "", "Class0","{68717151-DDEE-44b8-A3CF-68CECFFC6A64}");
+tocTab[tocTab.length] = new Array("0.3.7:12", "", "«Reference Definition» UML_Classification", "EARoot/EA3/EA7/EA645.htm", "5.png", "E4463", "0", "", "Class0","{8B86B95D-1C2F-49ab-9FD1-F96741ED8508}");

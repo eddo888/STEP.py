@@ -1,0 +1,3 @@
+tocTab[tocTab.length] = new Array("0.10:1", "", "Permissions", "EARoot/EA10/EA216.htm", "181.png", "118", "0", "", "Activity diagram0","{4108FA04-1C7F-4efc-ACEC-E2D5C68D44D9}");
+tocTab[tocTab.length] = new Array("0.10:2", "", "«Permission» Access Web UI", "EARoot/EA10/EA219.htm", "7.png", "E1622", "0", "", "UseCase0","{DEBEE2F9-6DFA-4912-8CEF-BF60E7DB91B5}");
+tocTab[tocTab.length] = new Array("0.10:3", "", "«Permission» Create New Product", "EARoot/EA10/EA220.htm", "7.png", "E1793", "0", "", "UseCase0","{F3858935-3286-4ecf-BF2F-4B650DC90BE8}");

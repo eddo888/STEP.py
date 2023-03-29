@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("0.2.2:1", "", "Movie LOVs", "EARoot/EA2/EA2/EA108.htm", "175.png", "1610", "0", "", "Logical diagram0","{216A4E73-3AD5-4111-B391-B6D07E6A14DF}");
+tocTab[tocTab.length] = new Array("0.2.2:2", "", "«LOV» Rating", "EARoot/EA2/EA2/EA111.htm", "247.png", "E5966", "0", "", "Enumeration0","{CFB77396-DB24-4b13-9E06-53270707CECB}");
+tocTab[tocTab.length] = new Array("0.2.2:3", "", "«LOV» Type", "EARoot/EA2/EA2/EA112.htm", "247.png", "E5965", "0", "", "Enumeration0","{597E556D-6407-4ccc-BE1D-3E238EC820E1}");
+tocTab[tocTab.length] = new Array("0.2.2:4", "", "«LOV» Yes/No", "EARoot/EA2/EA2/EA113.htm", "247.png", "E5964", "0", "", "Enumeration0","{D12956E5-CD47-49c6-B37E-C4E29D544C4A}");

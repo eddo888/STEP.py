@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("0.14.4:1", "", "assets", "EARoot/EA14/EA4/EA385.htm", "177.png", "129", "0", "", "Object diagram0","{31E3E7C2-2A70-495a-B17A-A5585A08CC09}");
+tocTab[tocTab.length] = new Array("0.14.4:2", "", "«asset instance» i 1: Product Digital Asset", "EARoot/EA14/EA4/EA388.htm", "25.png", "E1629", "0", "", "Object0","{69F6C55D-E450-4ba8-A50C-3A2DCAE731B2}");
+tocTab[tocTab.length] = new Array("0.14.4:3", "", "«asset instance» i 2: Product Digital Asset", "EARoot/EA14/EA4/EA389.htm", "25.png", "E1759", "0", "", "Object0","{DCFEF967-7547-4b75-B985-068C33FC1566}");
+tocTab[tocTab.length] = new Array("0.14.4:4", "", "«asset instance» mi 1: Product Digital Asset", "EARoot/EA14/EA4/EA390.htm", "25.png", "E1761", "0", "", "Object0","{A1E77898-EB76-49d4-A82E-A3A0C373E6E8}");

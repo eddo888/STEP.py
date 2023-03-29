@@ -1,0 +1,8 @@
+tocTab[tocTab.length] = new Array("0.8:1", "", "references", "EARoot/EA8/EA201.htm", "175.png", "1582", "0", "", "Class diagram0","{0A0D213A-850C-4017-A87A-DD20301A8E74}");
+tocTab[tocTab.length] = new Array("0.8:2", "", "«Reference Definition» Buy Side 2 Sell Side", "EARoot/EA8/EA204.htm", "5.png", "E1728", "0", "", "Class0","{1850E810-ADC5-49a9-B479-509258FF3791}");
+tocTab[tocTab.length] = new Array("0.8:3", "", "«Reference Definition» Primary Product Image", "EARoot/EA8/EA205.htm", "5.png", "E1749", "0", "", "Class0","{2FAB846F-E2EA-4896-8F8B-0AFFA1B21D77}");
+tocTab[tocTab.length] = new Array("0.8:4", "", "«Reference Definition» Product 2 Channel", "EARoot/EA8/EA206.htm", "5.png", "E1748", "0", "", "Class0","{9DC8368D-651B-4d0d-B760-D161DF016EE1}");
+tocTab[tocTab.length] = new Array("0.8:5", "", "«Reference Definition» Product 2 Supplier", "EARoot/EA8/EA207.htm", "5.png", "E1747", "0", "", "Class0","{D8548149-1871-4593-98DE-14847A9EE8D1}");
+tocTab[tocTab.length] = new Array("0.8:6", "", "«Reference Definition» Product Cross Reference", "EARoot/EA8/EA208.htm", "5.png", "E1726", "0", "", "Class0","{E7B43361-733F-4c67-A269-A6FEA9C1D66D}");
+tocTab[tocTab.length] = new Array("0.8:7", "", "«Reference Definition» Store Address", "EARoot/EA8/EA209.htm", "5.png", "E1740", "0", "", "Class0","{57B87774-9BC1-4652-8FCE-0E04745A6948}");
+tocTab[tocTab.length] = new Array("0.8:8", "", "«Reference Definition» Supplier Address", "EARoot/EA8/EA210.htm", "5.png", "E1736", "0", "", "Class0","{CB25C1A8-3BC5-48bd-B130-4E0ABCA4C8BC}");

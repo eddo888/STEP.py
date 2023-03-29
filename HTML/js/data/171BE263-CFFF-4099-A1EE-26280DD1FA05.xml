@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("0.11.3:1", "", "global", "EARoot/EA11/EA3/EA241.htm", "178.png", "1585", "0", "", "Component diagram0","{50E0003D-028C-45e5-A6C1-D24D7AAC2699}");
+tocTab[tocTab.length] = new Array("0.11.3:2", "", "«Rule» Automatic Classification", "EARoot/EA11/EA3/EA244.htm", "5.png", "E1877", "0", "", "Class0","{1C7DCA09-C5CD-4163-B7CC-6BDD98E8B57A}");
+tocTab[tocTab.length] = new Array("0.11.3:3", "", "«Rule» create payload", "EARoot/EA11/EA3/EA245.htm", "5.png", "E1880", "0", "", "Class0","{66D78EBE-1D8C-4806-A6EE-3145A4CB0073}");
+tocTab[tocTab.length] = new Array("0.11.3:4", "", "«Rule» GS1 Validate", "EARoot/EA11/EA3/EA246.htm", "5.png", "E1878", "0", "", "Class0","{8044C195-2DDE-42ba-B317-BD7136A65909}");

@@ -1,0 +1,7 @@
+tocTab[tocTab.length] = new Array("0.3:1", "", "Attributes", "EARoot/EA3/EA114.htm", "176.png", "1580", "0", "", "Package diagram0","{C6D05736-E19C-4b5a-ABAC-F6979931D48D}");
+tocTab[tocTab.length] = new Array("0.3.1", "1", "«Attribute Group» Common", "EARoot/EA3/EA1/EA125.htm", "4.png", "", "", "{4EC554C2-232B-4ddf-8414-B7B4B6A71C1F}", "Package");
+tocTab[tocTab.length] = new Array("0.3.2", "1", "«Attribute Group» Packaging", "EARoot/EA3/EA2/EA136.htm", "4.png", "", "", "{EAF33106-ED03-47cd-B0F9-EAC60A2D3843}", "Package");
+tocTab[tocTab.length] = new Array("0.3.3", "1", "«Attribute Group» Supplier", "EARoot/EA3/EA3/EA144.htm", "4.png", "", "", "{9AEF07CA-503A-44bc-90F8-41BE942A90E7}", "Package");
+tocTab[tocTab.length] = new Array("0.3.4", "1", "«Attribute Group» Location", "EARoot/EA3/EA4/EA150.htm", "4.png", "", "", "{B3712D69-8E26-45d6-B1F1-66102A4700BA}", "Package");
+tocTab[tocTab.length] = new Array("0.3.5", "1", "«Attribute Group» Pricing", "EARoot/EA3/EA5/EA156.htm", "4.png", "", "", "{40246A24-9764-43a3-AC69-99FBBA338FDB}", "Package");
+tocTab[tocTab.length] = new Array("0.3.6", "1", "«Attribute Group» Marketing", "EARoot/EA3/EA6/EA163.htm", "4.png", "", "", "{89CC6629-0736-449d-BF0F-A51981B66166}", "Package");

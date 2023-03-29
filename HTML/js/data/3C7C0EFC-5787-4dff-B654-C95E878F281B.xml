@@ -1,0 +1,3 @@
+tocTab[tocTab.length] = new Array("0.2.3.1:1", "", "All Attributes", "EARoot/EA2/EA3/EA1/EA479.htm", "178.png", "1598", "0", "", "Component diagram0","{991AA073-8733-405f-9F8B-A8C637639516}");
+tocTab[tocTab.length] = new Array("0.2.3.1.1", "1", "«Attribute Group» Heritage Classification", "EARoot/EA2/EA3/EA1/EA1/EA486.htm", "4.png", "", "", "{BC86BD6A-FD62-41ef-A170-5EF7A5D6395E}", "Package");
+tocTab[tocTab.length] = new Array("0.2.3.1.2", "1", "«Attribute Group» Heritage Object", "EARoot/EA2/EA3/EA1/EA2/EA489.htm", "4.png", "", "", "{10EE21FC-4112-4777-9DB6-D87DCFCB45B7}", "Package");

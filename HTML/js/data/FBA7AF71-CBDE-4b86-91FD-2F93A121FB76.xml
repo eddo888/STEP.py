@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.1.1:1", "", "UOM Currency", "EARoot/EA1/EA1/EA27.htm", "177.png", "210", "0", "", "Object diagram0","{B21D22FD-0290-462a-9316-3D7E3D8EBEE0}");
+tocTab[tocTab.length] = new Array("0.1.1:2", "", "«UOM instance» Australian Dollar", "EARoot/EA1/EA1/EA30.htm", "25.png", "E3644", "0", "", "Object0","{A1B07A95-B2A9-4635-8E37-E0F3229495CD}");
+tocTab[tocTab.length] = new Array("0.1.1:3", "", "«UOM instance» British Pound Sterling", "EARoot/EA1/EA1/EA31.htm", "25.png", "E3645", "0", "", "Object0","{C68E5D33-6619-445a-A763-71141DDDFECB}");
+tocTab[tocTab.length] = new Array("0.1.1:4", "", "«UOM» Currency", "EARoot/EA1/EA1/EA32.htm", "5.png", "E3643", "0", "", "Class0","{FBB76701-4356-4c66-A2B7-64019F4A151C}");
+tocTab[tocTab.length] = new Array("0.1.1:5", "", "«UOM instance» New Zealand Dollar", "EARoot/EA1/EA1/EA33.htm", "25.png", "E3646", "0", "", "Object0","{A326AF47-08F4-4d21-B3F9-C38FD1961781}");
+tocTab[tocTab.length] = new Array("0.1.1:6", "", "«UOM instance» United States Dollar", "EARoot/EA1/EA1/EA34.htm", "25.png", "E3647", "0", "", "Object0","{DC3C0DD9-5C88-4636-943E-63FAD2C7D738}");

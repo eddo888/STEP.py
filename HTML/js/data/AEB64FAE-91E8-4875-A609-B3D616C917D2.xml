@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("0.2.6:1", "", "Test", "EARoot/EA2/EA6/EA531.htm", "178.png", "1594", "0", "", "Component diagram0","{EC8F8951-9D20-47b4-B97C-6732F645BBED}");
+tocTab[tocTab.length] = new Array("0.2.6:2", "", "«Entity» CurrencyRoot", "EARoot/EA2/EA6/EA534.htm", "5.png", "E5936", "0", "", "Class0","{F4F08BF0-685A-4a95-9EC9-ADB28858F5E9}");
+tocTab[tocTab.length] = new Array("0.2.6:3", "", "«Entity» CurrencyType", "EARoot/EA2/EA6/EA535.htm", "5.png", "E5935", "0", "", "Class0","{C44D6E4D-9FFA-4453-80F4-3EB273F9CF0D}");
+tocTab[tocTab.length] = new Array("0.2.6:4", "", "«Entity» Entity user-type root", "EARoot/EA2/EA6/EA536.htm", "5.png", "E5933", "0", "", "Class0","{91B4B057-5AA4-4398-A7EF-FE6395DDDDE1}");

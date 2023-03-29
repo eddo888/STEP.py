@@ -1,0 +1,8 @@
+tocTab[tocTab.length] = new Array("0.4:1", "", "Products", "EARoot/EA4/EA165.htm", "175.png", "112", "0", "", "Logical diagram0","{17D66E5C-6EC8-4f8a-A722-422806869FDE}");
+tocTab[tocTab.length] = new Array("0.4:2", "", "«Product» Product UserType root", "EARoot/EA4/EA168.htm", "5.png", "E1608", "0", "", "Class0","{0F15AE4C-DCB8-47b6-A1E2-4BDA3DA81557}");
+tocTab[tocTab.length] = new Array("0.4:3", "", "«Product» Department", "EARoot/EA4/EA169.htm", "5.png", "E1631", "0", "", "Class0","{DE70A799-D6C4-4ea8-BAB4-77341ABD449F}");
+tocTab[tocTab.length] = new Array("0.4:4", "", "«Product» Category", "EARoot/EA4/EA170.htm", "5.png", "E1632", "0", "", "Class0","{2DEDF20D-25EB-4bff-826A-C24BB5CEA37D}");
+tocTab[tocTab.length] = new Array("0.4:5", "", "«Product» Group", "EARoot/EA4/EA171.htm", "5.png", "E1633", "0", "", "Class0","{68D7C99A-546E-4d3e-99E7-EC06AB492792}");
+tocTab[tocTab.length] = new Array("0.4:6", "", "«Product» Sub Group", "EARoot/EA4/EA172.htm", "5.png", "E1634", "0", "", "Class0","{BC19746A-030B-4b15-8F63-1C0F13D64545}");
+tocTab[tocTab.length] = new Array("0.4:7", "", "«Product» Product", "EARoot/EA4/EA173.htm", "5.png", "E1635", "0", "", "Class0","{1717E9E5-4FFC-4d65-9F3A-A17A6F1EBFB4}");
+tocTab[tocTab.length] = new Array("0.4:8", "", "«Product» Variant", "EARoot/EA4/EA174.htm", "5.png", "E1636", "0", "", "Class0","{5F5CEFC5-8735-4227-BBE4-953098FF187B}");

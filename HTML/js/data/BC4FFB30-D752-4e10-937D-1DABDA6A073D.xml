@@ -1,0 +1,5 @@
+tocTab[tocTab.length] = new Array("0.11:1", "", "Logic", "EARoot/EA11/EA221.htm", "175.png", "138", "0", "", "Logical diagram0","{3D86B19D-0910-4017-A18C-0F09AB2B5A7A}");
+tocTab[tocTab.length] = new Array("0.11:2", "", "packages", "EARoot/EA11/EA223.htm", "176.png", "139", "0", "", "Package diagram0","{CD7F8994-FC52-4f80-B57D-1A7F4A05E389}");
+tocTab[tocTab.length] = new Array("0.11.1", "1", "«Business Rules» Libraries", "EARoot/EA11/EA1/EA231.htm", "4.png", "", "", "{2975B9C9-E5F1-476b-BBF4-810596BFFEB8}", "Package");
+tocTab[tocTab.length] = new Array("0.11.2", "1", "«Business Rules» Conditions", "EARoot/EA11/EA2/EA239.htm", "4.png", "", "", "{789680BB-29D2-444f-8B00-EE00F4093430}", "Package");
+tocTab[tocTab.length] = new Array("0.11.3", "1", "«Business Rules» Rules", "EARoot/EA11/EA3/EA243.htm", "4.png", "", "", "{171BE263-CFFF-4099-A1EE-26280DD1FA05}", "Package");

@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.3.2:1", "", "Packaging Attributes", "EARoot/EA3/EA2/EA134.htm", "175.png", "124", "0", "", "Logical diagram0","{3A3698F0-709A-4180-8CC8-96ACC466DF64}");
+tocTab[tocTab.length] = new Array("0.3.2:2", "", "«Attribute» is for sale", "EARoot/EA3/EA2/EA137.htm", "5.png", "E1623", "0", "", "Class0","{A1849CED-5966-4361-9E3A-9CEE39E669A2}");
+tocTab[tocTab.length] = new Array("0.3.2:3", "", "«Attribute» Maximum Storage Temperature", "EARoot/EA3/EA2/EA138.htm", "5.png", "E2999", "0", "", "Class0","{4D169D17-1EC2-47c3-AD80-DA79FD4F8417}");
+tocTab[tocTab.length] = new Array("0.3.2:4", "", "«Attribute» Minimum Storage Temperature", "EARoot/EA3/EA2/EA139.htm", "5.png", "E2814", "0", "", "Class0","{B076B47E-0A18-45ed-9AD0-1812FB64A3DD}");
+tocTab[tocTab.length] = new Array("0.3.2:5", "", "«Attribute» Package Contents", "EARoot/EA3/EA2/EA140.htm", "5.png", "E1666", "0", "", "Class0","{CEA1D9B8-1338-4738-8BD0-2A4243F4824B}");
+tocTab[tocTab.length] = new Array("0.3.2:6", "", "«Attribute» Package Type", "EARoot/EA3/EA2/EA141.htm", "5.png", "E1664", "0", "", "Class0","{54917894-3762-401e-903F-FC55933C775A}");

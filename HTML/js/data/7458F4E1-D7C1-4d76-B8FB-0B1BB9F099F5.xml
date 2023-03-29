@@ -1,4 +1,0 @@
-tocTab[tocTab.length] = new Array("0.1.2:1", "", "UOM Electricity and Magnetism", "EARoot/EA1/EA2/EA35.htm", "177.png", "215", "0", "", "Object diagram0","{816F58CD-CCAF-4679-A5A4-9585B627D631}");
-tocTab[tocTab.length] = new Array("0.1.2:2", "", "«UOM instance» A", "EARoot/EA1/EA2/EA38.htm", "25.png", "E3699", "0", "", "Object0","{FFAEF51D-DCB6-43d6-B687-167FA7971BD5}");
-tocTab[tocTab.length] = new Array("0.1.2:3", "", "«UOM» Electricity and Magnetism", "EARoot/EA1/EA2/EA39.htm", "5.png", "E3697", "0", "", "Class0","{A36C0A41-3D4A-4e33-BB4F-32466A656375}");
-tocTab[tocTab.length] = new Array("0.1.2:4", "", "«UOM instance» V", "EARoot/EA1/EA2/EA40.htm", "25.png", "E3698", "0", "", "Object0","{4D80518E-AE1A-430a-9BCC-26E8A7B93FB5}");

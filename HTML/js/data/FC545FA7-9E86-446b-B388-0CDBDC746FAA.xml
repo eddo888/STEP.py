@@ -1,7 +1,0 @@
-tocTab[tocTab.length] = new Array("0.2.5:1", "", "Test", "EARoot/EA2/EA5/EA522.htm", "178.png", "1593", "0", "", "Component diagram0","{3D84CD4D-19AF-4dbe-887B-D6BB870978D1}");
-tocTab[tocTab.length] = new Array("0.2.5:2", "", "«Classification» Classification UserType root", "EARoot/EA2/EA5/EA525.htm", "5.png", "E5932", "0", "", "Class0","{24B3B17D-106F-4a83-8566-04794509AF5A}");
-tocTab[tocTab.length] = new Array("0.2.5:3", "", "«Classification» Heritage Classification", "EARoot/EA2/EA5/EA526.htm", "5.png", "E5938", "0", "", "Class0","{D2411A94-BAED-4f40-9C1D-F3D44AA245A6}");
-tocTab[tocTab.length] = new Array("0.2.5:4", "", "«Classification» Heritage Root", "EARoot/EA2/EA5/EA527.htm", "5.png", "E5949", "0", "", "Class0","{C13A67AB-9144-4562-BBF5-A17B4BA86AE9}");
-tocTab[tocTab.length] = new Array("0.2.5:5", "", "«Classification» Movie Classification", "EARoot/EA2/EA5/EA528.htm", "5.png", "E5946", "0", "", "Class0","{A72406CF-130A-4f49-8FC7-F6C625E16C24}");
-tocTab[tocTab.length] = new Array("0.2.5:6", "", "«Classification» Movie Classification Type", "EARoot/EA2/EA5/EA529.htm", "5.png", "E5951", "0", "", "Class0","{DD8DB9A1-562C-4ea4-A7DB-40AFC846974D}");
-tocTab[tocTab.length] = new Array("0.2.5:7", "", "«Classification» Movie Classifications", "EARoot/EA2/EA5/EA530.htm", "5.png", "E5950", "0", "", "Class0","{7FF2BD37-CA15-4884-87DD-0962BCB5E361}");

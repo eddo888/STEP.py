@@ -1,4 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3.4:1", "", "Location", "EARoot/EA3/EA4/EA148.htm", "175.png", "132", "0", "", "Logical diagram0","{795A5516-370B-4911-9B30-84AA84435964}");
-tocTab[tocTab.length] = new Array("0.3.4:2", "", "«Attribute» Country Code", "EARoot/EA3/EA4/EA151.htm", "5.png", "E1769", "0", "", "Class0","{9B638566-4DAA-4d5d-BA6E-8C1611147DB5}");
-tocTab[tocTab.length] = new Array("0.3.4:3", "", "«Attribute» Full Address", "EARoot/EA3/EA4/EA152.htm", "5.png", "E1738", "0", "", "Class0","{EF50DA9A-BA7F-46f8-9F88-928D22B64576}");
-tocTab[tocTab.length] = new Array("0.3.4:4", "", "«Attribute» Post Code", "EARoot/EA3/EA4/EA153.htm", "5.png", "E1768", "0", "", "Class0","{902135E1-11A4-440c-9C9C-A0583D4B885F}");

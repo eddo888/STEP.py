@@ -1,8 +1,0 @@
-tocTab[tocTab.length] = new Array("0.5:1", "", "Classifications", "EARoot/EA5/EA175.htm", "175.png", "113", "0", "", "Logical diagram0","{A653E905-A465-46b5-806C-81D47992ABD1}");
-tocTab[tocTab.length] = new Array("0.5:2", "", "«Classification» Classification UserType root", "EARoot/EA5/EA178.htm", "5.png", "E1610", "0", "", "Class0","{6BD76F76-9C41-4375-8D40-50CC0B3CB6C4}");
-tocTab[tocTab.length] = new Array("0.5:3", "", "«Classification» Channels", "EARoot/EA5/EA179.htm", "5.png", "E1641", "0", "", "Class0","{71BAEECA-8DDC-43c5-9E9C-D42DF8BF2B0D}");
-tocTab[tocTab.length] = new Array("0.5:4", "", "«Classification» Channel", "EARoot/EA5/EA180.htm", "5.png", "E1642", "0", "", "Class0","{1DD40E90-A143-48bc-8486-4540764E51F2}");
-tocTab[tocTab.length] = new Array("0.5:5", "", "«Classification» Suppliers", "EARoot/EA5/EA181.htm", "5.png", "E1637", "0", "", "Class0","{1A81F448-F90E-4684-8DAC-96ED2A7BAF1A}");
-tocTab[tocTab.length] = new Array("0.5:6", "", "«Classification» Supplier", "EARoot/EA5/EA182.htm", "5.png", "E1638", "0", "", "Class0","{69338A9C-D57A-4ad9-B6A3-BDC419216C64}");
-tocTab[tocTab.length] = new Array("0.5:7", "", "«Classification» Supplier Assets", "EARoot/EA5/EA183.htm", "5.png", "E1640", "0", "", "Class0","{FF695A97-3082-4d71-96C2-EEEC2974F0E7}");
-tocTab[tocTab.length] = new Array("0.5:8", "", "«Classification» Supplier Products", "EARoot/EA5/EA184.htm", "5.png", "E1639", "0", "", "Class0","{B0A17F3D-BB07-4945-975A-C156D06E6196}");

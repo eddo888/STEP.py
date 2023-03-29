@@ -1,5 +1,0 @@
-tocTab[tocTab.length] = new Array("0.2.3.2:1", "", "All Attributes", "EARoot/EA2/EA3/EA2/EA490.htm", "178.png", "1599", "0", "", "Component diagram0","{7D09DE2A-63C0-47b5-BC33-3116BA17A279}");
-tocTab[tocTab.length] = new Array("0.2.3.2.1", "1", "«Attribute Group» Movie Actor", "EARoot/EA2/EA3/EA2/EA1/EA499.htm", "4.png", "", "", "{02DA8CB8-F551-4214-AB7C-9422D596F4AD}", "Package");
-tocTab[tocTab.length] = new Array("0.2.3.2.2", "1", "«Attribute Group» Movie Character", "EARoot/EA2/EA3/EA2/EA2/EA502.htm", "4.png", "", "", "{AD7B0822-DB9A-47b4-B987-611AEDF8D813}", "Package");
-tocTab[tocTab.length] = new Array("0.2.3.2.3", "1", "«Attribute Group» Movie Show", "EARoot/EA2/EA3/EA2/EA3/EA505.htm", "4.png", "", "", "{6CAD3489-F5B4-4896-B51C-E628C5638232}", "Package");
-tocTab[tocTab.length] = new Array("0.2.3.2.4", "1", "«Attribute Group» Movie Writer", "EARoot/EA2/EA3/EA2/EA4/EA508.htm", "4.png", "", "", "{73622577-A646-4530-895E-7F4783DDA56E}", "Package");

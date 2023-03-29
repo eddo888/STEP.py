@@ -1,9 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3:1", "", "UML", "EARoot/EA3/EA552.htm", "176.png", "372", "0", "", "Package diagram0","{45CA8828-6427-4f76-9C0B-ED6B85F83767}");
-tocTab[tocTab.length] = new Array("0.3.1", "1", "«Attribute Group» All Attributes", "EARoot/EA3/EA1/EA565.htm", "4.png", "", "", "{65888B73-1DDA-4b32-B9CF-F6FA25FBE66A}", "Package");
-tocTab[tocTab.length] = new Array("0.3.2", "1", "«LOV Group» Lists of Values / LOVs", "EARoot/EA3/EA2/EA583.htm", "4.png", "", "", "{9B22F78C-0EC3-43de-87CB-989FE3AA144C}", "Package");
-tocTab[tocTab.length] = new Array("0.3.3", "1", "«Product Types» setup", "EARoot/EA3/EA3/EA594.htm", "4.png", "", "", "{C9BEED03-80FC-481f-9C91-7A4D779170DA}", "Package");
-tocTab[tocTab.length] = new Array("0.3.4", "1", "«Classification Types» setup", "EARoot/EA3/EA4/EA623.htm", "4.png", "", "", "{43976537-E1ED-433c-85F1-35767B6B0965}", "Package");
-tocTab[tocTab.length] = new Array("0.3.5", "1", "«Entity Types» setup", "EARoot/EA3/EA5/EA628.htm", "4.png", "", "", "{A429282D-57A0-495b-A57A-3895A9A63850}", "Package");
-tocTab[tocTab.length] = new Array("0.3.6", "1", "«Asset Types» setup", "EARoot/EA3/EA6/EA631.htm", "4.png", "", "", "{1081254D-A0CB-4c35-B398-00502FC08886}", "Package");
-tocTab[tocTab.length] = new Array("0.3.7", "1", "«Reference Types» setup", "EARoot/EA3/EA7/EA634.htm", "4.png", "", "", "{936D1F5B-8251-4383-B941-DFE8D921DE08}", "Package");
-tocTab[tocTab.length] = new Array("0.3.8", "1", "«UOM Types» Units of Measure", "EARoot/EA3/EA8/EA648.htm", "4.png", "", "", "{D38A2812-6575-4a96-8C35-0B0EA2B652ED}", "Package");

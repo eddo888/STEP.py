@@ -1,7 +1,0 @@
-tocTab[tocTab.length] = new Array("0.1:1", "", "Units of Measure", "EARoot/EA1/EA18.htm", "175.png", "209", "0", "", "Class diagram0","{0138557C-2981-4084-A2D9-687C82EF55AA}");
-tocTab[tocTab.length] = new Array("0.1.1", "1", "«Instances» UOM Currency", "EARoot/EA1/EA1/EA29.htm", "4.png", "", "", "{FBA7AF71-CBDE-4b86-91FD-2F93A121FB76}", "Package");
-tocTab[tocTab.length] = new Array("0.1.2", "1", "«Instances» UOM Electricity and Magnetism", "EARoot/EA1/EA2/EA37.htm", "4.png", "", "", "{7458F4E1-D7C1-4d76-B8FB-0B1BB9F099F5}", "Package");
-tocTab[tocTab.length] = new Array("0.1.3", "1", "«Instances» UOM Length", "EARoot/EA1/EA3/EA43.htm", "4.png", "", "", "{79A70ACE-9F84-47a4-9A28-DEE6F80C608D}", "Package");
-tocTab[tocTab.length] = new Array("0.1.4", "1", "«Instances» UOM Mass", "EARoot/EA1/EA4/EA58.htm", "4.png", "", "", "{68230014-B738-4593-BF00-045FB00CAD64}", "Package");
-tocTab[tocTab.length] = new Array("0.1.5", "1", "«Instances» UOM Temperature", "EARoot/EA1/EA5/EA77.htm", "4.png", "", "", "{AEF0C8A8-68FE-4e9f-92B0-0A28ACDE9206}", "Package");
-tocTab[tocTab.length] = new Array("0.1.6", "1", "«Instances» UOM Time", "EARoot/EA1/EA6/EA85.htm", "4.png", "", "", "{8306370F-99BE-4c64-8904-E1B42D1ABD61}", "Package");

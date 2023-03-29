@@ -1,5 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3.5:1", "", "Pricing", "EARoot/EA3/EA5/EA154.htm", "175.png", "134", "0", "", "Logical diagram0","{D124761F-50F4-4663-906C-206020B42C90}");
-tocTab[tocTab.length] = new Array("0.3.5:2", "", "«Attribute» Cost Price", "EARoot/EA3/EA5/EA157.htm", "5.png", "E1734", "0", "", "Class0","{FF8F6AE5-565C-47b0-AF60-F14BC65C603B}");
-tocTab[tocTab.length] = new Array("0.3.5:3", "", "«Attribute» End Date", "EARoot/EA3/EA5/EA158.htm", "5.png", "E1771", "0", "", "Class0","{3755122F-3D0A-4927-AEF6-E00B16628ACF}");
-tocTab[tocTab.length] = new Array("0.3.5:4", "", "«Attribute» Sell Price", "EARoot/EA3/EA5/EA159.htm", "5.png", "E1733", "0", "", "Class0","{A5676D8C-6EFD-4b51-BCF5-1BCBA5D427AE}");
-tocTab[tocTab.length] = new Array("0.3.5:5", "", "«Attribute» Start Date", "EARoot/EA3/EA5/EA160.htm", "5.png", "E1770", "0", "", "Class0","{9F4EF1EE-D36D-4ad7-A49C-5A389A176EAB}");

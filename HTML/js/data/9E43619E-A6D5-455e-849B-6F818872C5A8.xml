@@ -1,3 +1,0 @@
-tocTab[tocTab.length] = new Array("0.9:1", "", "Users & Groups", "EARoot/EA9/EA211.htm", "181.png", "117", "0", "", "Activity diagram0","{6FA807C1-EAD7-4523-8807-EE7845176646}");
-tocTab[tocTab.length] = new Array("0.9:2", "", "«Role» Stibo Users", "EARoot/EA9/EA214.htm", "6.png", "E1618", "0", "", "Actor0","{21E01F43-120F-4546-9E9D-0FA476599D7A}");
-tocTab[tocTab.length] = new Array("0.9:3", "", "«Role» Supplier", "EARoot/EA9/EA215.htm", "6.png", "E1792", "0", "", "Actor0","{3E47B9C8-0734-4939-9664-43DF95F97058}");

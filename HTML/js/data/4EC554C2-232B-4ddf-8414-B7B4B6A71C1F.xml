@@ -1,9 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3.1:1", "", "Common Attributes", "EARoot/EA3/EA1/EA123.htm", "175.png", "125", "0", "", "Logical diagram0","{5958E125-97DE-4e94-AE10-CFFE470F3D70}");
-tocTab[tocTab.length] = new Array("0.3.1:2", "", "«Attribute» Department ID", "EARoot/EA3/EA1/EA126.htm", "5.png", "E1686", "0", "", "Class0","{0FD7CB5C-D150-4078-9C35-416C184B12A3}");
-tocTab[tocTab.length] = new Array("0.3.1:3", "", "«Attribute» Category ID", "EARoot/EA3/EA1/EA127.htm", "5.png", "E1687", "0", "", "Class0","{056772ED-5F17-463d-A4D9-652FCF1750CB}");
-tocTab[tocTab.length] = new Array("0.3.1:4", "", "«Attribute» Group ID", "EARoot/EA3/EA1/EA128.htm", "5.png", "E1688", "0", "", "Class0","{44DC6F05-AC82-491b-8557-3FAC1154CCCA}");
-tocTab[tocTab.length] = new Array("0.3.1:5", "", "«Attribute» Sub Group ID", "EARoot/EA3/EA1/EA129.htm", "5.png", "E1689", "0", "", "Class0","{B47F8E5C-C9C7-4615-BAE9-3073A7FEB333}");
-tocTab[tocTab.length] = new Array("0.3.1:6", "", "«Attribute» barcode", "EARoot/EA3/EA1/EA130.htm", "5.png", "E1676", "0", "", "Class0","{07D916C1-73F3-4d68-A128-A35C7F19A3DA}");
-tocTab[tocTab.length] = new Array("0.3.1:7", "", "«Attribute» Diamater", "EARoot/EA3/EA1/EA131.htm", "5.png", "E1669", "0", "", "Class0","{C116B75D-7351-419e-8170-525B24D85536}");
-tocTab[tocTab.length] = new Array("0.3.1:8", "", "«Attribute» Style Type", "EARoot/EA3/EA1/EA132.htm", "5.png", "E1695", "0", "", "Class0","{71EED256-FA3A-4155-B4C3-D8A9D9143FD1}");
-tocTab[tocTab.length] = new Array("0.3.1:9", "", "«Attribute» Voltage", "EARoot/EA3/EA1/EA133.htm", "5.png", "E1697", "0", "", "Class0","{BD4D0B00-3488-4563-957F-556C6769E472}");

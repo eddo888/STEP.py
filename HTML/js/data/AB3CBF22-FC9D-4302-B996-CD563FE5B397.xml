@@ -1,8 +1,0 @@
-tocTab[tocTab.length] = new Array("0.2.8:1", "", "Test", "EARoot/EA2/EA8/EA542.htm", "178.png", "1596", "0", "", "Component diagram0","{5B9FB9BA-510F-452d-8CBB-F72A63144722}");
-tocTab[tocTab.length] = new Array("0.2.8:2", "", "«Reference Definition» Heritage_Site_2_Classification", "EARoot/EA2/EA8/EA545.htm", "5.png", "E5958", "0", "", "Class0","{DD3F408E-3539-436d-B4F8-5517830BEB3C}");
-tocTab[tocTab.length] = new Array("0.2.8:3", "", "«Reference Definition» Heritige_Site2Site", "EARoot/EA2/EA8/EA546.htm", "5.png", "E5956", "0", "", "Class0","{6CF3E371-A5E7-4ce9-9702-7C26C21F2E61}");
-tocTab[tocTab.length] = new Array("0.2.8:4", "", "«Reference Definition» Movie_2_Actor", "EARoot/EA2/EA8/EA547.htm", "5.png", "E5955", "0", "", "Class0","{B9F90932-BF9E-46b1-AE93-571C14A4FB3C}");
-tocTab[tocTab.length] = new Array("0.2.8:5", "", "«Reference Definition» Movie_2_Classification", "EARoot/EA2/EA8/EA548.htm", "5.png", "E5959", "0", "", "Class0","{3A5E0B82-C121-43c0-AE43-D0EACA95EA19}");
-tocTab[tocTab.length] = new Array("0.2.8:6", "", "«Reference Definition» Movie_2_Site", "EARoot/EA2/EA8/EA549.htm", "5.png", "E5957", "0", "", "Class0","{7B69E182-7D01-4081-9726-5D4005BC8FC7}");
-tocTab[tocTab.length] = new Array("0.2.8:7", "", "«Reference Definition» Movie_2_Writer", "EARoot/EA2/EA8/EA550.htm", "5.png", "E5954", "0", "", "Class0","{4FF53C7E-F244-4cea-BFB0-AD1DD0AD9FC9}");
-tocTab[tocTab.length] = new Array("0.2.8:8", "", "«Reference Definition» Primary Product Image", "EARoot/EA2/EA8/EA551.htm", "5.png", "E5953", "0", "", "Class0","{DD4A0C7A-EF00-42d0-9576-6DA5AEA82B3D}");

@@ -1,4 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3.3:1", "", "Supplier", "EARoot/EA3/EA3/EA142.htm", "175.png", "127", "0", "", "Logical diagram0","{0806EDE9-9186-4b59-A410-7F3B9D6CF488}");
-tocTab[tocTab.length] = new Array("0.3.3:2", "", "«Attribute» Repack Quotient", "EARoot/EA3/EA3/EA145.htm", "5.png", "E1730", "0", "", "Class0","{CF156D61-922D-4433-A5F9-1E2383BEC325}");
-tocTab[tocTab.length] = new Array("0.3.3:3", "", "«Attribute» Supplier Description", "EARoot/EA3/EA3/EA146.htm", "5.png", "E1675", "0", "", "Class0","{798F8262-E8CE-4ac8-8C2E-B2F1AFA70E87}");
-tocTab[tocTab.length] = new Array("0.3.3:4", "", "«Attribute» Supplier Priority", "EARoot/EA3/EA3/EA147.htm", "5.png", "E1729", "0", "", "Class0","{BD595D84-575E-4713-8C78-7ECC5336A53D}");

@@ -1,6 +1,0 @@
-tocTab[tocTab.length] = new Array("0.11.1:1", "", "global", "EARoot/EA11/EA1/EA229.htm", "178.png", "1583", "0", "", "Component diagram0","{9B3E2B0F-6FB4-4d8a-B3F4-8E1D2BBC336C}");
-tocTab[tocTab.length] = new Array("0.11.1:2", "", "«Library» fromXML", "EARoot/EA11/EA1/EA232.htm", "5.png", "E1875", "0", "", "Class0","{6C54B1FE-388A-4be0-95FA-19533EC885CA}");
-tocTab[tocTab.length] = new Array("0.11.1:3", "", "«Library» md5js", "EARoot/EA11/EA1/EA233.htm", "5.png", "E1871", "0", "", "Class0","{DA1262AB-DA32-4287-96C0-A0CB530CE88C}");
-tocTab[tocTab.length] = new Array("0.11.1:4", "", "«Library» StringJS", "EARoot/EA11/EA1/EA234.htm", "5.png", "E1873", "0", "", "Class0","{35F2327F-AC38-4633-9472-575433F95C43}");
-tocTab[tocTab.length] = new Array("0.11.1:5", "", "«Library» toXML", "EARoot/EA11/EA1/EA235.htm", "5.png", "E1874", "0", "", "Class0","{E42D9758-09E9-4e35-B06F-976623797FD5}");
-tocTab[tocTab.length] = new Array("0.11.1:6", "", "«Library» UnderscoreJS", "EARoot/EA11/EA1/EA236.htm", "5.png", "E1872", "0", "", "Class0","{17578F71-5255-4599-B444-3F17014E946A}");

@@ -1,5 +1,0 @@
-tocTab[tocTab.length] = new Array("0.3.2.1:1", "", "LOVs", "EARoot/EA3/EA2/EA1/EA585.htm", "175.png", "375", "0", "", "Class diagram0","{5347DC64-80C6-42fb-82DF-EECAB4B07EDE}");
-tocTab[tocTab.length] = new Array("0.3.2.1:2", "", "«LOV» Acceptance", "EARoot/EA3/EA2/EA1/EA588.htm", "247.png", "E4408", "0", "", "Enumeration0","{AE35364E-8851-4f4a-81EF-1FF395041111}");
-tocTab[tocTab.length] = new Array("0.3.2.1:3", "", "«LOV» MoSCoW", "EARoot/EA3/EA2/EA1/EA589.htm", "247.png", "E4406", "0", "", "Enumeration0","{66EF1937-CF6A-425f-847E-ABB73B1EEF85}");
-tocTab[tocTab.length] = new Array("0.3.2.1:4", "", "«LOV» Priority", "EARoot/EA3/EA2/EA1/EA590.htm", "247.png", "E4405", "0", "", "Enumeration0","{A1D34773-25BC-4a8d-B09B-72542031C098}");
-tocTab[tocTab.length] = new Array("0.3.2.1:5", "", "«LOV» Yes/No", "EARoot/EA3/EA2/EA1/EA591.htm", "247.png", "E4407", "0", "", "Enumeration0","{8BD68071-F6B0-44ce-9F4C-C3CB1B800386}");

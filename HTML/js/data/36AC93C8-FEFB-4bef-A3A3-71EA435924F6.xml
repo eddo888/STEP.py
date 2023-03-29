@@ -1,3 +1,0 @@
-tocTab[tocTab.length] = new Array("0.2:1", "", "LOVs", "EARoot/EA2/EA97.htm", "175.png", "120", "0", "", "Logical diagram0","{42F82906-668F-4581-9028-CEC643A6E076}");
-tocTab[tocTab.length] = new Array("0.2.1", "1", "«LOV Group» Common", "EARoot/EA2/EA1/EA104.htm", "4.png", "", "", "{FDDC2247-437B-43ac-927D-2B2ECF3AE0B3}", "Package");
-tocTab[tocTab.length] = new Array("0.2.2", "1", "«LOV Group» Movie LOVs", "EARoot/EA2/EA2/EA110.htm", "4.png", "", "", "{652B3F56-A702-41de-BB58-93456499D32D}", "Package");

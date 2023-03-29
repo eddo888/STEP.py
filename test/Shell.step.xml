@@ -1,194 +1,63 @@
 <STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="3/28/2023 7:06:03 PM">
-	<UnitList>
-		<UnitFamily ID="Currency" Selected="true" Referenced="true">
-			<Name>Currency</Name>
-			<Unit ID="iso4217.unit.AUD">
-				<Name encodeURI="Australian%20Dollar"/>
-				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
-			</Unit>
-			<Unit ID="iso4217.unit.GBP">
-				<Name encodeURI="British%20Pound%20Sterling"/>
-				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
-			</Unit>
-			<Unit ID="iso4217.unit.NZD">
-				<Name encodeURI="New%20Zealand%20Dollar"/>
-				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
-			</Unit>
-			<Unit ID="iso4217.unit.USD">
-				<Name encodeURI="United%20States%20Dollar"/>
-				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="" Offset=""/>
-			</Unit>
-		</UnitFamily>
-		<UnitFamily ID="Electricity and Magnetism" Selected="true" Referenced="true">
-			<Name>Electricity and Magnetism</Name>
-			<Unit ID="unece.unit.VLT">
-				<Name encodeURI="V"/>
-			</Unit>
-			<Unit ID="unece.unit.AMP">
-				<Name encodeURI="A"/>
-			</Unit>
-		</UnitFamily>
-		<UnitFamily ID="Length" Selected="true" Referenced="true">
-			<Name>Length</Name>
-			<Unit ID="unece.unit.SMI">
-				<Name encodeURI="mile"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="1609.344" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.A11">
-				<Name encodeURI="%C3%85"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0000000001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.INH">
-				<Name encodeURI="in"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0254" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.4H">
-				<Name encodeURI="%C2%B5m"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.MTR">
-				<Name encodeURI="m"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="" Offset=""/>
-			</Unit>
-			<Unit ID="unece.unit.FOT">
-				<Name encodeURI="ft"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".3048" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.C45">
-				<Name encodeURI="nm"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000000001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.CMT">
-				<Name encodeURI="cm"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="0.01" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.KTM">
-				<Name encodeURI="km"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="1000" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.YRD">
-				<Name encodeURI="yd"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".9144" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.MMT">
-				<Name encodeURI="mm"/>
-				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
-			</Unit>
-		</UnitFamily>
-		<UnitFamily ID="Mass" Selected="true" Referenced="true">
-			<Name>Mass</Name>
-			<Unit ID="GPerCm3">
-				<Name encodeURI="g/cm3"/>
-			</Unit>
-			<Unit ID="unece.unit.MGM">
-				<Name encodeURI="mg"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor=".001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.KGM">
-				<Name encodeURI="kg"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000" Offset="0"/>
-			</Unit>
-			<Unit ID="ST">
-				<Name encodeURI="ST"/>
-			</Unit>
-			<Unit ID="GPerMol">
-				<Name encodeURI="g/mol"/>
-			</Unit>
-			<Unit ID="unece.unit.TNE">
-				<Name encodeURI="t"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000000" Offset="0"/>
-			</Unit>
-			<Unit ID="uence.unit.L">
-				<Name encodeURI="L"/>
-			</Unit>
-			<Unit ID="unece.unit.MC">
-				<Name encodeURI="%C2%B5g"/>
-			</Unit>
-			<Unit ID="KG">
-				<Name encodeURI="KG"/>
-			</Unit>
-			<Unit ID="HL">
-				<Name encodeURI="HL"/>
-			</Unit>
-			<Unit ID="CE">
-				<Name encodeURI="CE"/>
-			</Unit>
-			<Unit ID="unece.unit.ONZ">
-				<Name encodeURI="oz"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="28.34952" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.ML">
-				<Name encodeURI="ml"/>
-			</Unit>
-			<Unit ID="unece.unit.LBR">
-				<Name encodeURI="lb"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="453.59237" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.GRM">
-				<Name encodeURI="g"/>
-				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="" Offset=""/>
-			</Unit>
-		</UnitFamily>
-		<UnitFamily ID="Temperature" Selected="true" Referenced="true">
-			<Name>Temperature</Name>
-			<Unit ID="unece.unit.CEL">
-				<Name encodeURI="%C2%B0C"/>
-				<UnitConversion BaseUnitID="unece.unit.KEL" Factor="1" Offset="273.15"/>
-			</Unit>
-			<Unit ID="unece.unit.A48">
-				<Name encodeURI="%C2%B0R"/>
-				<UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.KEL">
-				<Name encodeURI="K"/>
-				<UnitConversion BaseUnitID="unece.unit.KEL" Factor="" Offset=""/>
-			</Unit>
-			<Unit ID="unece.unit.FAH">
-				<Name encodeURI="%C2%B0F"/>
-				<UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
-			</Unit>
-		</UnitFamily>
-		<UnitFamily ID="Time" Selected="true" Referenced="true">
-			<Name>Time</Name>
-			<Unit ID="unece.unit.DAY">
-				<Name encodeURI="day(s)"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="86400" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.C26">
-				<Name encodeURI="millisecond"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor=".001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.WEE">
-				<Name encodeURI="week"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="604800" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.C47">
-				<Name encodeURI="nanosecond"/>
-			</Unit>
-			<Unit ID="unece.unit.MIN">
-				<Name encodeURI="minute"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="60" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.MON">
-				<Name encodeURI="month"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="2629800" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.SEC">
-				<Name encodeURI="second"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="" Offset=""/>
-			</Unit>
-			<Unit ID="unece.unit.HUR">
-				<Name encodeURI="hour"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="3600" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.B98">
-				<Name encodeURI="microsecond"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor=".000001" Offset="0"/>
-			</Unit>
-			<Unit ID="unece.unit.ANN">
-				<Name encodeURI="year"/>
-				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="31557600" Offset="0"/>
-			</Unit>
-		</UnitFamily>
-	</UnitList>
+	<ListOfValuesGroupList>
+		<ListOfValuesGroup ID="List Of Values group root" Selected="true" Referenced="true">
+			<Name>Lists of Values / LOVs</Name>
+			<ListOfValuesGroup ID="Common_LOVs" Selected="true" Referenced="true">
+				<Name>Common</Name>
+			</ListOfValuesGroup>
+			<ListOfValuesGroup ID="Movie_LOVs" Selected="true" Referenced="true">
+				<Name>Movie LOVs</Name>
+			</ListOfValuesGroup>
+		</ListOfValuesGroup>
+	</ListOfValuesGroupList>
+	<ListsOfValues>
+		<ListOfValue ID="PackageType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
+			<Name>Package Type LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Each</Value>
+			<Value>Box</Value>
+			<Value>Case</Value>
+			<Value>Pallett</Value>
+		</ListOfValue>
+		<ListOfValue ID="StyleType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
+			<Name>Style Type LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Tapered</Value>
+			<Value>Straight</Value>
+		</ListOfValue>
+		<ListOfValue ID="YesNo_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
+			<Name>Yes/No LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Yes</Value>
+			<Value>No</Value>
+		</ListOfValue>
+		<ListOfValue ID="Movie_Rating" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="0" ParentID="Movie_LOVs">
+			<Name>Rating</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>G</Value>
+			<Value>GP</Value>
+			<Value>N/A</Value>
+			<Value>NOT RATED</Value>
+			<Value>PG</Value>
+			<Value>PG-13</Value>
+			<Value>R</Value>
+			<Value>TV-14</Value>
+			<Value>TV-PG</Value>
+			<Value>UNRATED</Value>
+		</ListOfValue>
+		<ListOfValue ID="Movie_Type" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="0" ParentID="Movie_LOVs">
+			<Name>Type</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>episode</Value>
+			<Value>game</Value>
+			<Value>movie</Value>
+			<Value>series</Value>
+		</ListOfValue>
+		<ListOfValue ID="Heritage_Yes/No" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="-1" ParentID="Movie_LOVs">
+			<Name>Yes/No</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value ID="N">No</Value>
+			<Value ID="Y">Yes</Value>
+		</ListOfValue>
+	</ListsOfValues>
 </STEP-ProductInformation>

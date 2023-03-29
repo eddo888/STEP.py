@@ -3,7 +3,7 @@
 !INC User Scripts.Library
 //!INC Stibo STEP.Library
 
-function readUnitsOfMeasures(package, doc, cache) {
+function writeUnitsOfMeasures(package, doc, cache) {
 	/*
         <UnitFamily ID="Currency" Selected="true" Referenced="true">
             <Name>Currency</Name>
@@ -167,7 +167,7 @@ function digListOfValuesGroups(package, parent, cache) {
 	}
 }
 
-function readListOfValuesGroups(package, doc, cache) {
+function writeListOfValuesGroups(package, doc, cache) {
 	var package as EA.Package;
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
@@ -176,7 +176,7 @@ function readListOfValuesGroups(package, doc, cache) {
 	}
 }
 
-function readListOfValues(package, doc, cache) {
+function writeListOfValues(package, doc, cache) {
 	/*
         <ListOfValue 
 			ID="Heritage_Yes/No" 
@@ -270,7 +270,7 @@ function digAttributeGroups(package, diagram, parent, cache) {
 	}
 }
 
-function readAttributeGroups(package, doc, cache) {
+function writeAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	var _diagram as EA.Diagram;
@@ -282,10 +282,10 @@ function readAttributeGroups(package, doc, cache) {
 		digAttributeGroups(attributes, _diagram, groups, cache);
 	}	
 
-    readAttributes(attributes, package, doc, cache);
+    writeAttributes(attributes, package, doc, cache);
 }
 	
-function readAttributes(attributes, package, doc, cache) {
+function writeAttributes(attributes, package, doc, cache) {
 	/*
 		<Attribute 
 			ID="Movie_Name" 
@@ -368,7 +368,7 @@ function readAttributes(attributes, package, doc, cache) {
 	}
 }
 
-function readUserTypes(package, doc, cache) {
+function writeUserTypes(package, doc, cache) {
 	var userTypes as EA.Package;
 	/*
         <UserType 
@@ -472,7 +472,7 @@ function readUserTypes(package, doc, cache) {
 	
 }
 
-function readUserTypeLinks(package, doc, cache) {
+function writeUserTypeLinks(package, doc, cache) {
 	/*
 		<Attribute ID="Movie_Name"  ...
 			<UserTypeLink UserTypeID="Movie_Actor"/>
@@ -503,7 +503,7 @@ function readUserTypeLinks(package, doc, cache) {
 	}
 }
 	
-function readReferences(package, doc, cache) {	
+function writeReferences(package, doc, cache) {	
 	/*
         <ProductCrossReferenceType 
 			ID="Movie_2_Writer" 
@@ -586,75 +586,43 @@ function readReferences(package, doc, cache) {
 	// link attributes to references, valid attribute
 }
 
-function readKeys(package, doc, cache) {}
-function readProducts(package, doc, cache) {}
-function readClassifications(package, doc, cache) {}
-function readEntities(package, doc, cache) {}
-function readAssets(package, doc, cache) {}
-
-function importStepXML(diagram, cache) {
-	var doc; // as MSXML2.DOMDocument;
-	var node; // as MSXML2.DOMNode;
-	var fileName;
-
-	var package as EA.Package;
-	package = Repository.GetPackageByID(diagram.PackageID);
-	fillCache(cache, package);
-	//showCache(cache, package);
-	
-	fileName = getFileName(package, 0); // 0==open, 1==save
-
-	doc = XMLReadXMLFromFile(fileName);
-	if (!doc) {
-		Session.Output('failed to load '+fileName);
-		return;
-	}
-	doc.setProperty('SelectionNamespaces','xmlns:s="'+namespace+'"');
-	
-	node = doc.selectSingleNode('/s:STEP-ProductInformation');
-	if (node) {
-		//Session.Output('nodeName="'+node.nodeName+'"');
-		
-		var name = 'ExportTime';
-		var value = XMLGetNamedAttribute(node, 'ExportTime');
-		if (value) {
-			Session.Output('name="'+name+'" value="'+value+'"');
-		}
-	}
-		
-	readUnitsOfMeasures(package, doc, cache);
-	readListOfValuesGroups(package, doc, cache);
-	readListOfValues(package, doc, cache);
-	readAttributeGroups(package, doc, cache);
-	readUserTypes(package, doc, cache);
-	readUserTypeLinks(package, doc, cache);
-	readReferences(package, doc, cache);
-	readKeys(package, doc, cache);
-	readProducts(package, doc, cache);
-	readClassifications(package, doc, cache);
-	readEntities(package, doc, cache);
-	readAssets(package, doc, cache);
-}
+function writeKeys(package, doc, cache) {}
+function writeProducts(package, doc, cache) {}
+function writeClassifications(package, doc, cache) {}
+function writeEntities(package, doc, cache) {}
+function writeAssets(package, doc, cache) {}
 
 function exportStepXML(diagram, cache) {
-	var doc; // as MSXML2.DOMDocument;
-	var node; // as MSXML2.DOMNode;
+    var doc; // as MSXML2.DOMDocument;
+    var node; // as MSXML2.DOMNode;
 
-	var package as EA.Package;
-	package = Repository.GetPackageByID(diagram.PackageID);
-	Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
+    var package as EA.Package;
+    package = Repository.GetPackageByID(diagram.PackageID);
+    Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
 
-	fileName = getFileName(package, 1); // 0==open, 1==save
+    fileName = getFileName(package, 1); // 0==open, 1==save
 
-	if (!fileName) return;
-		
-	doc = XMLCreateXMLObject();
-	node = AddElementNS(doc, 'STEP-ProductInformation', namespace);
-	node.setAttribute('ExportTime', package.Modified);
-	
-	Session.Output('fileName="'+fileName+'"');
-	XMLSaveXMLToFile(doc, fileName);	
-	
+    if (!fileName) return;
+    
+    doc = XMLCreateXMLObject();
+    node = AddElementNS(doc, 'STEP-ProductInformation', namespace);
+    node.setAttribute('ExportTime', package.Modified);
+    
+    writeUnitsOfMeasures(package, doc, cache);
+    writeListOfValuesGroups(package, doc, cache);
+    writeListOfValues(package, doc, cache);
+    writeAttributeGroups(package, doc, cache);
+    writeUserTypes(package, doc, cache);
+    writeUserTypeLinks(package, doc, cache);
+    writeReferences(package, doc, cache);
+    writeKeys(package, doc, cache);
+    writeProducts(package, doc, cache);
+    writeClassifications(package, doc, cache);
+    writeEntities(package, doc, cache);
+    writeAssets(package, doc, cache);
+
+    Session.Output('fileName="'+fileName+'"');
+    XMLSaveXMLToFile(doc, fileName);	
 }
 
 Repository.EnsureOutputVisible( "Debug" );

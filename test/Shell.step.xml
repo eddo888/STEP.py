@@ -1,0 +1,160 @@
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="3/28/2023 7:06:03 PM">
+	<UnitList>
+		<UnitFamily ID="Currency" Selected="true" Referenced="true">
+			<Name>Currency</Name>
+			<Unit ID="iso4217.unit.AUD">
+				<Name>Australian%20Dollar</Name>
+			</Unit>
+			<Unit ID="iso4217.unit.GBP">
+				<Name>British%20Pound%20Sterling</Name>
+			</Unit>
+			<Unit ID="iso4217.unit.NZD">
+				<Name>New%20Zealand%20Dollar</Name>
+			</Unit>
+			<Unit ID="iso4217.unit.USD">
+				<Name>United%20States%20Dollar</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Electricity and Magnetism" Selected="true" Referenced="true">
+			<Name>Electricity and Magnetism</Name>
+			<Unit ID="unece.unit.VLT">
+				<Name>V</Name>
+			</Unit>
+			<Unit ID="unece.unit.AMP">
+				<Name>A</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Length" Selected="true" Referenced="true">
+			<Name>Length</Name>
+			<Unit ID="unece.unit.SMI">
+				<Name>mile</Name>
+			</Unit>
+			<Unit ID="unece.unit.A11">
+				<Name>%C3%85</Name>
+			</Unit>
+			<Unit ID="unece.unit.INH">
+				<Name>in</Name>
+			</Unit>
+			<Unit ID="unece.unit.4H">
+				<Name>%C2%B5m</Name>
+			</Unit>
+			<Unit ID="unece.unit.MTR">
+				<Name>m</Name>
+			</Unit>
+			<Unit ID="unece.unit.FOT">
+				<Name>ft</Name>
+			</Unit>
+			<Unit ID="unece.unit.C45">
+				<Name>nm</Name>
+			</Unit>
+			<Unit ID="unece.unit.CMT">
+				<Name>cm</Name>
+			</Unit>
+			<Unit ID="unece.unit.KTM">
+				<Name>km</Name>
+			</Unit>
+			<Unit ID="unece.unit.YRD">
+				<Name>yd</Name>
+			</Unit>
+			<Unit ID="unece.unit.MMT">
+				<Name>mm</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Mass" Selected="true" Referenced="true">
+			<Name>Mass</Name>
+			<Unit ID="GPerCm3">
+				<Name>g/cm3</Name>
+			</Unit>
+			<Unit ID="unece.unit.MGM">
+				<Name>mg</Name>
+			</Unit>
+			<Unit ID="unece.unit.KGM">
+				<Name>kg</Name>
+			</Unit>
+			<Unit ID="ST">
+				<Name>ST</Name>
+			</Unit>
+			<Unit ID="GPerMol">
+				<Name>g/mol</Name>
+			</Unit>
+			<Unit ID="unece.unit.TNE">
+				<Name>t</Name>
+			</Unit>
+			<Unit ID="uence.unit.L">
+				<Name>L</Name>
+			</Unit>
+			<Unit ID="unece.unit.MC">
+				<Name>%C2%B5g</Name>
+			</Unit>
+			<Unit ID="KG">
+				<Name>KG</Name>
+			</Unit>
+			<Unit ID="HL">
+				<Name>HL</Name>
+			</Unit>
+			<Unit ID="CE">
+				<Name>CE</Name>
+			</Unit>
+			<Unit ID="unece.unit.ONZ">
+				<Name>oz</Name>
+			</Unit>
+			<Unit ID="unece.unit.ML">
+				<Name>ml</Name>
+			</Unit>
+			<Unit ID="unece.unit.LBR">
+				<Name>lb</Name>
+			</Unit>
+			<Unit ID="unece.unit.GRM">
+				<Name>g</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Temperature" Selected="true" Referenced="true">
+			<Name>Temperature</Name>
+			<Unit ID="unece.unit.CEL">
+				<Name>%C2%B0C</Name>
+			</Unit>
+			<Unit ID="unece.unit.A48">
+				<Name>%C2%B0R</Name>
+			</Unit>
+			<Unit ID="unece.unit.KEL">
+				<Name>K</Name>
+			</Unit>
+			<Unit ID="unece.unit.FAH">
+				<Name>%C2%B0F</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Time" Selected="true" Referenced="true">
+			<Name>Time</Name>
+			<Unit ID="unece.unit.DAY">
+				<Name>day(s)</Name>
+			</Unit>
+			<Unit ID="unece.unit.C26">
+				<Name>millisecond</Name>
+			</Unit>
+			<Unit ID="unece.unit.WEE">
+				<Name>week</Name>
+			</Unit>
+			<Unit ID="unece.unit.C47">
+				<Name>nanosecond</Name>
+			</Unit>
+			<Unit ID="unece.unit.MIN">
+				<Name>minute</Name>
+			</Unit>
+			<Unit ID="unece.unit.MON">
+				<Name>month</Name>
+			</Unit>
+			<Unit ID="unece.unit.SEC">
+				<Name>second</Name>
+			</Unit>
+			<Unit ID="unece.unit.HUR">
+				<Name>hour</Name>
+			</Unit>
+			<Unit ID="unece.unit.B98">
+				<Name>microsecond</Name>
+			</Unit>
+			<Unit ID="unece.unit.ANN">
+				<Name>year</Name>
+			</Unit>
+		</UnitFamily>
+	</UnitList>
+</STEP-ProductInformation>

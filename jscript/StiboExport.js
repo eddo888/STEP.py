@@ -3,6 +3,25 @@
 !INC User Scripts.Library
 //!INC Stibo STEP.Library
 
+function toUtf8(text) {
+	var surrogate = encodeURI(text);
+  	var result = '';
+    for (var i = 0; i < surrogate.length;) {
+        var character = surrogate.charAt(i);
+		i += 1;
+        if (character == '%') {
+        	var hex = surrogate.slice(i, 2);
+			i = i + 2;
+			if (hex) {
+				result = result + String.fromCharCode(parseInt(hex, 16));
+			}
+        } else {
+        	result = result + character;
+        }
+    }
+    return result;
+}
+
 function writeUnitsOfMeasures(package, doc, cache) {
 	/*
         <UnitFamily ID="Currency" Selected="true" Referenced="true">
@@ -11,27 +30,78 @@ function writeUnitsOfMeasures(package, doc, cache) {
                 <Name>Australian Dollar</Name>
                 <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
             </Unit>
-            <Unit ID="iso4217.unit.GBP">
-                <Name>British Pound Sterling</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.NZD">
-                <Name>New Zealand Dollar</Name>
-                <UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
-            </Unit>
-            <Unit ID="iso4217.unit.USD">
-                <Name>United States Dollar</Name>
-            </Unit>
         </UnitFamily>
 	*/
 	var package as EA.Package;
-	var uom_types as EA.Package;
-	var uom_items as EA.Package;
-	var uom_type as EA.Element;
-	var uom_base as EA.Element;
-	var uom_item as EA.Element;
 
-	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
+	var root = doc.documentElement;
+	var _unit_list = AddElementNS(root, 'UnitList', namespace);
+
+	var uom_types = cache.Item('UOM').Items().toArray();
+	for (var t=0; t<uom_types.length; t++) {
+		var uom_type as EA.Element;
+		uom_type = uom_types[t];
+		
+		var tid = getTaggedValue(uom_type, '@ID').Value;
+		var tname = uom_type.Name;
+		var ttag = getTaggedValue(uom_type, 'Name');
+		if (ttag && ttag.Value) tname = ttag.Value;
+		Session.Output('UOM @ID="'+tid+'" Name="'+tname+'"');
+		
+		var _uom_type = AddElementNS(_unit_list, 'UnitFamily', namespace);
+		_uom_type.setAttribute('ID', tid);
+		_uom_type.setAttribute('Selected', 'true');
+		_uom_type.setAttribute('Referenced', 'true');
+		var _tname = AddElementNS(_uom_type, 'Name', namespace);
+		var _tcdata = doc.createCDATASection(tname);
+		_tname.appendChild(_tcdata);
+
+		for (var c=0; c<uom_type.Connectors.Count; c++) {
+			var connector as EA.Connector;
+			connector = uom_type.Connectors.GetAt(c);
+			if (connector.Stereotype == 'UOM Family') {
+				var uom_item as EA.Element;
+				uom_item = Repository.GetElementByID(connector.SupplierID);
+			
+				var iid = getTaggedValue(uom_item, '@ID').Value;
+				var iname = uom_item.Name;
+				var itag = getTaggedValue(uom_item, 'Name');
+				if (itag && itag.Value) iname = itag.Value;
+				Session.Output('  UOM instance @ID="'+iid+'" Name="'+iname+'"');
+				
+				var _uom_item = AddElementNS(_uom_type, 'Unit', namespace);
+				_uom_item.setAttribute('ID', iid);
+				var _iname = AddElementNS(_uom_item, 'Name', namespace);
+				// dirty hack here.
+				_iname.setAttribute('encodeURI',encodeURI(iname))
+				
+				var BaseUnitID = null;
+				for (var b=0; b<uom_item.Connectors.Count; b++) {
+					var base_connector as EA.Connector;
+					base_connector = uom_item.Connectors.GetAt(b);
+					if (base_connector.Stereotype == 'UOM Base') {
+						var base_unit as EA.Element;
+						base_unit = Repository.GetElementByID(base_connector.ClientID);
+						BaseUnitID = getTaggedValue(base_unit, '@ID').Value;
+						break;
+					}
+				}
+				if (BaseUnitID) {
+					var _uc = AddElementNS(_uom_item, 'UnitConversion', namespace);
+					_uc.setAttribute('BaseUnitID', BaseUnitID);
+					var Factor = getTaggedValue(uom_item, 'Factor');
+					if (Factor) _uc.setAttribute('Factor', Factor.Value);
+					var Offset = getTaggedValue(uom_item, 'Offset');
+					if (Offset) _uc.setAttribute('Offset', Offset.Value);
+				}
+			}
+		}	
+	}
+	
+	return;
+
+	uom_types = findPackage(package, 'UOM Types', 'Units of Measure');
+	
 	//var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
 	
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
@@ -594,35 +664,38 @@ function writeAssets(package, doc, cache) {}
 
 function exportStepXML(diagram, cache) {
     var doc; // as MSXML2.DOMDocument;
-    var node; // as MSXML2.DOMNode;
+    var root; // as MSXML2.DOMNode;
 
     var package as EA.Package;
     package = Repository.GetPackageByID(diagram.PackageID);
-    Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
+    //Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
 
     fileName = getFileName(package, 1); // 0==open, 1==save
 
     if (!fileName) return;
     
     doc = XMLCreateXMLObject();
-    node = AddElementNS(doc, 'STEP-ProductInformation', namespace);
-    node.setAttribute('ExportTime', package.Modified);
-    
+    root = AddElementNS(doc, 'STEP-ProductInformation', namespace);
+    root.setAttribute('ExportTime', package.Modified);
+
+	fillCache(cache, package);
+	//showCache(cache)
+	
     writeUnitsOfMeasures(package, doc, cache);
-    writeListOfValuesGroups(package, doc, cache);
-    writeListOfValues(package, doc, cache);
-    writeAttributeGroups(package, doc, cache);
-    writeUserTypes(package, doc, cache);
-    writeUserTypeLinks(package, doc, cache);
-    writeReferences(package, doc, cache);
-    writeKeys(package, doc, cache);
-    writeProducts(package, doc, cache);
-    writeClassifications(package, doc, cache);
-    writeEntities(package, doc, cache);
-    writeAssets(package, doc, cache);
+    //writeListOfValuesGroups(package, doc, cache);
+    //writeListOfValues(package, doc, cache);
+    //writeAttributeGroups(package, doc, cache);
+    //writeUserTypes(package, doc, cache);
+    //writeUserTypeLinks(package, doc, cache);
+    //writeReferences(package, doc, cache);
+    //writeKeys(package, doc, cache);
+    //writeProducts(package, doc, cache);
+    //writeClassifications(package, doc, cache);
+    //writeEntities(package, doc, cache);
+    //writeAssets(package, doc, cache);
 
     Session.Output('fileName="'+fileName+'"');
-    XMLSaveXMLToFile(doc, fileName);	
+    XMLSaveXMLToFile(doc, fileName, false, true);	
 }
 
 Repository.EnsureOutputVisible( "Debug" );

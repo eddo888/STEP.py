@@ -288,7 +288,8 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 	var parent as EA.Element;
 	var result as EA.Element;
-
+	if (! parent) return;
+	
 	result = getCache(cache, stereotype, id);
 	
 	if (! result) {
@@ -438,7 +439,7 @@ function getFileName(package, openOrSave) {
 	var uri as EA.TaggedValue;
 	var uri = getTaggedValue(package, 'fileName');
 	if (uri && uri.Value) {
-		Session.Output('getCache '+uri.Name+'='+uri.Value);
+		//Session.Output('getCache '+uri.Name+'='+uri.Value);
 		fileName = uri.Value;
 	}
 	var proj = Repository.GetProjectInterface();
@@ -448,14 +449,14 @@ function getFileName(package, openOrSave) {
 		var parts = fileName.split('\\');
 		filePart = parts[parts.length-1];
 		dirPart = parts.slice(0,parts.length-1).join('\\');
-		Session.Output('  filePart='+filePart);
-		Session.Output('  dirPart='+dirPart);
+		//Session.Output('  filePart='+filePart);
+		//Session.Output('  dirPart='+dirPart);
 	}
 	fileName = proj.GetFileNameDialog(filePart, "STEP.XML Files (*.xml)|*.xml|All Files (*.*)|*.*||", 1, 0, dirPart, openOrSave );
 	if (fileName) {
 		uri = setTaggedValue(package, 'fileName', fileName);
 		package.Update();
-		Session.Output('putCache '+uri.Name+'='+uri.Value);
+		//Session.Output('putCache '+uri.Name+'='+uri.Value);
 	}
 	return fileName
 }

@@ -39,7 +39,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 		var UnitFamily = UnitFamilies[uf];
 		var UnitFamily_id = XMLGetNamedAttribute(UnitFamily, 'ID');
 		var UnitFamily_name = XMLGetNodeText(UnitFamily, 's:Name');
-		Session.Output('UnitFamily name="'+UnitFamily_name+'" id="'+UnitFamily_id+'"');
+		//Session.Output('UnitFamily name="'+UnitFamily_name+'" id="'+UnitFamily_id+'"');
 
 		var items = new ActiveXObject("Scripting.Dictionary"); // { @ID : Element} 
 		var bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source.@ID] }
@@ -68,7 +68,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 					uom_item.Update();
 				}
 			}
-			Session.Output('  Unit name="'+Unit_name+'" id="'+Unit_id+'"');
+			//Session.Output('  Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
 			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name, Unit_id, cache);
 			setTaggedValue(uom_item, '@ID', Unit_id);
@@ -129,7 +129,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 	}
 }
 
-function digListOfValuesGroups(package, diagram, parent, cache) {
+function digListOfValuesGroups(package, parent, cache) {
 	/*
 		<ListOfValuesGroup 
 			ID="Movie_LOVs" 
@@ -152,7 +152,7 @@ function digListOfValuesGroups(package, diagram, parent, cache) {
 		var group = groups[g];
 		var id = XMLGetNamedAttribute(group, 'ID');
 		var name = XMLGetNodeText(group, 's:Name');
-		Session.Output('LOV group name="'+name+'" id="'+id+'"');
+		//Session.Output('LOV group name="'+name+'" id="'+id+'"');
 		
 		_group = findOrCreatePackage(package, 'LOV Group', name, id);
 		setTaggedValue(_group, '@ID', id);
@@ -167,12 +167,12 @@ function digListOfValuesGroups(package, diagram, parent, cache) {
 	}
 }
 
-function readListOfValuesGroups(package, diagram, doc, cache) {
+function readListOfValuesGroups(package, doc, cache) {
 	var package as EA.Package;
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
 	if (groups) {
-		digListOfValuesGroups(package, diagram, groups, cache);
+		digListOfValuesGroups(package, groups, cache);
 	}
 }
 
@@ -255,7 +255,7 @@ function digAttributeGroups(package, diagram, parent, cache) {
 		var group = groups[g];
 		var id = XMLGetNamedAttribute(group, 'ID');
 		var name = XMLGetNodeText(group, 's:Name');
-		Session.Output('Attribute group name="'+name+'" id="'+id+'"');
+		//Session.Output('Attribute group name="'+name+'" id="'+id+'"');
 		
 		_group = findOrCreatePackage(package, 'Attribute Group', name, id);
 		setTaggedValue(_group, '@ID', id);
@@ -275,16 +275,17 @@ function readAttributeGroups(package, doc, cache) {
 	var diagram as EA.Diagram;
 	var _diagram as EA.Diagram;
 	var attributes = findOrCreatePackage(package, 'Attribute Group', 'All Attributes', '');
-	_diagram = setupDiagram(attributes, 'Attributes', 'Package');
+	//_diagram = setupDiagram(attributes, 'Attributes', 'Package');
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
 	if (groups) {
 		digAttributeGroups(attributes, _diagram, groups, cache);
 	}	
-	
+
+    readAttributes(attributes, package, doc, cache);
 }
 	
-function readAttributes(package, doc, cache) {
+function readAttributes(attributes, package, doc, cache) {
 	/*
 		<Attribute 
 			ID="Movie_Name" 
@@ -304,13 +305,11 @@ function readAttributes(package, doc, cache) {
             <UserTypeLink UserTypeID="Movie_Actor"/>
 		</Attribute>
 	*/
-	
+	var attributes as EA.Package;
 	var package as EA.Package;
 	var parent as EA.Package;
 	var element as EA.Element;
 	var diagram as EA.Diagram;
-	
-	var attributes = findPackage(package, 'Attribute Group', 'All Attributes', '');
 	
 	var attribute_list = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeList/s:Attribute');
 	for (var l=0; l<attribute_list.length; l++) {
@@ -487,7 +486,7 @@ function readUserTypeLinks(package, doc, cache) {
 		var attribute_class = getCache(cache, 'Attribute', id);
 		if (! attribute_class) continue;
 			
-		Session.Output('attribute name='+attribute_class.Name);
+		//Session.Output('attribute name='+attribute_class.Name);
 		
 		var UserTypeLinks = attribute.selectNodes('s:UserTypeLink');
 		for (var u=0; u<UserTypeLinks.length; u++) {
@@ -496,7 +495,7 @@ function readUserTypeLinks(package, doc, cache) {
 		
 			var UserType = getCache(cache, 'UserType', UserTypeID);
 			if (UserType) {
-				Session.Output(' UserType name='+UserType.Name);
+				//Session.Output(' UserType name='+UserType.Name);
 				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
 			}
 		}
@@ -598,13 +597,14 @@ function importStepXML(diagram, cache) {
 	var node; // as MSXML2.DOMNode;
 	var fileName;
 
+
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
+	fileName = getFileName(package, 0); // 0==open, 1==save
+
 	fillCache(cache, package);
 	//showCache(cache, package);
 	
-	fileName = getFileName(package, 0); // 0==open, 1==save
-
 	doc = XMLReadXMLFromFile(fileName);
 	if (!doc) {
 		Session.Output('failed to load '+fileName);
@@ -624,10 +624,9 @@ function importStepXML(diagram, cache) {
 	}
 		
 	readUnitsOfMeasures(package, doc, cache);
-	readListOfValuesGroups(package, diagram, doc, cache);
+	readListOfValuesGroups(package, doc, cache);
 	readListOfValues(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
-	readAttributes(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);
 	readReferences(package, doc, cache);

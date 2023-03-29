@@ -192,7 +192,9 @@ function putCache(cache, stereotype, element) {
 		if (! cache.Exists(stereotype)) {
 			cache.Add(stereotype, new ActiveXObject("Scripting.Dictionary"));
 		}
-		cache.Item(stereotype).Add(tag.Value, element);
+		if (!cache.Item(stereotype).Exists(tag.Value)) {
+			cache.Item(stereotype).Add(tag.Value, element);
+		}
 	}
 }
 
@@ -270,7 +272,7 @@ function findOrCreatePackage(parent, stereotype, name, id) {
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
-		Session.Output('+ package="'+result.Name+'" stereotype="'+result.StereotypeEx+'"');
+		Session.Output('+ package stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}
 
 	if (stereotype) {
@@ -300,7 +302,7 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		setTaggedValue('@ID', id);
 		result.Update();
 		putCache(cache, stereotype, result);
-		Session.Output('+ element="'+result.Name+'" stereotype="'+result.StereotypeEx+'" id="'+id+'"');
+		Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'" id="'+id+'"');
 	}	
 	return result;
 	
@@ -325,7 +327,7 @@ function setTaggedValue(element, name, value) {
 	}
 	if (! result) {
 		result = element.TaggedValues.AddNew(name, value);
-		Session.Output('+ tag name="'+result.Name+'" value="'+result.Value+'"');
+		//Session.Output('+ tag name="'+result.Name+'" value="'+result.Value+'"');
 	}
 	else {
 		result.Value = value;
@@ -383,10 +385,9 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
 		target.Update();
+		Session.Output('+ connector stereotype="'+result.StereotypeEx+'" source="'+source.Name+'" target="'+target.Name+'"');
 	}
-	
-	Session.Output(prefix+' connector "'+source.Name+' -> '+target.Name+' : <'+result.StereotypeEx+'>');
-	
+		
 	return result;
 }
 
@@ -410,6 +411,7 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 		result.Update();
 		result.StereotypeEx = stereotype;
 		result.Update();
+		Session.Output('+ attribute stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}
 	return result;
 }

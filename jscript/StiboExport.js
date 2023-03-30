@@ -320,14 +320,51 @@ function writeAttributes(package, doc, cache) {
 		
 		var MultiValued = getTaggedValue(attribute, 'MultiValued');
 		if (MultiValued) {
-			_attribute.setAttribute('MultiValued', MultiValued.Value);
+			var isMultiValued = 'Yes' == MultiValued.Value;
+			_attribute.setAttribute('MultiValued', ''+isMultiValued);
 		}
 		
 		var _name = AddElementNS(_attribute, 'Name', namespace);
 		_name.text = name;
 
-		// validation
+		
 		// LOV Link
+		var isLov = false;
+		for (var c=0; c<attribute.Connectors.Count; c++) {
+			var connector as EA.Connector;
+			connector = attribute.Connectors.GetAt(c);
+			Session.Output('  connector stereotype='+connector.Stereotype);
+			if (connector.Stereotype == 'LOV Type') {
+				var lov as EA.Element;
+				lov = Repository.GetElementByID(connector.SupplierID);
+				Session.Output('    lov name='+lov.Name);
+				if (lov.Stereotype == 'LOV') {
+					isLov = true;
+					var ListOfValueID = getTaggedValue(lov, '@ID');
+					var _ListOfValueLink = AddElementNS(_attribute, 'ListOfValueLink', namespace);
+					_ListOfValueLink.setAttribute('ListOfValueID', ListOfValueID.Value);
+					break;
+				}
+				
+			}
+
+		}
+
+		// validation
+		if (!isLov) {
+			var _Validation = AddElementNS(_attribute, 'Validation', namespace);
+			_Validation.setAttribute('BaseType', getTaggedValue(attribute, 'validation').Value);
+			
+			var names = ['MinValue','MaxValue','MaxLength','InputMask'];
+			for (var n=0; n<names.length; n++) {
+				var nname = names[n];
+				var ntag = getTaggedValue(attribute, nname);
+				if (ntag) {
+					_Validation.setAttribute(nname, ntag.Value);
+				}
+			}
+		}
+		
 		// attribute group link
 		for (var c=0; c<attribute.Connectors.Count; c++) {
 			var connector as EA.Connector;
@@ -344,7 +381,6 @@ function writeAttributes(package, doc, cache) {
 				}
 				
 			}
-
 		}
 		// user type link
 	}

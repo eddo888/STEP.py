@@ -302,7 +302,7 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		setTaggedValue('@ID', id);
 		result.Update();
 		putCache(cache, stereotype, result);
-		Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'" id="'+id+'"');
+		Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}	
 	return result;
 	

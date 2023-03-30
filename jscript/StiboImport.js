@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC User Scripts.Library
-//!INC Stibo STEP.Library
+//!INC User Scripts.Library
+!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -274,7 +274,7 @@ function readAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	var _diagram as EA.Diagram;
-	var attributes = findOrCreatePackage(package, 'Attribute Group', 'All Attributes', '');
+	var attributes = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root');
 	//_diagram = setupDiagram(attributes, 'Attributes', 'Package');
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');

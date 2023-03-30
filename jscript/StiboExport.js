@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-//!INC User Scripts.Library
-!INC Stibo STEP.Library
+!INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function writeUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -333,11 +333,11 @@ function writeAttributes(package, doc, cache) {
 		for (var c=0; c<attribute.Connectors.Count; c++) {
 			var connector as EA.Connector;
 			connector = attribute.Connectors.GetAt(c);
-			Session.Output('  connector stereotype='+connector.Stereotype);
+			//Session.Output('  connector stereotype='+connector.Stereotype);
 			if (connector.Stereotype == 'LOV Type') {
 				var lov as EA.Element;
 				lov = Repository.GetElementByID(connector.SupplierID);
-				Session.Output('    lov name='+lov.Name);
+				//Session.Output('    lov name='+lov.Name);
 				if (lov.Stereotype == 'LOV') {
 					isLov = true;
 					var ListOfValueID = getTaggedValue(lov, '@ID');
@@ -369,11 +369,11 @@ function writeAttributes(package, doc, cache) {
 		for (var c=0; c<attribute.Connectors.Count; c++) {
 			var connector as EA.Connector;
 			connector = attribute.Connectors.GetAt(c);
-			Session.Output('  connector stereotype='+connector.Stereotype);
+			//Session.Output('  connector stereotype='+connector.Stereotype);
 			if (connector.Stereotype == 'Attribute Link') {
 				var link as EA.Element;
 				link = Repository.GetElementByID(connector.ClientID);
-				Session.Output('    client name='+link.Name);
+				//Session.Output('    client name='+link.Name);
 				if (link.Stereotype == 'Attribute Group') {
 					var AttributeGroupID = getTaggedValue(link, '@ID');
 					var _AttributeGroupLink = AddElementNS(_attribute, 'AttributeGroupLink', namespace);
@@ -382,7 +382,21 @@ function writeAttributes(package, doc, cache) {
 				
 			}
 		}
+		
 		// user type link
+		var claszes = findClassesThatUsesAttribute(attribute);
+		for (var c=0; c<claszes.length; c++) {
+			var clasz as EA.Element;
+			clasz = claszes[c];
+			//Session.Output(' clasz='+clasz.Name);
+			var _UserTypeLink = AddElementNS(_attribute, 'UserTypeLink', namespace);
+			var UserTypeID = getTaggedValue(clasz, '@ID');
+			if (UserTypeID) {
+				//Session.Output(' userTypeLink name='+clasz.Name+' id='+UserTypeID.Value);
+				_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
+			}
+		}
+
 	}
 }
 
@@ -610,7 +624,7 @@ function writeClassifications(package, doc, cache) {}
 function writeEntities(package, doc, cache) {}
 function writeAssets(package, doc, cache) {}
 
-function exportStepXML(diagram, cache) {
+function exportStepXML(diagram) {
     var doc; // as MSXML2.DOMDocument;
     var root; // as MSXML2.DOMNode;
 
@@ -626,7 +640,7 @@ function exportStepXML(diagram, cache) {
     root = AddElementNS(doc, 'STEP-ProductInformation', namespace);
     root.setAttribute('ExportTime', package.Modified);
 
-	fillCache(cache, package);
+	var cache = fillCache(null, package);
 	//showCache(cache)
 	
 	/*
@@ -654,12 +668,9 @@ Repository.EnsureOutputVisible( "Debug" );
 Repository.ClearOutput("Script");
 Session.Output( "Starting" );
 
-// { type: { @ID: Element }}
-var cache = new ActiveXObject("Scripting.Dictionary");
-
 var diagram as EA.Diagram;
 diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
 //diagram = Repository.GetCurrentDiagram();
-exportStepXML(diagram, cache);
+exportStepXML(diagram);
 
 Session.Output("Ended");

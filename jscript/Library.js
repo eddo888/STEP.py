@@ -152,6 +152,8 @@ function showCache(cache, package) {
 
 function fillCache(cache, package, indent) {
 	if (! indent) indent = '';
+	if (! cache) cache = new ActiveXObject("Scripting.Dictionary");
+		
 	var package as EA.Package;
 	//Session.Output(indent+'/'+package.Name);
 	
@@ -173,6 +175,8 @@ function fillCache(cache, package, indent) {
 		child = package.Packages.GetAt(p);
 		fillCache(cache, child, indent+'  ');
 	}
+	
+	return cache;
 }
 
 function normalize(stereotype) {
@@ -414,6 +418,31 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 		Session.Output('+ attribute stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}
 	return result;
+}
+
+function findClassesThatUsesAttribute(attribute) {
+	var attribute as EA.Element; // ie STEP class defnition of stereotyped <Attribute>
+	
+	var claszes = [];
+	var sql = "SELECT * FROM T_ATTRIBUTE a WHERE a.CLASSIFIER = (SELECT o.OBJECT_ID FROM T_OBJECT o WHERE o.EA_GUID='"+attribute.ElementGUID+"');";
+	var res = Repository.SQLQuery(sql);
+	//Session.Output('res='+res);
+
+	var xmlDOM = new ActiveXObject("MSXML2.DOMDocument");
+	xmlDOM.validateOnParse = false;
+	xmlDOM.async = false;
+	if( xmlDOM.loadXML( res ) ){
+		var nodeList = xmlDOM.documentElement.selectNodes( '//Object_ID' );
+		for ( var i = 0 ; i < nodeList.length ; i++ ){
+			var object_id = nodeList.item(i).text;
+			//Session.Output('object_id='+object_id);
+			var usage as EA.Element;
+			usage = Repository.GetElementByID(object_id);
+			//Session.Output('usage stereotype='+usage.Stereotype+' name='+usage.Name);
+			claszes.push(usage);
+		}
+	}
+	return claszes;
 }
 
 function setupDiagram(package, name, diagram_type) {

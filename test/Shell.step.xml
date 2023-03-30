@@ -1,63 +1,139 @@
 <STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="3/28/2023 7:06:03 PM">
-	<ListOfValuesGroupList>
-		<ListOfValuesGroup ID="List Of Values group root" Selected="true" Referenced="true">
-			<Name>Lists of Values / LOVs</Name>
-			<ListOfValuesGroup ID="Common_LOVs" Selected="true" Referenced="true">
+	<AttributeGroupList>
+		<AttributeGroup ID="Attribute group root">
+			<Name>Attribute Groups</Name>
+			<AttributeGroup ID="CommonAttributes">
 				<Name>Common</Name>
-			</ListOfValuesGroup>
-			<ListOfValuesGroup ID="Movie_LOVs" Selected="true" Referenced="true">
-				<Name>Movie LOVs</Name>
-			</ListOfValuesGroup>
-		</ListOfValuesGroup>
-	</ListOfValuesGroupList>
-	<ListsOfValues>
-		<ListOfValue ID="PackageType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
-			<Name>Package Type LOV</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value>Each</Value>
-			<Value>Box</Value>
-			<Value>Case</Value>
-			<Value>Pallett</Value>
-		</ListOfValue>
-		<ListOfValue ID="StyleType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
-			<Name>Style Type LOV</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value>Tapered</Value>
-			<Value>Straight</Value>
-		</ListOfValue>
-		<ListOfValue ID="YesNo_LOV" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="" ParentID="Common_LOVs">
-			<Name>Yes/No LOV</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value>Yes</Value>
-			<Value>No</Value>
-		</ListOfValue>
-		<ListOfValue ID="Movie_Rating" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="0" ParentID="Movie_LOVs">
-			<Name>Rating</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value>G</Value>
-			<Value>GP</Value>
-			<Value>N/A</Value>
-			<Value>NOT RATED</Value>
-			<Value>PG</Value>
-			<Value>PG-13</Value>
-			<Value>R</Value>
-			<Value>TV-14</Value>
-			<Value>TV-PG</Value>
-			<Value>UNRATED</Value>
-		</ListOfValue>
-		<ListOfValue ID="Movie_Type" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="0" ParentID="Movie_LOVs">
-			<Name>Type</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value>episode</Value>
-			<Value>game</Value>
-			<Value>movie</Value>
-			<Value>series</Value>
-		</ListOfValue>
-		<ListOfValue ID="Heritage_Yes/No" Selected="true" Referenced="true" AllowUserValueAddition="true" UseValueID="-1" ParentID="Movie_LOVs">
-			<Name>Yes/No</Name>
-			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
-			<Value ID="N">No</Value>
-			<Value ID="Y">Yes</Value>
-		</ListOfValue>
-	</ListsOfValues>
+			</AttributeGroup>
+			<AttributeGroup ID="PackagingAttributes">
+				<Name>Packaging</Name>
+				<AttributeGroup ID="Environmental">
+					<Name>Environment</Name>
+				</AttributeGroup>
+			</AttributeGroup>
+			<AttributeGroup ID="SupplierAttributes">
+				<Name>Supplier</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="LocationAttributes">
+				<Name>Location</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="Pricing Attributes">
+				<Name>Pricing</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="MarketingAttributes">
+				<Name>Marketing</Name>
+			</AttributeGroup>
+		</AttributeGroup>
+	</AttributeGroupList>
+	<AttributeList>
+		<Attribute ID="DepartmentID" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Department ID</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Department"/>
+		</Attribute>
+		<Attribute ID="CategoryID" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Category ID</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Category"/>
+		</Attribute>
+		<Attribute ID="GroupID" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Group ID</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Group"/>
+		</Attribute>
+		<Attribute ID="SubGroupID" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Sub Group ID</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Sub Group"/>
+		</Attribute>
+		<Attribute ID="barcode" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>barcode</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="10" InputMask="9999999999"/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="Diameter" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="true">
+			<Name>Diamater</Name>
+			<Validation BaseType="number" MinValue="0" MaxValue="100" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Variant"/>
+		</Attribute>
+		<Attribute ID="StyleType" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Style Type</Name>
+			<ListOfValueLink ListOfValueID="StyleType_LOV"/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+		</Attribute>
+		<Attribute ID="Voltage" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Voltage</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="CommonAttributes"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="isForSale" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>is for sale</Name>
+			<ListOfValueLink ListOfValueID="YesNo_LOV"/>
+			<AttributeGroupLink AttributeGroupID="PackagingAttributes"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="PackageContents" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Package Contents</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="PackagingAttributes"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="Repack Quotient" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Repack Quotient</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="SupplierAttributes"/>
+			<UserTypeLink UserTypeID="Buy Side 2 Sell Side"/>
+		</Attribute>
+		<Attribute ID="SupplierDescription" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Supplier Description</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="SupplierAttributes"/>
+			<UserTypeLink UserTypeID="Supplier Products"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="Supplier Priority" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Supplier Priority</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="SupplierAttributes"/>
+			<UserTypeLink UserTypeID="Buy Side 2 Sell Side"/>
+		</Attribute>
+		<Attribute ID="CountryCode" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Country Code</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="LocationAttributes"/>
+			<UserTypeLink UserTypeID="Country"/>
+		</Attribute>
+		<Attribute ID="PostCode" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Post Code</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="LocationAttributes"/>
+			<UserTypeLink UserTypeID="Suburb"/>
+		</Attribute>
+		<Attribute ID="EndDate" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>End Date</Name>
+			<Validation BaseType="DateTime" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Pricing Attributes"/>
+			<UserTypeLink UserTypeID="Price"/>
+		</Attribute>
+		<Attribute ID="StartDate" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Start Date</Name>
+			<Validation BaseType="DateTime" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Pricing Attributes"/>
+			<UserTypeLink UserTypeID="Price"/>
+		</Attribute>
+		<Attribute ID="Marketing Description" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Marketing Description</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="MarketingAttributes"/>
+			<UserTypeLink UserTypeID="Channel"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+	</AttributeList>
 </STEP-ProductInformation>

@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-//!INC User Scripts.Library
-!INC Stibo STEP.Library
+!INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -31,7 +31,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 	var uom_base as EA.Element;
 	var uom_item as EA.Element;
 
-	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure');
+	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure', '', cache);
 	//var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
 	
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
@@ -44,7 +44,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 		var items = new ActiveXObject("Scripting.Dictionary"); // { @ID : Element} 
 		var bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source.@ID] }
 		
-		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id);
+		uom_items = findOrCreatePackage(uom_types, 'Instances', 'UOM '+UnitFamily_name, UnitFamily_id, cache);
 		//add_diagram_package(uom_types_diagram, uom_items);
 		//var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
 
@@ -154,7 +154,7 @@ function digListOfValuesGroups(package, parent, cache) {
 		var name = XMLGetNodeText(group, 's:Name');
 		//Session.Output('LOV group name="'+name+'" id="'+id+'"');
 		
-		_group = findOrCreatePackage(package, 'LOV Group', name, id);
+		_group = findOrCreatePackage(package, 'LOV Group', name, id, cache);
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
@@ -257,7 +257,7 @@ function digAttributeGroups(package, diagram, parent, cache) {
 		var name = XMLGetNodeText(group, 's:Name');
 		//Session.Output('Attribute group name="'+name+'" id="'+id+'"');
 		
-		_group = findOrCreatePackage(package, 'Attribute Group', name, id);
+		_group = findOrCreatePackage(package, 'Attribute Group', name, id, cache);
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
@@ -274,7 +274,7 @@ function readAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	var _diagram as EA.Diagram;
-	var attributes = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root');
+	var attributes = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root', cache);
 	//_diagram = setupDiagram(attributes, 'Attributes', 'Package');
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
@@ -395,7 +395,7 @@ function readUserTypes(package, doc, cache) {
 	var stereotypes = ['Product','Classification','Entity','Asset'];
 	for (var s=0; s<stereotypes.length; s++) {
 		var stereotype = stereotypes[s];
-		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '');
+		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '', cache);
 		//if (parent.Diagrams) {
 		//	diagram = package.Diagrams.GetAt(0);
 		//	add_diagram_package(diagram, parent);
@@ -526,7 +526,7 @@ function readReferences(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Element;
 	
-	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '');
+	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '', cache);
 	//var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
 	
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @element.name : stereotype }
@@ -592,17 +592,16 @@ function readClassifications(package, doc, cache) {}
 function readEntities(package, doc, cache) {}
 function readAssets(package, doc, cache) {}
 
-function importStepXML(diagram, cache) {
+function importStepXML(diagram) {
 	var doc; // as MSXML2.DOMDocument;
 	var node; // as MSXML2.DOMNode;
 	var fileName;
-
 
 	var package as EA.Package;
 	package = Repository.GetPackageByID(diagram.PackageID);
 	fileName = getFileName(package, 0); // 0==open, 1==save
 
-	fillCache(cache, package);
+	var cache = fillCache(null, package);
 	//showCache(cache, package);
 	
 	doc = XMLReadXMLFromFile(fileName);
@@ -642,11 +641,10 @@ Repository.ClearOutput("Script");
 Session.Output( "Starting" );
 
 // { type: { @ID: Element }}
-var cache = new ActiveXObject("Scripting.Dictionary");
 
 var diagram as EA.Diagram;
 //diagram = Repository.GetDiagramByGuid('{B12EF0F9-C12A-40e1-A7A3-A73285928984}');
 diagram = Repository.GetCurrentDiagram();
-importStepXML(diagram, cache);
+importStepXML(diagram);
 
 Session.Output("Ended");

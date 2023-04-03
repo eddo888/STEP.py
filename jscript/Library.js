@@ -179,17 +179,9 @@ function fillCache(cache, package, indent) {
 	return cache;
 }
 
-function normalize(stereotype) {
-	if (stereotype == 'Asset' || stereotype == 'Product' || stereotype == 'Classification' || stereotype == 'Entity') {
-		return 'UserType';
-	}
-	return stereotype;
-}
-
 function putCache(cache, stereotype, element) {
 	var tag as EA.TaggedValue;
 	if (!element) return;
-	stereotype = normalize(stereotype);
 	tag = getTaggedValue(element, '@ID');
 	if (tag && tag.Name && tag.Value) {
 		//Session.Output('tag:'+tag.Name+'='+tag.Value);
@@ -200,16 +192,27 @@ function putCache(cache, stereotype, element) {
 			cache.Item(stereotype).Add(tag.Value, element);
 		}
 	}
+	
 }
 
 function getCache(cache, stereotype, id) {
 	var result as EA.Element;
 	if (! id) return;
-	stereotype = normalize(stereotype);
 	if (cache.Exists(stereotype)) {
 		if (cache.Item(stereotype).Exists(id)) {
 			result = cache.Item(stereotype).Item(id);
 		}
+	}
+	return result;
+}
+
+function getCachedUserType(cache, id) {
+	var result as EA.Element;
+	var tipes = ['Product','Classification','Entity','Asset'];
+	for (var t=0; t<tipes.length; t++) {
+		var tipe = tipes[t];
+		result = getCache(cache ,tipe, id);
+		if (result) break;
 	}
 	return result;
 }
@@ -266,7 +269,7 @@ function findPackage(parent, stereotype, name, id) {
 	return result;
 }
 
-function findOrCreatePackage(parent, stereotype, name, id) {
+function findOrCreatePackage(parent, stereotype, name, id, cache) {
 	var result as EA.Package;
 	var element as EA.Element;
 	result = findPackage(parent, stereotype, name, id);
@@ -470,7 +473,6 @@ function getFileName(package, openOrSave) {
 	var uri as EA.TaggedValue;
 	var uri = getTaggedValue(package, 'fileName');
 	if (uri && uri.Value) {
-		//Session.Output('getCache '+uri.Name+'='+uri.Value);
 		fileName = uri.Value;
 	}
 	var proj = Repository.GetProjectInterface();
@@ -484,10 +486,9 @@ function getFileName(package, openOrSave) {
 		//Session.Output('  dirPart='+dirPart);
 	}
 	fileName = proj.GetFileNameDialog(filePart, "STEP.XML Files (*.xml)|*.xml|All Files (*.*)|*.*||", 1, 0, dirPart, openOrSave );
-	if (fileName) {
+	if (fileName && openOrSave == 0) {
 		uri = setTaggedValue(package, 'fileName', fileName);
 		package.Update();
-		//Session.Output('putCache '+uri.Name+'='+uri.Value);
 	}
 	return fileName
 }

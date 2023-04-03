@@ -493,7 +493,7 @@ function readUserTypeLinks(package, doc, cache) {
 			var UserTypeLink = UserTypeLinks[u];
 			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
 		
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				//Session.Output(' UserType name='+UserType.Name);
 				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
@@ -556,7 +556,7 @@ function readReferences(package, doc, cache) {
 		for (var s=0; s<UserTypeLinks.length; s++) {
 			var UserTypeLink = UserTypeLinks[s];
 			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				createOrReplaceConnector(UserType, reference_element, 'Source', '' ,'Aggregation');
 			}
@@ -566,7 +566,7 @@ function readReferences(package, doc, cache) {
 		for (var t=0; t<TargetUserTypeLinks.length; t++) {
 			var TargetUserTypeLink = TargetUserTypeLinks[t];
 			var UserTypeID = XMLGetNamedAttribute(TargetUserTypeLink, 'UserTypeID');
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				createOrReplaceConnector(UserType, reference_element, 'Target', 'Target' ,'Aggregation');
 			}

@@ -418,90 +418,83 @@ function writeUserTypes(package, doc, cache) {
         </UserType>
 	*/	
 	var package as EA.Package;
-	var parent as EA.Package;
-	var element as EA.Element;
-	var diagram as EA.Diagram;
 	
-	var packages = new ActiveXObject("Scripting.Dictionary");
-	//var diagrams = new ActiveXObject("Scripting.Dictionary");
-	var stereotypes = ['Product','Classification','Entity','Asset'];
-	for (var s=0; s<stereotypes.length; s++) {
-		var stereotype = stereotypes[s];
-		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '');
-		//if (parent.Diagrams) {
-		//	diagram = package.Diagrams.GetAt(0);
-		//	add_diagram_package(diagram, parent);
-		//}
-		packages.Add(stereotype, parent);
-		//var diagram = setupDiagram(parent, 'setup', 'Class');
-		//diagrams.Add(stereotype, diagram);
-	}
+	var root = doc.documentElement;
+	var _parent = AddElementNS(root, 'UserTypes', namespace);
 	
-	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : element }
-	var child2parents = new ActiveXObject("Scripting.Dictionary");  // { child.@ID : [ parent.@ID ] }
-	
-	var userType_list = doc.selectNodes('/s:STEP-ProductInformation/s:UserTypes/s:UserType');
-	for (var l=0; l<userType_list.length; l++) {
-		var userType = userType_list[l];
-		var id = XMLGetNamedAttribute(userType, 'ID');
-		var name = XMLGetNodeText(userType, 's:Name');
-		var aid  = 'false' == XMLGetNamedAttribute(userType, 'AllowInDesignTemplate');
-		var aqt  = 'false' == XMLGetNamedAttribute(userType, 'AllowQuarkTemplate');
-		var ic   = 'true' == XMLGetNamedAttribute(userType, 'IsCategory');
-		var copl = 'false' == XMLGetNamedAttribute(userType, 'ClassificationOwnsProductLinks');
-		var r    = 'Global' == XMLGetNamedAttribute(userType, 'Revisability');
+	var tipes = [ 'Product', 'Classification', 'Entity', 'Asset' ];
+	for (var t=0; t<tipes.length; t++) {
+		var tipe = tipes[t];
+		Session.Output('tipe='+tipe);
 		
-		//Session.Output('id='+id+' aid='+aid+' aqt='+aqt+' ic='+ic+' copl='+copl+' r='+r);
-		
-		var stereotype;
-		if (r) {
-			stereotype = 'Entity';
-		}
-		else if (aid && aqt && ic) {
-			stereotype = 'Product';
-		}	
-		else if (aid && aqt && ! ic) {
-			stereotype = 'Classification';
-		}
-		else {
-			stereotype = 'Asset';
-		}
-		
-		parent = packages.Item(stereotype);
-		element = findOrCreateElement(parent, 'Class', stereotype, name, id, cache) ;
-		setTaggedValue(element, '@ID', id);
-		setTaggedValue(element, 'Name', name);
-		
-		//diagram = diagrams.Item(stereotype);
-		//add_diagram_element(diagram, element);
-		
-		types.Add(id, element);
-		child2parents.Add(id, []);
-		
-		var UserTypeLinks = userType.selectNodes('s:UserTypeLink');
-		for (var u=0; u<UserTypeLinks.length; u++) {
-			var UserTypeLink = UserTypeLinks[u];
-			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
-			child2parents.Item(id).push(UserTypeID);
+		var items = cache.Item(tipe).Items().toArray();
+		for (var i=0; i<items.length; i++) {
+			var item as EA.Element;
+			item = items[i];
+			var id = getTaggedValue(item, '@ID').Value;
+			var name = item.Name;
+			var tag = getTaggedValue(item, 'Name');
+			if (tag && tag.Value) name = tag.Value;
+			Session.Output('UserType @ID="'+id+'" Name="'+name+'"');
+			
+			var _UserType = AddElementNS(_parent, 'UserType', namespace);
+			_UserType.setAttribute('ID', id);
+			_UserType.setAttribute('Selected', 'true');
+			_UserType.setAttribute('Referenced', 'true');
+			_UserType.setAttribute('ReferenceTargetLockPolicy', 'Strict');
+
+			if (tipe == 'UserType') {
+				_UserType.setAttribute('AllowInDesignTemplate','false');
+				_UserType.setAttribute('AllowQuarkTemplate','false');
+				_UserType.setAttribute('ManuallySorted','false');
+				_UserType.setAttribute('IsCategory','true');
+			}
+			if (tipe == 'Entity') {
+				_UserType.setAttribute('AllowInDesignTemplate','false');
+				_UserType.setAttribute('AllowQuarkTemplate','false');
+				_UserType.setAttribute('ManuallySorted','false');
+				_UserType.setAttribute('IsCategory','false');
+				_UserType.setAttribute('Revisability','Global');
+			}
+			if (tipe == 'Classification') {
+				_UserType.setAttribute('AllowInDesignTemplate','false');
+				_UserType.setAttribute('AllowQuarkTemplate','false');
+				_UserType.setAttribute('ManuallySorted','false');
+				_UserType.setAttribute('ClassificationOwnsProductLinks','false');
+			}
+			if (tipe == 'Asset') {
+				// pass
+			}
+			
+			for (var c=0; c<item.Connectors.Count; c++) {
+				var connector as EA.Connector;
+				connector = item.Connectors.GetAt(c);
+				if (connector.Stereotype == 'Valid Parent' && connector.ClientID == item.ElementID) {
+					var parent as EA.Element;
+					parent = Repository.GetElementByID(connector.SupplierID);
+					if (parent) {
+						var _UserTypeLink = AddElementNS(_UserType, 'UserTypeLink', namespace);
+						var UserTypeID = getTaggedValue(parent, '@ID');
+						if (UserTypeID && UserTypeID.Value) {
+							_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
+						}
+					}
+				}
+			}
+			
+			for (var a=0; a<item.Attributes.Count; a++) {
+				var attribute as EA.Attribute;
+				attribute = item.Attributes.getAt(a);
+				var classifier = Repository.GetElementByID(attribute.ClassifierID);
+				var AttributeID = getTaggedValue(classifier, '@ID');
+				if (AttributeID && AttributeID.Value) {
+					var _AttributeLink = AddElementNS(_UserType, 'AttributeLink', namespace);
+					_AttributeLink.setAttribute('AttributeID',AttributeID.Value);
+				}
+			}
 		}
 	}
 
-	var child_ids = child2parents.Keys().toArray();
-	for (var c=0; c<child_ids.length; c++) {
-		var child_id = child_ids[c];
-		var child = types.Item(child_id);
-		
-		var parent_ids = child2parents.Item(child_id); 
-		for (var p=0; p<parent_ids.length; p++) {
-			var parent_id = parent_ids[p];
-			var parent = types.item(parent_id);
-			if (parent) {
-				createOrReplaceConnector(parent, child, 'Valid Parent', '' ,'Generalization');
-			}
-		}
-		
-	}
-	
 }
 
 function writeUserTypeLinks(package, doc, cache) {
@@ -510,6 +503,7 @@ function writeUserTypeLinks(package, doc, cache) {
 			<UserTypeLink UserTypeID="Movie_Actor"/>
 		</Attribute
 	*/
+	/*
 	var attribute_list = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeList/s:Attribute');
 	for (var l=0; l<attribute_list.length; l++) {
 		var attribute = attribute_list[l];
@@ -525,7 +519,7 @@ function writeUserTypeLinks(package, doc, cache) {
 			var UserTypeLink = UserTypeLinks[u];
 			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
 		
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				Session.Output(' UserType name='+UserType.Name);
 				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
@@ -533,6 +527,7 @@ function writeUserTypeLinks(package, doc, cache) {
 		}
 		
 	}
+	*/
 }
 	
 function writeReferences(package, doc, cache) {	
@@ -558,6 +553,7 @@ function writeReferences(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Element;
 	
+	/*
 	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '');
 	//var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
 	
@@ -588,7 +584,7 @@ function writeReferences(package, doc, cache) {
 		for (var s=0; s<UserTypeLinks.length; s++) {
 			var UserTypeLink = UserTypeLinks[s];
 			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				createOrReplaceConnector(UserType, reference_element, 'Source', '' ,'Aggregation');
 			}
@@ -598,7 +594,7 @@ function writeReferences(package, doc, cache) {
 		for (var t=0; t<TargetUserTypeLinks.length; t++) {
 			var TargetUserTypeLink = TargetUserTypeLinks[t];
 			var UserTypeID = XMLGetNamedAttribute(TargetUserTypeLink, 'UserTypeID');
-			var UserType = getCache(cache, 'UserType', UserTypeID);
+			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				createOrReplaceConnector(UserType, reference_element, 'Target', 'Target' ,'Aggregation');
 			}
@@ -616,6 +612,8 @@ function writeReferences(package, doc, cache) {
 	}
 	
 	// link attributes to references, valid attribute
+	
+	*/
 }
 
 function writeKeys(package, doc, cache) {}
@@ -647,9 +645,8 @@ function exportStepXML(diagram) {
 	writeUnitsOfMeasures(package, doc, cache);
     writeListOfValuesGroups(package, doc, cache);
 	writeListOfValues(package, doc, cache);
-	*/
     writeAttributeGroups(package, doc, cache);
-	/*
+	*/
     writeUserTypes(package, doc, cache);
     writeUserTypeLinks(package, doc, cache);
     writeReferences(package, doc, cache);
@@ -658,7 +655,6 @@ function exportStepXML(diagram) {
     writeClassifications(package, doc, cache);
     writeEntities(package, doc, cache);
     writeAssets(package, doc, cache);
-	*/
 	
     Session.Output('fileName="'+fileName+'"');
     XMLSaveXMLToFile(doc, fileName, false, true);	
@@ -669,8 +665,8 @@ Repository.ClearOutput("Script");
 Session.Output( "Starting" );
 
 var diagram as EA.Diagram;
-diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
-//diagram = Repository.GetCurrentDiagram();
+//diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
+diagram = Repository.GetCurrentDiagram();
 exportStepXML(diagram);
 
 Session.Output("Ended");

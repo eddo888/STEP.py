@@ -10,7 +10,7 @@ with codecs.open(path.join(pwd, 'README.md'), 'r', encoding='utf8') as input:
 
 name='STEP.py'
 user='eddo888'
-version='1.60'
+version='2.0'
 
 setup(
 	name=name,

@@ -180,8 +180,8 @@ function writeListOfValues(package, doc, cache) {
 		_LOV.setAttribute('Referenced', 'true');
 		_LOV.setAttribute('AllowUserValueAddition', 'true');
 		var itag = getTaggedValue(LOV, 'UseValueID');
-		var UseValueID = (itag && eval(itag.Value));
-		_LOV.setAttribute('UseValueID', UseValueID);
+		var UseValueID = (itag && itag.Value == 'true');
+		_LOV.setAttribute('UseValueID', ''+UseValueID);
 		
 		var _tname = AddElementNS(_LOV, 'Name', namespace);
 		var _tcdata = doc.createCDATASection(tname);
@@ -384,7 +384,7 @@ function writeAttributes(package, doc, cache) {
 		}
 		
 		// user type link
-		var claszes = findClassesThatUsesAttribute(attribute);
+		var claszes = findClassesThatUsesAttribute(cache, attribute);
 		for (var c=0; c<claszes.length; c++) {
 			var clasz as EA.Element;
 			clasz = claszes[c];
@@ -497,39 +497,6 @@ function writeUserTypes(package, doc, cache) {
 
 }
 
-function writeUserTypeLinks(package, doc, cache) {
-	/*
-		<Attribute ID="Movie_Name"  ...
-			<UserTypeLink UserTypeID="Movie_Actor"/>
-		</Attribute
-	*/
-	/*
-	var attribute_list = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeList/s:Attribute');
-	for (var l=0; l<attribute_list.length; l++) {
-		var attribute = attribute_list[l];
-		var id = XMLGetNamedAttribute(attribute, 'ID');
-		var name = XMLGetNodeText(attribute, 's:Name');
-		var attribute_class = getCache(cache, 'Attribute', id);
-		if (! attribute_class) continue;
-			
-		Session.Output('attribute name='+attribute_class.Name);
-		
-		var UserTypeLinks = attribute.selectNodes('s:UserTypeLink');
-		for (var u=0; u<UserTypeLinks.length; u++) {
-			var UserTypeLink = UserTypeLinks[u];
-			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
-		
-			var UserType = getCachedUserType(cache, UserTypeID);
-			if (UserType) {
-				Session.Output(' UserType name='+UserType.Name);
-				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
-			}
-		}
-		
-	}
-	*/
-}
-	
 function writeReferences(package, doc, cache) {	
 	/*
         <ProductCrossReferenceType 
@@ -641,15 +608,12 @@ function exportStepXML(diagram) {
 	var cache = fillCache(null, package);
 	//showCache(cache)
 	
-	/*
+    writeUserTypes(package, doc, cache);
+    writeReferences(package, doc, cache);
 	writeUnitsOfMeasures(package, doc, cache);
     writeListOfValuesGroups(package, doc, cache);
 	writeListOfValues(package, doc, cache);
     writeAttributeGroups(package, doc, cache);
-	*/
-    writeUserTypes(package, doc, cache);
-    writeUserTypeLinks(package, doc, cache);
-    writeReferences(package, doc, cache);
     writeKeys(package, doc, cache);
     writeProducts(package, doc, cache);
     writeClassifications(package, doc, cache);

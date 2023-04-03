@@ -219,7 +219,7 @@ function readListOfValues(package, doc, cache) {
 			for (var v=0; v<values.length; v++) {
 				var value = values[v];
 				var value_name = value.text;
-				var lov_value = findOrCreateAttribute(element, 'enum', value_name, '', '');
+				var lov_value = findOrCreateAttribute(element, 'enum', value_name, null, null);
 				if (UseValueID == 'true') {
 					var lov_id = XMLGetNamedAttribute(value, 'ID');
 					lov_value.Default = lov_id;
@@ -483,10 +483,10 @@ function readUserTypeLinks(package, doc, cache) {
 		var attribute = attribute_list[l];
 		var id = XMLGetNamedAttribute(attribute, 'ID');
 		var name = XMLGetNodeText(attribute, 's:Name');
-		var attribute_class = getCache(cache, 'Attribute', id);
-		if (! attribute_class) continue;
+		var element = getCache(cache, 'Attribute', id);
+		if (! element) continue;
 			
-		//Session.Output('attribute name='+attribute_class.Name);
+		//Session.Output('attribute name='+element.Name);
 		
 		var UserTypeLinks = attribute.selectNodes('s:UserTypeLink');
 		for (var u=0; u<UserTypeLinks.length; u++) {
@@ -496,7 +496,10 @@ function readUserTypeLinks(package, doc, cache) {
 			var UserType = getCachedUserType(cache, UserTypeID);
 			if (UserType) {
 				//Session.Output(' UserType name='+UserType.Name);
-				findOrCreateAttribute(UserType, 'Valid Attribute', name, name, '');
+				var item as EA.Attribute;
+				item = findOrCreateAttribute(UserType, 'Valid Attribute', name, name, null);
+				item.ClassifierID = element.ElementID;
+				item.Update();
 			}
 		}
 		
@@ -578,7 +581,10 @@ function readReferences(package, doc, cache) {
 			var AttributeID = XMLGetNamedAttribute(AttributeLink, 'AttributeID');
 			var attribute_element = getCache(cache, 'Attribute', AttributeID);
 			if (attribute_element) {
-				findOrCreateAttribute(reference_element, 'Valid Attribute', attribute_element.Name, attribute_element.Name, '');
+				var item as EA.Attribute;
+				item = findOrCreateAttribute(reference_element, 'Valid Attribute', attribute_element.Name, attribute_element.Name, null);
+				item.ClassifierID = attribute_element.ElementID;
+				item.Update();
 			}
 		}
 	}

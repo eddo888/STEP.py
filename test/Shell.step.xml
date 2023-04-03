@@ -26,6 +26,7 @@
 			<AttributeLink AttributeID="isForSale"/>
 			<AttributeLink AttributeID="Voltage"/>
 			<AttributeLink AttributeID="PackageContents"/>
+			<AttributeLink AttributeID="Package Type"/>
 		</UserType>
 		<UserType ID="Variant" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict">
 			<UserTypeLink UserTypeID="Product"/>
@@ -69,10 +70,13 @@
 		</UserType>
 		<UserType ID="Address" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ManuallySorted="false" IsCategory="false" Revisability="Global">
 			<UserTypeLink UserTypeID="Suburb"/>
+			<AttributeLink AttributeID="Full Address"/>
 		</UserType>
 		<UserType ID="Price" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ManuallySorted="false" IsCategory="false" Revisability="Global">
 			<UserTypeLink UserTypeID="Address"/>
+			<AttributeLink AttributeID="Cost Price"/>
 			<AttributeLink AttributeID="EndDate"/>
+			<AttributeLink AttributeID="Sell Price"/>
 			<AttributeLink AttributeID="StartDate"/>
 		</UserType>
 		<UserType ID="Asset user-type root" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict"/>
@@ -419,6 +423,22 @@
 			<AttributeGroupLink AttributeGroupID="PackagingAttributes"/>
 			<UserTypeLink UserTypeID="Product"/>
 		</Attribute>
+		<Attribute ID="Package Type" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Package Type</Name>
+			<ListOfValueLink ListOfValueID="PackageType_LOV"/>
+			<AttributeGroupLink AttributeGroupID="PackagingAttributes"/>
+			<UserTypeLink UserTypeID="Product"/>
+		</Attribute>
+		<Attribute ID="Maximum Storage Temperature" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Maximum Storage Temperature</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Environmental"/>
+		</Attribute>
+		<Attribute ID="Minimum Storage Temperature" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Minimum Storage Temperature</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Environmental"/>
+		</Attribute>
 		<Attribute ID="Repack Quotient" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
 			<Name>Repack Quotient</Name>
 			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
@@ -429,8 +449,8 @@
 			<Name>Supplier Description</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
 			<AttributeGroupLink AttributeGroupID="SupplierAttributes"/>
-			<UserTypeLink UserTypeID="Supplier Products"/>
 			<UserTypeLink UserTypeID="Product"/>
+			<UserTypeLink UserTypeID="Supplier Products"/>
 		</Attribute>
 		<Attribute ID="Supplier Priority" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
 			<Name>Supplier Priority</Name>
@@ -444,15 +464,33 @@
 			<AttributeGroupLink AttributeGroupID="LocationAttributes"/>
 			<UserTypeLink UserTypeID="Country"/>
 		</Attribute>
+		<Attribute ID="Full Address" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Full Address</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="LocationAttributes"/>
+			<UserTypeLink UserTypeID="Address"/>
+		</Attribute>
 		<Attribute ID="PostCode" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
 			<Name>Post Code</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
 			<AttributeGroupLink AttributeGroupID="LocationAttributes"/>
 			<UserTypeLink UserTypeID="Suburb"/>
 		</Attribute>
+		<Attribute ID="Cost Price" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Cost Price</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Pricing Attributes"/>
+			<UserTypeLink UserTypeID="Price"/>
+		</Attribute>
 		<Attribute ID="EndDate" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
 			<Name>End Date</Name>
 			<Validation BaseType="DateTime" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
+			<AttributeGroupLink AttributeGroupID="Pricing Attributes"/>
+			<UserTypeLink UserTypeID="Price"/>
+		</Attribute>
+		<Attribute ID="Sell Price" Selected="true" Referenced="true" FullTextIndexed="true" ExternallyMaintained="false" Derived="true" Mandatory="true" MultiValued="false">
+			<Name>Sell Price</Name>
+			<Validation BaseType="number" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
 			<AttributeGroupLink AttributeGroupID="Pricing Attributes"/>
 			<UserTypeLink UserTypeID="Price"/>
 		</Attribute>
@@ -466,8 +504,8 @@
 			<Name>Marketing Description</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="" InputMask=""/>
 			<AttributeGroupLink AttributeGroupID="MarketingAttributes"/>
-			<UserTypeLink UserTypeID="Channel"/>
 			<UserTypeLink UserTypeID="Product"/>
+			<UserTypeLink UserTypeID="Channel"/>
 		</Attribute>
 	</AttributeList>
 </STEP-ProductInformation>

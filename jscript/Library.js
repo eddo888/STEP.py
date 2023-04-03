@@ -400,6 +400,11 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 
 function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 	var element as EA.Element;
+	var stereotype as EA.Stereotype;
+	if (!tipe) tipe='';
+	if (!value) value = '';
+		
+	var element as EA.Element;
 	var result as EA.Attribute;
 	var prefix = '+';
 	for (var a=0; a<element.Attributes.Count; a++) {
@@ -412,7 +417,7 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 		}
 	}
 	if (! result) {
-		result = element.Attributes.AddNew(name, tipe);
+		result = element.Attributes.AddNew(name,tipe);
 		result.Update();
 		result.Default = value;
 		result.Update();
@@ -423,26 +428,27 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 	return result;
 }
 
-function findClassesThatUsesAttribute(attribute) {
-	var attribute as EA.Element; // ie STEP class defnition of stereotyped <Attribute>
-	
-	var claszes = [];
-	var sql = "SELECT * FROM T_ATTRIBUTE a WHERE a.CLASSIFIER = (SELECT o.OBJECT_ID FROM T_OBJECT o WHERE o.EA_GUID='"+attribute.ElementGUID+"');";
-	var res = Repository.SQLQuery(sql);
-	//Session.Output('res='+res);
-
-	var xmlDOM = new ActiveXObject("MSXML2.DOMDocument");
-	xmlDOM.validateOnParse = false;
-	xmlDOM.async = false;
-	if( xmlDOM.loadXML( res ) ){
-		var nodeList = xmlDOM.documentElement.selectNodes( '//Object_ID' );
-		for ( var i = 0 ; i < nodeList.length ; i++ ){
-			var object_id = nodeList.item(i).text;
-			//Session.Output('object_id='+object_id);
-			var usage as EA.Element;
-			usage = Repository.GetElementByID(object_id);
-			//Session.Output('usage stereotype='+usage.Stereotype+' name='+usage.Name);
-			claszes.push(usage);
+function findClassesThatUsesAttribute(cache, attribute) {
+	var attribute as EA.Element;
+	var claszes = [];	
+	var tipes = ['Product','Classification','Entity','Asset','Reference Definition'];
+	for (var t=0; t<tipes.length; t++) {
+		var tipe = tipes[t];
+		if (! cache.Exists(tipe)) continue;
+			
+		var _claszes = cache.Item(tipe).Items().toArray();
+		for (var j=0; j<_claszes.length; j++) {
+			var clasz as EA.Element;
+			clasz = _claszes[j];
+			
+			for (var k=0; k<clasz.Attributes.Count; k++) {
+				var item as EA.Attribute;
+				item = clasz.Attributes.GetAt(k);
+				if (item.ClassifierID == attribute.ElementID) {
+					claszes.push(clasz);
+					break;
+				}
+			}
 		}
 	}
 	return claszes;

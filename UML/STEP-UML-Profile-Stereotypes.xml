@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="1.6" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="2.0" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

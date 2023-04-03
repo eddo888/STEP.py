@@ -1,5 +1,4 @@
-<STEP-ProductInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd" xmlns="http://www.stibosystems.com/step" ExportTime="3/28/2023 7:06:03 PM">
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="3/28/2023 7:06:03 PM">
 	<UserTypes>
 		<UserType ID="Product user-type root" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict"/>
 		<UserType ID="Department" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict">
@@ -84,6 +83,33 @@
 			<UserTypeLink UserTypeID="Supplier Assets"/>
 		</UserType>
 	</UserTypes>
+	<CrossReferenceTypes>
+		<ProductCrossReferenceType ID="Buy Side 2 Sell Side" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<AttributeLink AttributeID="Supplier Priority"/>
+			<AttributeLink AttributeID="Repack Quotient"/>
+			<UserTypeLink UserTypeID="Variant"/>
+			<TargetUserTypeLink UserTypeID="Variant"/>
+		</ProductCrossReferenceType>
+		<ProductCrossReferenceType ID="Product Cross Reference" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<UserTypeLink UserTypeID="Variant"/>
+			<TargetUserTypeLink UserTypeID="Variant"/>
+		</ProductCrossReferenceType>
+		<AssetCrossReferenceType ID="Primary Product Image" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="false">
+			<UserTypeLink UserTypeID="Product"/>
+			<UserTypeLink UserTypeID="Channel"/>
+			<UserTypeLink UserTypeID="Supplier"/>
+			<UserTypeLink UserTypeID="Address"/>
+			<TargetUserTypeLink UserTypeID="ProductImage"/>
+		</AssetCrossReferenceType>
+		<ClassificationProductLinkType ID="Product 2 Channel" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<UserTypeLink UserTypeID="Variant"/>
+			<TargetUserTypeLink UserTypeID="Channel"/>
+		</ClassificationProductLinkType>
+		<ClassificationProductLinkType ID="Product 2 Supplier" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<UserTypeLink UserTypeID="Product"/>
+			<TargetUserTypeLink UserTypeID="Supplier Products"/>
+		</ClassificationProductLinkType>
+	</CrossReferenceTypes>
 	<UnitList>
 		<UnitFamily ID="Currency" Selected="true" Referenced="true">
 			<Name>Currency</Name>

@@ -518,69 +518,95 @@ function writeReferences(package, doc, cache) {
 	*/	
 	
 	var package as EA.Package;
-	var diagram as EA.Element;
 	
-	/*
-	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '');
-	//var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
+	var root = doc.documentElement;
+	var _parent = AddElementNS(root, 'CrossReferenceTypes', namespace);
 	
-	var types = new ActiveXObject("Scripting.Dictionary");  // { @element.name : stereotype }
-	types.Add('ProductCrossReferenceType',        'Product Reference Type'              );
-	types.Add('AssetCrossReferenceType',          'Asset Reference Type'                );
-	types.Add('ClassificationCrossReferenceType', 'Classification Reference Type'       );
-	types.Add('ClassificationProductLinkType',    'Product to Classification Link Type' );
-	types.Add('EntityCrossReferenceType',         'Entity Reference Type'               );
-	
-	var references = doc.selectNodes('/s:STEP-ProductInformation/s:CrossReferenceTypes/*');
-	
-	for (var r=0; r<references.length; r++) {
-		var reference = references[r];
-		var id = XMLGetNamedAttribute(reference, 'ID');
-		var name = XMLGetNodeText(reference, 's:Name');
-		var MultiValued = XMLGetNamedAttribute(reference, 'MultiValued');
-		
-		var stereotype = types.Item(reference.nodeName);
-		var reference_element = findOrCreateElement(reference_package, 'Class', 'Reference Definition', name, id, cache);
-		setTaggedValue(reference_element, '@ID', id);
-		setTaggedValue(reference_element, 'Name', name);
-		setTaggedValue(reference_element, 'Type', stereotype);
-		
-		//add_diagram_element(reference_diagram, reference_element);
+	var tipes = new ActiveXObject("Scripting.Dictionary");  // { reference.type: @element.name}
+	tipes.Add('Product Reference Type',              'ProductCrossReferenceType'        );
+	tipes.Add('Asset Reference Type',                'AssetCrossReferenceType'          );
+	tipes.Add('Classification Reference Type',       'ClassificationCrossReferenceType' );
+	tipes.Add('Product to Classification Link Type', 'ClassificationProductLinkType'    );
+	tipes.Add('Entity Reference Type'               ,'EntityCrossReferenceType'         );
+
+	var keys = tipes.Keys().toArray();
+	for (var k=0; k<keys.length; k++) {
+		var tipe = keys[k];
+		var element_name = tipes.Item(tipe);
+		Session.Output('tipe='+tipe);
+
+		var items = cache.Item('Reference Definition').Items().toArray();
+		for (var i=0; i<items.length; i++) {
+			var item as EA.Element;
+			item = items[i];
+			var rtag = getTaggedValue(item, 'Type');
+			if (rtag && rtag.Value == tipe) {
 				
-		var UserTypeLinks = reference.selectNodes('s:UserTypeLink');
-		for (var s=0; s<UserTypeLinks.length; s++) {
-			var UserTypeLink = UserTypeLinks[s];
-			var UserTypeID = XMLGetNamedAttribute(UserTypeLink, 'UserTypeID');
-			var UserType = getCachedUserType(cache, UserTypeID);
-			if (UserType) {
-				createOrReplaceConnector(UserType, reference_element, 'Source', '' ,'Aggregation');
-			}
-		}
-		
-		var TargetUserTypeLinks = reference.selectNodes('s:TargetUserTypeLink');
-		for (var t=0; t<TargetUserTypeLinks.length; t++) {
-			var TargetUserTypeLink = TargetUserTypeLinks[t];
-			var UserTypeID = XMLGetNamedAttribute(TargetUserTypeLink, 'UserTypeID');
-			var UserType = getCachedUserType(cache, UserTypeID);
-			if (UserType) {
-				createOrReplaceConnector(UserType, reference_element, 'Target', 'Target' ,'Aggregation');
-			}
-		}
-		
-		var AttributeLinks = reference.selectNodes('s:AttributeLink');
-		for (var a=0; a<AttributeLinks.length; a++) {
-			var AttributeLink = AttributeLinks[a];
-			var AttributeID = XMLGetNamedAttribute(AttributeLink, 'AttributeID');
-			var attribute_element = getCache(cache, 'Attribute', AttributeID);
-			if (attribute_element) {
-				findOrCreateAttribute(reference_element, 'Valid Attribute', attribute_element.Name, attribute_element.Name, '');
+				var id = getTaggedValue(item, '@ID').Value;
+				var name = item.Name;
+				var tag = getTaggedValue(item, 'Name');
+				if (tag && tag.Value) name = tag.Value;
+				Session.Output('  '+element_name+' @ID="'+id+'" Name="'+name+'"');
+				
+				var reference = AddElementNS(_parent, element_name, namespace);
+				reference.setAttribute('ID', id);
+				reference.setAttribute('Selected', 'true');
+				reference.setAttribute('Referenced', 'true');
+				reference.setAttribute('Inherited','false');
+				reference.setAttribute('Accumulated','false');
+				reference.setAttribute('Revised','false');
+				reference.setAttribute('Mandatory','false');
+				var MultiValued = ('Yes' == getTaggedValue(item, 'MultiValued').Value);
+				reference.setAttribute('MultiValued', ''+MultiValued)
+				
+				for (var a=0; a<item.Attributes.Count; a++) {
+					var attribute as EA.Attribute;
+					attribute = item.Attributes.getAt(a);
+					var classifier = Repository.GetElementByID(attribute.ClassifierID);
+					var AttributeID = getTaggedValue(classifier, '@ID');
+					if (AttributeID && AttributeID.Value) {
+						var _AttributeLink = AddElementNS(reference, 'AttributeLink', namespace);
+						_AttributeLink.setAttribute('AttributeID', AttributeID.Value);
+					}
+				}
+
+				// sources
+				for (var c=0; c<item.Connectors.Count; c++) {
+					var connector as EA.Connector;
+					connector = item.Connectors.GetAt(c);
+					if (connector.Stereotype == 'Source' && connector.ClientID == item.ElementID) {
+						var source as EA.Element;
+						source = Repository.GetElementByID(connector.SupplierID);
+						if (source) {
+							var _UserTypeLink = AddElementNS(reference, 'UserTypeLink', namespace);
+							var UserTypeID = getTaggedValue(source, '@ID');
+							if (UserTypeID && UserTypeID.Value) {
+								_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
+							}
+						}
+					}
+				}
+				
+				// targets
+				for (var c=0; c<item.Connectors.Count; c++) {
+					var connector as EA.Connector;
+					connector = item.Connectors.GetAt(c);
+					if (connector.Stereotype == 'Target' && connector.ClientID == item.ElementID) {
+						var target as EA.Element;
+						target = Repository.GetElementByID(connector.SupplierID);
+						if (target) {
+							var _TargetUserTypeLink = AddElementNS(reference, 'TargetUserTypeLink', namespace);
+							var UserTypeID = getTaggedValue(target, '@ID');
+							if (UserTypeID && UserTypeID.Value) {
+								_TargetUserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
-	
-	// link attributes to references, valid attribute
-	
-	*/
+
 }
 
 function writeKeys(package, doc, cache) {}
@@ -589,12 +615,10 @@ function writeClassifications(package, doc, cache) {}
 function writeEntities(package, doc, cache) {}
 function writeAssets(package, doc, cache) {}
 
-function exportStepXML(diagram) {
+function exportStepXML(package) {
     var doc; // as MSXML2.DOMDocument;
     var root; // as MSXML2.DOMNode;
 
-    var package as EA.Package;
-    package = Repository.GetPackageByID(diagram.PackageID);
     //Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
 
     fileName = getFileName(package, 1); // 0==open, 1==save
@@ -628,9 +652,12 @@ Repository.EnsureOutputVisible( "Debug" );
 Repository.ClearOutput("Script");
 Session.Output( "Starting" );
 
-var diagram as EA.Diagram;
+//var diagram as EA.Diagram;
 //diagram = Repository.GetDiagramByGuid('{FD97A92D-9741-413e-9585-4310E440FB71}');
-diagram = Repository.GetCurrentDiagram();
-exportStepXML(diagram);
+//diagram = Repository.GetCurrentDiagram();
+
+var package as EA.Package;
+package = Repository.GetTreeSelectedPackage();
+exportStepXML(package);
 
 Session.Output("Ended");

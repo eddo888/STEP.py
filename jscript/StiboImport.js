@@ -598,13 +598,11 @@ function readClassifications(package, doc, cache) {}
 function readEntities(package, doc, cache) {}
 function readAssets(package, doc, cache) {}
 
-function importStepXML(diagram) {
+function importStepXML(package) {
 	var doc; // as MSXML2.DOMDocument;
 	var node; // as MSXML2.DOMNode;
 	var fileName;
 
-	var package as EA.Package;
-	package = Repository.GetPackageByID(diagram.PackageID);
 	fileName = getFileName(package, 0); // 0==open, 1==save
 
 	var cache = fillCache(null, package);
@@ -646,11 +644,12 @@ Repository.EnsureOutputVisible( "Debug" );
 Repository.ClearOutput("Script");
 Session.Output( "Starting" );
 
-// { type: { @ID: Element }}
-
-var diagram as EA.Diagram;
+//var diagram as EA.Diagram;
 //diagram = Repository.GetDiagramByGuid('{B12EF0F9-C12A-40e1-A7A3-A73285928984}');
-diagram = Repository.GetCurrentDiagram();
-importStepXML(diagram);
+//diagram = Repository.GetCurrentDiagram();
+
+var package as EA.Package;
+package = Repository.GetTreeSelectedPackage();
+importStepXML(package);
 
 Session.Output("Ended");

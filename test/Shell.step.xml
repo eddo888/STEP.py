@@ -32,6 +32,10 @@
 			<AttributeLink AttributeID="Diameter"/>
 		</UserType>
 		<UserType ID="Classification 1 user-type root" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ManuallySorted="false" ClassificationOwnsProductLinks="false"/>
+		<UserType ID="Assets" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ManuallySorted="false" ClassificationOwnsProductLinks="false">
+			<UserTypeLink UserTypeID="Classification 1 user-type root"/>
+			<UserTypeLink UserTypeID="Assets"/>
+		</UserType>
 		<UserType ID="Channels" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ManuallySorted="false" ClassificationOwnsProductLinks="false">
 			<UserTypeLink UserTypeID="Classification 1 user-type root"/>
 		</UserType>
@@ -81,6 +85,7 @@
 		<UserType ID="Asset user-type root" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict"/>
 		<UserType ID="ProductImage" Selected="true" Referenced="true" ReferenceTargetLockPolicy="Strict">
 			<UserTypeLink UserTypeID="Supplier Assets"/>
+			<UserTypeLink UserTypeID="Assets"/>
 		</UserType>
 	</UserTypes>
 	<CrossReferenceTypes>
@@ -88,7 +93,9 @@
 			<AttributeLink AttributeID="Supplier Priority"/>
 			<AttributeLink AttributeID="Repack Quotient"/>
 			<UserTypeLink UserTypeID="Variant"/>
+			<UserTypeLink UserTypeID="Product"/>
 			<TargetUserTypeLink UserTypeID="Variant"/>
+			<TargetUserTypeLink UserTypeID="Product"/>
 		</ProductCrossReferenceType>
 		<ProductCrossReferenceType ID="Product Cross Reference" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
 			<UserTypeLink UserTypeID="Variant"/>
@@ -99,10 +106,16 @@
 			<UserTypeLink UserTypeID="Channel"/>
 			<UserTypeLink UserTypeID="Supplier"/>
 			<UserTypeLink UserTypeID="Address"/>
+			<UserTypeLink UserTypeID="Sub Group"/>
+			<UserTypeLink UserTypeID="Group"/>
+			<UserTypeLink UserTypeID="Category"/>
+			<UserTypeLink UserTypeID="Department"/>
+			<UserTypeLink UserTypeID="Variant"/>
 			<TargetUserTypeLink UserTypeID="ProductImage"/>
 		</AssetCrossReferenceType>
 		<ClassificationProductLinkType ID="Product 2 Channel" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
 			<UserTypeLink UserTypeID="Variant"/>
+			<UserTypeLink UserTypeID="Product"/>
 			<TargetUserTypeLink UserTypeID="Channel"/>
 		</ClassificationProductLinkType>
 		<ClassificationProductLinkType ID="Product 2 Supplier" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">

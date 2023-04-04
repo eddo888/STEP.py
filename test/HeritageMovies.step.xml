@@ -804,9 +804,9 @@ Exported by database exporter.
         </AttributeGroup>
     </AttributeGroupList>
     <AttributeList>
-        <Attribute ID="Movie_Name" MultiValued="false" ProductMode="Property" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Selected="true" Referenced="true" Mandatory="false">
+        <Attribute ID="Movie_Name" MultiValued="true" ProductMode="Property" FullTextIndexed="true" ExternallyMaintained="true" Derived="true" Selected="true" Referenced="true" Mandatory="false">
             <Name>Name</Name>
-            <Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+            <Validation BaseType="text" MinValue="0" MaxValue="9999" MaxLength="100" InputMask="abc"/>
             <MetaData>
                 <Value Derived="true" AttributeID="CategorySpecificCompleteness">0</Value>
                 <Value Derived="true" AttributeID="CompletenessPrimaryImage">0</Value>

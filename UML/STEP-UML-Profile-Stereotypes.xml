@@ -104,6 +104,7 @@
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
+					<Tag name="ShowInWorkbench" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="7451452" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">

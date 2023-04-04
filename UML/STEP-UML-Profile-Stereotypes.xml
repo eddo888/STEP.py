@@ -30,7 +30,10 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -75,7 +78,11 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Derived" type="" description="" unit="" values="" default=""/>
+					<Tag name="ExternallyMaintained" type="" description="" unit="" values="" default=""/>
+					<Tag name="FullTextIndexed" type="" description="" unit="" values="" default=""/>
 					<Tag name="InputMask" type="" description="" unit="" values="" default=""/>
+					<Tag name="Mandatory" type="" description="" unit="" values="" default=""/>
 					<Tag name="MaxLength" type="" description="" unit="" values="" default=""/>
 					<Tag name="MaxValue" type="" description="" unit="" values="" default=""/>
 					<Tag name="MinValue" type="" description="" unit="" values="" default=""/>
@@ -93,6 +100,10 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
+					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Attribute Link" notes="" cx="0" cy="0" bgcolor="7451452" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -163,7 +174,10 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -249,7 +263,10 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -415,7 +432,10 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="AllowUserValueAddition" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="UseValueID" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
@@ -427,6 +447,9 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="LOV Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -502,7 +525,11 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
@@ -546,8 +573,14 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Accumulated" type="" description="" unit="" values="" default=""/>
+					<Tag name="Inherited" type="" description="" unit="" values="" default=""/>
+					<Tag name="Mandatory" type="" description="" unit="" values="" default=""/>
 					<Tag name="MultiValued" type="" description="" unit="" values="" default="Yes"/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revised" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="Type" type="enumeration" description="" unit="" values="Product Reference Type,Asset Reference Type,Classification Reference Type,Product to Classification Link Type,Entity Reference Type" default=""/>
 				</TaggedValues>
 			</Stereotype>
@@ -701,6 +734,8 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>

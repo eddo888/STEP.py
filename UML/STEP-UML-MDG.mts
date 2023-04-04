@@ -1,10 +1,11 @@
 <MDG.Selections model="STEP-Model --- DBType=11;Connect=Provider=SSDB;SRC=C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\STEP-Model.qea;UID=;PWD=;">
 	<Technology id="Stibo STEP" name="Stibo STEP" version="2.0" notes="Stibo Systems STEP design model" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au" icon="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp" logo="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp"/>
 	<Profiles directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Stereotypes.xml"/>
-	<TagVals tags="@ID,Can Create,Can Delete,Can Instantiate,Can Join,Can Read,Can Terminate,Can Update,Factor,InputMask,MaxLength,MaxValue,MinValue,MultiValued,Name,Offset,Revision,UseValueID"/>
+	<TagVals tags="@ID,Accumulated,AllowUserValueAddition,Can Create,Can Delete,Can Instantiate,Can Join,Can Read,Can Terminate,Can Update,Derived,ExternallyMaintained,Factor,FullTextIndexed,Inherited,InputMask,Mandatory,ManuallySorted,MaxLength,MaxValue,MinValue,MultiValued,Name,Offset,Referenced,ReferenceTargetLockedPolicy,Revised,Revision,Selected,ShowInWorkbench,UseValueID"/>
 	<DiagramProfile directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Diagram.xml"/>
 	<UIToolboxes directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Toolbox.xml"/>
 	<Scripts>
+		<Script id="{993C1194-9615-4f9f-AF07-E243AD913EBA}" name="_set an ID for selected elements" type="normal" language="JScript"/>
 		<Script id="{1C6EFBF0-125A-4f39-96D9-4747500E5463}" name="Set Link Style" type="normal" language="JScript"/>
 		<Script id="{59E173F6-807B-4b3f-80A7-3C4244FCF9FA}" name="Include Missing Parts" type="normal" language="JScript"/>
 		<Script id="{10B5221B-4ED1-4c85-A57B-EB92688910BD}" name="Stibo Import" type="normal" language="JScript"/>
@@ -18,7 +19,7 @@
 		<Script id="{85B0216F-78EF-4e8d-BE55-3F63AF498BEF}" name="Stibo Export" type="normal" language="JScript"/>
 		<Script id="{794E7B21-B725-4d4b-9CA1-E0F4816AECC3}" name="Include Linked Parts" type="normal" language="JScript"/>
 		<Script id="{DF93B027-FD4B-48d3-9F03-1BE2468B49F5}" name="Import Connection References" type="normal" language="JScript"/>
-		<Script id="{A598A0AE-CEF2-4c04-AAF0-C5DD5813D731}" name="_set an ID" type="normal" language="JScript"/>
+		<Script id="{A598A0AE-CEF2-4c04-AAF0-C5DD5813D731}" name="_set an ID for all in package" type="normal" language="JScript"/>
 	</Scripts>
 	<WorkspaceLayouts>
 		<WorkspaceLayout name="Stibo STEP"/>

@@ -1,0 +1,30 @@
+<STEP-ProductInformation ExportTime="4/4/2023 12:10:28 PM" xmlns="http://www.stibosystems.com/step">
+    <UserTypes>
+        <UserType ID="Product user-type root" ManuallySorted="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="true" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Product UserType root</Name>
+        </UserType>
+        <UserType ID="Classification 1 user-type root" ClassificationOwnsProductLinks="false" ManuallySorted="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Classification UserType root</Name>
+        </UserType>
+        <UserType ID="Entity user-type root" AllowInDesignTemplate="false" AllowQuarkTemplate="false" Revisability="Global" IsCategory="false" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Entity user-type root</Name>
+        </UserType>
+        <UserType ID="Asset user-type root" ReferenceTargetLockPolicy="Strict" Selected="true" Referenced="true">
+            <Name>Assets</Name>
+        </UserType>
+    </UserTypes>
+    <CrossReferenceTypes/>
+    <UnitList/>
+    <ListOfValuesGroupList>
+        <ListOfValuesGroup ID="List Of Values group root" Referenced="true" Selected="true">
+            <Name>Lists of Values / LOVs</Name>
+        </ListOfValuesGroup>
+    </ListOfValuesGroupList>
+    <ListsOfValues/>
+    <AttributeGroupList>
+        <AttributeGroup ID="Attribute group root">
+            <Name>Attribute Groups</Name>
+        </AttributeGroup>
+    </AttributeGroupList>
+    <AttributeList/>
+</STEP-ProductInformation>

@@ -381,26 +381,29 @@
 	<AttributeGroupList>
 		<AttributeGroup ID="Attribute group root" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
 			<Name>Attribute Groups</Name>
-			<AttributeGroup ID="EDDO_CommonAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Common</Name>
-			</AttributeGroup>
-			<AttributeGroup ID="EDDO_PackagingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Packaging</Name>
-				<AttributeGroup ID="EDDO_Environmental" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-					<Name>Environment</Name>
+			<AttributeGroup ID="EDDO_Shell_Attrs" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Shell Attributes</Name>
+				<AttributeGroup ID="EDDO_CommonAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Common</Name>
 				</AttributeGroup>
-			</AttributeGroup>
-			<AttributeGroup ID="EDDO_SupplierAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Supplier</Name>
-			</AttributeGroup>
-			<AttributeGroup ID="EDDO_LocationAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Location</Name>
-			</AttributeGroup>
-			<AttributeGroup ID="EDDO_Pricing Attributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Pricing</Name>
-			</AttributeGroup>
-			<AttributeGroup ID="EDDO_MarketingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
-				<Name>Marketing</Name>
+				<AttributeGroup ID="EDDO_PackagingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Packaging</Name>
+					<AttributeGroup ID="EDDO_Environmental" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+						<Name>Environment</Name>
+					</AttributeGroup>
+				</AttributeGroup>
+				<AttributeGroup ID="EDDO_SupplierAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Supplier</Name>
+				</AttributeGroup>
+				<AttributeGroup ID="EDDO_LocationAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Location</Name>
+				</AttributeGroup>
+				<AttributeGroup ID="EDDO_Pricing Attributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Pricing</Name>
+				</AttributeGroup>
+				<AttributeGroup ID="EDDO_MarketingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Marketing</Name>
+				</AttributeGroup>
 			</AttributeGroup>
 		</AttributeGroup>
 	</AttributeGroupList>

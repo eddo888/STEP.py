@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC User Scripts.Library
-//!INC Stibo STEP.Library
+//!INC User Scripts.Library
+!INC Stibo STEP.Library
 
 function writeUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -17,44 +17,33 @@ function writeUnitsOfMeasures(package, doc, cache) {
 
 	var root = doc.documentElement;
 	var _unit_list = AddElementNS(root, 'UnitList', namespace);
-
+	if (! cache.Exists('UOM')) return;
+		
 	var uom_types = cache.Item('UOM').Items().toArray();
 	for (var t=0; t<uom_types.length; t++) {
 		var uom_type as EA.Element;
 		uom_type = uom_types[t];
-		
-		var tid = getTaggedValue(uom_type, '@ID').Value;
-		var tname = uom_type.Name;
-		var ttag = getTaggedValue(uom_type, 'Name');
-		if (ttag && ttag.Value) tname = ttag.Value;
-		Session.Output('UOM @ID="'+tid+'" Name="'+tname+'"');
-		
 		var _uom_type = AddElementNS(_unit_list, 'UnitFamily', namespace);
-		_uom_type.setAttribute('ID', tid);
-		_uom_type.setAttribute('Selected', 'true');
-		_uom_type.setAttribute('Referenced', 'true');
-		var _tname = AddElementNS(_uom_type, 'Name', namespace);
-		var _tcdata = doc.createCDATASection(tname);
-		_tname.appendChild(_tcdata);
-
+		
+		var tid = writeTagToAttr(_uom_type, uom_type, 'ID', '@ID');
+		var tname = writeTagToText(_uom_type, uom_type, 'Name');
+		//Session.Output('UOM @ID="'+tid.Value+'" Name="'+tname.text+'"');
+		
+		writeYesNo(_uom_type, uom_type, 'Selected');
+		writeYesNo(_uom_type, uom_type, 'Referenced');
+		
 		for (var c=0; c<uom_type.Connectors.Count; c++) {
 			var connector as EA.Connector;
 			connector = uom_type.Connectors.GetAt(c);
 			if (connector.Stereotype == 'UOM Family') {
 				var uom_item as EA.Element;
 				uom_item = Repository.GetElementByID(connector.SupplierID);
-			
-				var iid = getTaggedValue(uom_item, '@ID').Value;
-				var iname = uom_item.Name;
-				var itag = getTaggedValue(uom_item, 'Name');
-				if (itag && itag.Value) iname = itag.Value;
-				Session.Output('  UOM instance @ID="'+iid+'" Name="'+iname+'"');
-				
 				var _uom_item = AddElementNS(_uom_type, 'Unit', namespace);
-				_uom_item.setAttribute('ID', iid);
-				var _iname = AddElementNS(_uom_item, 'Name', namespace);
-				var _icdata = doc.createCDATASection(encodeURI(iname));
-				_iname.appendChild(_icdata);
+			
+				var iid = writeTagToAttr(_uom_item, uom_item, 'ID', '@ID');
+				var iname = writeTagToText(_uom_item, uom_item, 'Name');
+				iname.text = encodeURI(iname.text)
+				//Session.Output('  UOM instance @ID="'+iid+'" Name="'+iname.text+'"');
 				
 				var BaseUnitID = null;
 				for (var b=0; b<uom_item.Connectors.Count; b++) {
@@ -70,10 +59,8 @@ function writeUnitsOfMeasures(package, doc, cache) {
 				if (BaseUnitID) {
 					var _uc = AddElementNS(_uom_item, 'UnitConversion', namespace);
 					_uc.setAttribute('BaseUnitID', BaseUnitID);
-					var Factor = getTaggedValue(uom_item, 'Factor');
-					if (Factor) _uc.setAttribute('Factor', Factor.Value);
-					var Offset = getTaggedValue(uom_item, 'Offset');
-					if (Offset) _uc.setAttribute('Offset', Offset.Value);
+					writeTagToAttr(_uc, uom_item, 'Factor');
+					writeTagToAttr(_uc, uom_item, 'Offset');
 				}
 			}
 		}	
@@ -98,27 +85,20 @@ function digListOfValuesGroups(package, doc, parent, cache) {
 	
 	if (!parent) return;
 	
-	var _LOV = AddElementNS(parent, 'ListOfValuesGroup', namespace);
+	var _LOVg = AddElementNS(parent, 'ListOfValuesGroup', namespace);
 
-	var id = getTaggedValue(package, '@ID').Value;
-	var name = package.Name;
-	var tag = getTaggedValue(package, 'Name');
-	if (tag && tag.Value) name = tag.Value;
-	Session.Output('LOV Group @ID="'+id+'" Name="'+name+'"');
-	
-	_LOV.setAttribute('ID', id);
-	_LOV.setAttribute('Selected','true');
-	_LOV.setAttribute('Referenced','true');
-	
-	var _name = AddElementNS(_LOV, 'Name', namespace);
-	var _cdata = doc.createCDATASection(name);
-	_name.appendChild(_cdata);
-	
+	var id = writeTagToAttr(_LOVg, package, 'ID', '@ID');
+	var name = writeTagToText(_LOVg, package, 'Name');
+	//Session.Output('LOV Group @ID="'+id.Value+'" Name="'+name.text+'"');
+
+	writeYesNo(_LOVg, package, 'Selected');
+	writeYesNo(_LOVg, package, 'Referenced');
+		
 	for (var g=0; g<package.Packages.Count; g++) {
 		var group as EA.Package;
 		group = package.Packages.GetAt(g);
 		if (group.StereotypeEx == 'LOV Group') {
-			digListOfValuesGroups(group, doc, _LOV, cache);
+			digListOfValuesGroups(group, doc, _LOVg, cache);
 		}
 	}
 	
@@ -162,37 +142,27 @@ function writeListOfValues(package, doc, cache) {
 
 	var root = doc.documentElement;
 	var _list = AddElementNS(root, 'ListsOfValues', namespace);
-	
+	if (! cache.Exists('LOV')) return;
+		
 	var LOVs = cache.Item('LOV').Items().toArray();
 	for (var l=0; l<LOVs.length; l++) {
 		var LOV as EA.Element;
 		LOV = LOVs[l];
-		
-		var tid = getTaggedValue(LOV, '@ID').Value;
-		var tname = LOV.Name;
-		var ttag = getTaggedValue(LOV, 'Name');
-		if (ttag && ttag.Value) tname = ttag.Value;
-		Session.Output('LOV @ID="'+tid+'" Name="'+tname+'"');
-		
 		var _LOV = AddElementNS(_list, 'ListOfValue', namespace);
-		_LOV.setAttribute('ID', tid);
-		_LOV.setAttribute('Selected', 'true');
-		_LOV.setAttribute('Referenced', 'true');
-		_LOV.setAttribute('AllowUserValueAddition', 'true');
-		var itag = getTaggedValue(LOV, 'UseValueID');
-		var UseValueID = (itag && itag.Value == 'true');
-		_LOV.setAttribute('UseValueID', ''+UseValueID);
 		
-		var _tname = AddElementNS(_LOV, 'Name', namespace);
-		var _tcdata = doc.createCDATASection(tname);
-		_tname.appendChild(_tcdata);
+		var tid = writeTagToAttr(_LOV, LOV, 'ID', '@ID');
+		var tname = writeTagToText(_LOV, LOV, 'Name');
+		//Session.Output('LOV @ID="'+tid.Value+'" Name="'+tname.text+'"');
+
+		writeYesNo(_LOV, LOV, 'Selected');
+		writeYesNo(_LOV, LOV, 'Referenced');
+		writeYesNo(_LOV, LOV, 'AllowUserValueAddition');
+		var UseValueID = writeYesNo(_LOV, LOV, 'UseValueID');
 
 		parent = Repository.GetPackageByID(LOV.PackageID);
-		var pid = getTaggedValue(parent, '@ID');
-		if (pid) {
-			_LOV.setAttribute('ParentID', pid.Value);
-		}
-		
+		writeTagToAttr(_LOV, parent, 'ParentID', '@ID');
+
+		// hard coded, not important
 		var _validation = AddElementNS(_LOV, 'Validation', namespace);
 		_validation.setAttribute('BaseType',"text");
 		_validation.setAttribute('MinValue',"");
@@ -206,7 +176,7 @@ function writeListOfValues(package, doc, cache) {
 			if (attribute.Stereotype == 'enum') {
 				var _value = AddElementNS(_LOV, 'Value', namespace);
 				_value.text = attribute.Name;
-				if (UseValueID) {
+				if (UseValueID && UseValueID.Value && UseValueID.Value == 'Yes') {
 					_value.setAttribute('ID', attribute.Default);
 				}
 			}
@@ -234,16 +204,14 @@ function digAttributeGroups(package, parent, cache) {
 	if (package.StereotypeEx != 'Attribute Group') return;
 		
 	var _group = AddElementNS(parent, 'AttributeGroup', namespace);
-	var id = getTaggedValue(package, '@ID').Value;	
-	_group.setAttribute('ID', id);	
-
-	var _name = AddElementNS(_group, 'Name', namespace);
-	var name = package.Name;
-	var tag = getTaggedValue(package, 'Name')
-	if (tag && tag.Value) name = tag.Value;
-	_name.text = name;
+	var _id = writeTagToAttr(_group, package, 'ID', '@ID');
+	var _name = writeTagToText(_group, package, 'Name');	
+	//Session.Output('attribute group id="'+_id.Value+'" name="'+_name.text+'"');
 	
-	Session.Output('attribute group name="'+name+'" id="'+id+'"');
+	writeYesNo(_group, package, 'ManuallySorted');
+	writeYesNo(_group, package, 'ShowInWorkbench');
+	writeYesNo(_group, package, 'Selected');
+	writeYesNo(_group, package, 'Referenced');
 	
 	for (var g=0; g<package.Packages.Count; g++) {
 		var group as EA.Package;
@@ -297,36 +265,36 @@ function writeAttributes(package, doc, cache) {
 	
 	var root = doc.documentElement;
 	var _parent = AddElementNS(root, 'AttributeList', namespace);
-	
+	if (! cache.Exists('Attribute')) return; 
+		
 	var attributes = cache.Item('Attribute').Items().toArray();
 	for (var a=0; a<attributes.length; a++) {
 		var attribute as EA.Element;
 		attribute = attributes[a];
-		
-		var id = getTaggedValue(attribute, '@ID').Value;
-		var name = attribute.Name;
-		var tag = getTaggedValue(attribute, 'Name');
-		if (tag && tag.Value) name = tag.Value;
-		Session.Output('attribute @ID="'+id+'" Name="'+name+'"');
-		
 		var _attribute = AddElementNS(_parent, 'Attribute', namespace);
-		_attribute.setAttribute('ID', id);
-		_attribute.setAttribute('Selected', 'true');
-		_attribute.setAttribute('Referenced', 'true');
-		_attribute.setAttribute('FullTextIndexed', 'true');
-		_attribute.setAttribute('ExternallyMaintained', 'false');
-		_attribute.setAttribute('Derived', 'true');
-		_attribute.setAttribute('Mandatory', 'true');
 		
-		var MultiValued = getTaggedValue(attribute, 'MultiValued');
-		if (MultiValued) {
-			var isMultiValued = 'Yes' == MultiValued.Value;
-			_attribute.setAttribute('MultiValued', ''+isMultiValued);
+		var id = writeTagToAttr(_attribute, attribute, 'ID', '@ID');
+		var name = writeTagToText(_attribute, attribute, 'Name');
+		//Session.Output('attribute @ID="'+id.Value+'" Name="'+name.text+'"');
+
+		var tag = getTaggedValue(attribute, 'Type');
+		if (tag) {
+			//Session.Output('type='+tag.Value);
+			if (tag.Value == 'Specification') {
+				_attribute.setAttribute('ProductMode','Normal');
+			}
+			else {
+				_attribute.setAttribute('ProductMode','Property');
+			}
 		}
 		
-		var _name = AddElementNS(_attribute, 'Name', namespace);
-		_name.text = name;
-
+		writeYesNo(_attribute, attribute, 'Selected');
+		writeYesNo(_attribute, attribute, 'Referenced');
+		writeYesNo(_attribute, attribute, 'FullTextIndexed');
+		writeYesNo(_attribute, attribute, 'ExternallyMaintained');
+		writeYesNo(_attribute, attribute, 'Derived');
+		writeYesNo(_attribute, attribute, 'Mandatory');
+		writeYesNo(_attribute, attribute, 'MultiValued');
 		
 		// LOV Link
 		var isLov = false;
@@ -340,9 +308,8 @@ function writeAttributes(package, doc, cache) {
 				//Session.Output('    lov name='+lov.Name);
 				if (lov.Stereotype == 'LOV') {
 					isLov = true;
-					var ListOfValueID = getTaggedValue(lov, '@ID');
 					var _ListOfValueLink = AddElementNS(_attribute, 'ListOfValueLink', namespace);
-					_ListOfValueLink.setAttribute('ListOfValueID', ListOfValueID.Value);
+					writeTagToAttr(_ListOfValueLink, lov, 'ListOfValueID', '@ID');
 					break;
 				}
 				
@@ -353,16 +320,11 @@ function writeAttributes(package, doc, cache) {
 		// validation
 		if (!isLov) {
 			var _Validation = AddElementNS(_attribute, 'Validation', namespace);
-			_Validation.setAttribute('BaseType', getTaggedValue(attribute, 'validation').Value);
-			
-			var names = ['MinValue','MaxValue','MaxLength','InputMask'];
-			for (var n=0; n<names.length; n++) {
-				var nname = names[n];
-				var ntag = getTaggedValue(attribute, nname);
-				if (ntag) {
-					_Validation.setAttribute(nname, ntag.Value);
-				}
-			}
+			writeTagToAttr(_Validation, attribute, 'BaseType', 'validation');
+			writeTagToAttr(_Validation, attribute, 'MinValue');
+			writeTagToAttr(_Validation, attribute, 'MaxValue');
+			writeTagToAttr(_Validation, attribute, 'MaxLength');
+			writeTagToAttr(_Validation, attribute, 'InputMask');
 		}
 		
 		// attribute group link
@@ -375,9 +337,8 @@ function writeAttributes(package, doc, cache) {
 				link = Repository.GetElementByID(connector.ClientID);
 				//Session.Output('    client name='+link.Name);
 				if (link.Stereotype == 'Attribute Group') {
-					var AttributeGroupID = getTaggedValue(link, '@ID');
 					var _AttributeGroupLink = AddElementNS(_attribute, 'AttributeGroupLink', namespace);
-					_AttributeGroupLink.setAttribute('AttributeGroupID', AttributeGroupID.Value);
+					writeTagToAttr(_AttributeGroupLink, link, 'AttributeGroupID', '@ID');
 				}
 				
 			}
@@ -390,11 +351,7 @@ function writeAttributes(package, doc, cache) {
 			clasz = claszes[c];
 			//Session.Output(' clasz='+clasz.Name);
 			var _UserTypeLink = AddElementNS(_attribute, 'UserTypeLink', namespace);
-			var UserTypeID = getTaggedValue(clasz, '@ID');
-			if (UserTypeID) {
-				//Session.Output(' userTypeLink name='+clasz.Name+' id='+UserTypeID.Value);
-				_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
-			}
+			writeTagToAttr(_UserTypeLink, clasz, 'UserTypeID', '@ID');
 		}
 
 	}
@@ -425,41 +382,37 @@ function writeUserTypes(package, doc, cache) {
 	var tipes = [ 'Product', 'Classification', 'Entity', 'Asset' ];
 	for (var t=0; t<tipes.length; t++) {
 		var tipe = tipes[t];
-		Session.Output('tipe='+tipe);
+		//Session.Output('tipe='+tipe);
 		
 		var items = cache.Item(tipe).Items().toArray();
 		for (var i=0; i<items.length; i++) {
 			var item as EA.Element;
 			item = items[i];
-			var id = getTaggedValue(item, '@ID').Value;
-			var name = item.Name;
-			var tag = getTaggedValue(item, 'Name');
-			if (tag && tag.Value) name = tag.Value;
-			Session.Output('UserType @ID="'+id+'" Name="'+name+'"');
-			
 			var _UserType = AddElementNS(_parent, 'UserType', namespace);
-			_UserType.setAttribute('ID', id);
-			_UserType.setAttribute('Selected', 'true');
-			_UserType.setAttribute('Referenced', 'true');
-			_UserType.setAttribute('ReferenceTargetLockPolicy', 'Strict');
+
+			var id = writeTagToAttr(_UserType, item, 'ID', '@ID');
+			var name = writeTagToText(_UserType, item, 'Name');
+			//Session.Output('UserType @ID="'+id.Value+'" Name="'+name.text+'"');
+
+			writeYesNo(_UserType, item, 'Selected');
+			writeYesNo(_UserType, item, 'Referenced');
+			writeTagToAttr(_UserType, item, 'ReferenceTargetLockPolicy');
+			writeTagToAttr(_UserType, item, 'ManuallySorted');
 
 			if (tipe == 'UserType') {
 				_UserType.setAttribute('AllowInDesignTemplate','false');
 				_UserType.setAttribute('AllowQuarkTemplate','false');
-				_UserType.setAttribute('ManuallySorted','false');
 				_UserType.setAttribute('IsCategory','true');
 			}
 			if (tipe == 'Entity') {
 				_UserType.setAttribute('AllowInDesignTemplate','false');
 				_UserType.setAttribute('AllowQuarkTemplate','false');
-				_UserType.setAttribute('ManuallySorted','false');
 				_UserType.setAttribute('IsCategory','false');
 				_UserType.setAttribute('Revisability','Global');
 			}
 			if (tipe == 'Classification') {
 				_UserType.setAttribute('AllowInDesignTemplate','false');
 				_UserType.setAttribute('AllowQuarkTemplate','false');
-				_UserType.setAttribute('ManuallySorted','false');
 				_UserType.setAttribute('ClassificationOwnsProductLinks','false');
 			}
 			if (tipe == 'Asset') {
@@ -472,12 +425,9 @@ function writeUserTypes(package, doc, cache) {
 				if (connector.Stereotype == 'Valid Parent' && connector.ClientID == item.ElementID) {
 					var parent as EA.Element;
 					parent = Repository.GetElementByID(connector.SupplierID);
-					if (parent) {
+					if (parent && parent.Stereotype == item.Stereotype) {
 						var _UserTypeLink = AddElementNS(_UserType, 'UserTypeLink', namespace);
-						var UserTypeID = getTaggedValue(parent, '@ID');
-						if (UserTypeID && UserTypeID.Value) {
-							_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
-						}
+						writeTagToAttr(_UserTypeLink, parent, 'UserTypeID', '@ID');
 					}
 				}
 			}
@@ -486,11 +436,8 @@ function writeUserTypes(package, doc, cache) {
 				var attribute as EA.Attribute;
 				attribute = item.Attributes.getAt(a);
 				var classifier = Repository.GetElementByID(attribute.ClassifierID);
-				var AttributeID = getTaggedValue(classifier, '@ID');
-				if (AttributeID && AttributeID.Value) {
-					var _AttributeLink = AddElementNS(_UserType, 'AttributeLink', namespace);
-					_AttributeLink.setAttribute('AttributeID',AttributeID.Value);
-				}
+				var _AttributeLink = AddElementNS(_UserType, 'AttributeLink', namespace);
+				writeTagToAttr(_AttributeLink, classifier, 'AttributeID', '@ID');
 			}
 		}
 	}
@@ -533,41 +480,36 @@ function writeReferences(package, doc, cache) {
 	for (var k=0; k<keys.length; k++) {
 		var tipe = keys[k];
 		var element_name = tipes.Item(tipe);
-		Session.Output('tipe='+tipe);
-
+		//Session.Output('tipe='+tipe);
+		if (! cache.Exists('Reference Definition')) return;			
+			
 		var items = cache.Item('Reference Definition').Items().toArray();
 		for (var i=0; i<items.length; i++) {
 			var item as EA.Element;
 			item = items[i];
+			
 			var rtag = getTaggedValue(item, 'Type');
 			if (rtag && rtag.Value == tipe) {
-				
-				var id = getTaggedValue(item, '@ID').Value;
-				var name = item.Name;
-				var tag = getTaggedValue(item, 'Name');
-				if (tag && tag.Value) name = tag.Value;
-				Session.Output('  '+element_name+' @ID="'+id+'" Name="'+name+'"');
-				
 				var reference = AddElementNS(_parent, element_name, namespace);
-				reference.setAttribute('ID', id);
-				reference.setAttribute('Selected', 'true');
-				reference.setAttribute('Referenced', 'true');
-				reference.setAttribute('Inherited','false');
-				reference.setAttribute('Accumulated','false');
-				reference.setAttribute('Revised','false');
-				reference.setAttribute('Mandatory','false');
-				var MultiValued = ('Yes' == getTaggedValue(item, 'MultiValued').Value);
-				reference.setAttribute('MultiValued', ''+MultiValued)
+				
+				var id = writeTagToAttr(reference, item, 'ID', '@ID');
+				var name = writeTagToText(reference, item, 'Name');					
+				//Session.Output('  '+element_name+' @ID="'+id.Value+'" Name="'+name.text+'"');
+
+				writeYesNo(reference, item, 'Selected');
+				writeYesNo(reference, item, 'Referenced');
+				writeYesNo(reference, item, 'Inherited');
+				writeYesNo(reference, item, 'Accumulated');
+				writeYesNo(reference, item, 'Revised');
+				writeYesNo(reference, item, 'Mandatory');
+				writeYesNo(reference, item, 'MultiValued');
 				
 				for (var a=0; a<item.Attributes.Count; a++) {
 					var attribute as EA.Attribute;
 					attribute = item.Attributes.getAt(a);
 					var classifier = Repository.GetElementByID(attribute.ClassifierID);
-					var AttributeID = getTaggedValue(classifier, '@ID');
-					if (AttributeID && AttributeID.Value) {
-						var _AttributeLink = AddElementNS(reference, 'AttributeLink', namespace);
-						_AttributeLink.setAttribute('AttributeID', AttributeID.Value);
-					}
+					var _AttributeLink = AddElementNS(reference, 'AttributeLink', namespace);
+					writeTagToAttr(_AttributeLink, classifier, 'AttributeID', '@ID');
 				}
 
 				// sources
@@ -577,13 +519,8 @@ function writeReferences(package, doc, cache) {
 					if (connector.Stereotype == 'Source' && connector.ClientID == item.ElementID) {
 						var source as EA.Element;
 						source = Repository.GetElementByID(connector.SupplierID);
-						if (source) {
-							var _UserTypeLink = AddElementNS(reference, 'UserTypeLink', namespace);
-							var UserTypeID = getTaggedValue(source, '@ID');
-							if (UserTypeID && UserTypeID.Value) {
-								_UserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
-							}
-						}
+						var _UserTypeLink = AddElementNS(reference, 'UserTypeLink', namespace);
+						writeTagToAttr(_UserTypeLink, source, 'UserTypeID', '@ID');
 					}
 				}
 				
@@ -594,13 +531,8 @@ function writeReferences(package, doc, cache) {
 					if (connector.Stereotype == 'Target' && connector.ClientID == item.ElementID) {
 						var target as EA.Element;
 						target = Repository.GetElementByID(connector.SupplierID);
-						if (target) {
-							var _TargetUserTypeLink = AddElementNS(reference, 'TargetUserTypeLink', namespace);
-							var UserTypeID = getTaggedValue(target, '@ID');
-							if (UserTypeID && UserTypeID.Value) {
-								_TargetUserTypeLink.setAttribute('UserTypeID', UserTypeID.Value);
-							}
-						}
+						var _TargetUserTypeLink = AddElementNS(reference, 'TargetUserTypeLink', namespace);
+						writeTagToAttr(_TargetUserTypeLink, target, 'UserTypeID', '@ID');
 					}
 				}
 			}
@@ -629,13 +561,16 @@ function exportStepXML(package) {
     root = AddElementNS(doc, 'STEP-ProductInformation', namespace);
     root.setAttribute('ExportTime', package.Modified);
 
+	writeTagToAttr(root, package, 'ContextID');
+	writeTagToAttr(root, package, 'WorkspaceID');
+		
 	var cache = fillCache(null, package);
 	//showCache(cache)
 	
-    writeUserTypes(package, doc, cache);
+	writeUserTypes(package, doc, cache);
     writeReferences(package, doc, cache);
 	writeUnitsOfMeasures(package, doc, cache);
-    writeListOfValuesGroups(package, doc, cache);
+	writeListOfValuesGroups(package, doc, cache);
 	writeListOfValues(package, doc, cache);
     writeAttributeGroups(package, doc, cache);
     writeKeys(package, doc, cache);
@@ -643,8 +578,8 @@ function exportStepXML(package) {
     writeClassifications(package, doc, cache);
     writeEntities(package, doc, cache);
     writeAssets(package, doc, cache);
-	
-    Session.Output('fileName="'+fileName+'"');
+
+	//Session.Output('fileName="'+fileName+'"');
     XMLSaveXMLToFile(doc, fileName, false, true);	
 }
 

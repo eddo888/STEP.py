@@ -3,7 +3,6 @@
 
 function DoNotDisturb(diagram) {
 	var diagram as EA.Diagram;
-	diagram.t
 	var package as EA.Package;
 	var tag as EA.TaggedValue;
 	
@@ -45,12 +44,12 @@ function LayoutThisDiagram(diagram) {
 		= lsCycleRemoveDFS 
 		| lsLayeringOptimalLinkLength 
 		| lsInitializeDFSOut 
-		| lsLayoutDirectionLeft
+		| lsLayoutDirectionUp
 		;
       
       Iterations = 4;
-      LayerSpacing = 20;
-      ColumnSpacing = 50;
+      LayerSpacing = 40;
+      ColumnSpacing = 20;
       SaveToDiagram = false;
 
       Project.LayoutDiagramEx( DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram );
@@ -181,7 +180,9 @@ function fillCache(cache, package, indent) {
 
 function putCache(cache, stereotype, element) {
 	var tag as EA.TaggedValue;
+	if (!cache) return;
 	if (!element) return;
+	if (!stereotype) return;
 	tag = getTaggedValue(element, '@ID');
 	if (tag && tag.Name && tag.Value) {
 		//Session.Output('tag:'+tag.Name+'='+tag.Value);
@@ -452,6 +453,77 @@ function findClassesThatUsesAttribute(cache, attribute) {
 		}
 	}
 	return claszes;
+}
+
+function readTextToTag(xmlNode, element, xpath, tagName) {
+	var value = XMLGetNodeText(xmlNode, xpath);
+	if (value) {
+		setTaggedValue(element, tagName, value);
+	}
+	return value;
+}
+
+function writeTagToText(xmlNode, element, name, tagName) {
+	if (!tagName) tagName = name;
+	var tag = getTaggedValue(element, tagName);
+	var node = xmlNode.selectSingleNode('*[local-name()='+name+']');
+	if (! node) {
+		node = AddElementNS(xmlNode, name, namespace);
+		xmlNode.appendChild(node);
+	}
+	if (tag && tag.Value) {
+		node.text = tag.Value;
+	}
+	else {
+		if (tagName == 'Name') {
+			node.text = element.Name;
+		}
+	}
+	return node;
+}
+
+function readAttrToTag(xmlNode, element, attrName, tagName) {
+	if (!tagName) tagName = attrName;
+	var value = XMLGetNamedAttribute(xmlNode, attrName);
+	if (value) setTaggedValue(element, tagName, value);
+	return value;
+}
+
+function writeTagToAttr(xmlNode, element, attrName, tagName) {
+	if (!tagName) tagName = attrName;
+	var tag = getTaggedValue(element, tagName);
+	if (tag && tag.Value) {
+		xmlNode.setAttribute(attrName, tag.Value);
+	}
+	return tag;
+}
+
+function readYesNo(xmlNode, element, attrName, tagName) {
+	if (!tagName) tagName = attrName;
+	var value = XMLGetNamedAttribute(xmlNode, attrName);
+	if (value && value == 'true') {
+		setTaggedValue(element, tagName, 'Yes');
+	}
+	else {
+		setTaggedValue(element, tagName, 'No');
+	}
+	return value;
+}
+
+function writeYesNo(xmlNode, element, attrName, tagName) {
+	if (!tagName) tagName = attrName;
+	//Session.Output('writeYesNo xmlNode='+xmlNode.nodeName+' element='+element.Name+' attrName='+attrName+' tagName='+tagName);
+	var tag = getTaggedValue(element, tagName);
+	if (tag) {
+		//Session.Output('    tag='+tag.Value);
+		if (tag.Value == 'Yes') {
+			xmlNode.setAttribute(attrName, 'true');
+		}
+		else {
+			xmlNode.setAttribute(attrName, 'false');
+		}
+	}
+	return tag;
 }
 
 function setupDiagram(package, name, diagram_type) {

@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC User Scripts.Library
-//!INC Stibo STEP.Library
+//!INC User Scripts.Library
+!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -32,15 +32,16 @@ function readUnitsOfMeasures(package, doc, cache) {
 	var uom_item as EA.Element;
 
 	uom_types = findOrCreatePackage(package, 'UOM Types', 'Units of Measure', '', cache);
-	//var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
+	var uom_types_diagram = setupDiagram(uom_types, 'Units of Measure', 'Class');
 	
 	var UnitFamilies = doc.selectNodes('/s:STEP-ProductInformation/s:UnitList//s:UnitFamily');
 	for (var uf=0; uf<UnitFamilies.length; uf++) {
 		var UnitFamily = UnitFamilies[uf];
+		
 		var UnitFamily_id = XMLGetNamedAttribute(UnitFamily, 'ID');
 		var UnitFamily_name = XMLGetNodeText(UnitFamily, 's:Name');
 		//Session.Output('UnitFamily name="'+UnitFamily_name+'" id="'+UnitFamily_id+'"');
-
+		
 		var items = new ActiveXObject("Scripting.Dictionary"); // { @ID : Element} 
 		var bases = new ActiveXObject("Scripting.Dictionary"); //{ BaseUnitID: [source.@ID] }
 		
@@ -51,7 +52,10 @@ function readUnitsOfMeasures(package, doc, cache) {
 		uom_type = findOrCreateElement(uom_items, 'Class', 'UOM', UnitFamily_name, UnitFamily_id, cache);
 		setTaggedValue(uom_type, '@ID', UnitFamily_id);
 		setTaggedValue(uom_type, 'Name', UnitFamily_name);
-				
+
+		// xmlNode, sparxElement, attrName, tagName==attrName if null
+		readYesNo(UnitFamily, uom_type, 'Selected');
+		readYesNo(UnitFamily, uom_type, 'Referenced');
 		//add_diagram_element(uom_items_diagram, uom_type);
 		
 		var Units = UnitFamily.selectNodes('s:Unit');
@@ -143,6 +147,7 @@ function digListOfValuesGroups(package, parent, cache) {
 	var diagram as EA.Diagram;
 	var _group as EA.Package;
 	var _diagram as EA.Diagram;	
+	var root as EA.Package;
 	
 	if (!parent) return;
 		
@@ -158,22 +163,35 @@ function digListOfValuesGroups(package, parent, cache) {
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
+		if (id == 'List Of Values group root') root = _group;
+		
+		readYesNo(group, _group, 'Selected');
+		readYesNo(group, _group, 'Referenced');
 		//add_diagram_package(diagram, _group);
 		
-		//_diagram = setupDiagram(_group, 'LOVs', 'Class');	
+		_diagram = setupDiagram(_group, 'LOVs', 'Class');	
 		//add_diagram_element(_diagram, _group);
 		
-		digListOfValuesGroups(_group, _diagram, group, cache);
+		digListOfValuesGroups(_group, group, cache);
 	}
+	
+	return root;
 }
 
 function readListOfValuesGroups(package, doc, cache) {
 	var package as EA.Package;
+	var root as EA.Package;
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
 	if (groups) {
-		digListOfValuesGroups(package, groups, cache);
+		root = digListOfValuesGroups(package, groups, cache);
 	}
+	
+	if (!root) {
+		root = findOrCreatePackage(package, 'LOV Group', 'List Of Values group root', 'Lists of Values / LOVs');
+	}
+
+	readListOfValues(root, doc, cache);
 }
 
 function readListOfValues(package, doc, cache) {
@@ -184,7 +202,7 @@ function readListOfValues(package, doc, cache) {
 			AllowUserValueAddition="false" 
 			UseValueID="true" 
 			Selected="true" 
-			qReferenced="true"
+			Referenced="true"
 		>
             <Name>Yes/No</Name>
             <Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
@@ -200,10 +218,11 @@ function readListOfValues(package, doc, cache) {
 	var lovs = doc.selectNodes('/s:STEP-ProductInformation/s:ListsOfValues/s:ListOfValue');
 	for (var l=0; l<lovs.length; l++) {
 		var lov = lovs[l];
+		
 		var id = XMLGetNamedAttribute(lov, 'ID');
 		var name = XMLGetNodeText(lov, 's:Name');
 		var ParentID = XMLGetNamedAttribute(lov, 'ParentID');
-		var UseValueID = XMLGetNamedAttribute(lov, 'UseValueID');
+		if (!ParentID) ParentID = 'List Of Values group root';
 		
 		parent = getCache(cache, 'LOV Group', ParentID);
 		//Session.Output('LOV parent='+parent);
@@ -211,8 +230,12 @@ function readListOfValues(package, doc, cache) {
 			element = findOrCreateElement(parent, 'Enum', 'LOV', name, id, cache) ;
 			setTaggedValue(element, '@ID', id);
 			setTaggedValue(element, 'Name', name);
-			setTaggedValue(element, 'UseValueID', UseValueID);
-			//diagram = parent.Diagrams.GetAt(0);
+			var UseValueID = readYesNo(lov, element, 'UseValueID');
+			readYesNo(lov, element, 'Selected');
+			readYesNo(lov, element, 'Referenced');
+			readYesNo(lov, element, 'AllowUserValueAddition');
+
+			diagram = setupDiagram(parent, 'Attributes', 'Class');
 			//add_diagram_element(diagram, element);
 			
 			var values = lov.selectNodes('s:Value');
@@ -220,7 +243,7 @@ function readListOfValues(package, doc, cache) {
 				var value = values[v];
 				var value_name = value.text;
 				var lov_value = findOrCreateAttribute(element, 'enum', value_name, null, null);
-				if (UseValueID == 'true') {
+				if (UseValueID == 'Yes') {
 					var lov_id = XMLGetNamedAttribute(value, 'ID');
 					lov_value.Default = lov_id;
 					lov_value.Update();
@@ -230,7 +253,7 @@ function readListOfValues(package, doc, cache) {
 	}
 }
 
-function digAttributeGroups(package, diagram, parent, cache) {
+function digAttributeGroups(package, parent, cache) {
 	/*
 	   <AttributeGroup 
 			ID="Movie_Character" 
@@ -246,6 +269,7 @@ function digAttributeGroups(package, diagram, parent, cache) {
 	var diagram as EA.Diagram;
 	var _group as EA.Package;
 	var _diagram as EA.Diagram;	
+	var root as EA.Package;
 	
 	if (!parent) return;
 		
@@ -260,32 +284,41 @@ function digAttributeGroups(package, diagram, parent, cache) {
 		_group = findOrCreatePackage(package, 'Attribute Group', name, id, cache);
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
+		readYesNo(group, _group, 'Selected');
+		readYesNo(group, _group, 'Referenced');
+		readYesNo(group, _group, 'ManuallySorted');
+		readYesNo(group, _group, 'ShowInWorkbench');
 		
+		if (id == 'Attribute group root') root = _group;
+
 		//add_diagram_package(diagram, _group);
 		
-		//_diagram = setupDiagram(_group, 'Attributes', 'Class');	
+		_diagram = setupDiagram(_group, 'Attributes', 'Class');	
 		//add_diagram_package(_diagram, _group);
 		
-		digAttributeGroups(_group, _diagram, group, cache);
+		digAttributeGroups(_group, group, cache);
 	}
+	
+	return root;
 }
 
 function readAttributeGroups(package, doc, cache) {
 	var package as EA.Package;
-	var diagram as EA.Diagram;
-	var _diagram as EA.Diagram;
-	var attributes = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root', cache);
-	//_diagram = setupDiagram(attributes, 'Attributes', 'Package');
+	var root as EA.Package;
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
 	if (groups) {
-		digAttributeGroups(attributes, _diagram, groups, cache);
+		root = digAttributeGroups(package, groups, cache);
 	}	
 
-    readAttributes(attributes, package, doc, cache);
+	if (!root) {
+		root = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root');
+	}
+	
+    readAttributes(root, doc, cache);
 }
 	
-function readAttributes(attributes, package, doc, cache) {
+function readAttributes(package, doc, cache) {
 	/*
 		<Attribute 
 			ID="Movie_Name" 
@@ -305,7 +338,6 @@ function readAttributes(attributes, package, doc, cache) {
             <UserTypeLink UserTypeID="Movie_Actor"/>
 		</Attribute>
 	*/
-	var attributes as EA.Package;
 	var package as EA.Package;
 	var parent as EA.Package;
 	var element as EA.Element;
@@ -316,32 +348,33 @@ function readAttributes(attributes, package, doc, cache) {
 		var attribute = attribute_list[l];
 		var id = XMLGetNamedAttribute(attribute, 'ID');
 		var name = XMLGetNodeText(attribute, 's:Name');
-		var MultiValued = XMLGetNamedAttribute(attribute, 'MultiValued');
 		var ProductMode = XMLGetNamedAttribute(attribute, 'ProductMode');
 		
-		element = findOrCreateElement(attributes, 'Class', 'Attribute', name, id, cache) ;
+		element = findOrCreateElement(package, 'Class', 'Attribute', name, id, cache) ;
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
-		setTaggedValue(element, 'MultiValued', MultiValued);
 		if (ProductMode == 'Normal') {
 			setTaggedValue(element, 'Type', 'Specification');
 		}
 		else {
 			setTaggedValue(element, 'Type', 'Description');
 		}
+
+		readYesNo(attribute, element, 'MultiValued');
+		readYesNo(attribute, element, 'Derived');
+		readYesNo(attribute, element, 'Selected');
+		readYesNo(attribute, element, 'Referenced');
+		readYesNo(attribute, element, 'FullTextIndexed');
+		readYesNo(attribute, element, 'ExternallyMaintained');
+		readYesNo(attribute, element, 'Mandatory');
 		
 		var validation = attribute.selectSingleNode('s:Validation');
 		if (validation) {
-			var BaseType = XMLGetNamedAttribute(validation, 'BaseType');
-			var MinValue = XMLGetNamedAttribute(validation, 'MinValue');
-			var MaxValue = XMLGetNamedAttribute(validation, 'MaxValue');
-			var MaxLength = XMLGetNamedAttribute(validation, 'MaxLength');
-			var InputMask = XMLGetNamedAttribute(validation, 'InputMask');
-			setTaggedValue(element, 'validation', BaseType);
-			setTaggedValue(element, 'MinValue', MinValue);
-			setTaggedValue(element, 'MaxValue', MaxValue);
-			setTaggedValue(element, 'MaxLength', MaxLength);
-			setTaggedValue(element, 'InputMask', InputMask);
+			readAttrToTag(validation, element, 'BaseType', 'validation');
+			readAttrToTag(validation, element, 'MinValue');
+			readAttrToTag(validation, element, 'MaxValue');
+			readAttrToTag(validation, element, 'MaxLength');
+			readAttrToTag(validation, element, 'InputMask');
 		}
 		
 		element.update();
@@ -395,13 +428,13 @@ function readUserTypes(package, doc, cache) {
 	var stereotypes = ['Product','Classification','Entity','Asset'];
 	for (var s=0; s<stereotypes.length; s++) {
 		var stereotype = stereotypes[s];
-		parent = findOrCreatePackage(package, stereotype+' Types', 'setup', '', cache);
+		parent = findOrCreatePackage(package, stereotype+' Types', stereotype, '', cache);
 		//if (parent.Diagrams) {
 		//	diagram = package.Diagrams.GetAt(0);
 		//	add_diagram_package(diagram, parent);
 		//}
 		packages.Add(stereotype, parent);
-		//var diagram = setupDiagram(parent, 'setup', 'Class');
+		diagram = setupDiagram(parent, stereotype, 'Class');
 		//diagrams.Add(stereotype, diagram);
 	}
 	
@@ -413,6 +446,7 @@ function readUserTypes(package, doc, cache) {
 		var userType = userType_list[l];
 		var id = XMLGetNamedAttribute(userType, 'ID');
 		var name = XMLGetNodeText(userType, 's:Name');
+		
 		var aid  = 'false' == XMLGetNamedAttribute(userType, 'AllowInDesignTemplate');
 		var aqt  = 'false' == XMLGetNamedAttribute(userType, 'AllowQuarkTemplate');
 		var ic   = 'true' == XMLGetNamedAttribute(userType, 'IsCategory');
@@ -440,6 +474,11 @@ function readUserTypes(package, doc, cache) {
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		
+		readYesNo(userType, element, 'ManuallySorted');
+		readYesNo(userType, element, 'ReferenceTargetLockPolicy');
+		readYesNo(userType, element, 'Selected');
+		readYesNo(userType, element, 'Referenced');
+
 		//diagram = diagrams.Item(stereotype);
 		//add_diagram_element(diagram, element);
 		
@@ -529,8 +568,8 @@ function readReferences(package, doc, cache) {
 	var package as EA.Package;
 	var diagram as EA.Element;
 	
-	var reference_package = findOrCreatePackage(package, 'Reference Types', 'setup', '', cache);
-	//var reference_diagram = setupDiagram(reference_package, 'references', 'Class');
+	var reference_package = findOrCreatePackage(package, 'Reference Types', 'References', '', cache);
+	var reference_diagram = setupDiagram(reference_package, 'References', 'Class');
 	
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @element.name : stereotype }
 	types.Add('ProductCrossReferenceType',        'Product Reference Type'              );
@@ -545,7 +584,6 @@ function readReferences(package, doc, cache) {
 		var reference = references[r];
 		var id = XMLGetNamedAttribute(reference, 'ID');
 		var name = XMLGetNodeText(reference, 's:Name');
-		var MultiValued = XMLGetNamedAttribute(reference, 'MultiValued');
 		
 		var stereotype = types.Item(reference.nodeName);
 		var reference_element = findOrCreateElement(reference_package, 'Class', 'Reference Definition', name, id, cache);
@@ -553,6 +591,14 @@ function readReferences(package, doc, cache) {
 		setTaggedValue(reference_element, 'Name', name);
 		setTaggedValue(reference_element, 'Type', stereotype);
 		
+		readYesNo(reference, reference_element, 'Inherited');
+		readYesNo(reference, reference_element, 'Accumulated');
+		readYesNo(reference, reference_element, 'Revised');
+		readYesNo(reference, reference_element, 'Mandatory');
+		readYesNo(reference, reference_element, 'MultiValued');
+		readYesNo(reference, reference_element, 'Selected');
+		readYesNo(reference, reference_element, 'Referenced');
+
 		//add_diagram_element(reference_diagram, reference_element);
 				
 		var UserTypeLinks = reference.selectNodes('s:UserTypeLink');
@@ -589,7 +635,6 @@ function readReferences(package, doc, cache) {
 		}
 	}
 	
-	// link attributes to references, valid attribute
 }
 
 function readKeys(package, doc, cache) {}
@@ -608,6 +653,8 @@ function importStepXML(package) {
 	var cache = fillCache(null, package);
 	//showCache(cache, package);
 	
+	var diagram = setupDiagram(package, 'STEP', 'Package');
+	
 	doc = XMLReadXMLFromFile(fileName);
 	if (!doc) {
 		Session.Output('failed to load '+fileName);
@@ -624,11 +671,13 @@ function importStepXML(package) {
 		if (value) {
 			Session.Output('name="'+name+'" value="'+value+'"');
 		}
+		
+		readAttrToTag(node, package, 'ContextID');
+		readAttrToTag(node, package, 'WorkspaceID');
 	}
 		
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, doc, cache);
-	readListOfValues(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);

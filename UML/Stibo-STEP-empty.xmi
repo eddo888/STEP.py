@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252" standalone="no" ?>
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2023-04-06 11:26:51">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2023-04-06 21:42:57">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -13,7 +13,7 @@
 				<UML:Class name="EARootClass" xmi.id="EAID_11111111_5487_4080_A7F4_41526CB0AA00" isRoot="true" isLeaf="false" isAbstract="false"/>
 				<UML:Package name="empty" xmi.id="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 					<UML:ModelElement.stereotype>
-						<UML:Stereotype xmi.idref="EAID_9B5D0522_878F_41a5_AD52_4015B4047AF7"/>
+						<UML:Stereotype xmi.idref="EAID_1677F795_9300_4c3e_B90D_F8540EDBAAEB"/>
 					</UML:ModelElement.stereotype>
 					<UML:ModelElement.taggedValue>
 						<UML:TaggedValue tag="parent" value="EAPK_F00934CA_5D2B_47b4_91F6_5CA7637625EB"/>
@@ -278,7 +278,7 @@
 						</UML:Collaboration>
 						<UML:Package name="Units of Measure" xmi.id="EAPK_BA0BBD08_B913_4e2b_9AA2_36E77634A786" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_90B0DBD6_F9DE_4faf_A32C_2B1ADCD9357F"/>
+								<UML:Stereotype xmi.idref="EAID_2A11C55E_1F72_4040_B0FD_31757DA01A84"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -302,7 +302,7 @@
 						</UML:Package>
 						<UML:Package name="Lists of Values / LOVs" xmi.id="EAPK_1FCCE817_DC5F_424c_8293_1277774385F4" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_79DCEC57_E96D_45c5_ABD9_C5768BFA14C8"/>
+								<UML:Stereotype xmi.idref="EAID_BBEAB433_E1CB_477e_98F3_BE10F6136960"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -326,7 +326,7 @@
 						</UML:Package>
 						<UML:Package name="Attribute Groups" xmi.id="EAPK_DFE829D2_4A21_4688_8B7A_6B8D992A6997" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_8660DC92_50BD_4350_9091_B6817E12DFE3"/>
+								<UML:Stereotype xmi.idref="EAID_485BF57F_B7DD_4cba_9051_7C692F0BF776"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -350,7 +350,7 @@
 						</UML:Package>
 						<UML:Package name="Product" xmi.id="EAPK_43F46033_A885_411b_9B3B_2633F36FAEF2" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_4CCD4662_5335_41e4_9D6A_6E3F77B830D3"/>
+								<UML:Stereotype xmi.idref="EAID_22EDF8FB_BEAA_4dc9_A5CD_FA734B2211F7"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -402,7 +402,7 @@
 						</UML:Package>
 						<UML:Package name="Classification" xmi.id="EAPK_7C049B14_9EAF_4107_B6CA_A7A00E1F86C6" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_79F6487A_0CE5_4ffa_9CC6_B2BD154CCE5A"/>
+								<UML:Stereotype xmi.idref="EAID_EBE28796_13E2_43a4_984E_2C9F907AA91D"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -454,7 +454,7 @@
 						</UML:Package>
 						<UML:Package name="Entity" xmi.id="EAPK_2AB4748A_DC88_48d0_B8E3_60DBBCD486D9" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_BC640068_3629_46fb_AF45_A119A183309C"/>
+								<UML:Stereotype xmi.idref="EAID_93DF7256_1C35_4830_BE1F_DCB04B725FAA"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -506,7 +506,7 @@
 						</UML:Package>
 						<UML:Package name="Asset" xmi.id="EAPK_C75233E0_1142_49cc_801E_012898DC5FCF" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_C8E30F25_8B1F_4da0_B5B3_BE7C9F84B0E9"/>
+								<UML:Stereotype xmi.idref="EAID_AF825350_E5B9_415f_A0AF_B9519776618B"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -558,7 +558,7 @@
 						</UML:Package>
 						<UML:Package name="References" xmi.id="EAPK_3C630659_D1FD_4334_A910_B20E7CD57EFF" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
 							<UML:ModelElement.stereotype>
-								<UML:Stereotype xmi.idref="EAID_A30528B2_5D16_4a64_A547_D55D92662859"/>
+								<UML:Stereotype xmi.idref="EAID_48B1EA77_E089_4130_B3F3_4F0BEB473EE4"/>
 							</UML:ModelElement.stereotype>
 							<UML:ModelElement.taggedValue>
 								<UML:TaggedValue tag="parent" value="EAPK_10CE5A89_9C79_4dd6_9B47_C1EFF7B892C7"/>
@@ -582,31 +582,31 @@
 						</UML:Package>
 					</UML:Namespace.ownedElement>
 				</UML:Package>
-				<UML:Stereotype xmi.id="EAID_9B5D0522_878F_41a5_AD52_4015B4047AF7" name="Stibo" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_1677F795_9300_4c3e_B90D_F8540EDBAAEB" name="Stibo" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_90B0DBD6_F9DE_4faf_A32C_2B1ADCD9357F" name="UOM Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_2A11C55E_1F72_4040_B0FD_31757DA01A84" name="UOM Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_79DCEC57_E96D_45c5_ABD9_C5768BFA14C8" name="LOV Group" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_BBEAB433_E1CB_477e_98F3_BE10F6136960" name="LOV Group" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_8660DC92_50BD_4350_9091_B6817E12DFE3" name="Attribute Group" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_485BF57F_B7DD_4cba_9051_7C692F0BF776" name="Attribute Group" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_4CCD4662_5335_41e4_9D6A_6E3F77B830D3" name="Product Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_22EDF8FB_BEAA_4dc9_A5CD_FA734B2211F7" name="Product Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_79F6487A_0CE5_4ffa_9CC6_B2BD154CCE5A" name="Classification Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_EBE28796_13E2_43a4_984E_2C9F907AA91D" name="Classification Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_BC640068_3629_46fb_AF45_A119A183309C" name="Entity Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_93DF7256_1C35_4830_BE1F_DCB04B725FAA" name="Entity Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_C8E30F25_8B1F_4da0_B5B3_BE7C9F84B0E9" name="Asset Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_AF825350_E5B9_415f_A0AF_B9519776618B" name="Asset Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
-				<UML:Stereotype xmi.id="EAID_A30528B2_5D16_4a64_A547_D55D92662859" name="Reference Types" isRoot="false" isLeaf="false" isAbstract="false">
+				<UML:Stereotype xmi.id="EAID_48B1EA77_E089_4130_B3F3_4F0BEB473EE4" name="Reference Types" isRoot="false" isLeaf="false" isAbstract="false">
 					<UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
 				</UML:Stereotype>
 			</UML:Namespace.ownedElement>

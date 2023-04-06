@@ -1,5 +1,4 @@
 <STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="4/6/2023 11:23:46 AM" ContextID="Context1" WorkspaceID="Main">
-	<fileName DoNotLayout="true">C:\Users\eddo8\git\github.com\eddo888\STEP.py\test\Shell.step.xml</fileName>
 	<UserTypes>
 		<UserType ID="Product user-type root" Selected="false" Referenced="false">
 			<Name>Product UserType root</Name>
@@ -117,4 +116,437 @@
 			<UserTypeLink UserTypeID="EDDO_Assets"/>
 		</UserType>
 	</UserTypes>
+	<CrossReferenceTypes>
+		<ProductCrossReferenceType ID="EDDO_Buy Side 2 Sell Side" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Buy Side 2 Sell Side</Name>
+			<AttributeLink AttributeID="EDDO_Supplier Priority"/>
+			<AttributeLink AttributeID="EDDO_Repack Quotient"/>
+			<UserTypeLink UserTypeID="EDDO_Variant"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<TargetUserTypeLink UserTypeID="EDDO_Variant"/>
+			<TargetUserTypeLink UserTypeID="EDDO_Product"/>
+		</ProductCrossReferenceType>
+		<ProductCrossReferenceType ID="EDDO_Product Cross Reference" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Product Cross Reference</Name>
+			<UserTypeLink UserTypeID="EDDO_Variant"/>
+			<TargetUserTypeLink UserTypeID="EDDO_Variant"/>
+		</ProductCrossReferenceType>
+		<AssetCrossReferenceType ID="EDDO_Primary Product Image" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="false">
+			<Name>Primary Product Image</Name>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<UserTypeLink UserTypeID="EDDO_Channel"/>
+			<UserTypeLink UserTypeID="EDDO_Supplier"/>
+			<UserTypeLink UserTypeID="EDDO_Address"/>
+			<UserTypeLink UserTypeID="EDDO_Sub Group"/>
+			<UserTypeLink UserTypeID="EDDO_Group"/>
+			<UserTypeLink UserTypeID="EDDO_Category"/>
+			<UserTypeLink UserTypeID="EDDO_Department"/>
+			<UserTypeLink UserTypeID="EDDO_Variant"/>
+			<TargetUserTypeLink UserTypeID="EDDO_ProductImage"/>
+		</AssetCrossReferenceType>
+		<ClassificationProductLinkType ID="EDDO_Product 2 Channel" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Product 2 Channel</Name>
+			<UserTypeLink UserTypeID="EDDO_Variant"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<TargetUserTypeLink UserTypeID="EDDO_Channel"/>
+		</ClassificationProductLinkType>
+		<ClassificationProductLinkType ID="EDDO_Product 2 Supplier" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Product 2 Supplier</Name>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<TargetUserTypeLink UserTypeID="EDDO_Supplier Products"/>
+		</ClassificationProductLinkType>
+	</CrossReferenceTypes>
+	<UnitList>
+		<UnitFamily ID="Currency" Selected="false" Referenced="false">
+			<Name>Currency</Name>
+			<Unit ID="iso4217.unit.AUD">
+				<Name>Australian%20Dollar</Name>
+				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.7529848319" Offset="0"/>
+			</Unit>
+			<Unit ID="iso4217.unit.GBP">
+				<Name>British%20Pound%20Sterling</Name>
+				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="1.3145527563" Offset="0"/>
+			</Unit>
+			<Unit ID="iso4217.unit.NZD">
+				<Name>New%20Zealand%20Dollar</Name>
+				<UnitConversion BaseUnitID="iso4217.unit.USD" Factor="0.6946060368" Offset="0"/>
+			</Unit>
+			<Unit ID="iso4217.unit.USD">
+				<Name>United%20States%20Dollar</Name>
+				<UnitConversion BaseUnitID="iso4217.unit.USD"/>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Electricity and Magnetism" Selected="false" Referenced="false">
+			<Name>Electricity and Magnetism</Name>
+			<Unit ID="unece.unit.VLT">
+				<Name>V</Name>
+			</Unit>
+			<Unit ID="unece.unit.AMP">
+				<Name>A</Name>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Length" Selected="false" Referenced="false">
+			<Name>Length</Name>
+			<Unit ID="unece.unit.SMI">
+				<Name>mile</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="1609.344" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.A11">
+				<Name>%C3%85</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0000000001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.INH">
+				<Name>in</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".0254" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.4H">
+				<Name>%C2%B5m</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.MTR">
+				<Name>m</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR"/>
+			</Unit>
+			<Unit ID="unece.unit.FOT">
+				<Name>ft</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".3048" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.C45">
+				<Name>nm</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".000000001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.CMT">
+				<Name>cm</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="0.01" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.KTM">
+				<Name>km</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor="1000" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.YRD">
+				<Name>yd</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".9144" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.MMT">
+				<Name>mm</Name>
+				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Mass" Selected="false" Referenced="false">
+			<Name>Mass</Name>
+			<Unit ID="GPerCm3">
+				<Name>g/cm3</Name>
+			</Unit>
+			<Unit ID="unece.unit.MGM">
+				<Name>mg</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM" Factor=".001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.KGM">
+				<Name>kg</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000" Offset="0"/>
+			</Unit>
+			<Unit ID="ST">
+				<Name>ST</Name>
+			</Unit>
+			<Unit ID="GPerMol">
+				<Name>g/mol</Name>
+			</Unit>
+			<Unit ID="unece.unit.TNE">
+				<Name>t</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="1000000" Offset="0"/>
+			</Unit>
+			<Unit ID="uence.unit.L">
+				<Name>L</Name>
+			</Unit>
+			<Unit ID="unece.unit.MC">
+				<Name>%C2%B5g</Name>
+			</Unit>
+			<Unit ID="KG">
+				<Name>KG</Name>
+			</Unit>
+			<Unit ID="HL">
+				<Name>HL</Name>
+			</Unit>
+			<Unit ID="CE">
+				<Name>CE</Name>
+			</Unit>
+			<Unit ID="unece.unit.ONZ">
+				<Name>oz</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="28.34952" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.ML">
+				<Name>ml</Name>
+			</Unit>
+			<Unit ID="unece.unit.LBR">
+				<Name>lb</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM" Factor="453.59237" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.GRM">
+				<Name>g</Name>
+				<UnitConversion BaseUnitID="unece.unit.GRM"/>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Temperature" Selected="false" Referenced="false">
+			<Name>Temperature</Name>
+			<Unit ID="unece.unit.CEL">
+				<Name>%C2%B0C</Name>
+				<UnitConversion BaseUnitID="unece.unit.KEL" Factor="1" Offset="273.15"/>
+			</Unit>
+			<Unit ID="unece.unit.A48">
+				<Name>%C2%B0R</Name>
+				<UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.KEL">
+				<Name>K</Name>
+				<UnitConversion BaseUnitID="unece.unit.KEL"/>
+			</Unit>
+			<Unit ID="unece.unit.FAH">
+				<Name>%C2%B0F</Name>
+				<UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
+			</Unit>
+		</UnitFamily>
+		<UnitFamily ID="Time" Selected="false" Referenced="false">
+			<Name>Time</Name>
+			<Unit ID="unece.unit.DAY">
+				<Name>day(s)</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="86400" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.C26">
+				<Name>millisecond</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor=".001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.WEE">
+				<Name>week</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="604800" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.C47">
+				<Name>nanosecond</Name>
+			</Unit>
+			<Unit ID="unece.unit.MIN">
+				<Name>minute</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="60" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.MON">
+				<Name>month</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="2629800" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.SEC">
+				<Name>second</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC"/>
+			</Unit>
+			<Unit ID="unece.unit.HUR">
+				<Name>hour</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="3600" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.B98">
+				<Name>microsecond</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor=".000001" Offset="0"/>
+			</Unit>
+			<Unit ID="unece.unit.ANN">
+				<Name>year</Name>
+				<UnitConversion BaseUnitID="unece.unit.SEC" Factor="31557600" Offset="0"/>
+			</Unit>
+		</UnitFamily>
+	</UnitList>
+	<ListOfValuesGroupList>
+		<ListOfValuesGroup ID="List Of Values group root" Selected="false" Referenced="false">
+			<Name>Lists of Values / LOVs</Name>
+			<ListOfValuesGroup ID="EDDO_Common_LOVs" Selected="false" Referenced="false">
+				<Name>Common</Name>
+			</ListOfValuesGroup>
+		</ListOfValuesGroup>
+	</ListOfValuesGroupList>
+	<ListsOfValues>
+		<ListOfValue ID="EDDO_PackageType_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Package Type LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Each</Value>
+			<Value>Box</Value>
+			<Value>Case</Value>
+			<Value>Pallett</Value>
+		</ListOfValue>
+		<ListOfValue ID="EDDO_StyleType_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Style Type LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Tapered</Value>
+			<Value>Straight</Value>
+		</ListOfValue>
+		<ListOfValue ID="EDDO_YesNo_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Yes/No LOV</Name>
+			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
+			<Value>Yes</Value>
+			<Value>No</Value>
+		</ListOfValue>
+	</ListsOfValues>
+	<AttributeGroupList>
+		<AttributeGroup ID="Attribute group root" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+			<Name>Attribute Groups</Name>
+			<AttributeGroup ID="EDDO_CommonAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Common</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="EDDO_PackagingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Packaging</Name>
+				<AttributeGroup ID="EDDO_Environmental" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<Name>Environment</Name>
+				</AttributeGroup>
+			</AttributeGroup>
+			<AttributeGroup ID="EDDO_SupplierAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Supplier</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="EDDO_LocationAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Location</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="EDDO_Pricing Attributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Pricing</Name>
+			</AttributeGroup>
+			<AttributeGroup ID="EDDO_MarketingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<Name>Marketing</Name>
+			</AttributeGroup>
+		</AttributeGroup>
+	</AttributeGroupList>
+	<AttributeList>
+		<Attribute ID="EDDO_DepartmentID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Department ID</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Department"/>
+		</Attribute>
+		<Attribute ID="EDDO_CategoryID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Category ID</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Category"/>
+		</Attribute>
+		<Attribute ID="EDDO_GroupID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Group ID</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Group"/>
+		</Attribute>
+		<Attribute ID="EDDO_SubGroupID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Sub Group ID</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Sub Group"/>
+		</Attribute>
+		<Attribute ID="EDDO_barcode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>barcode</Name>
+			<Validation BaseType="text" MaxLength="10" InputMask="9999999999"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+		</Attribute>
+		<Attribute ID="EDDO_Diameter" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="true">
+			<Name>Diamater</Name>
+			<Validation BaseType="number" MinValue="0" MaxValue="100"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Variant"/>
+		</Attribute>
+		<Attribute ID="EDDO_StyleType" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Style Type</Name>
+			<ListOfValueLink ListOfValueID="EDDO_StyleType_LOV"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+		</Attribute>
+		<Attribute ID="EDDO_Voltage" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Voltage</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+		</Attribute>
+		<Attribute ID="EDDO_isForSale" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>is for sale</Name>
+			<ListOfValueLink ListOfValueID="EDDO_YesNo_LOV"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+		</Attribute>
+		<Attribute ID="EDDO_PackageContents" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Package Contents</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+		</Attribute>
+		<Attribute ID="EDDO_Package Type" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Package Type</Name>
+			<ListOfValueLink ListOfValueID="EDDO_PackageType_LOV"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+		</Attribute>
+		<Attribute ID="EDDO_Maximum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Maximum Storage Temperature</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Environmental"/>
+		</Attribute>
+		<Attribute ID="EDDO_Minimum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Minimum Storage Temperature</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Environmental"/>
+		</Attribute>
+		<Attribute ID="EDDO_Repack Quotient" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Repack Quotient</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Buy Side 2 Sell Side"/>
+		</Attribute>
+		<Attribute ID="EDDO_SupplierDescription" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Supplier Description</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<UserTypeLink UserTypeID="EDDO_Supplier Products"/>
+		</Attribute>
+		<Attribute ID="EDDO_Supplier Priority" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Supplier Priority</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Buy Side 2 Sell Side"/>
+		</Attribute>
+		<Attribute ID="EDDO_CountryCode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Country Code</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Country"/>
+		</Attribute>
+		<Attribute ID="EDDO_Full Address" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Full Address</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Address"/>
+		</Attribute>
+		<Attribute ID="EDDO_PostCode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Post Code</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Suburb"/>
+		</Attribute>
+		<Attribute ID="EDDO_Cost Price" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Cost Price</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
+			<UserTypeLink UserTypeID="EDDO_Price"/>
+		</Attribute>
+		<Attribute ID="EDDO_EndDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>End Date</Name>
+			<Validation BaseType="DateTime"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
+			<UserTypeLink UserTypeID="EDDO_Price"/>
+		</Attribute>
+		<Attribute ID="EDDO_Sell Price" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Sell Price</Name>
+			<Validation BaseType="number"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
+			<UserTypeLink UserTypeID="EDDO_Price"/>
+		</Attribute>
+		<Attribute ID="EDDO_StartDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Start Date</Name>
+			<Validation BaseType="DateTime"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
+			<UserTypeLink UserTypeID="EDDO_Price"/>
+		</Attribute>
+		<Attribute ID="EDDO_Marketing Description" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Marketing Description</Name>
+			<Validation BaseType="text"/>
+			<AttributeGroupLink AttributeGroupID="EDDO_MarketingAttributes"/>
+			<UserTypeLink UserTypeID="EDDO_Product"/>
+			<UserTypeLink UserTypeID="EDDO_Channel"/>
+		</Attribute>
+	</AttributeList>
 </STEP-ProductInformation>

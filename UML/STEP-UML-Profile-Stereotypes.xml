@@ -714,6 +714,17 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Stibo" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="ContextID" type="" description="" unit="" values="" default=""/>
+					<Tag name="WorkspaceID" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
 			<Stereotype name="Target" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Aggregation">

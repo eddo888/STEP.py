@@ -97,6 +97,7 @@
 					<Tag name="STEP Types::Product Types(UML::Package)" type="" description="" unit="" values="" default="Products"/>
 					<Tag name="STEP Types::Reference Types(UML::Package)" type="" description="" unit="" values="" default="References"/>
 					<Tag name="STEP Types::Roles(UML::Package)" type="" description="" unit="" values="" default="Roles"/>
+					<Tag name="STEP Types::Stibo(UML::Package)" type="" description="" unit="" values="" default="Stibo"/>
 					<Tag name="STEP Types::UOM Types(UML::Package)" type="" description="" unit="" values="" default="UOMs"/>
 					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
 				</TaggedValues>

@@ -472,7 +472,7 @@
 		</Attribute>
 		<Attribute ID="EDDO_Maximum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
 			<Name>Maximum Storage Temperature</Name>
-			<Validation BaseType="text"/>
+			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Environmental"/>
 		</Attribute>
 		<Attribute ID="EDDO_Minimum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
@@ -525,7 +525,7 @@
 		</Attribute>
 		<Attribute ID="EDDO_EndDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
 			<Name>End Date</Name>
-			<Validation BaseType="DateTime"/>
+			<Validation BaseType="isodatetime"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>
@@ -537,7 +537,7 @@
 		</Attribute>
 		<Attribute ID="EDDO_StartDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
 			<Name>Start Date</Name>
-			<Validation BaseType="DateTime"/>
+			<Validation BaseType="isodatetime"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>

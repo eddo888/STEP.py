@@ -88,7 +88,7 @@
 					<Tag name="MinValue" type="" description="" unit="" values="" default=""/>
 					<Tag name="MultiValued" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,datetime,date,url,gtin,integer,isodate,isodatetime,numberrange,numeric_text,regexp" default="text"/>
+					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,url,gtin,integer,isodate,isodatetime,numberrange,embedded_number,numeric_text,fraction,regexp,boolean,date" default="text"/>
 					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
 				</TaggedValues>
 			</Stereotype>

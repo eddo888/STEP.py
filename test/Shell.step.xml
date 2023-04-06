@@ -1,30 +1,34 @@
-<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="4/6/2023 11:23:46 AM" ContextID="Context1" WorkspaceID="Main">
+<STEP-ProductInformation xmlns="http://www.stibosystems.com/step" ExportTime="4/6/2023 11:23:46 AM" ContextID="GL" WorkspaceID="Main">
 	<UserTypes>
-		<UserType ID="Product user-type root" Selected="false" Referenced="false">
+		<UserType ID="Product user-type root" Selected="true" Referenced="true" ManuallySorted="No">
 			<Name>Product UserType root</Name>
 		</UserType>
-		<UserType ID="EDDO_Department" Selected="false" Referenced="false">
-			<Name>Department</Name>
+		<UserType ID="EDDO_ShellRoot" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Root</Name>
 			<UserTypeLink UserTypeID="Product user-type root"/>
+		</UserType>
+		<UserType ID="EDDO_Department" Selected="false" Referenced="true" ManuallySorted="No">
+			<Name>Shell Department</Name>
+			<UserTypeLink UserTypeID="EDDO_ShellRoot"/>
 			<AttributeLink AttributeID="EDDO_DepartmentID"/>
 		</UserType>
-		<UserType ID="EDDO_Category" Selected="false" Referenced="false">
-			<Name>Category</Name>
+		<UserType ID="EDDO_Category" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Category</Name>
 			<UserTypeLink UserTypeID="EDDO_Department"/>
 			<AttributeLink AttributeID="EDDO_CategoryID"/>
 		</UserType>
-		<UserType ID="EDDO_Group" Selected="false" Referenced="false">
-			<Name>Group</Name>
+		<UserType ID="EDDO_Group" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Group</Name>
 			<UserTypeLink UserTypeID="EDDO_Category"/>
 			<AttributeLink AttributeID="EDDO_GroupID"/>
 		</UserType>
-		<UserType ID="EDDO_Sub Group" Selected="false" Referenced="false">
-			<Name>Sub Group</Name>
+		<UserType ID="EDDO_Sub Group" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Sub Group</Name>
 			<UserTypeLink UserTypeID="EDDO_Group"/>
 			<AttributeLink AttributeID="EDDO_SubGroupID"/>
 		</UserType>
-		<UserType ID="EDDO_Product" Selected="false" Referenced="false">
-			<Name>Product</Name>
+		<UserType ID="EDDO_Product" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Product</Name>
 			<UserTypeLink UserTypeID="EDDO_Sub Group"/>
 			<AttributeLink AttributeID="EDDO_barcode"/>
 			<AttributeLink AttributeID="EDDO_Marketing Description"/>
@@ -34,91 +38,97 @@
 			<AttributeLink AttributeID="EDDO_PackageContents"/>
 			<AttributeLink AttributeID="EDDO_Package Type"/>
 		</UserType>
-		<UserType ID="EDDO_Variant" Selected="false" Referenced="false">
-			<Name>Variant</Name>
+		<UserType ID="EDDO_Variant" Selected="true" Referenced="true" ManuallySorted="No">
+			<Name>Shell Variant</Name>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 			<AttributeLink AttributeID="EDDO_Diameter"/>
 		</UserType>
-		<UserType ID="Classification 1 user-type root" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+		<UserType ID="Classification 1 user-type root" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
 			<Name>Classification UserType root</Name>
 		</UserType>
-		<UserType ID="EDDO_Assets" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Assets</Name>
+		<UserType ID="EDDO_Shell_Class_Root" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Root</Name>
 			<UserTypeLink UserTypeID="Classification 1 user-type root"/>
+		</UserType>
+		<UserType ID="EDDO_Assets" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Assets</Name>
+			<UserTypeLink UserTypeID="EDDO_Shell_Class_Root"/>
 			<UserTypeLink UserTypeID="EDDO_Assets"/>
 		</UserType>
-		<UserType ID="EDDO_Channels" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Channels</Name>
-			<UserTypeLink UserTypeID="Classification 1 user-type root"/>
+		<UserType ID="EDDO_Channels" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Channels</Name>
+			<UserTypeLink UserTypeID="EDDO_Shell_Class_Root"/>
 		</UserType>
-		<UserType ID="EDDO_Channel" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Channel</Name>
+		<UserType ID="EDDO_Channel" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Channel</Name>
 			<UserTypeLink UserTypeID="EDDO_Channels"/>
 			<AttributeLink AttributeID="EDDO_Marketing Description"/>
 		</UserType>
-		<UserType ID="EDDO_Suppliers" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Suppliers</Name>
-			<UserTypeLink UserTypeID="Classification 1 user-type root"/>
+		<UserType ID="EDDO_Suppliers" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Suppliers</Name>
+			<UserTypeLink UserTypeID="EDDO_Shell_Class_Root"/>
 		</UserType>
-		<UserType ID="EDDO_Supplier" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Supplier</Name>
+		<UserType ID="EDDO_Supplier" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Supplier</Name>
 			<UserTypeLink UserTypeID="EDDO_Suppliers"/>
 		</UserType>
-		<UserType ID="EDDO_Supplier Assets" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Supplier Assets</Name>
+		<UserType ID="EDDO_Supplier Assets" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Supplier Assets</Name>
 			<UserTypeLink UserTypeID="EDDO_Supplier"/>
 		</UserType>
-		<UserType ID="EDDO_Supplier Products" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
-			<Name>Supplier Products</Name>
+		<UserType ID="EDDO_Supplier Products" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false">
+			<Name>Shell Supplier Products</Name>
 			<UserTypeLink UserTypeID="EDDO_Supplier"/>
 			<AttributeLink AttributeID="EDDO_SupplierDescription"/>
 		</UserType>
-		<UserType ID="Entity user-type root" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+		<UserType ID="Entity user-type root" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
 			<Name>Entity user-type root</Name>
 		</UserType>
-		<UserType ID="EDDO_Locations" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>Locations</Name>
+		<UserType ID="EDDO_Shell_Entity_Root" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Entity Root</Name>
 			<UserTypeLink UserTypeID="Entity user-type root"/>
 		</UserType>
-		<UserType ID="EDDO_Country" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>Country</Name>
+		<UserType ID="EDDO_Locations" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Locations</Name>
+			<UserTypeLink UserTypeID="EDDO_Shell_Entity_Root"/>
+		</UserType>
+		<UserType ID="EDDO_Country" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Country</Name>
 			<UserTypeLink UserTypeID="EDDO_Locations"/>
 			<AttributeLink AttributeID="EDDO_CountryCode"/>
 		</UserType>
-		<UserType ID="EDDO_State" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>State</Name>
+		<UserType ID="EDDO_State" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell State</Name>
 			<UserTypeLink UserTypeID="EDDO_Country"/>
 		</UserType>
-		<UserType ID="EDDO_Suburb" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>Suburb</Name>
+		<UserType ID="EDDO_Suburb" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Suburb</Name>
 			<UserTypeLink UserTypeID="EDDO_State"/>
 			<AttributeLink AttributeID="EDDO_PostCode"/>
 		</UserType>
-		<UserType ID="EDDO_Address" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>Address</Name>
+		<UserType ID="EDDO_Address" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Address</Name>
 			<UserTypeLink UserTypeID="EDDO_Suburb"/>
 			<AttributeLink AttributeID="EDDO_Full Address"/>
 		</UserType>
-		<UserType ID="EDDO_Price" Selected="false" Referenced="false" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
-			<Name>Price</Name>
+		<UserType ID="EDDO_Price" Selected="true" Referenced="true" AllowInDesignTemplate="false" AllowQuarkTemplate="false" IsCategory="false" Revisability="Global">
+			<Name>Shell Price</Name>
 			<UserTypeLink UserTypeID="EDDO_Address"/>
 			<AttributeLink AttributeID="EDDO_Cost Price"/>
 			<AttributeLink AttributeID="EDDO_EndDate"/>
 			<AttributeLink AttributeID="EDDO_Sell Price"/>
 			<AttributeLink AttributeID="EDDO_StartDate"/>
 		</UserType>
-		<UserType ID="Asset user-type root" Selected="false" Referenced="false">
+		<UserType ID="Asset user-type root" Selected="true" Referenced="true">
 			<Name>Assets</Name>
 		</UserType>
-		<UserType ID="EDDO_ProductImage" Selected="false" Referenced="false">
-			<Name>Product Digital Asset</Name>
-			<UserTypeLink UserTypeID="EDDO_Supplier Assets"/>
-			<UserTypeLink UserTypeID="EDDO_Assets"/>
+		<UserType ID="EDDO_ProductImage" Selected="true" Referenced="true">
+			<Name>Shell Product Digital Asset</Name>
 		</UserType>
 	</UserTypes>
 	<CrossReferenceTypes>
-		<ProductCrossReferenceType ID="EDDO_Buy Side 2 Sell Side" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
-			<Name>Buy Side 2 Sell Side</Name>
+		<ProductCrossReferenceType ID="EDDO_Buy Side 2 Sell Side" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Shell Buy Side 2 Sell Side</Name>
 			<AttributeLink AttributeID="EDDO_Supplier Priority"/>
 			<AttributeLink AttributeID="EDDO_Repack Quotient"/>
 			<UserTypeLink UserTypeID="EDDO_Variant"/>
@@ -126,12 +136,12 @@
 			<TargetUserTypeLink UserTypeID="EDDO_Variant"/>
 			<TargetUserTypeLink UserTypeID="EDDO_Product"/>
 		</ProductCrossReferenceType>
-		<ProductCrossReferenceType ID="EDDO_Product Cross Reference" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
-			<Name>Product Cross Reference</Name>
+		<ProductCrossReferenceType ID="EDDO_Product Cross Reference" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Shell Product Cross Reference</Name>
 			<UserTypeLink UserTypeID="EDDO_Variant"/>
 			<TargetUserTypeLink UserTypeID="EDDO_Variant"/>
 		</ProductCrossReferenceType>
-		<AssetCrossReferenceType ID="EDDO_Primary Product Image" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="false">
+		<AssetCrossReferenceType ID="EDDO_Primary Product Image" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="false">
 			<Name>Primary Product Image</Name>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 			<UserTypeLink UserTypeID="EDDO_Channel"/>
@@ -144,20 +154,20 @@
 			<UserTypeLink UserTypeID="EDDO_Variant"/>
 			<TargetUserTypeLink UserTypeID="EDDO_ProductImage"/>
 		</AssetCrossReferenceType>
-		<ClassificationProductLinkType ID="EDDO_Product 2 Channel" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
-			<Name>Product 2 Channel</Name>
+		<ClassificationProductLinkType ID="EDDO_Product 2 Channel" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Shell Product 2 Channel</Name>
 			<UserTypeLink UserTypeID="EDDO_Variant"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 			<TargetUserTypeLink UserTypeID="EDDO_Channel"/>
 		</ClassificationProductLinkType>
-		<ClassificationProductLinkType ID="EDDO_Product 2 Supplier" Selected="false" Referenced="false" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
-			<Name>Product 2 Supplier</Name>
+		<ClassificationProductLinkType ID="EDDO_Product 2 Supplier" Selected="true" Referenced="true" Inherited="false" Accumulated="false" Revised="false" Mandatory="false" MultiValued="true">
+			<Name>Shell Product 2 Supplier</Name>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 			<TargetUserTypeLink UserTypeID="EDDO_Supplier Products"/>
 		</ClassificationProductLinkType>
 	</CrossReferenceTypes>
 	<UnitList>
-		<UnitFamily ID="Currency" Selected="false" Referenced="false">
+		<UnitFamily ID="Currency" Selected="true" Referenced="true">
 			<Name>Currency</Name>
 			<Unit ID="iso4217.unit.AUD">
 				<Name>Australian%20Dollar</Name>
@@ -176,7 +186,7 @@
 				<UnitConversion BaseUnitID="iso4217.unit.USD"/>
 			</Unit>
 		</UnitFamily>
-		<UnitFamily ID="Electricity and Magnetism" Selected="false" Referenced="false">
+		<UnitFamily ID="Electricity and Magnetism" Selected="true" Referenced="true">
 			<Name>Electricity and Magnetism</Name>
 			<Unit ID="unece.unit.VLT">
 				<Name>V</Name>
@@ -185,7 +195,7 @@
 				<Name>A</Name>
 			</Unit>
 		</UnitFamily>
-		<UnitFamily ID="Length" Selected="false" Referenced="false">
+		<UnitFamily ID="Length" Selected="true" Referenced="true">
 			<Name>Length</Name>
 			<Unit ID="unece.unit.SMI">
 				<Name>mile</Name>
@@ -232,7 +242,7 @@
 				<UnitConversion BaseUnitID="unece.unit.MTR" Factor=".001" Offset="0"/>
 			</Unit>
 		</UnitFamily>
-		<UnitFamily ID="Mass" Selected="false" Referenced="false">
+		<UnitFamily ID="Mass" Selected="true" Referenced="true">
 			<Name>Mass</Name>
 			<Unit ID="GPerCm3">
 				<Name>g/cm3</Name>
@@ -286,7 +296,7 @@
 				<UnitConversion BaseUnitID="unece.unit.GRM"/>
 			</Unit>
 		</UnitFamily>
-		<UnitFamily ID="Temperature" Selected="false" Referenced="false">
+		<UnitFamily ID="Temperature" Selected="true" Referenced="true">
 			<Name>Temperature</Name>
 			<Unit ID="unece.unit.CEL">
 				<Name>%C2%B0C</Name>
@@ -305,7 +315,7 @@
 				<UnitConversion BaseUnitID="unece.unit.KEL" Factor=".555555555555555555555555555555555555556" Offset="255.3722"/>
 			</Unit>
 		</UnitFamily>
-		<UnitFamily ID="Time" Selected="false" Referenced="false">
+		<UnitFamily ID="Time" Selected="true" Referenced="true">
 			<Name>Time</Name>
 			<Unit ID="unece.unit.DAY">
 				<Name>day(s)</Name>
@@ -349,203 +359,206 @@
 		</UnitFamily>
 	</UnitList>
 	<ListOfValuesGroupList>
-		<ListOfValuesGroup ID="List Of Values group root" Selected="false" Referenced="false">
+		<ListOfValuesGroup ID="List Of Values group root" Selected="true" Referenced="true">
 			<Name>Lists of Values / LOVs</Name>
-			<ListOfValuesGroup ID="EDDO_Common_LOVs" Selected="false" Referenced="false">
-				<Name>Common</Name>
+			<ListOfValuesGroup ID="EDDO_Shell_LOVs" Selected="true" Referenced="true">
+				<Name>Shell LOVs</Name>
+				<ListOfValuesGroup ID="EDDO_Common_LOVs" Selected="true" Referenced="true">
+					<Name>Shell Common LOVs</Name>
+				</ListOfValuesGroup>
 			</ListOfValuesGroup>
 		</ListOfValuesGroup>
 	</ListOfValuesGroupList>
 	<ListsOfValues>
-		<ListOfValue ID="EDDO_PackageType_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
-			<Name>Package Type LOV</Name>
+		<ListOfValue ID="EDDO_PackageType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Shell Package Type LOV</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
 			<Value>Each</Value>
 			<Value>Box</Value>
 			<Value>Case</Value>
 			<Value>Pallett</Value>
 		</ListOfValue>
-		<ListOfValue ID="EDDO_StyleType_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
-			<Name>Style Type LOV</Name>
+		<ListOfValue ID="EDDO_StyleType_LOV" Selected="true" Referenced="true" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Shell Style Type LOV</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
 			<Value>Tapered</Value>
 			<Value>Straight</Value>
 		</ListOfValue>
-		<ListOfValue ID="EDDO_YesNo_LOV" Selected="false" Referenced="false" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
-			<Name>Yes/No LOV</Name>
+		<ListOfValue ID="EDDO_YesNo_LOV" Selected="true" Referenced="true" AllowUserValueAddition="false" UseValueID="false" ParentID="EDDO_Common_LOVs">
+			<Name>Shell Yes/No LOV</Name>
 			<Validation BaseType="text" MinValue="" MaxValue="" MaxLength="100" InputMask=""/>
 			<Value>Yes</Value>
 			<Value>No</Value>
 		</ListOfValue>
 	</ListsOfValues>
 	<AttributeGroupList>
-		<AttributeGroup ID="Attribute group root" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+		<AttributeGroup ID="Attribute group root" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 			<Name>Attribute Groups</Name>
-			<AttributeGroup ID="EDDO_Shell_Attrs" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+			<AttributeGroup ID="EDDO_Shell_Attrs" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 				<Name>Shell Attributes</Name>
-				<AttributeGroup ID="EDDO_CommonAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_CommonAttributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Common</Name>
 				</AttributeGroup>
-				<AttributeGroup ID="EDDO_PackagingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_PackagingAttributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Packaging</Name>
-					<AttributeGroup ID="EDDO_Environmental" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+					<AttributeGroup ID="EDDO_Environmental" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 						<Name>Environment</Name>
 					</AttributeGroup>
 				</AttributeGroup>
-				<AttributeGroup ID="EDDO_SupplierAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_SupplierAttributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Supplier</Name>
 				</AttributeGroup>
-				<AttributeGroup ID="EDDO_LocationAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_LocationAttributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Location</Name>
 				</AttributeGroup>
-				<AttributeGroup ID="EDDO_Pricing Attributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_Pricing Attributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Pricing</Name>
 				</AttributeGroup>
-				<AttributeGroup ID="EDDO_MarketingAttributes" ManuallySorted="false" ShowInWorkbench="false" Selected="false" Referenced="false">
+				<AttributeGroup ID="EDDO_MarketingAttributes" ManuallySorted="false" ShowInWorkbench="true" Selected="true" Referenced="true">
 					<Name>Marketing</Name>
 				</AttributeGroup>
 			</AttributeGroup>
 		</AttributeGroup>
 	</AttributeGroupList>
 	<AttributeList>
-		<Attribute ID="EDDO_DepartmentID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Department ID</Name>
+		<Attribute ID="EDDO_DepartmentID" ProductMode="Normal" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Department ID</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Department"/>
 		</Attribute>
-		<Attribute ID="EDDO_CategoryID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Category ID</Name>
+		<Attribute ID="EDDO_CategoryID" ProductMode="Normal" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Category ID</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Category"/>
 		</Attribute>
-		<Attribute ID="EDDO_GroupID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Group ID</Name>
+		<Attribute ID="EDDO_GroupID" ProductMode="Normal" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Group ID</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Group"/>
 		</Attribute>
-		<Attribute ID="EDDO_SubGroupID" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Sub Group ID</Name>
+		<Attribute ID="EDDO_SubGroupID" ProductMode="Normal" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Sub Group ID</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Sub Group"/>
 		</Attribute>
-		<Attribute ID="EDDO_barcode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>barcode</Name>
+		<Attribute ID="EDDO_barcode" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell barcode</Name>
 			<Validation BaseType="text" MaxLength="10" InputMask="9999999999"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 		</Attribute>
-		<Attribute ID="EDDO_Diameter" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="true">
-			<Name>Diamater</Name>
+		<Attribute ID="EDDO_Diameter" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="true">
+			<Name>Shell Diamater</Name>
 			<Validation BaseType="number" MinValue="0" MaxValue="100"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Variant"/>
 		</Attribute>
-		<Attribute ID="EDDO_StyleType" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Style Type</Name>
+		<Attribute ID="EDDO_StyleType" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Style Type</Name>
 			<ListOfValueLink ListOfValueID="EDDO_StyleType_LOV"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 		</Attribute>
-		<Attribute ID="EDDO_Voltage" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Voltage</Name>
+		<Attribute ID="EDDO_Voltage" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Voltage</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_CommonAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 		</Attribute>
-		<Attribute ID="EDDO_isForSale" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>is for sale</Name>
+		<Attribute ID="EDDO_isForSale" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell is for sale</Name>
 			<ListOfValueLink ListOfValueID="EDDO_YesNo_LOV"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 		</Attribute>
-		<Attribute ID="EDDO_PackageContents" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Package Contents</Name>
+		<Attribute ID="EDDO_PackageContents" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Package Contents</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 		</Attribute>
-		<Attribute ID="EDDO_Package Type" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Package Type</Name>
+		<Attribute ID="EDDO_Package Type" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Package Type</Name>
 			<ListOfValueLink ListOfValueID="EDDO_PackageType_LOV"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_PackagingAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 		</Attribute>
-		<Attribute ID="EDDO_Maximum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Maximum Storage Temperature</Name>
+		<Attribute ID="EDDO_Maximum Storage Temperature" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Maximum Storage Temperature</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Environmental"/>
 		</Attribute>
-		<Attribute ID="EDDO_Minimum Storage Temperature" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Minimum Storage Temperature</Name>
+		<Attribute ID="EDDO_Minimum Storage Temperature" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Minimum Storage Temperature</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Environmental"/>
 		</Attribute>
-		<Attribute ID="EDDO_Repack Quotient" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Repack Quotient</Name>
+		<Attribute ID="EDDO_Repack Quotient" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Repack Quotient</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Buy Side 2 Sell Side"/>
 		</Attribute>
-		<Attribute ID="EDDO_SupplierDescription" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Supplier Description</Name>
+		<Attribute ID="EDDO_SupplierDescription" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Supplier Description</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>
 			<UserTypeLink UserTypeID="EDDO_Supplier Products"/>
 		</Attribute>
-		<Attribute ID="EDDO_Supplier Priority" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Supplier Priority</Name>
+		<Attribute ID="EDDO_Supplier Priority" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Supplier Priority</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_SupplierAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Buy Side 2 Sell Side"/>
 		</Attribute>
-		<Attribute ID="EDDO_CountryCode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Country Code</Name>
+		<Attribute ID="EDDO_CountryCode" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Country Code</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Country"/>
 		</Attribute>
-		<Attribute ID="EDDO_Full Address" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Full Address</Name>
+		<Attribute ID="EDDO_Full Address" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Full Address</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Address"/>
 		</Attribute>
-		<Attribute ID="EDDO_PostCode" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Post Code</Name>
+		<Attribute ID="EDDO_PostCode" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Post Code</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_LocationAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Suburb"/>
 		</Attribute>
-		<Attribute ID="EDDO_Cost Price" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Cost Price</Name>
+		<Attribute ID="EDDO_Cost Price" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Cost Price</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>
-		<Attribute ID="EDDO_EndDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>End Date</Name>
+		<Attribute ID="EDDO_EndDate" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell End Date</Name>
 			<Validation BaseType="isodatetime"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>
-		<Attribute ID="EDDO_Sell Price" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Sell Price</Name>
+		<Attribute ID="EDDO_Sell Price" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Sell Price</Name>
 			<Validation BaseType="number"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>
-		<Attribute ID="EDDO_StartDate" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Start Date</Name>
+		<Attribute ID="EDDO_StartDate" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Start Date</Name>
 			<Validation BaseType="isodatetime"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_Pricing Attributes"/>
 			<UserTypeLink UserTypeID="EDDO_Price"/>
 		</Attribute>
-		<Attribute ID="EDDO_Marketing Description" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
-			<Name>Marketing Description</Name>
+		<Attribute ID="EDDO_Marketing Description" ProductMode="Property" Selected="false" Referenced="false" FullTextIndexed="false" ExternallyMaintained="false" Derived="false" Mandatory="false" MultiValued="false">
+			<Name>Shell Marketing Description</Name>
 			<Validation BaseType="text"/>
 			<AttributeGroupLink AttributeGroupID="EDDO_MarketingAttributes"/>
 			<UserTypeLink UserTypeID="EDDO_Product"/>

@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="2.0" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="2.1" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -30,12 +30,12 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="asset instance" notes="" cx="0" cy="0" bgcolor="13882323" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -88,8 +88,8 @@
 					<Tag name="MinValue" type="" description="" unit="" values="" default=""/>
 					<Tag name="MultiValued" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,url,gtin,integer,isodate,isodatetime,numberrange,embedded_number,numeric_text,fraction,regexp,boolean,date" default="text"/>
 					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
+					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,url,gtin,integer,isodate,isodatetime,numberrange,embedded_number,numeric_text,fraction,regexp,boolean,date" default="text"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -175,12 +175,12 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="classification instance" notes="" cx="0" cy="0" bgcolor="10551295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -264,12 +264,12 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="entity instance" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -501,12 +501,28 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Permission" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Permission 2 Node" constraint="STEP Types::classification instance;STEP Types::entity instance;STEP Types::product instance"/>
+				</stereotypedrelationships>
 				<AppliesTo>
 					<Apply type="UseCase"/>
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Permission 2 Node" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Usage">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Can Create" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Delete" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Read" type="" description="" unit="" values="" default=""/>
+					<Tag name="Can Update" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -526,13 +542,13 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
+					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="product instance" notes="" cx="0" cy="0" bgcolor="15453831" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
@@ -746,10 +762,10 @@
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
-					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
+					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
+					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="UOM Base" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

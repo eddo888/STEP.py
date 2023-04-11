@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.0" notes="STEP Toolbox"/>
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.1" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -13,6 +13,7 @@
 					<Tag name="STEP Types::Depends On(UML::Dependency)" type="" description="" unit="" values="" default="Depends On"/>
 					<Tag name="STEP Types::Event Processor(UML::Class)" type="" description="" unit="" values="" default="Event Processor"/>
 					<Tag name="STEP Types::Library(UML::Class)" type="" description="" unit="" values="" default="Library"/>
+					<Tag name="STEP Types::Permission 2 Node(UML::Usage)" type="" description="" unit="" values="" default="Permission 2 Node"/>
 					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
 					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
 					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>

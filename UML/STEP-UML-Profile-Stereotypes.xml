@@ -114,10 +114,6 @@
 						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
-				<TaggedValues>
-					<Tag name="Attributes"/>
-					<Tag name="Attribute Groups"/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Azure Blobs" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -912,10 +908,7 @@
 				</AppliesTo>
 			</Stereotype>
 		</Stereotypes>
-		<TaggedValueTypes>
-			<TaggedValueType property="Attributes" description="" notes="Type=RefGUIDList;Stereotypes=Attribute;"/>
-			<TaggedValueType property="Attribute Groups" description="" notes="Type=RefGUIDList;Stereotypes=Attribute Group;"/>
-		</TaggedValueTypes>
+		<TaggedValueTypes/>
 		<ViewDefinitions/>
 		<Metamodel/>
 	</Content>

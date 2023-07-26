@@ -1081,4 +1081,22 @@ class Task(STEP):
 		return super().post('%s/%s/release'%(self.base,id))
 		
 	
+#====================================================================================================
+@args.command(name='attributes')
+class Attributes(STEP):
+
+	base = 'attributes'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+				
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get attribute definition by id')
+	@args.parameter(name='id', help='the ID attribute')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
+		
+
 if __name__ == '__main__': args.execute()

@@ -251,6 +251,13 @@ class Assets(STEP):
 
 
 	#________________________________________________________________________________________________
+	@args.operation(help='approve asset by id')
+	@args.parameter(name='id', help='the ID of asset')
+	def approve(self, id):
+		return super().post('%s/%s/approve'%(self.base,id))
+
+
+	#________________________________________________________________________________________________
 	@args.operation
 	@args.parameter(name='output', short='o', help='where to store the content, defautls to stdout')
 	def content(self, id, output=None):
@@ -446,6 +453,13 @@ class Products(STEP):
 
 	
 	#________________________________________________________________________________________________
+	@args.operation(help='approve product by id')
+	@args.parameter(name='id', help='the ID of product')
+	def approve(self, id):
+		return super().post('%s/%s/approve'%(self.base,id))
+
+
+	#________________________________________________________________________________________________
 	@args.operation(help='create a new product')
 	@args.parameter(name='name', short='n')
 	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
@@ -613,6 +627,13 @@ class Entities(STEP):
 
 
 	#________________________________________________________________________________________________
+	@args.operation(help='approve entity by id')
+	@args.parameter(name='id', help='the ID of entity')
+	def approve(self, id):
+		return super().post('%s/%s/approve'%(self.base,id))
+
+
+	#________________________________________________________________________________________________
 	@args.operation(help='get children of entity by id')
 	@args.parameter(name='id', help='the ID of entity')
 	def children(self, id):
@@ -691,6 +712,13 @@ class Classifications(STEP):
 	@args.parameter(name='id', help='the ID of classification')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='approve classification by id')
+	@args.parameter(name='id', help='the ID of classification')
+	def approve(self, id):
+		return super().post('%s/%s/approve'%(self.base,id))
 
 
 	#________________________________________________________________________________________________

@@ -346,12 +346,13 @@ class Processes(STEP):
 
 
 	#________________________________________________________________________________________________
-	@args.operation(help='get attachment content, JSON only !')
-	def attachment_content(self, id, attachmentId):
+	@args.operation(help='get attachment content')
+	@args.parameter(name='output', short='o', help='where to store the content, defautls to stdout')
+	def attachment_content(self, id, attachmentId, output=None):
 		'''
 		get the process by id
 		'''
-		return super().get('background-processes/%s/attachments/%s/content'%(id,attachmentId))
+		return super().file('background-processes/%s/attachments/%s/content'%(id,attachmentId), output)
 
 	
 #====================================================================================================
@@ -901,9 +902,9 @@ class Exports(STEP):
 	@args.parameter(name='use_context', short='c', flag=True, help='useRequestContextWorkspace')
 	@args.parameter(name='process', short='p', help='process BGP description', default='triggered by rest')
 	@args.parameter(name='urls', short='u', nargs='*', help='STEP URLs')
-	def importer(self, id, use_context=None, process=None, urls=[]):
+	def exporter(self, id, use_context=None, process=None, urls=[]):
 		'''
-		returns the process BGP ID for the import process
+		returns the process BGP ID for the export process
 		'''
 		params = {
 			"context" : self.context,

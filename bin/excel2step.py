@@ -4,8 +4,8 @@
 
 import sys, os, re
 
-# remove before flight
-#sys.path.insert(0,'..')
+if sys.argv[0].startswith('.'):
+	sys.path.insert(0,'..')
 
 from STEP.XML import Converter, args
 

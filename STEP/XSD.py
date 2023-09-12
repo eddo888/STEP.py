@@ -5,6 +5,15 @@
 # Namespace http://www.stibosystems.com/step
 
 from __future__ import unicode_literals
+
+import collections
+
+try:
+	# fix moved module for PyXB backward compatibility
+	collections.MutableSequence = collections.abc.MutableSequence
+except:
+	pass
+
 import pyxb
 import pyxb.binding
 import pyxb.binding.saxer

@@ -11,6 +11,7 @@ import collections
 try:
 	# fix moved module for PyXB backward compatibility
 	collections.MutableSequence = collections.abc.MutableSequence
+	collections.Iterable = collections.abc.Iterable
 except:
 	pass
 

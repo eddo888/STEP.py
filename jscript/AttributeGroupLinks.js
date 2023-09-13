@@ -11,9 +11,8 @@ function LinkAttributeGroup(diagram, depth) {
 	
 	package = Repository.GetPackageByID(diagram.PackageID);
 	Session.Output(depth+"package["+package.PackageID+"]="+package.Name);
-
-	element = package.Element;
 	
+	element = package.Element;
 	for (var c=0; c<element.Connectors.Count; c++) {
 		var connector as EA.Connector;
 		connector = element.Connectors.GetAt(c);
@@ -36,8 +35,8 @@ function LinkAttributeGroup(diagram, depth) {
 
 		add_diagram_package(diagram, _package);
 	}
-
-	diagram.ShowAsElementList(true, true);
+	
+	diagram.ShowAsElementList(false, true);
 	
 	diagram.Update();
 	Repository.ReloadDiagram(diagram.DiagramID);

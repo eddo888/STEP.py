@@ -36,7 +36,7 @@ function LinkAttributeGroup(diagram, depth) {
 		add_diagram_package(diagram, _package);
 	}
 	
-	diagram.ShowAsElementList(false, true);
+	diagram.ShowAsElementList(true, true);
 	
 	diagram.Update();
 	Repository.ReloadDiagram(diagram.DiagramID);
@@ -86,3 +86,4 @@ function LinkAttributeGroups() {
 }
 
 LinkAttributeGroups();
+

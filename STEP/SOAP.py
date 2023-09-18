@@ -13,12 +13,10 @@ from suds.xsd.sxbasic import Complex
 from dotmap import DotMap
 
 from Argumental.Argue import Argue
-from Spanners.Squirrel import Squirrel
 from Perdy.pretty import prettyPrint
 from Baubles.Logger import Logger
 
 args = Argue()
-squirrel = Squirrel()
 logger = Logger()
 
 def quietly():
@@ -73,14 +71,11 @@ class StepSoapClient(object):
 	def username(self): return
 
 	@args.property(short='p')
-	def password(self):
-		return squirrel.get('%s:%s'%(self.hostname, self.username))
-	
+	def password(self): return 
 
 	@args.property(short='v', flag=True)
 	def verbose(self): return False
 
-	#.............................................................
 	def __init__(self, hostname=None, wsdlpath=None, username=None, password=None, verbose=False):
 		if hostname: self.hostname = hostname
 		if wsdlpath: self.wsdlpath = wsdlpath
@@ -106,13 +101,11 @@ class StepSoapClient(object):
 		return
 
 
-	#.............................................................
 	@args.operation
 	def service(self):
 		print(self.client)
 
 
-	#.............................................................
 	def createAccessControl(self):
 		request = self.client.factory.create('ns1:accessContext')
 		request.userName = self.username
@@ -120,7 +113,6 @@ class StepSoapClient(object):
 		return request
 	
 
-	#.............................................................
 	@args.operation
 	def directory(self):
 		'''
@@ -129,7 +121,6 @@ class StepSoapClient(object):
 		return sorted(self.client.sd[0].service.ports[0].methods.keys())
 	
 
-	#.............................................................
 	@args.operation
 	def types(self):
 		'''
@@ -138,7 +129,6 @@ class StepSoapClient(object):
 		return sorted(self._types.keys())
 		
 
-	#.............................................................
 	def typo(self, part):
 		name = str(part[0].name)
 		if name not in self._types.keys():
@@ -152,7 +142,6 @@ class StepSoapClient(object):
 		return d
 		
 
-	#.............................................................
 	@args.operation
 	def describe(self, name):
 		'''
@@ -176,7 +165,6 @@ class StepSoapClient(object):
 		return(result)
 			
 
-	#.............................................................
 	@args.operation
 	def dummy(self, name):
 		'''
@@ -186,14 +174,18 @@ class StepSoapClient(object):
 		return self.client.service.dummy(request,name)
 
 
-	#.............................................................
 	@args.operation
 	def getWorkspaces(self):
 		response = self.client.service.getWorkspaces(self.username,self.password)
 		return response
 
 
-	#.............................................................
+	@args.operation
+	def getContexts(self):
+		response = self.client.service.getContexts(self.username,self.password)
+		return response
+
+
 	@args.operation
 	def approve(self, nodeURL):
 		request = self.createAccessControl()
@@ -201,7 +193,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getBaseProduct(self, nodeURL):
 		request = self.createAccessControl()
@@ -209,14 +200,12 @@ class StepSoapClient(object):
 		return response
 		
 
-	#.............................................................
 	@args.operation
 	def createProduct(self, productID, name, objectTypeURL, parentURL, beforeURL=None):
 		request = self.createAccessControl()
 		response = self.client.service.createProduct(request,productID, name, objectTypeURL, parentURL, beforeURL) 
 		return response
 													 
-	#.............................................................
 	@args.operation
 	def createClassification(self, classificationID, name, objectTypeURL, parentURL, beforeURL=None):
 		request = self.createAccessControl()
@@ -224,28 +213,24 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getClassifications(self, nodeURL):
 		request = self.createAccessControl()
 		return self.client.service.getClassifications(request, nodeURL)
 		
 
-	#.............................................................
 	@args.operation
 	def addClassification(self, nodeURL, classificationURL):
 		request = self.createAccessControl()
 		return self.client.service.addClassification(request, nodeURL, classificationURL)
 		
 
-	#.............................................................
 	@args.operation
 	def getAttributeDetails(self, nodeURL):
 		request = self.createAccessControl()
 		return self.client.service.getAttributeDetails(request, nodeURL)
 		
 
-	#.............................................................
 	@args.operation
 	@args.parameter(name='urls', short='u', flag=True, help='show attribute urls')
 	@args.parameter(name='useNames', short='n', flag=True, help='use attribute name not id')
@@ -270,7 +255,6 @@ class StepSoapClient(object):
 		return values
 
 
-	#.............................................................
 	@args.operation
 	@args.parameter(name='nameEqValues', short='e', nargs='*', metavar='name=value', help='name is the attribute id')
 	def setValues(self, nodeURL, nameEqValues=[]):
@@ -292,7 +276,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getName(self, nodeURL):
 		request = self.createAccessControl()
@@ -300,7 +283,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	@args.parameter(name='caseSensitive', short='i', flag=True)
 	@args.parameter(name='sort', short='s', flag=True)
@@ -312,7 +294,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	@args.parameter(name='caseSensitive', flag=True)
 	@args.parameter(name='offset', type=int, default=0)
@@ -323,14 +304,12 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getNodeDetails(self, nodeURL):
 		request = self.createAccessControl()
 		return self.client.service.getNodeDetails(request, nodeURL)
 		
 
-	#.............................................................
 	@args.operation
 	def moveNode(self, nodeURL, oldParentURL, newParentURL):
 		request = self.createAccessControl()
@@ -338,7 +317,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def setName(self, nodeURL, name=None):
 		request = self.createAccessControl()
@@ -346,7 +324,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getChildren(self, nodeURL):
 		request = self.createAccessControl()
@@ -354,7 +331,6 @@ class StepSoapClient(object):
 		return response
 		
 
-	#.............................................................
 	@args.operation
 	def getGroups(self, nodeURL):
 		request = self.createAccessControl()
@@ -362,7 +338,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getUsers(self, nodeURL):
 		request = self.createAccessControl()
@@ -370,7 +345,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getUserInfo(self, nodeURL):
 		request = self.createAccessControl()
@@ -378,7 +352,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getValidChildTypes(self, nodeURL):
 		request = self.createAccessControl()
@@ -386,7 +359,6 @@ class StepSoapClient(object):
 		return response
 		
 
-	#.............................................................
 	@args.operation
 	def getPath(self, nodeURL):
 		request = self.createAccessControl()
@@ -394,7 +366,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getReferenceTypes(self):
 		request = self.createAccessControl()
@@ -402,7 +373,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def createReference(self, ownerURL, targetURL, referenceType):
 		request = self.createAccessControl()
@@ -410,7 +380,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getReferences(self, nodeURL):
 		request = self.createAccessControl()
@@ -418,7 +387,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def deleteNode(self, nodeURL):
 		request = self.createAccessControl()
@@ -426,7 +394,6 @@ class StepSoapClient(object):
 		return response
 	
 
-	#.............................................................
 	@args.operation
 	def getTasks(self, nodeURL, workflowID):
 		request = self.createAccessControl()
@@ -434,7 +401,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getWorkflowProcesses(self, workflowID):
 		request = self.createAccessControl()
@@ -442,7 +408,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getWorkflowProcessDetail(self, processTemplateIdType, processIdType):
 		request = self.createAccessControl()
@@ -450,7 +415,6 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def startWorkflow(self, nodeID, workflowID, message):
 		request = self.createAccessControl()
@@ -458,14 +422,12 @@ class StepSoapClient(object):
 		return response
 
 
-	#.............................................................
 	@args.operation
 	def getLOVValueIDs(self,nodeID):
 		request = self.createAccessControl()
 		response = self.client.service.getLOVValueIDs(request,nodeID)
 		return response
 
-	#.............................................................
 	@args.operation
 	@args.parameter(name='templateID', choices=['Inbound', 'Outbound', 'Importer', 'Exporter', 'StateflowDeadline'])
 	def getBackgoundProcesses(self, templateID):
@@ -474,7 +436,6 @@ class StepSoapClient(object):
 		return response
 
 
-#_________________________________________________________________
 def render(node):
 	#sys.stderr.write('%s[%s]\n'%(node,type(node)))
 	if type(node) in [Text]:

@@ -14,7 +14,6 @@ from GoldenChild.xpath import *
 from Perdy.pyxbext import directory
 from Perdy.parser import printXML
 from Spanners.IdentityCache import IdentityCache
-from Spanners.Squirrel import Squirrel
 from Argumental.Argue import Argue
 
 from STEP.XSD import *

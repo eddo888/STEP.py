@@ -12,10 +12,8 @@ from dotmap import DotMap
 from Perdy.parser import doParse, printXML
 from Perdy.pretty import prettyPrint
 from Argumental.Argue import Argue
-from Spanners.Squirrel import Squirrel
 
 args = Argue()
-squirrel = Squirrel()
 
 dts = '%Y-%m-%dT%H:%M:%S'
 
@@ -52,7 +50,7 @@ class STEP(object):
 	def username(self): return
 
 	@args.property(short='P')
-	def password(self): return squirrel.get('stibo:%s:%s'%(self.hostname, self.username))
+	def password(self): return
 
 	@args.property(short='v', flag=True)
 	def verbose(self): return
@@ -567,9 +565,10 @@ class Products(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='set values of product by id')
 	@args.parameter(name='id', help='the ID of product')
-	@args.parameter(name='attributeID', help='the ID of product')
-	@args.parameter(name='value', help='the ID of product')
-	def update(self, id, attributeID, value):
+	@args.parameter(name='attributeID', help='the ID of attribute')
+	@args.parameter(name='value', help='the actual value')
+	@args.parameter(name='unit', short='u', help='unit of measure')
+	def update(self, id, attributeID, value, unit=None):
 		headers={
 			"accept": "application/json",
 			"Content-Type": "application/json",
@@ -579,6 +578,8 @@ class Products(STEP):
 				"value":value
 			}
 		}
+		if unit:
+			payload['value']['unit'] = unit
 		result = super().put('%s/%s/values/%s'%(
 			self.base, id, attributeID), body=json.dumps(payload), headers=headers
 		)
@@ -653,12 +654,25 @@ class Entities(STEP):
 	@args.parameter(name='id', help='the ID of entity')
 	@args.parameter(name='name', help='attribute ID')
 	@args.parameter(name='value', help='attribute Value')
-	def update(self, id, name, value):
-		body = json.dumps(dict(value=dict(value=value)))
-		headers = { 'Content-Type' : 'application/json' }
-		return super().put('%s/%s/values/%s'%(self.base, id, name), body=body, headers=headers)
+	@args.parameter(name='unit', short='u', help='unit of measure')
+	def update(self, id, attributeID, value, unit=None):
+		headers={
+			"accept": "application/json",
+			"Content-Type": "application/json",
+		}
+		payload={
+			"value": {
+				"value":value
+			}
+		}
+		if unit:
+			payload['value']['unit'] = unit
+		result = super().put('%s/%s/values/%s'%(
+			self.base, id, attributeID), body=json.dumps(payload), headers=headers
+		)
+		return json.loads(result)
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='search for entities')
 	@args.parameter(name='below_id', help='the ID of entity to search within')
@@ -769,6 +783,30 @@ class Classifications(STEP):
 	def values(self, id):
 		return super().get('%s/%s/values'%(self.base,id))
 	
+	#________________________________________________________________________________________________
+	@args.operation(help='set values of classification by id')
+	@args.parameter(name='id', help='the ID of classification')
+	@args.parameter(name='attributeID', help='the ID of attribute')
+	@args.parameter(name='value', help='the actual value')
+	@args.parameter(name='unit', short='u', help='unit of measure')
+	def update(self, id, attributeID, value, unit=None):
+		headers={
+			"accept": "application/json",
+			"Content-Type": "application/json",
+		}
+		payload={
+			"value": {
+				"value":value
+			}
+		}
+		if unit:
+			payload['value']['unit'] = unit
+		result = super().put('%s/%s/values/%s'%(
+			self.base, id, attributeID), body=json.dumps(payload), headers=headers
+		)
+		return json.loads(result)
+
+
 
 #====================================================================================================
 @args.command(name='endpoints')

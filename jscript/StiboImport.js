@@ -702,6 +702,9 @@ function readSetupGroups(package, doc, cache) {
 }
 
 function readRules(package, doc, cache) {	
+	var package as EA.Package;
+	var diagram as EA.Element;
+
 	/*
 	<BusinessLibraries>
 		<BusinessRule ID="perdy.js" Referenced="true" Selected="true" Type="Library">
@@ -712,26 +715,8 @@ function readRules(package, doc, cache) {
 			<ValidObjectTypes AllObjectTypesValid="false"/>
 		</BusinessRule>
 	</BuysinessLibraries>
-	
-	<BusinessRules>
-		<BusinessRule ID="GS1-Child-Key-Fixer" Referenced="true" RunPrivileged="false" Scope="Global" Selected="true" Type="Action">
-			<SetupGroupLink SetupGroupID="GS1_Actions"/>
-			<Name>GS1-Child-Key-Fixer</Name>
-			<OnApprove ApproveSetup="Never"/>
-			<Configuration>...</Configuration>
-			<ValidObjectTypes AllObjectTypesValid="false">
-				<ValidObjectType ID="GS1-Price"/>
-				<ValidObjectType ID="GS1-Case"/>
-				<ValidObjectType ID="GS1-Product"/>
-				<ValidObjectType ID="GS1-Pallet"/>
-				<ValidObjectType ID="GS1-Pack"/>
-			</ValidObjectTypes>
-		</BusinessRule>
 	*/
-	
-	var package as EA.Package;
-	var diagram as EA.Element;
-		
+			
 	var libraries = doc.selectNodes('/s:STEP-ProductInformation/s:BusinessLibraries/*');
 	
 	for (var l=0; l<libraries.length; l++) {
@@ -751,12 +736,33 @@ function readRules(package, doc, cache) {
 			var parent_diagram = setupDiagram(parent_package, null, 'Class');
 			
 			var element = findOrCreateElement(parent_package, 'Class', 'Library', name, id, cache);
+			setTaggedValue(element, '@ID', id);
+			setTaggedValue(element, 'Name', name);
+			//setTaggedValue(element, 'Type', stereotype);
 			element.Update();
+			
 			add_diagram_element(parent_diagram, element);
 			parent_diagram.Update();
 		}
 	}
 	
+	/*
+	<BusinessRules>
+		<BusinessRule ID="GS1-Child-Key-Fixer" Referenced="true" RunPrivileged="false" Scope="Global" Selected="true" Type="Action">
+			<SetupGroupLink SetupGroupID="GS1_Actions"/>
+			<Name>GS1-Child-Key-Fixer</Name>
+			<OnApprove ApproveSetup="Never"/>
+			<Configuration>...</Configuration>
+			<ValidObjectTypes AllObjectTypesValid="false">
+				<ValidObjectType ID="GS1-Price"/>
+				<ValidObjectType ID="GS1-Case"/>
+				<ValidObjectType ID="GS1-Product"/>
+				<ValidObjectType ID="GS1-Pallet"/>
+				<ValidObjectType ID="GS1-Pack"/>
+			</ValidObjectTypes>
+		</BusinessRule>
+	*/
+
 	var rules = doc.selectNodes('/s:STEP-ProductInformation/s:BusinessRules/*');
 	
 	for (var r=0; r<rules.length; r++) {
@@ -776,8 +782,15 @@ function readRules(package, doc, cache) {
 			var parent_package = getCache(cache, 'Business Rules', parent_id);
 			var parent_diagram = setupDiagram(parent_package, null, 'Class');
 			
+			// hack
+			if (tipe == 'Action') tipe = 'Rule';
+				
 			var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
+			setTaggedValue(element, '@ID', id);
+			setTaggedValue(element, 'Name', name);
+			//setTaggedValue(element, 'Type', stereotype);
 			element.Update();
+
 			add_diagram_element(parent_diagram, element);
 			parent_diagram.Update();
 		}

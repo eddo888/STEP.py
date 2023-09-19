@@ -244,7 +244,7 @@ function findPackage(parent, stereotype, name, id) {
 	for (var c=0; c<parent.Packages.Count; c++) {
 		var child as EA.Package;
 		child = parent.Packages.GetAt(c);
-		if (child.StereotypeEx == stereotype && child.Name == name) {
+		if (child.StereotypeEx == stereotype && (name && child.Name == name)) {
 			tag = getTaggedValue(child, '@ID');
 			if (id && tag && tag.Value) {
 				if (tag.Value == id) {
@@ -276,7 +276,7 @@ function findOrCreatePackage(parent, stereotype, name, id, cache) {
 	result = findPackage(parent, stereotype, name, id);
 	
 	if (! result) {
-		result = parent.Packages.AddNew(name, 'Package');
+		result = parent.Packages.AddNew(name || '', 'Package');
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
@@ -286,11 +286,11 @@ function findOrCreatePackage(parent, stereotype, name, id, cache) {
 	if (stereotype) {
 		putCache(cache, stereotype, result);
 	}
+
+	element = result.Element;
 	
-	if (id) {
-		element = result.Element;
-		setTaggedValue(element, '@ID', id);
-	}
+	if (id) setTaggedValue(element, '@ID', id);
+	if (name) setTaggedValue(element, 'Name', name);
 
 	return result;
 }
@@ -538,7 +538,7 @@ function setupDiagram(package, name, diagram_type) {
 		}
 	}
 	if (! diagram) {
-		diagram = package.Diagrams.AddNew(name, diagram_type);
+		diagram = package.Diagrams.AddNew(name || '', diagram_type);
 		diagram.Update();
 	}
 

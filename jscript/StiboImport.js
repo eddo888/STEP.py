@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-//!INC User Scripts.Library
-!INC Stibo STEP.Library
+!INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -637,6 +637,154 @@ function readReferences(package, doc, cache) {
 	
 }
 
+function readSetupGroup(package, node, cache) {
+	/*
+		<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
+			<Name>Global Business Rules</Name>
+			...
+		</SetupGroup>
+	*/
+	
+	var package as EA.Package;
+	var diagram as EA.Diagram;
+	var element as EA.Element;
+
+	if (! node) return;
+		
+	//Session.Output('nodeName="'+node.nodeName+'"');
+
+	element = package.Element;
+	var id = XMLGetNamedAttribute(node, 'ID');
+	var name = XMLGetNodeText(node, 's:Name');
+	var stereotype = 'STEP Types::Business Rules';
+	
+	var child_package = findOrCreatePackage(package, 'Business Rules', name, id, cache);
+	var child_diagram = setupDiagram(child_package, name, 'Class');
+	
+	child_package.Update();
+	child_diagram.Update();
+	
+	var nodes = node.selectNodes('s:SetupGroup[@UserTypeID="BusinessRuleGroup"]');
+	for (var n=0; n<nodes.length; n++) {
+		var child = nodes[n];
+		readSetupGroup(child_package, child, cache);
+	}
+
+}
+
+function readSetupGroups(package, doc, cache) {
+	/*
+		<SetupGroups>
+			<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
+				<Name>Global Business Rules</Name>
+				<SetupGroup ID="GS1" Referenced="true" Selected="true" UserTypeID="BusinessRuleGroup">
+				<Name>GS1</Name>
+				<SetupGroup ID="GS1_Actions" Referenced="true" Selected="true" UserTypeID="BusinessRuleGroup">
+					<Name>Actions</Name>
+				</SetupGroup>
+				<SetupGroup ID="GS1_Conditions" Referenced="true" Selected="true" UserTypeID="BusinessRuleGroup">
+					<Name>Conditions</Name>
+				</SetupGroup>
+				<SetupGroup ID="GS1_Libraries" Referenced="true" Selected="true" UserTypeID="BusinessRuleGroup">
+					<Name>Libraries</Name>
+				</SetupGroup>
+			</SetupGroup>
+		</SetupGroup>
+	*/	
+	
+	var package as EA.Package;
+	var diagram as EA.Element;
+	
+	var nodes = doc.selectNodes('/s:STEP-ProductInformation/s:SetupGroups/s:SetupGroup[@ID="GlobalBusinessRulesRoot"]');
+	if (nodes.length > 0) {
+		readSetupGroup(package, nodes[0], cache);
+	}
+}
+
+function readRules(package, doc, cache) {	
+	/*
+	<BusinessLibraries>
+		<BusinessRule ID="perdy.js" Referenced="true" Selected="true" Type="Library">
+			<SetupGroupLink SetupGroupID="GS1_Libraries"/>
+			<Name>perdy.js</Name>
+			<Dependency LibraryAlias="UnderscoreJs" LibraryID="UnderscoreJS"/>
+			<Configuration>...</Configuration>
+			<ValidObjectTypes AllObjectTypesValid="false"/>
+		</BusinessRule>
+	</BuysinessLibraries>
+	
+	<BusinessRules>
+		<BusinessRule ID="GS1-Child-Key-Fixer" Referenced="true" RunPrivileged="false" Scope="Global" Selected="true" Type="Action">
+			<SetupGroupLink SetupGroupID="GS1_Actions"/>
+			<Name>GS1-Child-Key-Fixer</Name>
+			<OnApprove ApproveSetup="Never"/>
+			<Configuration>...</Configuration>
+			<ValidObjectTypes AllObjectTypesValid="false">
+				<ValidObjectType ID="GS1-Price"/>
+				<ValidObjectType ID="GS1-Case"/>
+				<ValidObjectType ID="GS1-Product"/>
+				<ValidObjectType ID="GS1-Pallet"/>
+				<ValidObjectType ID="GS1-Pack"/>
+			</ValidObjectTypes>
+		</BusinessRule>
+	*/
+	
+	var package as EA.Package;
+	var diagram as EA.Element;
+		
+	var libraries = doc.selectNodes('/s:STEP-ProductInformation/s:BusinessLibraries/*');
+	
+	for (var l=0; l<libraries.length; l++) {
+		var library = libraries[l];
+		var id = XMLGetNamedAttribute(library, 'ID');
+		var name = XMLGetNodeText(library, 's:Name');
+		// library specifgic bits here
+		Session.Output('id="'+id+'"');
+
+		var parents = library.selectNodes('s:SetupGroupLink');
+		if (parents.length > 0) {
+			var parent = parents[0];
+			var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
+			//Session.Output('  parent id="'+parent_id+'"');
+			
+			var parent_package = getCache(cache, 'Business Rules', parent_id);
+			var parent_diagram = setupDiagram(parent_package, null, 'Class');
+			
+			var element = findOrCreateElement(parent_package, 'Class', 'Library', name, id, cache);
+			element.Update();
+			add_diagram_element(parent_diagram, element);
+			parent_diagram.Update();
+		}
+	}
+	
+	var rules = doc.selectNodes('/s:STEP-ProductInformation/s:BusinessRules/*');
+	
+	for (var r=0; r<rules.length; r++) {
+		var rule = rules[r];
+		var id = XMLGetNamedAttribute(rule, 'ID');
+		var name = XMLGetNodeText(rule, 's:Name');
+		var tipe = XMLGetNamedAttribute(rule, 'Type');
+		// rule specifgic bits here
+		Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+
+		var parents = rule.selectNodes('s:SetupGroupLink');
+		if (parents.length > 0) {
+			var parent = parents[0];
+			var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
+			//Session.Output('  parent id="'+parent_id+'"');
+			
+			var parent_package = getCache(cache, 'Business Rules', parent_id);
+			var parent_diagram = setupDiagram(parent_package, null, 'Class');
+			
+			var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
+			element.Update();
+			add_diagram_element(parent_diagram, element);
+			parent_diagram.Update();
+		}
+	}
+	
+}
+		
 function readKeys(package, doc, cache) {}
 function readProducts(package, doc, cache) {}
 function readClassifications(package, doc, cache) {}
@@ -676,17 +824,23 @@ function importStepXML(package) {
 		readAttrToTag(node, package, 'WorkspaceID');
 	}
 		
+	/*
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);
 	readReferences(package, doc, cache);
+	*/
+	readSetupGroups(package, doc, cache);
+	readRules(package, doc, cache);
+	/*
 	readKeys(package, doc, cache);
 	readProducts(package, doc, cache);
 	readClassifications(package, doc, cache);
 	readEntities(package, doc, cache);
 	readAssets(package, doc, cache);
+	*/
 }
 
 Repository.EnsureOutputVisible( "Debug" );

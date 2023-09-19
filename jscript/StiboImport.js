@@ -1,7 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 !INC EAScriptLib.JScript-XML
-!INC User Scripts.Library
-//!INC Stibo STEP.Library
+//!INC User Scripts.Library
+!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
 	/*
@@ -660,16 +660,16 @@ function readSetupGroup(package, node, cache) {
 	
 	var child_package = findOrCreatePackage(package, 'Business Rules', name, id, cache);
 	var child_diagram = setupDiagram(child_package, name, 'Class');
-	
-	child_package.Update();
-	child_diagram.Update();
-	
+		
 	var nodes = node.selectNodes('s:SetupGroup[@UserTypeID="BusinessRuleGroup"]');
 	for (var n=0; n<nodes.length; n++) {
 		var child = nodes[n];
 		readSetupGroup(child_package, child, cache);
 	}
 
+	child_package.Update();
+	child_diagram.Update();
+	package.Update();
 }
 
 function readSetupGroups(package, doc, cache) {
@@ -701,9 +701,58 @@ function readSetupGroups(package, doc, cache) {
 	}
 }
 
+function addDependencies(id, node, dependencies) {
+	var dependencys = node.selectNodes('s:Dependency');
+	for (var d=0; d<dependencys.length; d++) {
+		var dependency = dependencys[d];
+		var target = new ActiveXObject("Scripting.Dictionary");
+		target.Add('id', XMLGetNamedAttribute(dependency, 'LibraryID'));
+		target.Add('alias', XMLGetNamedAttribute(dependency, 'LibraryAlias'));
+		Session.Output('  '+id+' -> '+target.Item('id'));
+		if (! dependencies.Exists(id)) dependencies.Add(id, []);
+		dependencies.Item(id).push(target);
+	}
+}	
+	
+function addRule(node, dependencies, elements, cache) {
+	var element = null;
+	var id = XMLGetNamedAttribute(node, 'ID');
+	var name = XMLGetNodeText(node, 's:Name');
+	var tipe = XMLGetNamedAttribute(node, 'Type');
+	Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+	
+	addDependencies(id, node, dependencies);
+	
+	var parents = node.selectNodes('s:SetupGroupLink');
+	if (parents.length > 0) {
+		var parent = parents[0];
+		var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
+		//Session.Output('  parent id="'+parent_id+'"');
+		
+		var parent_package = getCache(cache, 'Business Rules', parent_id);
+		var parent_diagram = setupDiagram(parent_package, null, 'Class');
+		
+		var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
+		setTaggedValue(element, '@ID', id);
+		setTaggedValue(element, 'Name', name);
+		//setTaggedValue(element, 'Type', stereotype);
+		element.Update();
+		
+		add_diagram_element(parent_diagram, element);
+		parent_diagram.Update();
+	}
+	
+	elements.Add(id, element);
+	return element;
+}
+
 function readRules(package, doc, cache) {	
 	var package as EA.Package;
 	var diagram as EA.Element;
+
+	var elements = new ActiveXObject("Scripting.Dictionary");  // { id : element }
+
+	var dependencies = new ActiveXObject("Scripting.Dictionary");  // { source_id : [{id, alias}] }
 
 	/*
 	<BusinessLibraries>
@@ -721,29 +770,8 @@ function readRules(package, doc, cache) {
 	
 	for (var l=0; l<libraries.length; l++) {
 		var library = libraries[l];
-		var id = XMLGetNamedAttribute(library, 'ID');
-		var name = XMLGetNodeText(library, 's:Name');
-		// library specifgic bits here
-		Session.Output('id="'+id+'"');
-
-		var parents = library.selectNodes('s:SetupGroupLink');
-		if (parents.length > 0) {
-			var parent = parents[0];
-			var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
-			//Session.Output('  parent id="'+parent_id+'"');
-			
-			var parent_package = getCache(cache, 'Business Rules', parent_id);
-			var parent_diagram = setupDiagram(parent_package, null, 'Class');
-			
-			var element = findOrCreateElement(parent_package, 'Class', 'Library', name, id, cache);
-			setTaggedValue(element, '@ID', id);
-			setTaggedValue(element, 'Name', name);
-			//setTaggedValue(element, 'Type', stereotype);
-			element.Update();
-			
-			add_diagram_element(parent_diagram, element);
-			parent_diagram.Update();
-		}
+		var element = addRule(library, dependencies, elements, cache);
+		// specifics
 	}
 	
 	/*
@@ -767,32 +795,27 @@ function readRules(package, doc, cache) {
 	
 	for (var r=0; r<rules.length; r++) {
 		var rule = rules[r];
-		var id = XMLGetNamedAttribute(rule, 'ID');
-		var name = XMLGetNodeText(rule, 's:Name');
-		var tipe = XMLGetNamedAttribute(rule, 'Type');
-		// rule specifgic bits here
-		Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+		var element = addRule(rule, dependencies, elements, cache);
+		// specifics
+	}
 
-		var parents = rule.selectNodes('s:SetupGroupLink');
-		if (parents.length > 0) {
-			var parent = parents[0];
-			var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
-			//Session.Output('  parent id="'+parent_id+'"');
-			
-			var parent_package = getCache(cache, 'Business Rules', parent_id);
-			var parent_diagram = setupDiagram(parent_package, null, 'Class');
-			
-			// hack
-			if (tipe == 'Action') tipe = 'Rule';
-				
-			var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
-			setTaggedValue(element, '@ID', id);
-			setTaggedValue(element, 'Name', name);
-			//setTaggedValue(element, 'Type', stereotype);
-			element.Update();
-
-			add_diagram_element(parent_diagram, element);
-			parent_diagram.Update();
+	/*
+	link em up now
+	*/
+	
+	var keys = dependencies.Keys().toArray();
+	for (var s=0; s<keys.length; s++) {
+		var source_id = keys[s];
+		var source = elements.Item(source_id);
+		Session.Output('source id='+source_id);
+		var targets = dependencies.Item(source_id);
+		for (var t=0; t<targets.length; t++) {
+			var targeta = targets[t];
+			var tid = targeta.Item('id');
+			var alias = targeta.Item('alias');
+			Session.Output('   target id='+tid+' alias='+alias);
+			var target = elements.Item(tid);
+			createOrReplaceConnector(source, target, 'Depends On', alias, 'Dependens');
 		}
 	}
 	
@@ -836,24 +859,20 @@ function importStepXML(package) {
 		readAttrToTag(node, package, 'ContextID');
 		readAttrToTag(node, package, 'WorkspaceID');
 	}
-		
-	/*
+	
 	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);
 	readReferences(package, doc, cache);
-	*/
 	readSetupGroups(package, doc, cache);
 	readRules(package, doc, cache);
-	/*
 	readKeys(package, doc, cache);
 	readProducts(package, doc, cache);
 	readClassifications(package, doc, cache);
 	readEntities(package, doc, cache);
 	readAssets(package, doc, cache);
-	*/
 }
 
 Repository.EnsureOutputVisible( "Debug" );

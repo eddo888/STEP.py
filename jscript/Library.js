@@ -1,5 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
-!INC EAScriptLib.JScript-XML
+!INC User Scripts.JScript-XML
+//!INC EAScriptLib.JScript-XML
 
 function DoNotDisturb(diagram) {
 	var diagram as EA.Diagram;
@@ -110,7 +111,8 @@ function add_diagram_package(diagram, package) {
 
 function add_diagram_element(diagram, element) {
 	var diagram_object as EA.Diagram;
-
+	if (! diagram) return;
+		
 	diagram_object = diagram.FindElementInDiagram(element.ElementID);
 
 	if (diagram_object) {
@@ -310,7 +312,7 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		setTaggedValue('@ID', id);
 		result.Update();
 		putCache(cache, stereotype, result);
-		Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
+		//Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}	
 	return result;
 	
@@ -393,7 +395,7 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
 		target.Update();
-		Session.Output('+ connector stereotype="'+result.StereotypeEx+'" source="'+source.Name+'" target="'+target.Name+'"');
+		//Session.Output('+ connector stereotype="'+result.StereotypeEx+'" source="'+source.Name+'" target="'+target.Name+'"');
 	}
 		
 	return result;
@@ -424,7 +426,7 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 		result.Update();
 		result.StereotypeEx = stereotype;
 		result.Update();
-		Session.Output('+ attribute stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
+		//Session.Output('+ attribute stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}
 	return result;
 }

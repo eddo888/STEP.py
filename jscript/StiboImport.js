@@ -1,9 +1,11 @@
 !INC Local Scripts.EAConstants-JScript
-!INC EAScriptLib.JScript-XML
-//!INC User Scripts.Library
-!INC Stibo STEP.Library
+!INC User Scripts.JScript-XML
+//!INC EAScriptLib.JScript-XML
+!INC User Scripts.Library
+//!INC Stibo STEP.Library
 
 function readUnitsOfMeasures(package, doc, cache) {
+	Session.Output("Units of Measure");
 	/*
         <UnitFamily ID="Currency" Selected="true" Referenced="true">
             <Name>Currency</Name>
@@ -179,6 +181,8 @@ function digListOfValuesGroups(package, parent, cache) {
 }
 
 function readListOfValuesGroups(package, doc, cache) {
+	Session.Output("LOV Groups");
+	
 	var package as EA.Package;
 	var root as EA.Package;
 	
@@ -303,6 +307,8 @@ function digAttributeGroups(package, parent, cache) {
 }
 
 function readAttributeGroups(package, doc, cache) {
+	Session.Output("Attribute Groups");
+	
 	var package as EA.Package;
 	var root as EA.Package;
 	
@@ -402,6 +408,8 @@ function readAttributes(package, doc, cache) {
 }
 
 function readUserTypes(package, doc, cache) {
+	Session.Output("User Types");
+	
 	var userTypes as EA.Package;
 	/*
         <UserType 
@@ -546,6 +554,8 @@ function readUserTypeLinks(package, doc, cache) {
 }
 	
 function readReferences(package, doc, cache) {	
+	Session.Output("Reference Types");
+	
 	/*
         <ProductCrossReferenceType 
 			ID="Movie_2_Writer" 
@@ -638,6 +648,8 @@ function readReferences(package, doc, cache) {
 }
 
 function readSetupGroup(package, node, cache) {
+	Session.Output("Setup Groups");
+	
 	/*
 		<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
 			<Name>Global Business Rules</Name>
@@ -708,7 +720,7 @@ function addDependencies(id, node, dependencies) {
 		var target = new ActiveXObject("Scripting.Dictionary");
 		target.Add('id', XMLGetNamedAttribute(dependency, 'LibraryID'));
 		target.Add('alias', XMLGetNamedAttribute(dependency, 'LibraryAlias'));
-		Session.Output('  '+id+' -> '+target.Item('id'));
+		//Session.Output('  '+id+' -> '+target.Item('id'));
 		if (! dependencies.Exists(id)) dependencies.Add(id, []);
 		dependencies.Item(id).push(target);
 	}
@@ -719,7 +731,7 @@ function addRule(node, dependencies, elements, cache) {
 	var id = XMLGetNamedAttribute(node, 'ID');
 	var name = XMLGetNodeText(node, 's:Name');
 	var tipe = XMLGetNamedAttribute(node, 'Type');
-	Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+	//Session.Output('id="'+id+'"'+' type="'+tipe+'"');
 	
 	addDependencies(id, node, dependencies);
 	
@@ -736,10 +748,10 @@ function addRule(node, dependencies, elements, cache) {
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		//setTaggedValue(element, 'Type', stereotype);
-		element.Update();
+		//element.Update();
 		
 		add_diagram_element(parent_diagram, element);
-		parent_diagram.Update();
+		if (parent_diagram) parent_diagram.Update();
 	}
 	
 	elements.Add(id, element);
@@ -747,6 +759,8 @@ function addRule(node, dependencies, elements, cache) {
 }
 
 function readRules(package, doc, cache) {	
+	Session.Output("Business Rules");
+	
 	var package as EA.Package;
 	var diagram as EA.Element;
 
@@ -807,13 +821,13 @@ function readRules(package, doc, cache) {
 	for (var s=0; s<keys.length; s++) {
 		var source_id = keys[s];
 		var source = elements.Item(source_id);
-		Session.Output('source id='+source_id);
+		//Session.Output('source id='+source_id);
 		var targets = dependencies.Item(source_id);
 		for (var t=0; t<targets.length; t++) {
 			var targeta = targets[t];
 			var tid = targeta.Item('id');
 			var alias = targeta.Item('alias');
-			Session.Output('   target id='+tid+' alias='+alias);
+			//Session.Output('   target id='+tid+' alias='+alias);
 			var target = elements.Item(tid);
 			createOrReplaceConnector(source, target, 'Depends On', alias, 'Dependens');
 		}
@@ -821,11 +835,21 @@ function readRules(package, doc, cache) {
 	
 }
 		
-function readKeys(package, doc, cache) {}
-function readProducts(package, doc, cache) {}
-function readClassifications(package, doc, cache) {}
-function readEntities(package, doc, cache) {}
-function readAssets(package, doc, cache) {}
+function readKeys(package, doc, cache) {
+	Session.Output("Keys");
+}
+function readProducts(package, doc, cache) {
+	Session.Output("Products");
+}
+function readClassifications(package, doc, cache) {
+	Session.Output("Classifications");
+}
+function readEntities(package, doc, cache) {
+	Session.Output("Entities");
+}
+function readAssets(package, doc, cache) {
+	Session.Output("Assets");
+}
 
 function importStepXML(package) {
 	var doc; // as MSXML2.DOMDocument;

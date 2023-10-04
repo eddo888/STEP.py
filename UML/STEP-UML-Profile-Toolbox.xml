@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.2" notes="STEP Toolbox"/>
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.4" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -9,16 +9,18 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="STEP Types::Action(UML::Class)" type="" description="" unit="" values="" default="Action"/>
+					<Tag name="STEP Types::Business Rule(UML::Association)" type="" description="" unit="" values="" default="Business Rule"/>
 					<Tag name="STEP Types::Condition(UML::Class)" type="" description="" unit="" values="" default="Condition"/>
 					<Tag name="STEP Types::Depends On(UML::Dependency)" type="" description="" unit="" values="" default="Depends On"/>
 					<Tag name="STEP Types::Event Processor(UML::Class)" type="" description="" unit="" values="" default="Event Processor"/>
+					<Tag name="STEP Types::Final(UML::FinalState)" type="" description="" unit="" values="" default="Final State"/>
+					<Tag name="STEP Types::Initial(UML::InitialState)" type="" description="" unit="" values="" default="Initial State"/>
 					<Tag name="STEP Types::Library(UML::Class)" type="" description="" unit="" values="" default="Library"/>
-					<Tag name="STEP Types::Permission 2 Node(UML::Usage)" type="" description="" unit="" values="" default="Permission 2 Node"/>
-					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
-					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
-					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>
-					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
+					<Tag name="STEP Types::On Entry(UML::Association)" type="" description="" unit="" values="" default="On Entry"/>
+					<Tag name="STEP Types::On Exit(UML::Association)" type="" description="" unit="" values="" default="On Exit"/>
+					<Tag name="STEP Types::On Transition(UML::ControlFlow)" type="" description="" unit="" values="" default="On Transition"/>
 					<Tag name="STEP Types::Task(UML::Action)" type="" description="" unit="" values="" default="Task"/>
+					<Tag name="STEP Types::Valid Type(UML::Class)" type="" description="" unit="" values="" default="Valid Type"/>
 					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
 				</TaggedValues>
 			</Stereotype>
@@ -132,9 +134,21 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="STEP Types::Reference Definition(UML::Class)" type="" description="" unit="" values="" default="Reference"/>
-					<Tag name="STEP Types::Source(UML::Aggregation)" type="" description="" unit="" values="" default="Source"/>
-					<Tag name="STEP Types::Target(UML::Aggregation)" type="" description="" unit="" values="" default="Target"/>
 					<Tag name="STEP Types::Valid Parent(UML::Generalization)" type="" description="" unit="" values="" default="Valid Parent"/>
+					<Tag name="STEP Types::Valid Source(UML::Aggregation)" type="" description="" unit="" values="" default="Valid Source"/>
+					<Tag name="STEP Types::Valid Target(UML::Aggregation)" type="" description="" unit="" values="" default="Valid Target"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Role Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Permission 2 Node(UML::Usage)" type="" description="" unit="" values="" default="Permission 2 Node"/>
+					<Tag name="STEP Types::Permission(UML::UseCase)" type="" description="" unit="" values="" default="Permission"/>
+					<Tag name="STEP Types::Role 2 Permission(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Permission"/>
+					<Tag name="STEP Types::Role 2 Workflow(UML::Usage)" type="" description="" unit="" values="" default="Role 2 Workflow"/>
+					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">

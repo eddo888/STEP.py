@@ -1,21 +1,13 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="2.2" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="2.4" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Action" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Action" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Condition;STEP Types::Library"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Type" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Active MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -33,35 +25,18 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Asset" notes="" cx="0" cy="0" bgcolor="8421504" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="asset instance" notes="" cx="0" cy="0" bgcolor="13882323" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
+			<Stereotype name="asset instance" notes="" cx="0" cy="0" bgcolor="13882323" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object"/>
 			<Stereotype name="Asset Side Car" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Port">
@@ -78,20 +53,14 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Attribute" notes="" cx="0" cy="0" bgcolor="2263842" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute Group"/>
 					<stereotypedrelationship stereotype="STEP Types::LOV Type" constraint="STEP Types::LOV"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Default" constraint="STEP Types::UOM instance"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Type" constraint="STEP Types::UOM"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Derived" type="" description="" unit="" values="" default=""/>
 					<Tag name="ExternallyMaintained" type="" description="" unit="" values="" default=""/>
 					<Tag name="FullTextIndexed" type="" description="" unit="" values="" default=""/>
@@ -101,17 +70,11 @@
 					<Tag name="MaxValue" type="" description="" unit="" values="" default=""/>
 					<Tag name="MinValue" type="" description="" unit="" values="" default=""/>
 					<Tag name="MultiValued" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="validation" type="enumeration" description="" unit="" values="number,text,url,gtin,integer,isodate,isodatetime,numberrange,embedded_number,numeric_text,fraction,regexp,boolean,date" default="text"/>
 					<Tag name="type" type="enumeration" description="" unit="" values="Specification,Description" default="Specification"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
-					</Apply>
-				</AppliesTo>
+			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package">
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
 					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
@@ -147,48 +110,30 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Business Rules" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Business Rule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Business Rules" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package"/>
+			<Stereotype name="Classification" notes="" cx="0" cy="0" bgcolor="55295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Classification"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="classification instance" notes="" cx="0" cy="0" bgcolor="10551295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="classification instance" notes="" cx="0" cy="0" bgcolor="10551295" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Classification Types" notes="" cx="0" cy="0" bgcolor="9234160" fontcolor="0" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -204,19 +149,11 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Condition" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Condition" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Library"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Type" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Cosmos DB" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -246,36 +183,19 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Entity" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Entity" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Entity Reference Type" constraint="STEP Types::Classification;STEP Types::Product"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Attribute" constraint="STEP Types::Attribute"/>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Entity"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="entity instance" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
+			<Stereotype name="entity instance" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object"/>
 			<Stereotype name="Entity Types" notes="" cx="0" cy="0" bgcolor="16777215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
@@ -290,27 +210,17 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Event Processor" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Event Processor" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Action"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="GIEP" notes="Gateway Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Final" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Action" baseStereotypes="Stibo%20Action">
 				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
+					<Apply type="FinalState"/>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="GIEP" notes="Gateway Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="GraphQL" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Port">
@@ -338,13 +248,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="IIEP" notes="Inbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
+			<Stereotype name="IIEP" notes="Inbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="InDesign Client" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -357,6 +261,14 @@
 					<Apply type="Component">
 						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Initial" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Action" baseStereotypes="Stibo%20Action">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::On Transition" constraint="STEP Types::Task"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="InitialState"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="Instances" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -407,39 +319,23 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Library" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Library" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Library"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="LOV" notes="" cx="0" cy="0" bgcolor="64636" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<AppliesTo>
 					<Apply type="Enumeration"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="AllowUserValueAddition" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="UseValueID" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
-					</Apply>
-				</AppliesTo>
+			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package">
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
@@ -471,10 +367,30 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
+			<Stereotype name="On Entry" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="On Exit" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="On Transition" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::Business Rule" constraint="STEP Types::Action;STEP Types::Condition"/>
+				</stereotypedrelationships>
+				<AppliesTo>
+					<Apply type="ControlFlow">
+						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -526,37 +442,21 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Product" notes="" cx="0" cy="0" bgcolor="16748574" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Valid Parent" constraint="STEP Types::Product"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
 					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="ReferenceTargetLockedPolicy" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="product instance" notes="" cx="0" cy="0" bgcolor="15453831" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="product instance" notes="" cx="0" cy="0" bgcolor="15453831" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Attribute Link" constraint="STEP Types::Attribute"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Product Types" notes="" cx="0" cy="0" bgcolor="16436871" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
@@ -565,45 +465,24 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Profile" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Reference Definition" notes="" cx="0" cy="0" bgcolor="14053594" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="Profile" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
+			<Stereotype name="Reference Definition" notes="" cx="0" cy="0" bgcolor="14053594" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Source" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
-					<stereotypedrelationship stereotype="STEP Types::Target" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Source" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
+					<stereotypedrelationship stereotype="STEP Types::Valid Target" constraint="STEP Types::Asset;STEP Types::Classification;STEP Types::Entity;STEP Types::Product"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Accumulated" type="" description="" unit="" values="" default=""/>
 					<Tag name="Inherited" type="" description="" unit="" values="" default=""/>
 					<Tag name="Mandatory" type="" description="" unit="" values="" default=""/>
 					<Tag name="MultiValued" type="" description="" unit="" values="" default="Yes"/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="Revised" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
 					<Tag name="Type" type="enumeration" description="" unit="" values="Product Reference Type,Asset Reference Type,Classification Reference Type,Product to Classification Link Type,Entity Reference Type" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="reference instance" notes="" cx="0" cy="0" bgcolor="13353215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
+			<Stereotype name="reference instance" notes="" cx="0" cy="0" bgcolor="13353215" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object"/>
 			<Stereotype name="Reference Types" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Package">
@@ -618,13 +497,10 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Role" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="Role" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Actor" baseStereotypes="Stibo%20Actor">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::Role 2 Permission" constraint="STEP Types::Permission"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Actor"/>
-				</AppliesTo>
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
@@ -655,13 +531,7 @@
 					<Tag name="Can Terminate" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
+			<Stereotype name="Roles" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package"/>
 			<Stereotype name="S3" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Port">
@@ -686,13 +556,6 @@
 						<Property name="isBehavior" value="false"/>
 						<Property name="isConjugated" value="false"/>
 						<Property name="isService" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Source" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -721,17 +584,7 @@
 					<Tag name="WorkspaceID" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Target" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Aggregation">
-						<Property name="direction" value="Source -&gt; Destination"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Task" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<stereotypedrelationships>
-					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Action;STEP Types::Condition"/>
-				</stereotypedrelationships>
+			<Stereotype name="Stibo Action" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Action">
 						<Property name="context" value=""/>
@@ -742,7 +595,87 @@
 				<TaggedValues>
 					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revised" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Actor" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Class" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" isAbstract="true">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Component" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Object" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Object"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Stibo Package" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Package">
+						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Revision" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="Task" notes="" cx="0" cy="0" bgcolor="4678655" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Action" baseStereotypes="Stibo%20Action">
+				<stereotypedrelationships>
+					<stereotypedrelationship stereotype="STEP Types::On Entry" constraint="STEP Types::Action;STEP Types::Condition"/>
+					<stereotypedrelationship stereotype="STEP Types::On Exit" constraint="STEP Types::Action;STEP Types::Condition"/>
+					<stereotypedrelationship stereotype="STEP Types::On Transition" constraint="STEP Types::Final;STEP Types::Task"/>
+				</stereotypedrelationships>
 			</Stereotype>
 			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -751,17 +684,10 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Class">
-						<Property name="isActive" value=""/>
-					</Apply>
-				</AppliesTo>
+			<Stereotype name="UOM" notes="" cx="0" cy="0" bgcolor="42495" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
 				<TaggedValues>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
-					<Tag name="@ID" type="char" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="char" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="UOM Base" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -788,18 +714,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="UOM instance" notes="" cx="0" cy="0" bgcolor="755384" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+			<Stereotype name="UOM instance" notes="" cx="0" cy="0" bgcolor="755384" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Object" baseStereotypes="Stibo%20Object">
 				<stereotypedrelationships>
 					<stereotypedrelationship stereotype="STEP Types::UOM Base" constraint="STEP Types::UOM instance"/>
 					<stereotypedrelationship stereotype="STEP Types::UOM Family" constraint="STEP Types::UOM"/>
 				</stereotypedrelationships>
-				<AppliesTo>
-					<Apply type="Object"/>
-				</AppliesTo>
 				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Factor" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Offset" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
@@ -834,6 +755,28 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Valid Source" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Valid Target" notes="" cx="0" cy="0" bgcolor="14524637" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Aggregation">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Valid Type" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="compositionKind" value="none"/>
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="WebSphere MQ" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Port">
@@ -843,13 +786,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="WebUI" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
+			<Stereotype name="WebUI" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="Widgets" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -864,35 +801,9 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Activity">
-						<Property name="isReadOnly" value="false"/>
-						<Property name="isSingleExecution" value=""/>
-						<Property name="parameterName" value=""/>
-						<Property name="postcondition" value=""/>
-						<Property name="precondition" value=""/>
-					</Apply>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
-					<Tag name="Name" type="" description="" unit="" values="" default=""/>
-				</TaggedValues>
-			</Stereotype>
-			<Stereotype name="Workflows" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Package">
-						<Property name="URI" value=""/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
-			<Stereotype name="Workspace" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
+			<Stereotype name="Workflow" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Activity" baseStereotypes="Stibo%20Activity"/>
+			<Stereotype name="Workflows" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package"/>
+			<Stereotype name="Workspace" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="WSDL" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -900,13 +811,7 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="XSLT" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="Component">
-						<Property name="isIndirectlyInstantiated" value="true"/>
-					</Apply>
-				</AppliesTo>
-			</Stereotype>
+			<Stereotype name="XSLT" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 		</Stereotypes>
 		<TaggedValueTypes/>
 		<ViewDefinitions/>

@@ -1,6 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
-!INC User Scripts.JScript-XML
 //!INC EAScriptLib.JScript-XML
+//!INC User Scripts.JScript-XML
+!INC Stibo STEP.JScript-XML
 
 function DoNotDisturb(diagram) {
 	var diagram as EA.Diagram;
@@ -314,6 +315,9 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		putCache(cache, stereotype, result);
 		//Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}	
+	
+	//Session.Output('element id='+result.ElementID);
+	
 	return result;
 	
 }

@@ -1,6 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
-!INC User Scripts.JScript-XML
 //!INC EAScriptLib.JScript-XML
+//!INC User Scripts.JScript-XML
+!INC Stibo STEP.JScript-XML
 !INC User Scripts.Library
 //!INC Stibo STEP.Library
 
@@ -648,7 +649,6 @@ function readReferences(package, doc, cache) {
 }
 
 function readSetupGroup(package, node, cache) {
-	Session.Output("Setup Groups");
 	
 	/*
 		<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
@@ -685,6 +685,7 @@ function readSetupGroup(package, node, cache) {
 }
 
 function readSetupGroups(package, doc, cache) {
+	Session.Output("Setup Groups");
 	/*
 		<SetupGroups>
 			<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
@@ -731,7 +732,9 @@ function addRule(node, dependencies, elements, cache) {
 	var id = XMLGetNamedAttribute(node, 'ID');
 	var name = XMLGetNodeText(node, 's:Name');
 	var tipe = XMLGetNamedAttribute(node, 'Type');
-	//Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+	Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+	var config = XMLGetNodeText(node, 's:Configuration');	
+	//Session.Output('len='+config.length);
 	
 	addDependencies(id, node, dependencies);
 	
@@ -747,11 +750,11 @@ function addRule(node, dependencies, elements, cache) {
 		var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
-		//setTaggedValue(element, 'Type', stereotype);
-		//element.Update();
-		
-		add_diagram_element(parent_diagram, element);
-		if (parent_diagram) parent_diagram.Update();
+
+		var file as EA.File;
+		file = element.Files.AddNew(id, 'Local File');
+		file.Notes = config;
+		file.Update();
 	}
 	
 	elements.Add(id, element);
@@ -834,7 +837,70 @@ function readRules(package, doc, cache) {
 	}
 	
 }
+
+function addWorkflow(node, dependencies, elements, cache) {
+	var element = null;
+	var id = XMLGetNamedAttribute(node, 'ID');
+	var name = XMLGetNodeText(node, 's:Name');
+	var tipe = XMLGetNamedAttribute(node, 'Type');
+	//Session.Output('id="'+id+'"'+' type="'+tipe+'"');
+	
+	addDependencies(id, node, dependencies);
+	
+	var parents = node.selectNodes('s:SetupGroupLink');
+	if (parents.length > 0) {
+		var parent = parents[0];
+		var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
+		//Session.Output('  parent id="'+parent_id+'"');
 		
+		var parent_package = getCache(cache, 'Business Rules', parent_id);
+		var parent_diagram = setupDiagram(parent_package, null, 'Class');
+		
+		var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
+		setTaggedValue(element, '@ID', id);
+		setTaggedValue(element, 'Name', name);
+		//setTaggedValue(element, 'Type', stereotype);
+		//element.Update();
+		
+		//add_diagram_element(parent_diagram, element);
+	}
+	
+	elements.Add(id, element);
+	return element;
+}
+
+function readWorkflows(package, doc, cache) {	
+	Session.Output("Workflows");
+	
+	var package as EA.Package;
+	var diagram as EA.Element;
+
+	var elements = new ActiveXObject("Scripting.Dictionary");  // { id : element }
+
+	var dependencies = new ActiveXObject("Scripting.Dictionary");  // { source_id : [{id, alias}] }
+
+	/*
+	<STEPWorkflows>
+		<STEPWorkflow ID="wf_SubrangePriceChange" Selected="true" Referenced="true">
+			<SetupGroupLink SetupGroupID="mi_workflow"/>
+			<Name>Approved Subrange Submissions Corporate - Price Changes</Name>
+			<ValidUserTypeLink UserTypeID="sch_srh_sbrg"/>
+			<Configuration>base64 encoded xml of workflow</Configuration>
+			<LocalBusinessRule ID="acn-deda3001-de52-4641-b5f1-d47851c40cbc" Scope="Local" Type="Action" RunPrivileged="true">	
+		</STEPWorkflow>
+	</STEPWorkflows>
+	*/
+			
+	var workflows = doc.selectNodes('/s:STEP-ProductInformation/s:STEPWorkflows/*');
+	
+	for (var l=0; l<workflows.length; l++) {
+		var workflow = workflows[l];
+		var element = addWorkflow(workflow, dependencies, elements, cache);
+		// specifics
+	}
+	
+}
+
 function readKeys(package, doc, cache) {
 	Session.Output("Keys");
 }
@@ -884,19 +950,20 @@ function importStepXML(package) {
 		readAttrToTag(node, package, 'WorkspaceID');
 	}
 	
-	readUnitsOfMeasures(package, doc, cache);
+	/*readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);
-	readReferences(package, doc, cache);
+	readReferences(package, doc, cache);*/
 	readSetupGroups(package, doc, cache);
 	readRules(package, doc, cache);
-	readKeys(package, doc, cache);
+	readWorkflows(package, doc, cache);
+	/*readKeys(package, doc, cache);
 	readProducts(package, doc, cache);
 	readClassifications(package, doc, cache);
 	readEntities(package, doc, cache);
-	readAssets(package, doc, cache);
+	readAssets(package, doc, cache);*/
 }
 
 Repository.EnsureOutputVisible( "Debug" );

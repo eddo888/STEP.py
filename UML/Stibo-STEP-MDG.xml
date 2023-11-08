@@ -3078,7 +3078,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.4" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3099,7 +3099,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Workflow(UML::Activity)" type="" description="" unit="" values="" default="Workflow"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Attributes" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Attributes" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3113,7 +3113,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Valid Attribute(UML::Attribute)" type="" description="" unit="" values="" default="Valid Attribute"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Components" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3145,7 +3145,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::XSLT(UML::Component)" type="" description="" unit="" values="" default="XSLT"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Instances" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Instances" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3158,7 +3158,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::UOM instance(UML::Object)" type="" description="" unit="" values="" default="UOM"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Packages" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3180,7 +3180,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Workflows(UML::Package)" type="" description="" unit="" values="" default="Workflows"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Ports" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Ports" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3203,7 +3203,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::WebSphere MQ(UML::Port)" type="" description="" unit="" values="" default="WebSphere MQ"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Relationships" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3214,7 +3214,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Valid Target(UML::Aggregation)" type="" description="" unit="" values="" default="Valid Target"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Role Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Role Permissions" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -3226,7 +3226,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Role(UML::Actor)" type="" description="" unit="" values="" default="Role"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+			<Stereotype name="STEP Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -7697,8 +7697,8 @@ AAkACQAJAHAAYQByAHMAZQBFAHIAcgBvAHIALgBsAGkAbgBlAHAAbwBzACAA
 KwAgACIAXQAgACIAIAArACAAcABhAHIAcwBlAEUAcgByAG8AcgAuAHIAZQBh
 AHMAbwBuADsADQAKAAkAfQANAAoACQANAAoACQByAGUAdAB1AHIAbgAgAHIA
 ZQBhAHMAbwBuADsADQAKAH0ADQAKAA==
-</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKRmRFeRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHXmAd
-ZV5gHWVeYB1l7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAO5FWleRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHmyc6
+ZZsnOmWbJzpl7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
 EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
 4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
 /yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
@@ -8180,7 +8180,7 @@ oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
 YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
 /U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
 f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
-YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACACkZkRXkUXXPL9UAABKCwQABwAJ
-AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHXmAdZVBLBQYAAAAAAQABAD4A
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACADuRVpXkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHmyc6ZVBLBQYAAAAAAQABAD4A
 AAD1VAAAAAA=
 </Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

@@ -267,10 +267,23 @@ class Assets(STEP):
 		super().file(path=path, destination=output)
 
 
-	#________________________________________________________________________________________________
 	@args.operation
-	def upload(self, id, file):
-		pass
+	@args.parameter(name='parent_id', help='classification parent id')
+	@args.parameter(name='type_id', help='asset user type')
+	@args.parameter(name='name', help='step name')
+	def create(self, parent_id, type_id, name):
+		body = {
+			"name": name,
+			"objectType" : type_id,
+			"classifications": [
+				parent_id
+			]
+		}
+		headers = {
+			'accept': 'application/json',
+			'content-type': 'application/json',
+		}
+		return super().post('%s'%(self.base), body=json.dumps(body), headers=headers)
 
 
 	#________________________________________________________________________________________________

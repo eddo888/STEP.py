@@ -296,6 +296,40 @@ class Assets(STEP):
 	
 
 #====================================================================================================
+@args.command(name='process-types')
+class ProcessTypes(STEP):
+	'''
+	background processes running on STEP
+	'''
+	base = 'background-process-types'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+		
+
+	#________________________________________________________________________________________________
+	@args.operation
+	def types(self):
+		'''
+		list the background process types
+		'''
+		return super().get(self.base)
+
+
+	#________________________________________________________________________________________________
+	@args.operation
+	def processes(self, id):
+		'''
+		get the process by background process type id
+		'''
+		if self.asXML:
+			return super().get('%s/%s'%(self.base,id))
+		else:
+			return super().get('%s/%s/processes'%(self.base, id))
+
+	
+#====================================================================================================
 @args.command(name='processes')
 class Processes(STEP):
 	'''
@@ -1190,4 +1224,3 @@ class Attributes(STEP):
 		return super().get('%s/%s'%(self.base,id))
 		
 
-if __name__ == '__main__': args.execute()

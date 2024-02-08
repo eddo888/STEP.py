@@ -831,6 +831,7 @@ class Endpoints(STEP):
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 		
+		
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of endpoints')
@@ -896,7 +897,17 @@ class Endpoints(STEP):
 	@args.operation(help='invoke an endpoint')
 	def invoke(self, id):
 		return super().put('%s/%s/invoke'%(self.base, id))
-											   
+
+	#________________________________________________________________________________________________
+	@args.operation(help='invoke an inbound endpoint')
+	def invoke_inbound(self, id):
+		return super().post(f'inbound-integration-endpoints/{id}/invoke')
+
+	#________________________________________________________________________________________________
+	@args.operation(help='invoke an outbound endpoint')
+	def invoke_outbound(self, id):
+		return super().post(f'outbound-integration-endponits/{id}/invoke')
+	
 
 #====================================================================================================
 @args.command(name='imports')

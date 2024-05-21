@@ -676,6 +676,26 @@ class Entities(STEP):
 
 
 	#________________________________________________________________________________________________
+	@args.operation(help='create a new entity')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create(self, parent, objectType, name=None, values=[]):
+		body=dict(
+			parent=parent,
+			objectType=objectType,
+			name=name,
+			values=dict()
+		)
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().post('%s'%self.base, body=json.dumps(body))
+		return json.loads(result)
+
+			
+	#________________________________________________________________________________________________
 	@args.operation(help='approve entity by id')
 	@args.parameter(name='id', help='the ID of entity')
 	def approve(self, id):
@@ -852,7 +872,6 @@ class Classifications(STEP):
 			self.base, id, attributeID), body=json.dumps(payload), headers=headers
 		)
 		return json.loads(result)
-
 
 
 #====================================================================================================

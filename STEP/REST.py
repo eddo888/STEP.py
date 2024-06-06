@@ -768,6 +768,14 @@ class Entities(STEP):
 		return super().post('%s/search'%(self.base), body=body, headers=headers)
 		
 
+	#________________________________________________________________________________________________
+	@args.operation(help='delete entity by id')
+	@args.parameter(name='id', help='the ID of entity')
+	def delete(self, id):
+		result = super().delete('%s/%s'%(self.base, id))
+		return result
+
+	
 #====================================================================================================
 @args.command(name='classifications')
 class Classifications(STEP):
@@ -850,6 +858,7 @@ class Classifications(STEP):
 	def values(self, id):
 		return super().get('%s/%s/values'%(self.base,id))
 	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='set values of classification by id')
 	@args.parameter(name='id', help='the ID of classification')

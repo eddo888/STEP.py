@@ -1,9 +1,17 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="727D11BD-7" name="STEP Diagrms" version="2.4" notes="STEP Diagrms"/>
+	<Documentation id="727D11BD-7" name="STEP Diagrms" version="2.5" notes="STEP Diagrms"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Component Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Component">
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Environments Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Component">
 						<Property name="pdata" value="ShowTags=1;"/>

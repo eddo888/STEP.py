@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="2.4" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="2.5" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Action" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
@@ -139,6 +139,13 @@
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Cluster" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -367,6 +374,13 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Network" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="On Entry" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -391,6 +405,13 @@
 				<AppliesTo>
 					<Apply type="ControlFlow">
 						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Operating System" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -676,6 +697,16 @@
 					<stereotypedrelationship stereotype="STEP Types::On Exit" constraint="STEP Types::Action;STEP Types::Condition"/>
 					<stereotypedrelationship stereotype="STEP Types::On Transition" constraint="STEP Types::Final;STEP Types::Task"/>
 				</stereotypedrelationships>
+			</Stereotype>
+			<Stereotype name="Tier" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="TierType" type="enumeration" description="" unit="" values="Production,Staging,Development,Testing,Distaster Recovery" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>

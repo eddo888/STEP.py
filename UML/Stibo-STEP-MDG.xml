@@ -1,5 +1,5 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
-<MDG.Technology version="1.0"><Documentation id="Stibo STEP" name="Stibo STEP" version="2.4" notes="Stibo Systems STEP design model" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02wAAAAAAAADYAAAAoAAAAgAAAAIAAAAABABgAAAAAAADAAAAlFgAAJRYA
+<MDG.Technology version="1.0"><Documentation id="Stibo STEP" name="Stibo STEP" version="2.5" notes="Stibo Systems STEP design model" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02wAAAAAAAADYAAAAoAAAAgAAAAIAAAAABABgAAAAAAADAAAAlFgAAJRYA
 AAAAAAAAAAAA////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 ///////////////////+////////////////////////////////////////
@@ -2188,7 +2188,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 ////////////////////////////////////////////////////////////
 ////////////////////////////
 </Image></Icon><UMLProfiles><UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="2.4" notes="STEP Types"/>
+	<Documentation id="8017159A-0" name="STEP Types" version="2.5" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Action" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
@@ -2327,6 +2327,13 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 				<AppliesTo>
 					<Apply type="Package">
 						<Property name="URI" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Cluster" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -2555,6 +2562,13 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Network" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="OIEP" notes="Outbound Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>
 			<Stereotype name="On Entry" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -2579,6 +2593,13 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 				<AppliesTo>
 					<Apply type="ControlFlow">
 						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Operating System" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
@@ -2865,6 +2886,16 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<stereotypedrelationship stereotype="STEP Types::On Transition" constraint="STEP Types::Final;STEP Types::Task"/>
 				</stereotypedrelationships>
 			</Stereotype>
+			<Stereotype name="Tier" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="TierType" type="enumeration" description="" unit="" values="Production,Staging,Development,Testing,Distaster Recovery" default=""/>
+				</TaggedValues>
+			</Stereotype>
 			<Stereotype name="Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Component">
@@ -3006,10 +3037,18 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 		<Metamodel/>
 	</Content>
 </UMLProfile></UMLProfiles><TaggedValueTypes><RefData version="1.0" exporter="EA.25"><DataSet name="Property Types" table="t_propertytypes" filter="Property='#Property#'"><DataRow><Column name="Property" value="Can Instantiate"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Terminate"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Read"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Create"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Update"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Delete"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Can Join"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="@ID"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="Name"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="MinValue"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="MaxValue"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="MaxLength"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="InputMask"/><Column name="Notes" value="Type=String;"/></DataRow><DataRow><Column name="Property" value="MultiValued"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="UseValueID"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Factor"/><Column name="Notes" value="Type=Float;&#xA;Default=1.0;&#xA;"/></DataRow><DataRow><Column name="Property" value="Offset"/><Column name="Notes" value="Type=Float;&#xA;Default=0.0;&#xA;"/></DataRow><DataRow><Column name="Property" value="Revision"/><Column name="Notes" value="Type=Float;&#xA;Default=1.0;&#xA;"/></DataRow><DataRow><Column name="Property" value="Selected"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=Yes;"/></DataRow><DataRow><Column name="Property" value="Referenced"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=Yes;"/></DataRow><DataRow><Column name="Property" value="AllowUserValueAddition"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=Yes;"/></DataRow><DataRow><Column name="Property" value="FullTextIndexed"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="ExternallyMaintained"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Derived"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Mandatory"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="ReferenceTargetLockedPolicy"/><Column name="Notes" value="Type=Enum;&#xA;Values=Strict;&#xA;Default=Strict;"/></DataRow><DataRow><Column name="Property" value="Inherited"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Accumulated"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="Revised"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="ShowInWorkbench"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=Yes;"/></DataRow><DataRow><Column name="Property" value="ManuallySorted"/><Column name="Notes" value="Type=Enum;&#xA;Values=Yes,No;&#xA;Default=No;"/></DataRow><DataRow><Column name="Property" value="ContextID"/><Column name="Notes" value="Type=String;&#xA;Default=Context1;"/></DataRow><DataRow><Column name="Property" value="WorkspaceID"/><Column name="Notes" value="Type=String;&#xA;Default=Main;"/></DataRow></DataSet></RefData></TaggedValueTypes><DiagramProfile><UMLProfile profiletype="uml2">
-	<Documentation id="727D11BD-7" name="STEP Diagrms" version="2.4" notes="STEP Diagrms"/>
+	<Documentation id="727D11BD-7" name="STEP Diagrms" version="2.5" notes="STEP Diagrms"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Component Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Component">
+						<Property name="pdata" value="ShowTags=1;"/>
+						<Property name="toolbox" value="STEP Toolbox_STEP_Toolbox"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Environments Diagram" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Diagram_Component">
 						<Property name="pdata" value="ShowTags=1;"/>
@@ -3075,7 +3114,7 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 		<Metamodel/>
 	</Content>
 </UMLProfile></DiagramProfile><UIToolboxes><UMLProfile profiletype="uml2">
-	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.4" notes="STEP Toolbox"/>
+	<Documentation id="7A4A6DE2-4" name="STEP Toolbox" version="2.5" notes="STEP Toolbox"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="STEP Activity" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -3143,6 +3182,17 @@ n7b/ao/+4uv+///+/v7///7/////////////////////////////////////
 					<Tag name="STEP Types::Workspace(UML::Component)" type="" description="" unit="" values="" default="Workspace"/>
 					<Tag name="STEP Types::WSDL(UML::Component)" type="" description="" unit="" values="" default="WSDL"/>
 					<Tag name="STEP Types::XSLT(UML::Component)" type="" description="" unit="" values="" default="XSLT"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="STEP Environments" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="STEP Types::Cluster(UML::Component)" type="" description="" unit="" values="" default="Cluster"/>
+					<Tag name="STEP Types::Network(UML::Component)" type="" description="" unit="" values="" default="Network"/>
+					<Tag name="STEP Types::Operating System(UML::Component)" type="" description="" unit="" values="" default="OS"/>
+					<Tag name="STEP Types::Tier(UML::Component)" type="" description="" unit="" values="" default="Tier"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="STEP Instances" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -7697,8 +7747,8 @@ AAkACQAJAHAAYQByAHMAZQBFAHIAcgBvAHIALgBsAGkAbgBlAHAAbwBzACAA
 KwAgACIAXQAgACIAIAArACAAcABhAHIAcwBlAEUAcgByAG8AcgAuAHIAZQBh
 AHMAbwBuADsADQAKAAkAfQANAAoACQANAAoACQByAGUAdAB1AHIAbgAgAHIA
 ZQBhAHMAbwBuADsADQAKAH0ADQAKAA==
-</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAO5FWleRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHmyc6
-ZZsnOmWbJzpl7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
+</Content></Script></Scripts><WorkspaceLayouts><WorkspaceLayout name="Stibo STEP"><Content xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGyF2liRRdc8v1QAAEoLBAAHABEAc3RyLmRhdFVUDQAHKkV8
+ZipFfGYqRXxm7X1rjyXHcWV9XmD/g0BA3+wFu3se3Qb2g0xJtqCVxSUlew3L
 EPo19NgSRyCHluxfvxUVlYyT8ciKrFu3+/ZlYdCHxbxZWSciIzIjH5X15fCn
 4Xb4ZvjL8KPhy+G/hm+Hj8Pj8Mfxvz8avhivvhreT2nfjL/9aPjZmO9Pw4fx
 /yjXN2PKxfBm+F/Dp+MfXX06vB7+5/A/pr9/Gf5++OV4xz8Pvx8+G347lvbF
@@ -8180,7 +8230,7 @@ oP0q/Jajlpt+wX/PJ/fn03kHdB7Cw/fyYlrRi34/E61d3yEaat31PPL+08T0
 YSzxz2P6H8YSqWZp5wnVbtHAz6dfvlr0jss5/6/G3FQuls5Ww3VfNPBu6m29
 /U1+eokb9Fi77Dev+4tih/82Pf+zUaqHBf5Xz1oTXw7/Z7z+y/da/8mkr/fD
 f44l/+P438fxObUFFWsjaT5OfvrT8fp++I8pLa4tWvumOWZ7/y/Gu34ynYT+
-YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACADuRVpXkUXXPL9UAABKCwQABwAJ
-AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHmyc6ZVBLBQYAAAAAAQABAD4A
+YdTA+8luo1LKv6Kz/w9QSwECFwsUAAAACABshdpYkUXXPL9UAABKCwQABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHKkV8ZlBLBQYAAAAAAQABAD4A
 AAD1VAAAAAA=
 </Content></WorkspaceLayout></WorkspaceLayouts></MDG.Technology>

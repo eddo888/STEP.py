@@ -3,3 +3,4 @@
 dist
 .dbeaver/
 HTML
+**/.ipynb_checkpoints

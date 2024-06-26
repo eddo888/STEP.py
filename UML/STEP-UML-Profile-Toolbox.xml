@@ -76,8 +76,11 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="STEP Types::Cluster(UML::Component)" type="" description="" unit="" values="" default="Cluster"/>
+					<Tag name="STEP Types::Database(UML::Component)" type="" description="" unit="" values="" default="Database"/>
+					<Tag name="STEP Types::File System(UML::Component)" type="" description="" unit="" values="" default="Disk"/>
+					<Tag name="STEP Types::Folder(UML::Component)" type="" description="" unit="" values="" default="Folder"/>
 					<Tag name="STEP Types::Network(UML::Component)" type="" description="" unit="" values="" default="Network"/>
-					<Tag name="STEP Types::Operating System(UML::Component)" type="" description="" unit="" values="" default="OS"/>
+					<Tag name="STEP Types::Operating System(UML::Component)" type="" description="" unit="" values="" default="Operating System"/>
 					<Tag name="STEP Types::Tier(UML::Component)" type="" description="" unit="" values="" default="Tier"/>
 				</TaggedValues>
 			</Stereotype>

@@ -176,6 +176,16 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Database" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Database Type" type="enumeration" description="" unit="" values="Cassandra,Oracle" default=""/>
+				</TaggedValues>
+			</Stereotype>
 			<Stereotype name="Depends On" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="Dependency">
@@ -222,9 +232,23 @@
 					<stereotypedrelationship stereotype="STEP Types::Depends On" constraint="STEP Types::Action"/>
 				</stereotypedrelationships>
 			</Stereotype>
+			<Stereotype name="File System" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 			<Stereotype name="Final" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Action" baseStereotypes="Stibo%20Action">
 				<AppliesTo>
 					<Apply type="FinalState"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Folder" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Component">
+						<Property name="isIndirectlyInstantiated" value="true"/>
+					</Apply>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="GIEP" notes="Gateway Integration End Point&#xA;" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Component" baseStereotypes="Stibo%20Component"/>

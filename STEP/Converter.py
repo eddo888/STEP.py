@@ -59,10 +59,6 @@ class Converter(object):
 			Product	= ProductsType,
 		)
 		
-		self.roots = dict(
-			# namespace -> name -> type -> STEP
-		) 
-
 		# store STEP objects against XSD definiton (-> means nested dict)
 		self.step = {
 			# XSD namespace -> XSD name ([@]=attribute,[^@]=element) -> STEP Type = STEP object
@@ -70,9 +66,6 @@ class Converter(object):
 				self.root: {}
 			}
 		}
-		self.ids = dict(
-			# stores STEP objects by STEP ID
-		)
 		
 		#list of XSD files that have been processed
 		self.xsd = set()
@@ -204,7 +197,6 @@ class Converter(object):
 
 		return
 
-
 	def __hash(self, text):
 		hasher = hashlib.md5()
 		hasher.update(text.encode('UTF8'))
@@ -220,7 +212,6 @@ class Converter(object):
 			self.cache[ns][name][tipe] = f'{self.prefix}_{hashed}'
 		return self.cache[ns][name][tipe]
 
-
 	def __store(self, ns, name, tipe, value):
 		if ns not in self.step.keys():
 			self.step[ns] = dict()
@@ -229,9 +220,7 @@ class Converter(object):
 		if tipe not in self.step[ns][name].keys():
 			self.step[ns][name][tipe] = dict()
 		self.step[ns][name][tipe] = value
-		self.ids[value.ID] = value
 		
-
 	def __groups(self, nsp, tns):
 		# setup main namespaces and groups
 		for p, name in nsp.items():
@@ -320,17 +309,6 @@ class Converter(object):
 				t = tipe
 				url = tns
 				
-			if url not in self.roots.keys():
-				self.roots[url] = dict()
-			if name not in self.roots[url].keys():
-				self.roots[url][name] = dict()
-
-			#print(self.roots[url][name])
-			if t not in self.roots[url][name].keys():
-				if t in self.step[url].keys():
-					if 'UserType' in self.step[url][t].keys():
-						self.roots[url][name][t] = self.step[url][t]['UserType']
-
 		return nsp
 
 	def __containers(self, doc, ctx, nsp, tns, prefix):
@@ -441,7 +419,7 @@ class Converter(object):
 		and setup inheritance
 		'''
 
-		# todo, make elements referencing simple types use attributes.
+		# first pass create usertypes
 		
 		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
 			name = getAttribute(complexType, 'name')
@@ -463,12 +441,6 @@ class Converter(object):
 				],
 				UserTypeLink = [
 				]
-			)
-
-			userType.UserTypeLink.append(
-				UserTypeLinkType(
-					UserTypeID = self.step['/'][self.root]['UserType'].ID
-				)
 			)
 
 			if desc:
@@ -497,6 +469,35 @@ class Converter(object):
 			self.__store(url, name, 'UserType', userType)
 			self.dom.UserTypes.append(userType)
 		
+
+		# second pass, link parents
+
+		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
+			name = getAttribute(complexType, 'name')
+			url = nsp[prefix]
+
+			userType = self.step[url][name]['UserType']
+
+			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complexType):
+				elem = getAttribute(xse, 'name')
+				tipe = getAttribute(xse, 'type')
+
+				if not tipe: continue
+				
+				if ':' in tipe:
+					(p,t) = tuple(tipe.split(':'))
+					u = nsp[p]
+				else:
+					t = tipe
+					u = tns
+
+				userType.UserTypeLink.append(
+					UserTypeLinkType(
+						UserTypeID = self.step[u][t]['UserType'].ID
+					)
+				)
+					
+
 		return
 
 	def __complexAttrs(self, doc, ctx, nsp, tns, prefix):
@@ -512,60 +513,11 @@ class Converter(object):
 
 			userType = self.step[url][name]['UserType']
 
-			child = getElement(ctx, 'xs:simpleContent/xs:extension', complexType)
-			if child:
-				# simple type in simpleContent
-				base = getAttribute(child, 'base')
-				(p,t) = tuple(base.split(':'))
-				u = nsp[p]
+			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
+			#if child:
+			#	child = cc
 
-				if 'Attribute' in self.step[u][t].keys():
-				
-					source = self.step[u][t]['Attribute']
-					#print(source.ID)
-
-					# create a copy
-					attribute = AttributeType(
-						ID = self.__uuid(url, name, 'Attribute'),
-						Name = [
-							NameType(name)
-						],
-						MultiValued = source.MultiValued,
-						ProductMode = source.ProductMode,
-						FullTextIndexed = source.FullTextIndexed,
-						ExternallyMaintained = source.ExternallyMaintained,
-						Derived = source.Derived,
-						Validation = source.Validation,
-						ListOfValueLink = source.ListOfValueLink,
-						AttributeGroupLink = [
-							AttributeGroupLinkType(
-								AttributeGroupID =self.step[url][name]['Group'].ID
-							)
-						],
-						UserTypeLink = [
-							UserTypeLinkType(
-								UserTypeID = userType.ID
-							)
-						]
-					)
-					self.__store(url, name, 'Attribute', attribute)
-					# need to put the following backin later
-					self.dom.AttributeList.append(attribute)
-
-					userType.AttributeLink.append(
-						AttributeLinkType(
-							AttributeID = attribute.ID
-						)
-					)
-
-			else:
-				child = complexType
-				
-			cc = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
-			if cc:
-				child = cc
-
-			for xsa in getElements(ctx, 'xs:attribute', child):
+			for xsa in getElements(ctx, 'xs:attribute', complexType):
 				attr = getAttribute(xsa, 'name')
 				tipe = getAttribute(xsa, 'type')
 				if not tipe: continue
@@ -579,7 +531,7 @@ class Converter(object):
 				attribute = AttributeType(
 					ID = self.__uuid(u, attr, 'Attribute'),
 					Name = [
-						NameType('@%s'%attr)
+						NameType(attr)
 					],
 					MultiValued = source.MultiValued,
 					ProductMode = source.ProductMode,
@@ -590,7 +542,7 @@ class Converter(object):
 					ListOfValueLink = source.ListOfValueLink,
 					AttributeGroupLink = [
 						AttributeGroupLinkType(
-							AttributeGroupID =self.step[url][name]['Group'].ID
+							AttributeGroupID = self.step[url][name]['Group'].ID
 						)
 					],
 					UserTypeLink = [
@@ -602,69 +554,6 @@ class Converter(object):
 				self.__store(u, attr, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				
-				userType.AttributeLink.append(
-					AttributeLinkType(
-						AttributeID = attribute.ID
-					)
-				)
-
-			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', child):
-				elem = getAttribute(xse, 'name')
-				tipe = getAttribute(xse, 'type')
-
-				if not tipe: continue
-				
-				if ':' in tipe:
-					(p,t) = tuple(tipe.split(':'))
-					u = nsp[p]
-				else:
-					t = tipe
-					u = tns
-
-				if not t in self.step[u].keys(): continue
-
-				attribute = None
-				
-				if u == self.nsp['xs']:
-					# create as new attribute in tns
-					attribute = AttributeType(
-						ID = self.__uuid(u, elem, 'Attribute'),
-						Name = [
-							NameType(elem)
-						],
-						MultiValued = 'false',
-						ProductMode = 'Property',
-						FullTextIndexed = 'false',
-						ExternallyMaintained = 'false',
-						Derived = 'false',
-						AttributeGroupLink = [
-							AttributeGroupLinkType(
-								AttributeGroupID = self.step[u][elem]['Group'].ID
-							)
-						],
-						Validation = ValidationType(
-							BaseType=self.xs[f'xs:{t}'],
-							MaxLength=None
-						)
-					)
-
-					'''
-					if desc:
-						attribute.Name = [
-							NameType(desc)
-						]
-					'''
-					
-					self.__store(u, name, 'Attribute', attribute)
-					self.dom.AttributeList.append(attribute)
-				
-				else:
-					target = self.step[u][t]
-					if 'Attribute' in target.keys():
-						attribute = target['Attribute']
-
-				if not attribute: continue
-
 				attribute.UserTypeLink.append(
 					UserTypeLinkType(
 						UserTypeID = userType.ID
@@ -776,7 +665,8 @@ class Converter(object):
 		
 		def valueAdd(ns, name, value, product, usertype, indent):
 			for a in usertype.AttributeLink:
-				attribute = self.ids[a.AttributeID]
+				attribute = self.step[ns][name]['Attribute']
+
 				if self.step[ns][name]['Attribute'].ID == attribute.ID:
 					print('  %s%s = %s'%(indent, name, value))
 
@@ -809,24 +699,17 @@ class Converter(object):
 			pcr = None
 			name = node.name
 			ns = str(node.ns().content)
-
-			if ns in self.roots.keys():
-				if name in self.roots[ns].keys():
-					print(self.roots[ns][name])
-					key = list(self.roots[ns][name])[0]
-					step = self.roots[ns][name][key]
+			print(f'{indent}{ns}:{name}')
 
 			if ns in self.step.keys():
 				if name in self.step[ns].keys():
+					#step = self.step[ns][name]['UserType']
 					if 'ProductCrossReference' in self.step[ns][name].keys():
 						pcr = self.step[ns][name]['ProductCrossReference']
-						step = self.ids[pcr.TargetUserTypeLink[0].UserTypeID]
-
-			if not step: return
 
 			product = ProductType(
 				ID = self.__uuid(ns, name, 'Product'),
-				UserTypeID = step.ID,
+				UserTypeID = '', #step.ID,
 				ParentID = parent.ID,
 				Name = [
 					NameType(name)
@@ -837,6 +720,7 @@ class Converter(object):
 					)
 				]
 			)
+			parent.append(product)
 
 			if pcr and parent:
 				parent.ProductCrossReference.append(
@@ -847,31 +731,31 @@ class Converter(object):
 				)
 					
 			self.__store(ns, name, 'Product', product)
-			self.dom.Products.append(product)
-			print('%s%s'%(indent,name))
 
 			if node.properties:
 				for p in node.properties:
 					if p.type == 'attribute':
-						aname = '@%s'%p.name
+						aname = p.name
 						value = str(p.content)
-						valueAdd(ns,aname, value, product, step, indent)
+						print(f'\t{indent}@{aname}={value}')
+						#valueAdd(ns, aname, value, product, step, indent)
+
+			#for child in node.children:
+			#	if child.type == 'element':
+			#		name = child.name
+			#		value = child.content
+			#		valueAdd(ns, name, value, product, step, indent)
+
+			if not node.children: return
 
 			for child in node.children:
 				if child.type == 'element':
-					name = child.name
-					value = child.content
-					valueAdd(ns,name,value,product,step, indent)
+			   		walk(child, parent=product, indent=f'\t{indent}')
+					
+			return product
 
-			#print(product, step, node)
-			if node.children and product:
-				for child in node.children:
-					if child.type == 'element':
-						walk(child, parent=product, indent=f'\t{indent}')
-
-
-		walk(root, parent=self.step['/'][self.root]['Product'])
-
+		root = walk(root, parent=self.step['/'][self.root]['Product'])
+		self.dom.Products.append(root)
 		return
 	
 	
@@ -907,11 +791,10 @@ class Converter(object):
 			_output.close()
 
 		with open(self.cname,'w') as output:
-			json.dump(self.cache,output,indent=4,sort_keys=True)
+			json.dump(self.cache, output, indent=4, sort_keys=True)
 
 		return
 	
-
 	@args.operation
 	def export(self):
 		'''

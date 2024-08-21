@@ -542,7 +542,7 @@ class Converter(object):
 					ListOfValueLink = source.ListOfValueLink,
 					AttributeGroupLink = [
 						AttributeGroupLinkType(
-							AttributeGroupID = self.step[url][name]['Group'].ID
+							AttributeGroupID = self.step[url][tns]['Group'].ID
 						)
 					],
 					UserTypeLink = [

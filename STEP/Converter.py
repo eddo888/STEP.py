@@ -2,9 +2,7 @@
 
 # PYTHON_ARGCOMPLETE_OK
 
-import os, sys, re, json, logging
-
-#sys.path.insert(0,'..')
+import os, sys, re, json, logging, hashlib
 
 from uuid import uuid4 as uuid
 from datetime import datetime
@@ -66,14 +64,14 @@ class Converter(object):
 		) 
 
 		# store STEP objects against XSD definiton (-> means nested dict)
-		self.step = dict(
+		self.step = {
 			# XSD namespace -> XSD name ([@]=attribute,[^@]=element) -> STEP Type = STEP object
-		)
+		    '/': {
+				self.root: {}
+			}
+		}
 		self.ids = dict(
 			# stores STEP objects by STEP ID
-		)
-		self.elements = dict(
-			# stores XSD element objects by STEP ID
 		)
 		
 		#list of XSD files that have been processed
@@ -97,49 +95,55 @@ class Converter(object):
 
 		# add python Roots
 		
-		self.dom.UserTypes.append(
-			UserTypeType(
-				ID = self.root,
-				AllowInDesignTemplate='false',
-				AllowQuarkTemplate='false',
-				#IDPattern='%s:[uuid]'%self.prefix,
-				NamePattern=self.root,
-				IsCategory='true',
-				ManuallySorted='false',
-				ReferenceTargetLockPolicy='Strict',
-				Referenced='true',
-				UserTypeLink = [
-					UserTypeLinkType(
-						UserTypeID="Product user-type root"
-					)
-				]
-			)
+		user_type_root = UserTypeType(
+			ID = self.__uuid('/', self.root, 'UserType'),
+			Name = [
+				NameType(self.root)
+			],
+			AllowInDesignTemplate='false',
+			AllowQuarkTemplate='false',
+			#IDPattern='%s:[uuid]'%self.prefix,
+			NamePattern = f'{self.root}_[id]',
+			IsCategory='true',
+			ManuallySorted='false',
+			ReferenceTargetLockPolicy='Strict',
+			Referenced='true',
+			UserTypeLink = [
+				UserTypeLinkType(
+					UserTypeID = "Product user-type root"
+				)
+			]
 		)
+		self.__store('/', self.root, 'UserType', user_type_root)
+		self.dom.UserTypes.append(user_type_root)
 
-		self.attributes_group = AttributeGroupType(
-			ID = 'XSD_AttributeGroup',
+		attribute_group_root = AttributeGroupType(
+			ID = self.__uuid('/', self.root, 'Group'),
 			ShowInWorkbench = 'true',
 			ManuallySorted = 'false',
 			Name = [
-				NameType('XSD')
+				NameType(f'{self.root} Attribute')
 			]
 		)
-		self.dom.AttributeGroupList.append(self.attributes_group)
+		self.__store('/', self.root, 'Group', attribute_group_root)
+		self.dom.AttributeGroupList.append(attribute_group_root)
 		
-		self.lists_of_values_group = ListOfValuesGroupType(
-			ID = 'XSD_ListOfValuesGroup',
+		lovs_root = ListOfValuesGroupType(
+			ID = self.__uuid('/', self.root, 'LOVs'),
 			Name = [
-				NameType('XSD')
+				NameType(f'{self.root}_LOVs')
 			]
 		)
-		self.dom.ListOfValuesGroupList.append(self.lists_of_values_group)
+		self.__store('/',self.root,'LOVs',lovs_root)
+		self.dom.ListOfValuesGroupList.append(lovs_root)
 
-		self.rootProduct = ProductType(
-			ID = self.root,
-			UserTypeID = self.root,
+		product_root = ProductType(
+			ID = self.__uuid('/', self.root, 'Product'),
+			UserTypeID = self.step['/'][self.root]['UserType'].ID,
 			ParentID = "Product hierarchy root",
 		)
-		self.dom.Products.append(self.rootProduct)
+		self.__store('/', self.root, 'Product', product_root)
+		self.dom.Products.append(product_root)
 
 		# setup main namespaces and groups
 		self.nsp = {
@@ -150,21 +154,21 @@ class Converter(object):
 
 		# base types for duplication to actual
 		self.xs = {
-			'xs:string' : 'text',
-			'xs:NMTOKEN': 'text',
-			'xs:NCName': 'text',
-			'xs:dateTime' : 'isodatetime',
-			'xs:date' : 'isodate',
-			'xs:time' : 'isodate',
-			'xs:int' : 'integer',
-			'xs:integer' : 'integer',
-			'xs:positiveInteger' : 'integer',
+			'xs:string'             : 'text',
+			'xs:NMTOKEN'            : 'text',
+			'xs:NCName'             : 'text',
+			'xs:dateTime'           : 'isodatetime',
+			'xs:date'               : 'isodate',
+			'xs:time'               : 'isodate',
+			'xs:int'                : 'integer',
+			'xs:integer'            : 'integer',
+			'xs:positiveInteger'    : 'integer',
 			'xs:nonNegativeInteger' : 'integer',
-			'xs:long' : 'integer',
-			'xs:gDay' : 'integer',
-			'xs:decimal' : 'number',
-			'xs:float': 'fraction',
-			'xs:boolean' : 'text', #'condition',
+			'xs:long'               : 'integer',
+			'xs:gDay'               : 'integer',
+			'xs:decimal'            : 'number',
+			'xs:float'              : 'fraction',
+			'xs:boolean'            : 'text', #'condition',
 		}
 
 		for name, tipe in self.xs.items():
@@ -186,7 +190,7 @@ class Converter(object):
 				],
 				AttributeGroupLink = [
 					AttributeGroupLinkType(
-						AttributeGroupID=self.step[u]['/']['AttributeGroup'].ID
+						AttributeGroupID = self.step[u][self.nsp['xs']]['Group'].ID
 					)
 				],
 				Validation = ValidationType(
@@ -195,10 +199,16 @@ class Converter(object):
 				)
 			)
 
-			self.__store(u,t,'Attribute',myAttribute)
-			self.elements[myAttribute.ID] = tipe
+			self.__store(u, t, 'Attribute', myAttribute)
 			self.dom.AttributeList.append(myAttribute)
+
 		return
+
+
+	def __hash(self, text):
+		hasher = hashlib.md5()
+		hasher.update(text.encode('UTF8'))
+		return hasher.hexdigest()
 
 	def __uuid(self, ns, name, tipe):
 		if ns not in self.cache.keys():
@@ -206,8 +216,10 @@ class Converter(object):
 		if name not in self.cache[ns].keys():
 			self.cache[ns][name] = dict()
 		if tipe not in self.cache[ns][name].keys():
-			self.cache[ns][name][tipe] = '%s:%s'%(self.prefix,str(uuid()))
+			hashed = self.__hash(f'{ns}:{name}:{tipe}')
+			self.cache[ns][name][tipe] = f'{self.prefix}_{hashed}'
 		return self.cache[ns][name][tipe]
+
 
 	def __store(self, ns, name, tipe, value):
 		if ns not in self.step.keys():
@@ -219,34 +231,36 @@ class Converter(object):
 		self.step[ns][name][tipe] = value
 		self.ids[value.ID] = value
 		
+
 	def __groups(self, nsp, tns):
 		# setup main namespaces and groups
-		for p, u in nsp.items():
-			if u in self.step.keys():
+		for p, name in nsp.items():
+			if name in self.step.keys():
 				continue
-			if u == tns:
-				prefix = p 
+			if name == tns:
+				u = tns
+			else:
+				u = self.nsp[p]
+
 			ag = AttributeGroupType(
-				ID = self.__uuid(u,'/','AttributeGroup'),
+				ID = self.__uuid(u, name, 'Group'),
 				ShowInWorkbench = 'true',
 				ManuallySorted = 'false',
 				Name = [
-					NameType(u)
+					NameType(name)
 				]
 			)
-			self.__store(u,'/','AttributeGroup',ag)
-			self.elements[ag.ID] = u
-			self.attributes_group.append(ag)
+			self.__store(u, name, 'Group', ag)
+			self.step['/'][self.root]['Group'].append(ag)
 			
 			LOVs = ListOfValuesGroupType(
-				ID = self.__uuid(u,'/','ListOfValuesGroup'),
+				ID = self.__uuid(u, name, 'LOVs'),
 				Name = [
-					NameType(u)
+					NameType(name)
 				]
 			)
-			self.__store(u,'/','ListOfValuesGroup',LOVs)
-			self.elements[LOVs.ID] = u
-			self.lists_of_values_group.append(LOVs)
+			self.__store(u, name, 'LOVs', LOVs)
+			self.step['/'][self.root]['LOVs'].append(LOVs)
 		
 	def __schema(self, dir, file):
 		'''
@@ -330,17 +344,16 @@ class Converter(object):
 			u = nsp[prefix]
 			
 			ag = AttributeGroupType(
-				ID = self.__uuid(u,name,'AttributeGroup'),
+				ID = self.__uuid(u, name, 'Group'),
 				ShowInWorkbench = 'true',
 				ManuallySorted = 'false',
 				Name = [
 					NameType(name)
 				],
 			)
-			self.__store(u,name,'AttributeGroup',ag)
-			self.elements[ag.ID] = complexType
+			self.__store(u, name, 'Group', ag)
 
-			self.step[u]['/']['AttributeGroup'].append(ag)
+			self.step[u][name]['Group'].append(ag)
 
 		return
 		
@@ -349,14 +362,18 @@ class Converter(object):
 		setup simple types as LOV and Attributes
 		'''
 		
+
+		self.__groups(nsp, tns)
+					
+
 		for simpleType in getElements(ctx,'/xs:schema/xs:simpleType'):
 			name = getAttribute(simpleType, 'name')
 			tipe = getAttribute(simpleType, 'type')
 			desc = getElementText(ctx, 'xs:annotation/xs:documentation', simpleType)
 			u = nsp[prefix]
-			
+
 			myAttribute = AttributeType(
-				ID = self.__uuid(u,name,'Attribute'),
+				ID = self.__uuid(u, name, 'Attribute'),
 				Name = [
 					NameType(name)
 				],
@@ -367,7 +384,7 @@ class Converter(object):
 				Derived = 'false',
 				AttributeGroupLink = [
 					AttributeGroupLinkType(
-						AttributeGroupID=self.step[u]['/']['AttributeGroup'].ID
+						AttributeGroupID = self.step[u][tns]['Group'].ID
 					)
 				],
 			)
@@ -377,15 +394,14 @@ class Converter(object):
 					NameType(desc)
 				]
 				
-			self.__store(u,name,'Attribute',myAttribute)
-			self.elements[myAttribute.ID] = simpleType
+			self.__store(u, name, 'Attribute', myAttribute)
 			self.dom.AttributeList.append(myAttribute)
 
 			enumerations = getElements(ctx,'xs:restriction/xs:enumeration', simpleType)
 
 			if len(enumerations) > 0:
 				LOV = ListOfValueType(
-					ID = self.__uuid(u,name,'ListOfValue'),
+					ID = self.__uuid(u, name, 'LOV'),
 					UseValueID = 'false',
 					Name = [
 						NameType(name)
@@ -394,7 +410,7 @@ class Converter(object):
 						BaseType='text', 
 						MaxLength=None
 					),
-					ParentID = self.step[u]['/']['ListOfValuesGroup'].ID
+					ParentID = self.step['/'][self.root]['LOVs'].ID  # could nest this
 				)
 
 				for enum in enumerations:
@@ -404,12 +420,11 @@ class Converter(object):
 						)
 					)
 					
-				self.__store(u,name,'ListOfValue',LOV)
-				self.elements[LOV.ID] = simpleType
+				self.__store(u, name, 'LOV', LOV)
 				self.dom.ListsOfValues.append(LOV)
 
 				myAttribute.ListOfValueLink = ListOfValueLinkType(
-					ListOfValueID=LOV.ID
+					ListOfValueID = LOV.ID
 				)
 
 			else:
@@ -434,11 +449,11 @@ class Converter(object):
 			url = nsp[prefix]
 
 			userType = UserTypeType(
-				ID = self.__uuid(url,name,'UserType'),
+				ID = self.__uuid(url, name, 'UserType'),
 				AllowInDesignTemplate='false',
 				AllowQuarkTemplate='false',
 				IDPattern='%s:[uuid]'%self.prefix,
-				NamePattern=name,
+				NamePattern = f'{name}_[id]',
 				IsCategory='true',
 				ManuallySorted='false',
 				ReferenceTargetLockPolicy='Strict',
@@ -452,7 +467,7 @@ class Converter(object):
 
 			userType.UserTypeLink.append(
 				UserTypeLinkType(
-					UserTypeID=self.root
+					UserTypeID = self.step['/'][self.root]['UserType'].ID
 				)
 			)
 
@@ -474,13 +489,12 @@ class Converter(object):
 				if False:
 					userType.UserTypeLink.append(
 						UserTypeLinkType(
-							UserTypeID=self.step[u][t]['UserType'].ID
+							UserTypeID =self.step[u][t]['UserType'].ID
 						)
 					)
 
 			
-			self.__store(url,name,'UserType',userType)
-			self.elements[userType.ID] = complexType
+			self.__store(url, name, 'UserType', userType)
 			self.dom.UserTypes.append(userType)
 		
 		return
@@ -512,9 +526,9 @@ class Converter(object):
 
 					# create a copy
 					attribute = AttributeType(
-						ID = self.__uuid(url,'%s'%name,'Attribute'),
+						ID = self.__uuid(url, name, 'Attribute'),
 						Name = [
-							NameType('%s'%name)
+							NameType(name)
 						],
 						MultiValued = source.MultiValued,
 						ProductMode = source.ProductMode,
@@ -525,7 +539,7 @@ class Converter(object):
 						ListOfValueLink = source.ListOfValueLink,
 						AttributeGroupLink = [
 							AttributeGroupLinkType(
-								AttributeGroupID=self.step[url][name]['AttributeGroup'].ID
+								AttributeGroupID =self.step[url][name]['Group'].ID
 							)
 						],
 						UserTypeLink = [
@@ -534,14 +548,13 @@ class Converter(object):
 							)
 						]
 					)
-					self.__store(url,'%s'%name,'Attribute',attribute)
+					self.__store(url, name, 'Attribute', attribute)
 					# need to put the following backin later
-					#self.elements[attribute.ID] = xsa
 					self.dom.AttributeList.append(attribute)
 
 					userType.AttributeLink.append(
 						AttributeLinkType(
-							AttributeID=attribute.ID
+							AttributeID = attribute.ID
 						)
 					)
 
@@ -564,7 +577,7 @@ class Converter(object):
 				
 				# create a copy
 				attribute = AttributeType(
-					ID = self.__uuid(url,'@%s'%attr,'Attribute'),
+					ID = self.__uuid(u, attr, 'Attribute'),
 					Name = [
 						NameType('@%s'%attr)
 					],
@@ -577,7 +590,7 @@ class Converter(object):
 					ListOfValueLink = source.ListOfValueLink,
 					AttributeGroupLink = [
 						AttributeGroupLinkType(
-							AttributeGroupID=self.step[url][name]['AttributeGroup'].ID
+							AttributeGroupID =self.step[url][name]['Group'].ID
 						)
 					],
 					UserTypeLink = [
@@ -586,13 +599,12 @@ class Converter(object):
 						)
 					]
 				)
-				self.__store(url,'@%s'%attr,'Attribute',attribute)
-				self.elements[attribute.ID] = xsa
+				self.__store(u, attr, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				
 				userType.AttributeLink.append(
 					AttributeLinkType(
-						AttributeID=attribute.ID
+						AttributeID = attribute.ID
 					)
 				)
 
@@ -616,7 +628,7 @@ class Converter(object):
 				if u == self.nsp['xs']:
 					# create as new attribute in tns
 					attribute = AttributeType(
-						ID = self.__uuid(tns,elem,'Attribute'),
+						ID = self.__uuid(u, elem, 'Attribute'),
 						Name = [
 							NameType(elem)
 						],
@@ -627,7 +639,7 @@ class Converter(object):
 						Derived = 'false',
 						AttributeGroupLink = [
 							AttributeGroupLinkType(
-								AttributeGroupID=self.step[tns][name]['AttributeGroup'].ID
+								AttributeGroupID = self.step[u][elem]['Group'].ID
 							)
 						],
 						Validation = ValidationType(
@@ -643,7 +655,7 @@ class Converter(object):
 						]
 					'''
 					
-					self.__store(tns, name,'Attribute', attribute)
+					self.__store(u, name, 'Attribute', attribute)
 					self.dom.AttributeList.append(attribute)
 				
 				else:
@@ -661,7 +673,7 @@ class Converter(object):
 
 				userType.AttributeLink.append(
 					AttributeLinkType(
-						AttributeID=attribute.ID
+						AttributeID = attribute.ID
 					)
 				)
 				
@@ -714,7 +726,7 @@ class Converter(object):
 
 				else: # this would be for the true inheritance model
 					crossReference = ProductCrossReferenceTypeType(
-						ID = self.__uuid(u,elem,'ProductCrossReference'),
+						ID = self.__uuid(u ,elem, 'ProductCrossReference'),
 						Name = [
 							NameType('%s,%s'%(tns,elem))
 						],
@@ -736,7 +748,7 @@ class Converter(object):
 						]
 					)
 
-					self.__store(u,elem,'ProductCrossReference',crossReference)
+					self.__store(u, elem, 'ProductCrossReference',crossReference)
 					self.dom.CrossReferenceTypes.append(crossReference)
 		 
 		return
@@ -810,55 +822,56 @@ class Converter(object):
 						pcr = self.step[ns][name]['ProductCrossReference']
 						step = self.ids[pcr.TargetUserTypeLink[0].UserTypeID]
 
-			product = None
-			if step:
-				product = ProductType(
-					ID = self.__uuid(ns,name,'Product'),
-					UserTypeID = step.ID,
-					ParentID=self.root,
-					Name = [
-						NameType(name)
-					],
-					Values = [
-						ValuesType(
-							Value = []
-						)
-					]
-				)
+			if not step: return
 
-				if pcr and parent:
-					parent.ProductCrossReference.append(
-						ProductCrossReferenceType(
-							ProductID = product.ID,
-							Type=pcr.ID
-						)
+			product = ProductType(
+				ID = self.__uuid(ns, name, 'Product'),
+				UserTypeID = step.ID,
+				ParentID = parent.ID,
+				Name = [
+					NameType(name)
+				],
+				Values = [
+					ValuesType(
+						Value = []
 					)
+				]
+			)
+
+			if pcr and parent:
+				parent.ProductCrossReference.append(
+					ProductCrossReferenceType(
+						ProductID = product.ID,
+						Type=pcr.ID
+					)
+				)
 					
-				self.__store(ns,name,'Product',product)
-				self.dom.Products.append(product)
-				print('%s%s'%(indent,name))
+			self.__store(ns, name, 'Product', product)
+			self.dom.Products.append(product)
+			print('%s%s'%(indent,name))
 
-				if node.properties:
-					for p in node.properties:
-						if p.type == 'attribute':
-							aname = '@%s'%p.name
-							value = str(p.content)
-							valueAdd(ns,aname, value, product, step, indent)
+			if node.properties:
+				for p in node.properties:
+					if p.type == 'attribute':
+						aname = '@%s'%p.name
+						value = str(p.content)
+						valueAdd(ns,aname, value, product, step, indent)
 
-				for child in node.children:
-					if child.type == 'element':
-						name = child.name
-						value = child.content
-						valueAdd(ns,name,value,product,step, indent)
-
+			for child in node.children:
+				if child.type == 'element':
+					name = child.name
+					value = child.content
+					valueAdd(ns,name,value,product,step, indent)
 
 			#print(product, step, node)
 			if node.children and product:
 				for child in node.children:
 					if child.type == 'element':
-						walk(child, parent=product, indent='  %s'%indent)
+						walk(child, parent=product, indent=f'\t{indent}')
 
-		walk(root)
+
+		walk(root, parent=self.step['/'][self.root]['Product'])
+
 		return
 	
 	

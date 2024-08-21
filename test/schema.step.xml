@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ns1:STEP-ProductInformation
 	ContextID="Context1"
-	ExportTime="2024-08-21 18:27:31.797275"
+	ExportTime="2024-08-22 08:35:57.669456"
 	SingleUpdateMode="Y"
 	UseContextLocale="false"
 	WorkspaceID="Main"
@@ -219,95 +219,6 @@
 		</ns1:Attribute>
 	</ns1:AttributeList>
 	<ns1:Products>
-		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2">
-			<ns1:Product ID="XSD_555c18a68a38c430ef2cf400eca1bab2" ParentID="XSD_84c41a407d1a753c9c567968f889d76e" UserTypeID="">
-				<ns1:Name>people</ns1:Name>
-				<ns1:Product ID="XSD_49189f75771d779d7f9a2022aa34a355" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-						<ns1:Name>person</ns1:Name>
-						<ns1:Values/>
-					</ns1:Product>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-					<ns1:Name>person</ns1:Name>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Product ID="XSD_49189f75771d779d7f9a2022aa34a355" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-						<ns1:Name>person</ns1:Name>
-						<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_23039b5f069fc56823d901755ceea839" UserTypeID="">
-							<ns1:Name>contact</ns1:Name>
-							<ns1:Values/>
-						</ns1:Product>
-						<ns1:Values/>
-					</ns1:Product>
-					<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-						<ns1:Name>contact</ns1:Name>
-						<ns1:Values/>
-					</ns1:Product>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-					<ns1:Name>person</ns1:Name>
-					<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_23039b5f069fc56823d901755ceea839" UserTypeID="">
-						<ns1:Name>contact</ns1:Name>
-						<ns1:Values/>
-					</ns1:Product>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-					<ns1:Name>contact</ns1:Name>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Values/>
-			</ns1:Product>
-		</ns1:Product>
-		<ns1:Product ID="XSD_555c18a68a38c430ef2cf400eca1bab2" ParentID="XSD_84c41a407d1a753c9c567968f889d76e" UserTypeID="">
-			<ns1:Name>people</ns1:Name>
-			<ns1:Product ID="XSD_49189f75771d779d7f9a2022aa34a355" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-				<ns1:Name>group</ns1:Name>
-				<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-					<ns1:Name>person</ns1:Name>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Values/>
-			</ns1:Product>
-			<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-				<ns1:Name>person</ns1:Name>
-				<ns1:Values/>
-			</ns1:Product>
-			<ns1:Product ID="XSD_49189f75771d779d7f9a2022aa34a355" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-				<ns1:Name>group</ns1:Name>
-				<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-					<ns1:Name>person</ns1:Name>
-					<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_23039b5f069fc56823d901755ceea839" UserTypeID="">
-						<ns1:Name>contact</ns1:Name>
-						<ns1:Values/>
-					</ns1:Product>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_49189f75771d779d7f9a2022aa34a355" UserTypeID="">
-					<ns1:Name>contact</ns1:Name>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Values/>
-			</ns1:Product>
-			<ns1:Product ID="XSD_23039b5f069fc56823d901755ceea839" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-				<ns1:Name>person</ns1:Name>
-				<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_23039b5f069fc56823d901755ceea839" UserTypeID="">
-					<ns1:Name>contact</ns1:Name>
-					<ns1:Values/>
-				</ns1:Product>
-				<ns1:Values/>
-			</ns1:Product>
-			<ns1:Product ID="XSD_38f2ec096fc78defb4a179e3907d03ce" ParentID="XSD_555c18a68a38c430ef2cf400eca1bab2" UserTypeID="">
-				<ns1:Name>contact</ns1:Name>
-				<ns1:Values/>
-			</ns1:Product>
-			<ns1:Values/>
-		</ns1:Product>
+		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2"/>
 	</ns1:Products>
 </ns1:STEP-ProductInformation>

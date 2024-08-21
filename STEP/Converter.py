@@ -260,6 +260,7 @@ class Converter(object):
 			return
 		self.xsd.add(file)
 		
+		# todo fix up the nsp root and tns
 		#print(file)
 		
 		xsd = '%s/%s'%(dir, file) if len(dir) else file

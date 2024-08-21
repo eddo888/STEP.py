@@ -7,7 +7,7 @@
     attributeFormDefault="unqualified"
 >
 
-    <!-- xs:element name="people" type="fyayc:PeopleType"/ -->
+    <xs:element name="people" type="fyayc:PeopleType"/>
 
     <xs:complexType name="PeopleType">
         <xs:sequence>

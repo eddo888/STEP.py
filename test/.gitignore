@@ -3,3 +3,4 @@ cache.json
 .ipynb_checkpoints
 __pycache__
 PIM.xsd
+.cache.json

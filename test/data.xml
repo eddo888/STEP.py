@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<fyayc:people
+	xmlns:fyayc="https://foryouandyourcustomers.com/people"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="schema.xsd"
+>
+	<fyayc:group
+		ID="STIBO"
+		name="Stibo Systems"
+	>
+		<fyayc:person
+			ID="DE"
+			email="dave@stibosystems.com"
+			name="David Edson"
+			phone="+614 0868 0808"
+			role="Solution Architect"
+			when="2020-10-18T09:00:00"
+		/>
+	</fyayc:group>
+	
+	<fyayc:group
+		ID="FYAYC"
+		name="for you and your customers"
+	>
+		<fyayc:person
+			ID="BM"
+			email="bem@foryouandyourcustomers.com"
+			name="Bernhard Mueller"
+			role="General Manager"
+			when="2020-10-18T09:00:00"
+		>
+			<fyayc:contact 
+				ID="DE"
+			/>
+		</fyayc:person>
+	</fyayc:group>
+
+</fyayc:people>

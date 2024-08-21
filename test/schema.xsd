@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:fyayc="https://foryouandyourcustomers.com/people"
+    targetNamespace="https://foryouandyourcustomers.com/people"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+>
+
+    <!-- xs:element name="people" type="fyayc:PeopleType"/ -->
+
+    <xs:complexType name="PeopleType">
+        <xs:sequence>
+            <xs:element name="group" type="fyayc:GroupType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="GroupType">
+        <xs:sequence>
+            <xs:element name="person" type="fyayc:PersonType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="ID" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="PersonType">
+        <xs:sequence>
+            <xs:element name="contact" type="fyayc:ContactType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="ID" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="email" type="xs:string" use="required"/>
+        <xs:attribute name="phone" type="xs:string" use="optional"/>
+        <xs:attribute name="when" type="xs:dateTime" use="optional"/>
+        <xs:attribute name="role" type="fyayc:RoleType" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ContactType">
+        <xs:attribute name="ID" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="RoleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Solution Architect"/>
+            <xs:enumeration value="Project Manager"/>
+            <xs:enumeration value="General Manager"/>
+            <xs:enumeration value="Company"/>                
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

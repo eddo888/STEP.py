@@ -130,7 +130,7 @@ class Converter(object):
 
 		product_root = ProductType(
 			ID = self.__uuid('/', self.root, 'Product'),
-			UserTypeID = self.step['/'][self.root]['UserType'].ID,
+			UserTypeID = user_type_root.ID,
 			ParentID = "Product hierarchy root",
 		)
 		self.__store('/', self.root, 'Product', product_root)
@@ -268,7 +268,7 @@ class Converter(object):
 		tns = getAttribute(root, 'targetNamespace')
 		prefix = None
 
-		print(tns)
+		#print(tns)
 		
 		nsp[prefix] = tns
 
@@ -623,6 +623,7 @@ class Converter(object):
 		root = doc.getRootElement()
 		tns = str(root.ns().content)
 		root_type = self.step[tns][root.name]['/']
+		root_home = self.step['/'][self.root]['Product']
 
 		xdf = '%Y-%m-%d'
 		xdtf = '%Y-%m-%dT%H:%M:%S'
@@ -673,7 +674,7 @@ class Converter(object):
 			product = ProductType(
 				ID = self.__uuid(ns, name, 'Product'),
 				UserTypeID = usertype.ID,
-				ParentID = parent.ID,
+				#ParentID = parent.ID,
 				Name = [
 					NameType(name)
 				],
@@ -720,10 +721,8 @@ class Converter(object):
 					
 			return product
 
-		root = walk(root, parent=self.step['/'][self.root]['Product'], usertype=root_type)
-		self.dom.Products.append(root)
+		walk(root, parent=root_home, usertype=root_type)
 		return
-	
 	
 	@args.operation
 	@args.parameter(name='xsd', param='xsds', short='s', nargs='*', help='XML Schema Definition')

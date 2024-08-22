@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
 
+config='406608'
+step='schema.step.xml'
+
 rm -f .cache.json
-rm -f schema.step.xml
+rm -f ${step}
 
-../STEP/Converter.py -p XSD -r EDDO xsd2step -s schema.xsd  -o schema.step.xml
+../STEP/Converter.py -p XSD -r EDDO xsd2step -s schema.xsd  -o ${step} -x data.xml
 
-open schema.step.xml
+if [ -e "${step}" ]
+then
+    open "${step}"
+fi
 
-id=$(./import.sh  -i 406608 schema.step.xml | pyson.py -tp '$.id')
+exit
+
+id=$(./import.sh  -i ${config} ${step} | pyson.py -tp '$.id')
 
 echo $id
 
-sleep 5
+if [ ! -z "$id" ]
+then
+    ./report.sh -i $id
+fi
 
-./report.sh -i $id | pyson.py -c
 
 

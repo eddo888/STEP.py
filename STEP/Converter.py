@@ -59,9 +59,7 @@ class Converter(object):
 			Product	= ProductsType,
 		)
 		
-		# store STEP objects against XSD definiton (-> means nested dict)
 		self.step = {
-			# XSD namespace -> XSD name ([@]=attribute,[^@]=element) -> STEP Type = STEP object
 		    '/': {
 				self.root: {}
 			}
@@ -295,20 +293,7 @@ class Converter(object):
 		self.__simpleTypes(doc, ctx, nsp, tns, prefix)
 		self.__complexTypes(doc, ctx, nsp, tns, prefix)
 		self.__complexAttrs(doc, ctx, nsp, tns, prefix)
-		self.__references(doc, ctx, nsp, tns, prefix)
-
-		#find element types to get root
-
-		for element in getElements(ctx,'/xs:schema/xs:element'):
-			name = getAttribute(element, 'name')
-			tipe = getAttribute(element, 'type')
-			
-			if ':' in tipe:
-				(p,t) = tuple(tipe.split(':'))
-				url = nsp[p]
-			else:
-				t = tipe
-				url = tns
+		self.__elements(doc, ctx, nsp, tns, prefix)
 				
 		return nsp
 
@@ -492,13 +477,14 @@ class Converter(object):
 					t = tipe
 					u = tns
 
+				target = self.step[u][t]['UserType']
+
 				userType.UserTypeLink.append(
 					UserTypeLinkType(
-						UserTypeID = self.step[u][t]['UserType'].ID
+						UserTypeID = target.ID
 					)
 				)
 					
-
 		return
 
 	def __complexAttrs(self, doc, ctx, nsp, tns, prefix):
@@ -570,77 +556,52 @@ class Converter(object):
 
 		return
 
-	def __references(self, doc, ctx, nsp, tns, prefix):
+	def __elements(self, doc, ctx, nsp, tns, prefix):
 		'''
 		setup relationships on elements
+
 		'''
+		
+		for element in getElements(ctx,'//xs:element'):
+			name = getAttribute(element, 'name')
+			tipe = getAttribute(element, 'type')
+			
+			if ':' in tipe:
+				(p,t) = tuple(tipe.split(':'))
+				url = nsp[p]
+			else:
+				t = tipe
+				url = tns
 
-		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
-			name = getAttribute(complexType, 'name')
-			url = nsp[prefix]
-					
-			source = self.step[url][name]['UserType']
-				
-			child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
-			if not child:
-				child = complexType
+			source = self.step[url][t]['UserType']
+			self.__store(url, name, '/', source)
+	
+			if 'Elements' not in self.step[url][name].keys():
+				self.step[url][name]['Elements'] = dict()
+			self.step[url][name]['Elements']
 
-			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', child):
+			complex_type = getElement(ctx, f'//xs:complexType[@name="{t}"]')
+			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
+			#if not child:
+			#	child = complexType
+
+			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complex_type):
 				elem = getAttribute(xse, 'name')
-				tipe = getAttribute(xse, 'type')
-				if not tipe: continue
+				etipe = getAttribute(xse, 'type')
+				if not etipe: continue
 				
-				if ':' in tipe:
-					(p,t) = tuple(tipe.split(':'))
+				if ':' in etipe:
+					(p,t) = tuple(etipe.split(':'))
 					u = nsp[p]
 				else:
-					t = tipe
+					t = etipe
 					u = tns
 					
-				mino = getAttribute(xse, 'minOccurs') or '0'
-				maxo = getAttribute(xse, 'maxOccurs') or '1'
-
-				if t not in self.step[u].keys(): continue
-				
-				if not 'UserType' in self.step[u][t].keys(): continue
-				
-				etarget = self.step[u][t]['UserType']
-				# key above dodgey
-
-				if True: # this is for parent child instead of true inheritance model
-					etarget.UserTypeLink.append(
-						UserTypeLinkType(
-							UserTypeID = source.ID
-						)
-					)
-
-				else: # this would be for the true inheritance model
-					crossReference = ProductCrossReferenceTypeType(
-						ID = self.__uuid(u ,elem, 'ProductCrossReference'),
-						Name = [
-							NameType('%s,%s'%(tns,elem))
-						],
-						Accumulated='false',
-						Inherited='false',
-						Mandatory= 'true' if str(mino) == '1' else 'false',
-						MultiValued= 'true' if str(maxo) == 'unbounded' else 'false',
-						Referenced='true',
-						Revised='true',
-						UserTypeLink = [
-							UserTypeLinkType(
-								UserTypeID = source.ID
-							)
-						],
-						TargetUserTypeLink = [
-							TargetUserTypeLinkType(
-								UserTypeID = self.step[u][t]['UserType'].ID
-							)
-						]
-					)
-
-					self.__store(u, elem, 'ProductCrossReference',crossReference)
-					self.dom.CrossReferenceTypes.append(crossReference)
+				target = self.step[u][t]['UserType']
+				self.step[url][name]['Elements'][elem] = target
 		 
+			#print('Elements2', url, name, self.step[url][name]['Elements'])
+
 		return
 	
 	def __products(self, xsd, xml):
@@ -653,11 +614,14 @@ class Converter(object):
 		validator = schema.schemaNewValidCtxt()
 		doc = libxml2.parseFile(xml)
 		validation = validator.schemaValidateDoc(doc)
+
 		if validation != 0:
 			sys.stderr.write('schema invalid %s\n'%validation)
 			return
 		
 		root = doc.getRootElement()
+		tns = str(root.ns().content)
+		root_type = self.step[tns][root.name]['/']
 
 		xdf = '%Y-%m-%d'
 		xdtf = '%Y-%m-%dT%H:%M:%S'
@@ -695,22 +659,18 @@ class Converter(object):
 
 			return
 			
-		def walk(node, parent=None, indent=''):
-			step = None
+		def walk(node, parent=None, usertype=None, indent=''):
 			pcr = None
 			name = node.name
 			ns = str(node.ns().content)
 			print(f'{indent}{ns}:{name}')
 
-			if ns in self.step.keys():
-				if name in self.step[ns].keys():
-					#step = self.step[ns][name]['UserType']
-					if 'ProductCrossReference' in self.step[ns][name].keys():
-						pcr = self.step[ns][name]['ProductCrossReference']
+			elements = self.step[ns][name]['Elements']
+			#pcr = self.step[ns][name]['ProductCrossReference']
 
 			product = ProductType(
 				ID = self.__uuid(ns, name, 'Product'),
-				UserTypeID = '', #step.ID,
+				UserTypeID = usertype.ID,
 				ParentID = parent.ID,
 				Name = [
 					NameType(name)
@@ -739,7 +699,7 @@ class Converter(object):
 						aname = p.name
 						value = str(p.content)
 						print(f'\t{indent}@{aname}={value}')
-						#valueAdd(ns, aname, value, product, step, indent)
+						valueAdd(ns, aname, value, product, usertype, indent)
 
 			#for child in node.children:
 			#	if child.type == 'element':
@@ -751,11 +711,14 @@ class Converter(object):
 
 			for child in node.children:
 				if child.type == 'element':
-			   		walk(child, parent=product, indent=f'\t{indent}')
+					#print(indent, child.name, '?', elements)
+					if child.name in elements.keys():
+						child_type = elements[child.name]
+						walk(child, parent=product, usertype=child_type, indent=f'\t{indent}')
 					
 			return product
 
-		root = walk(root, parent=self.step['/'][self.root]['Product'])
+		root = walk(root, parent=self.step['/'][self.root]['Product'], usertype=root_type)
 		self.dom.Products.append(root)
 		return
 	

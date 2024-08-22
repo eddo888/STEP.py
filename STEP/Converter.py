@@ -625,6 +625,8 @@ class Converter(object):
 		root_type = self.step[tns][root.name]['/']
 		root_home = self.step['/'][self.root]['Product']
 
+
+
 		xdf = '%Y-%m-%d'
 		xdtf = '%Y-%m-%dT%H:%M:%S'
 		sdf = '%d-%b-%Y'

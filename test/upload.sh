@@ -13,8 +13,6 @@ then
     open "${step}"
 fi
 
-exit
-
 id=$(./import.sh  -i ${config} ${step} | pyson.py -tp '$.id')
 
 echo $id

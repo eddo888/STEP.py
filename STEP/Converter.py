@@ -538,7 +538,8 @@ class Converter(object):
 						)
 					]
 				)
-				self.__store(u, attr, 'Attribute', attribute)
+				key = f'{name}@{attr}'
+				self.__store(u, key, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				
 				attribute.UserTypeLink.append(
@@ -628,11 +629,12 @@ class Converter(object):
 		sdf = '%d-%b-%Y'
 		sdtf = '%Y-%m-%d %H:%M:%S'
 		
-		def valueAdd(ns, name, value, product, usertype, indent):
-			for a in usertype.AttributeLink:
-				attribute = self.step[ns][name]['Attribute']
+		def valueAdd(ns, tipe, name, value, product, usertype, indent):
 
-				if self.step[ns][name]['Attribute'].ID == attribute.ID:
+			for a in usertype.AttributeLink:
+
+				attribute = self.step[ns][name]['Attribute']
+				if attribute.Name[0] == f'@{name}':
 					print('  %s%s = %s'%(indent, name, value))
 
 					if attribute.Validation:
@@ -699,7 +701,7 @@ class Converter(object):
 						aname = p.name
 						value = str(p.content)
 						print(f'\t{indent}@{aname}={value}')
-						valueAdd(ns, aname, value, product, usertype, indent)
+						#valueAdd(ns, aname, value, product, usertype, indent)
 
 			#for child in node.children:
 			#	if child.type == 'element':

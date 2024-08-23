@@ -8,16 +8,15 @@ from uuid import uuid4 as uuid
 from datetime import datetime
 from dateutil import tz
 from io import StringIO
-from dotmap import DotMap
 from collections import OrderedDict
 
 from Baubles.Colours import Colours
 from Perdy.pyxbext import directory
-from GoldenChild.xpath import *
 from Argumental.Argue import Argue
 from Perdy.pyxbext import directory
 from Perdy.parser import doParse
 from Perdy.pretty import prettyPrint
+from GoldenChild.xpath import *
 
 from STEP.XML import *
 
@@ -654,14 +653,15 @@ class Converter(object):
 		ctx = libxml2.schemaNewParserCtxt(xsd)
 		schema = ctx.schemaParse()
 		validator = schema.schemaNewValidCtxt()
-		doc = libxml2.parseFile(xml)
-		validation = validator.schemaValidateDoc(doc)
+
+		DATA = XML(*getContextFromFile(xml))
+		validation = validator.schemaValidateDoc(DATA.doc)
 
 		if validation != 0:
 			sys.stderr.write('schema invalid %s\n'%validation)
 			return
 		
-		root = doc.getRootElement()
+		root = DATA.doc.getRootElement()
 		tns = str(root.ns().content)
 		root_home = self.step['/'][self.root]['Product']
 
@@ -752,11 +752,9 @@ class Converter(object):
 
 			if not node.children: return
 
-			for index, child in enumerate(node.children):
-				if child.type == 'element':
-					#print(indent, child.name, '?', elements)
-					if child.name in self.elements[tns].keys():
-						walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
+			for index, child in enumerate(getElements(DATA.ctx, '*', node)):
+				if child.name in self.elements[tns].keys():
+				   	walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
 					
 			return
 

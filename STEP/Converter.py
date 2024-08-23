@@ -6,6 +6,7 @@ import os, sys, re, json, logging, hashlib
 
 from uuid import uuid4 as uuid
 from datetime import datetime
+from dateutil import tz
 from io import StringIO
 from dotmap import DotMap
 from collections import OrderedDict
@@ -610,6 +611,10 @@ class Converter(object):
 		load sample data
 		'''
 
+		ltz = tz.gettz('AEST')
+		mt = os.stat(xml).st_mtime
+		dt = datetime.fromtimestamp(mt, tz=ltz)
+
 		ctx = libxml2.schemaNewParserCtxt(xsd)
 		schema = ctx.schemaParse()
 		validator = schema.schemaNewValidCtxt()
@@ -625,7 +630,9 @@ class Converter(object):
 		root_type = self.step[tns][root.name]['/']
 		root_home = self.step['/'][self.root]['Product']
 
+		# seed for id generation path
 
+		salt = f'{xml}:{dt:%Y-%m-%dT%H:%M:%S}:{root.name}'
 
 		xdf = '%Y-%m-%d'
 		xdtf = '%Y-%m-%dT%H:%M:%S'
@@ -664,17 +671,19 @@ class Converter(object):
 
 			return
 			
-		def walk(node, parent=None, usertype=None, indent=''):
+		def walk(node, parent=None, usertype=None, indent='', path=''):
 			pcr = None
 			name = node.name
 			ns = str(node.ns().content)
-			print(f'{indent}{ns}:{name}')
+			print(f'{indent}{ns}:{name}')# -> {path}')
 
+			id = self.__hash(path)
+			
 			elements = self.step[ns][name]['Elements']
 			#pcr = self.step[ns][name]['ProductCrossReference']
 
 			product = ProductType(
-				ID = self.__uuid(ns, name, 'Product'),
+				ID = f'{self.prefix}_{id}', #self.__uuid(ns, name, 'Product'),
 				UserTypeID = usertype.ID,
 				#ParentID = parent.ID,
 				Name = [
@@ -714,16 +723,16 @@ class Converter(object):
 
 			if not node.children: return
 
-			for child in node.children:
+			for index, child in enumerate(node.children):
 				if child.type == 'element':
 					#print(indent, child.name, '?', elements)
 					if child.name in elements.keys():
 						child_type = elements[child.name]
-						walk(child, parent=product, usertype=child_type, indent=f'\t{indent}')
+						walk(child, parent=product, usertype=child_type, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
 					
 			return product
 
-		walk(root, parent=root_home, usertype=root_type)
+		walk(root, parent=root_home, usertype=root_type, path=salt)
 		return
 	
 	@args.operation

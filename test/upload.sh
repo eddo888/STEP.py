@@ -13,6 +13,12 @@ then
     open "${step}"
 fi
 
+if [ ! -e "${step}" ]
+then 
+    echo "no file created" 1>&2
+    exit 1
+fi
+
 id=$(./import.sh  -i ${config} ${step} | pyson.py -tp '$.id')
 
 echo $id

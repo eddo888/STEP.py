@@ -2,7 +2,7 @@
 
 # PYTHON_ARGCOMPLETE_OK
 
-import os, sys, re, json, logging, hashlib
+import os, sys, re, json, logging, hashlib, traceback
 
 from uuid import uuid4 as uuid
 from datetime import datetime
@@ -68,6 +68,8 @@ class Converter(object):
 		
 		self.ids = dict() # { type: { id: step}}
 
+		self.xpaths = dict() # { xpath : id }
+
 		#list of XSD files that have been processed
 		self.xsd = set()
 
@@ -96,8 +98,8 @@ class Converter(object):
 			],
 			AllowInDesignTemplate='false',
 			AllowQuarkTemplate='false',
-			#IDPattern='%s:[uuid]'%self.prefix,
-			NamePattern = f'{self.root}_[id]',
+			IDPattern = f'{self.prefix}_[id]',
+			NamePattern = f'{self.root}',
 			IsCategory='true',
 			ManuallySorted='false',
 			ReferenceTargetLockPolicy='Strict',
@@ -321,10 +323,10 @@ class Converter(object):
 					NameType(name)
 				],
 			)
-			self.__store(u, name, 'Group', ag)
+			self.__store(tns, name, 'Group', ag)
 
-			self.step[u][name]['Group'].append(ag)
-
+			self.step[tns][tns]['Group'].append(ag)
+			
 		return
 		
 	def __simpleTypes(self, doc, ctx, nsp, tns, prefix):
@@ -422,8 +424,8 @@ class Converter(object):
 				ID = self.__uuid(url, name, 'UserType'),
 				AllowInDesignTemplate='false',
 				AllowQuarkTemplate='false',
-				IDPattern='%s:[uuid]'%self.prefix,
-				NamePattern = f'{name}_[id]',
+				IDPattern = f'f{self.prefix}_[id]',
+				#NamePattern = f'{name}',
 				IsCategory='true',
 				ManuallySorted='false',
 				ReferenceTargetLockPolicy='Strict',
@@ -448,15 +450,6 @@ class Converter(object):
 				else:
 					t = base
 					u = tns
-
-				# lets do this in the second run through
-				if False:
-					userType.UserTypeLink.append(
-						UserTypeLinkType(
-							UserTypeID =self.step[u][t]['UserType'].ID
-						)
-					)
-
 			
 			self.__store(url, name, 'UserType', userType)
 			self.dom.UserTypes.append(userType)
@@ -483,11 +476,11 @@ class Converter(object):
 					t = tipe
 					u = tns
 
-				target = self.step[u][t]['UserType']
+				source = self.step[u][t]['UserType']
 
-				userType.UserTypeLink.append(
+				source.UserTypeLink.append(
 					UserTypeLinkType(
-						UserTypeID = target.ID
+						UserTypeID = userType.ID
 					)
 				)
 					
@@ -535,7 +528,7 @@ class Converter(object):
 					ListOfValueLink = source.ListOfValueLink,
 					AttributeGroupLink = [
 						AttributeGroupLinkType(
-							AttributeGroupID = self.step[url][tns]['Group'].ID
+							AttributeGroupID = self.step[url][name]['Group'].ID
 						)
 					],
 					UserTypeLink = [
@@ -568,7 +561,32 @@ class Converter(object):
 		setup relationships on elements
 
 		'''
+		#anchor the root first
+
+		root = self.step['/'][self.root]['UserType']
+
+		for element in getElements(ctx,'/xs:schema/xs:element'):
+			name = getAttribute(element, 'name')
+			tipe = getAttribute(element, 'type')
+			
+			if ':' in tipe:
+				(p,etipe) = tuple(tipe.split(':'))
+				url = nsp[p]
+			else:
+				etipe = tipe
+				url = tns
 		
+			source = self.step[url][etipe]['UserType']
+			source.NamePattern = name
+
+			source.UserTypeLink.append(
+				UserTypeLinkType(
+					UserTypeID = root.ID
+				)
+			)
+
+		# resolve element and attribute names second
+
 		for element in getElements(ctx,'//xs:element'):
 			name = getAttribute(element, 'name')
 			tipe = getAttribute(element, 'type')
@@ -579,21 +597,15 @@ class Converter(object):
 			else:
 				etipe = tipe
 				url = tns
-
-			source = self.step[url][etipe]['UserType']
-			self.__store(url, name, '/', source)
-	
-			if 'Elements' not in self.step[url][name].keys():
-				self.step[url][name]['Elements'] = dict()
-
-			if 'Attributes' not in self.step[url][name].keys():
-				self.step[url][name]['Attributes'] = dict()
-
+		
 			complex_type = getElement(ctx, f'//xs:complexType[@name="{etipe}"]')
 			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
 			#if not child:
 			#	child = complexType
 
+			source = self.step[url][etipe]['UserType']
+			source.NamePattern = name
+			
 			for xsa in getElements(ctx, 'xs:attribute', complex_type):
 				attr = getAttribute(xsa, 'name')
 				tipe = getAttribute(xsa, 'type')
@@ -603,24 +615,20 @@ class Converter(object):
 
 				key = f'{etipe}@{attr}'
 				target = self.step[u][key]['Attribute']
-				self.step[url][name]['Attributes'][attr] = target
 
 			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complex_type):
 				elem = getAttribute(xse, 'name')
-				etipe = getAttribute(xse, 'type')
+				t = getAttribute(xse, 'type')
 				if not etipe: continue
 				
-				if ':' in etipe:
-					(p,t) = tuple(etipe.split(':'))
+				if ':' in t:
+					(p,t) = tuple(t.split(':'))
 					u = nsp[p]
 				else:
-					t = etipe
 					u = tns
 					
 				target = self.step[u][t]['UserType']
-				self.step[url][name]['Elements'][elem] = target
 		 
-			#print('Elements2', url, name, self.step[url][name]['Elements'])
 
 		return
 	
@@ -645,7 +653,7 @@ class Converter(object):
 		
 		root = doc.getRootElement()
 		tns = str(root.ns().content)
-		root_type = self.step[tns][root.name]['/']
+		root_type = self.step[tns][root.name]['Elements'][root.name]
 		root_home = self.step['/'][self.root]['Product']
 
 		# seed for id generation path
@@ -659,9 +667,9 @@ class Converter(object):
 		
 		def valueAdd(ns, ename, aname, value, product, indent):
 
-			if aname not in self.step[ns][ename]['Attributes'].keys(): return
+			#if aname not in self.step[ns][ename]['Attributes'].keys(): return
 
-			attribute = self.step[ns][ename]['Attributes'][aname]
+			attribute = None #self.step[ns][ename]['Attributes'][aname]
 			print(f'\t{indent}@{aname} = {value}')
 
 			if attribute.Validation:
@@ -707,6 +715,8 @@ class Converter(object):
 
 			id = self.__hash(path)
 			
+			#print(self.step[ns].keys())
+
 			elements = self.step[ns][name]['Elements']
 			#pcr = self.step[ns][name]['ProductCrossReference']
 
@@ -777,7 +787,10 @@ class Converter(object):
 			if xml:
 				xf = os.path.expanduser(xml)
 				if os.path.isfile(xf):
-					self.__products(xsd, xf) # todo: update and test
+					try:
+						self.__products(xsd, xf) # todo: update and test
+					except:
+						sys.stderr.write(traceback.format_exc())
 				
 		if self.verbose:
 			print('step: ',prettyPrint(self.step))

@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <ns1:STEP-ProductInformation
 	ContextID="Context1"
-	ExportTime="2024-08-23 11:21:46.242143"
+	ExportTime="2024-08-23 14:51:33.806578"
 	SingleUpdateMode="Y"
 	UseContextLocale="false"
 	WorkspaceID="Main"
 	xmlns:ns1="http://www.stibosystems.com/step"
 >
 	<ns1:UserTypes>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_4edfd128dfc075fce5b7fda6192e18f2" IsCategory="true" ManuallySorted="false" NamePattern="EDDO_[id]" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_4edfd128dfc075fce5b7fda6192e18f2" IDPattern="XSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="EDDO" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>EDDO</ns1:Name>
 			<ns1:UserTypeLink UserTypeID="Product user-type root"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_6fe064606fe4005520cdee18f2b7510c" IDPattern="XSD:[uuid]" IsCategory="true" ManuallySorted="false" NamePattern="PeopleType_[id]" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_6fe064606fe4005520cdee18f2b7510c" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="people" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>PeopleType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:UserTypeLink UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_49dc65673f2d236498a685a2dabd02f2" IDPattern="XSD:[uuid]" IsCategory="true" ManuallySorted="false" NamePattern="GroupType_[id]" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_49dc65673f2d236498a685a2dabd02f2" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="group" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>GroupType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c"/>
 			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
 			<ns1:AttributeLink AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_c5db2f624b174d6867f1b7ec12def059" IDPattern="XSD:[uuid]" IsCategory="true" ManuallySorted="false" NamePattern="PersonType_[id]" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_c5db2f624b174d6867f1b7ec12def059" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="person" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>PersonType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e"/>
+			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
 			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
 			<ns1:AttributeLink AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb"/>
 			<ns1:AttributeLink AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0"/>
@@ -32,8 +32,9 @@
 			<ns1:AttributeLink AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340"/>
 			<ns1:AttributeLink AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_e1069d5be446a51506e34e1d5c21007e" IDPattern="XSD:[uuid]" IsCategory="true" ManuallySorted="false" NamePattern="ContactType_[id]" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_e1069d5be446a51506e34e1d5c21007e" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="contact" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>ContactType</ns1:Name>
+			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
 		</ns1:UserType>
 	</ns1:UserTypes>
@@ -67,6 +68,18 @@
 			</ns1:AttributeGroup>
 			<ns1:AttributeGroup ID="XSD_249ea994b75e209dcb8632573da7a559" ManuallySorted="false" ShowInWorkbench="true">
 				<ns1:Name>https://foryouandyourcustomers.com/people</ns1:Name>
+				<ns1:AttributeGroup ID="XSD_a6c3ef798948ac9cfc6581c703bd48ca" ManuallySorted="false" ShowInWorkbench="true">
+					<ns1:Name>PeopleType</ns1:Name>
+				</ns1:AttributeGroup>
+				<ns1:AttributeGroup ID="XSD_087bdf698d99b53f198d1087766077c3" ManuallySorted="false" ShowInWorkbench="true">
+					<ns1:Name>GroupType</ns1:Name>
+				</ns1:AttributeGroup>
+				<ns1:AttributeGroup ID="XSD_ebdd9a5612b9bc015bf23595a94e477e" ManuallySorted="false" ShowInWorkbench="true">
+					<ns1:Name>PersonType</ns1:Name>
+				</ns1:AttributeGroup>
+				<ns1:AttributeGroup ID="XSD_40d431032961479b0d317aaa7a8ee460" ManuallySorted="false" ShowInWorkbench="true">
+					<ns1:Name>ContactType</ns1:Name>
+				</ns1:AttributeGroup>
 			</ns1:AttributeGroup>
 		</ns1:AttributeGroup>
 	</ns1:AttributeGroupList>
@@ -154,114 +167,68 @@
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_087bdf698d99b53f198d1087766077c3"/>
 			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
 			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5383e8ad49ac9991a32df960dc5812bb" MultiValued="false" ProductMode="Property">
 			<ns1:Name>name</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_087bdf698d99b53f198d1087766077c3"/>
 			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
 			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5383e8ad49ac9991a32df960dc5812bb" MultiValued="false" ProductMode="Property">
 			<ns1:Name>name</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5acabc2848c2b4a1a67223420f4162b0" MultiValued="false" ProductMode="Property">
 			<ns1:Name>email</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5291c4292a5bf459c39dd5fa115b90c9" MultiValued="false" ProductMode="Property">
 			<ns1:Name>phone</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_36bc00a26f2c770ceb5dca9eb7856340" MultiValued="false" ProductMode="Property">
 			<ns1:Name>when</ns1:Name>
 			<ns1:Validation BaseType="isodatetime"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_693f42e19a54bb8d84617c96f08bbd05" MultiValued="false" ProductMode="Property">
 			<ns1:Name>role</ns1:Name>
 			<ns1:ListOfValueLink ListOfValueID="XSD_f0d3244a1d1dce75ceebfb5d313fd57d"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
 		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:AttributeGroupLink AttributeGroupID="XSD_40d431032961479b0d317aaa7a8ee460"/>
 			<ns1:UserTypeLink UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e"/>
 			<ns1:UserTypeLink UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e"/>
 		</ns1:Attribute>
 	</ns1:AttributeList>
 	<ns1:Products>
-		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2">
-			<ns1:Product ID="XSD_5d4cc4041e9f707aa0a2414956d506b1" UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c">
-				<ns1:Name>people</ns1:Name>
-				<ns1:Product ID="XSD_260df53d75de0ef41e9663049502228d" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
-					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_3546bdf758aa4bdee8ad8eaeec36fc14" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
-						<ns1:Name>person</ns1:Name>
-						<ns1:Values>
-							<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>
-							<ns1:Value AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0">dave@stibosystems.com</ns1:Value>
-							<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">David Edson</ns1:Value>
-							<ns1:Value AttributeID="XSD_5291c4292a5bf459c39dd5fa115b90c9">+614 0868 0808</ns1:Value>
-							<ns1:Value AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05">Solution Architect</ns1:Value>
-							<ns1:Value AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340">2020-10-18 09:00:00</ns1:Value>
-						</ns1:Values>
-					</ns1:Product>
-					<ns1:Values>
-						<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">STIBO</ns1:Value>
-						<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">Stibo Systems</ns1:Value>
-					</ns1:Values>
-				</ns1:Product>
-				<ns1:Product ID="XSD_6548471b5c875cbf13855c4f01583e82" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
-					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_afed8c2bec62741baec62d16e5b58151" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
-						<ns1:Name>person</ns1:Name>
-						<ns1:Product ID="XSD_23b13eeb1897e06bd43c0a158d0baf21" UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e">
-							<ns1:Name>contact</ns1:Name>
-							<ns1:Values>
-								<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>
-							</ns1:Values>
-						</ns1:Product>
-						<ns1:Values>
-							<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">BM</ns1:Value>
-							<ns1:Value AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0">bem@foryouandyourcustomers.com</ns1:Value>
-							<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">Bernhard Mueller</ns1:Value>
-							<ns1:Value AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05">General Manager</ns1:Value>
-							<ns1:Value AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340">2020-10-18 09:00:00</ns1:Value>
-						</ns1:Values>
-					</ns1:Product>
-					<ns1:Values>
-						<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">FYAYC</ns1:Value>
-						<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">for you and your customers</ns1:Value>
-					</ns1:Values>
-				</ns1:Product>
-				<ns1:Values/>
-			</ns1:Product>
-		</ns1:Product>
+		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2"/>
 	</ns1:Products>
 </ns1:STEP-ProductInformation>

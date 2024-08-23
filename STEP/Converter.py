@@ -4,6 +4,10 @@
 
 import os, sys, re, json, logging, hashlib, traceback
 
+import collections
+collections.MutableSequence = collections.abc.MutableSequence
+collections.Iterable = collections.abc.Iterable
+
 from uuid import uuid4 as uuid
 from datetime import datetime
 from dateutil import tz

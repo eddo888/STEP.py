@@ -679,7 +679,7 @@ class Converter(object):
 			#if aname not in self.step[ns][ename]['Attributes'].keys(): return
 
 			key = f'{ename}@{aname}'
-			if key not in self.elements[tns].keys():return
+			if key not in self.elements[tns].keys(): return
 
 			attribute = self.elements[tns][key]
 			print(f'\t{indent}@{aname} = {value}')
@@ -720,18 +720,13 @@ class Converter(object):
 			
 		def walk(node, parent=None, indent='', path=''):
 
-			pcr = None
 			name = node.name
 			ns = str(node.ns().content)
 			print(f'{indent}{ns}:{name}')# -> {path}')
 
 			id = self.__hash(path)
 			
-			#print(self.step[ns].keys())
-
 			usertype = self.elements[tns][name]
-
-			#pcr = self.step[ns][name]['ProductCrossReference']
 
 			product = ProductType(
 				ID = f'{self.prefix}_{id}', #self.__uuid(ns, name, 'Product'),
@@ -748,28 +743,12 @@ class Converter(object):
 			)
 			parent.append(product)
 
-			if pcr and parent:
-				parent.ProductCrossReference.append(
-					ProductCrossReferenceType(
-						ProductID = product.ID,
-						Type=pcr.ID
-					)
-				)
-					
-			self.__store(ns, name, 'Product', product)
-
 			if node.properties:
 				for p in node.properties:
 					if p.type == 'attribute':
 						aname = p.name
 						value = str(p.content)
 						valueAdd(ns, node.name, aname, value, product, indent)
-
-			#for child in node.children:
-			#	if child.type == 'element':
-			#		name = child.name
-			#		value = child.content
-			#		valueAdd(ns, name, value, product, step, indent)
 
 			if not node.children: return
 
@@ -779,7 +758,7 @@ class Converter(object):
 					if child.name in self.elements[tns].keys():
 						walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
 					
-			return product
+			return
 
 		walk(root, parent=root_home, path=salt)
 		return
@@ -799,10 +778,7 @@ class Converter(object):
 			if xml:
 				xf = os.path.expanduser(xml)
 				if os.path.isfile(xf):
-					try:
-						self.__products(xsd, xf) # todo: update and test
-					except:
-						sys.stderr.write(traceback.format_exc())
+					self.__products(xsd, xf) # todo: update and test
 				
 		if self.verbose:
 			print('step: ',prettyPrint(self.step))

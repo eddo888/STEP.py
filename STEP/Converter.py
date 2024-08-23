@@ -68,7 +68,7 @@ class Converter(object):
 		
 		self.ids = dict() # { type: { id: step}}
 
-		self.xpaths = dict() # { xpath : id }
+		self.elements = dict() # { ns : { name : tipe }}
 
 		#list of XSD files that have been processed
 		self.xsd = set()
@@ -563,6 +563,9 @@ class Converter(object):
 		'''
 		#anchor the root first
 
+		if tns not in self.elements.keys():
+		   	self.elements[tns] = dict()
+
 		root = self.step['/'][self.root]['UserType']
 
 		for element in getElements(ctx,'/xs:schema/xs:element'):
@@ -578,6 +581,8 @@ class Converter(object):
 		
 			source = self.step[url][etipe]['UserType']
 			source.NamePattern = name
+
+			self.elements[tns][name] = source
 
 			source.UserTypeLink.append(
 				UserTypeLinkType(
@@ -616,6 +621,8 @@ class Converter(object):
 				key = f'{etipe}@{attr}'
 				target = self.step[u][key]['Attribute']
 
+				self.elements[tns][f'{name}@{attr}'] = target
+
 			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complex_type):
 				elem = getAttribute(xse, 'name')
 				t = getAttribute(xse, 'type')
@@ -628,7 +635,8 @@ class Converter(object):
 					u = tns
 					
 				target = self.step[u][t]['UserType']
-		 
+
+				self.elements[tns][elem] = target
 
 		return
 	
@@ -636,6 +644,8 @@ class Converter(object):
 		'''
 		load sample data
 		'''
+
+		#print(self.elements)
 
 		ltz = tz.gettz('AEST')
 		mt = os.stat(xml).st_mtime
@@ -653,7 +663,6 @@ class Converter(object):
 		
 		root = doc.getRootElement()
 		tns = str(root.ns().content)
-		root_type = self.step[tns][root.name]['Elements'][root.name]
 		root_home = self.step['/'][self.root]['Product']
 
 		# seed for id generation path
@@ -669,7 +678,10 @@ class Converter(object):
 
 			#if aname not in self.step[ns][ename]['Attributes'].keys(): return
 
-			attribute = None #self.step[ns][ename]['Attributes'][aname]
+			key = f'{ename}@{aname}'
+			if key not in self.elements[tns].keys():return
+
+			attribute = self.elements[tns][key]
 			print(f'\t{indent}@{aname} = {value}')
 
 			if attribute.Validation:
@@ -706,7 +718,7 @@ class Converter(object):
 
 			return
 			
-		def walk(node, parent=None, usertype=None, indent='', path=''):
+		def walk(node, parent=None, indent='', path=''):
 
 			pcr = None
 			name = node.name
@@ -717,7 +729,8 @@ class Converter(object):
 			
 			#print(self.step[ns].keys())
 
-			elements = self.step[ns][name]['Elements']
+			usertype = self.elements[tns][name]
+
 			#pcr = self.step[ns][name]['ProductCrossReference']
 
 			product = ProductType(
@@ -763,13 +776,12 @@ class Converter(object):
 			for index, child in enumerate(node.children):
 				if child.type == 'element':
 					#print(indent, child.name, '?', elements)
-					if child.name in elements.keys():
-						child_type = elements[child.name]
-						walk(child, parent=product, usertype=child_type, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
+					if child.name in self.elements[tns].keys():
+						walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
 					
 			return product
 
-		walk(root, parent=root_home, usertype=root_type, path=salt)
+		walk(root, parent=root_home, path=salt)
 		return
 	
 	@args.operation

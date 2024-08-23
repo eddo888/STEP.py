@@ -66,6 +66,8 @@ class Converter(object):
 			}
 		}
 		
+		self.ids = dict() # { type: { id: step}}
+
 		#list of XSD files that have been processed
 		self.xsd = set()
 
@@ -219,6 +221,9 @@ class Converter(object):
 		if tipe not in self.step[ns][name].keys():
 			self.step[ns][name][tipe] = dict()
 		self.step[ns][name][tipe] = value
+		if tipe not in self.ids.keys():
+			self.ids[tipe] = dict()
+		self.ids[tipe][value.ID] = value
 		
 	def __groups(self, nsp, tns):
 		# setup main namespaces and groups
@@ -539,7 +544,7 @@ class Converter(object):
 						)
 					]
 				)
-				key = f'{name}@{attr}'
+				key = f'{name}@{attr}'				
 				self.__store(u, key, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				
@@ -569,23 +574,36 @@ class Converter(object):
 			tipe = getAttribute(element, 'type')
 			
 			if ':' in tipe:
-				(p,t) = tuple(tipe.split(':'))
+				(p,etipe) = tuple(tipe.split(':'))
 				url = nsp[p]
 			else:
-				t = tipe
+				etipe = tipe
 				url = tns
 
-			source = self.step[url][t]['UserType']
+			source = self.step[url][etipe]['UserType']
 			self.__store(url, name, '/', source)
 	
 			if 'Elements' not in self.step[url][name].keys():
 				self.step[url][name]['Elements'] = dict()
-			self.step[url][name]['Elements']
 
-			complex_type = getElement(ctx, f'//xs:complexType[@name="{t}"]')
+			if 'Attributes' not in self.step[url][name].keys():
+				self.step[url][name]['Attributes'] = dict()
+
+			complex_type = getElement(ctx, f'//xs:complexType[@name="{etipe}"]')
 			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
 			#if not child:
 			#	child = complexType
+
+			for xsa in getElements(ctx, 'xs:attribute', complex_type):
+				attr = getAttribute(xsa, 'name')
+				tipe = getAttribute(xsa, 'type')
+				if not tipe: continue
+				(p,atipe) = tuple(tipe.split(':'))
+				u = nsp[p]
+
+				key = f'{etipe}@{attr}'
+				target = self.step[u][key]['Attribute']
+				self.step[url][name]['Attributes'][attr] = target
 
 			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complex_type):
 				elem = getAttribute(xse, 'name')
@@ -639,39 +657,49 @@ class Converter(object):
 		sdf = '%d-%b-%Y'
 		sdtf = '%Y-%m-%d %H:%M:%S'
 		
-		def valueAdd(ns, tipe, name, value, product, usertype, indent):
+		def valueAdd(ns, ename, aname, value, product, indent):
 
-			for a in usertype.AttributeLink:
+			if aname not in self.step[ns][ename]['Attributes'].keys(): return
 
-				attribute = self.step[ns][name]['Attribute']
-				if attribute.Name[0] == f'@{name}':
-					print('  %s%s = %s'%(indent, name, value))
+			attribute = self.step[ns][ename]['Attributes'][aname]
+			print(f'\t{indent}@{aname} = {value}')
 
-					if attribute.Validation:
-						if attribute.Validation.BaseType == 'date':
-							dt = datetime.strptime(value,xdf)
-							value = dt.strftime(sdf)
-						if attribute.Validation.BaseType == 'isodatetime':
-							dt = datetime.strptime(value,xdtf)
-							value = dt.strftime(sdtf)
-						product.Values[0].Value.append(
-							ValueType(
-								value,
-								AttributeID = attribute.ID
-							)
+			if attribute.Validation:
+				if attribute.Validation.BaseType == 'date':
+					dt = datetime.strptime(value,xdf)
+					value = dt.strftime(sdf)
+				if attribute.Validation.BaseType == 'isodatetime':
+					dt = datetime.strptime(value,xdtf)
+					value = dt.strftime(sdtf)
+				product.Values[0].Value.append(
+					ValueType(
+						value,
+						AttributeID = attribute.ID
+					)
+				)
+
+			if attribute.ListOfValueLink:
+				lov_id = attribute.ListOfValueLink.ListOfValueID
+				lov = self.ids['LOV'][lov_id]
+				if lov.UseValueID == 'true':
+					product.Values[0].Value.append(
+						ValueType(
+							ID = value,
+							AttributeID = attribute.ID
 						)
-
-					if attribute.ListOfValueLink:
-						product.Values[0].Value.append(
-							ValueType(
-								ID = value,
-								AttributeID = attribute.ID
-							)
+					)
+				else:
+					product.Values[0].Value.append(
+						ValueType(
+							value,
+							AttributeID = attribute.ID
 						)
+					)
 
 			return
 			
 		def walk(node, parent=None, usertype=None, indent='', path=''):
+
 			pcr = None
 			name = node.name
 			ns = str(node.ns().content)
@@ -712,8 +740,7 @@ class Converter(object):
 					if p.type == 'attribute':
 						aname = p.name
 						value = str(p.content)
-						print(f'\t{indent}@{aname}={value}')
-						#valueAdd(ns, aname, value, product, usertype, indent)
+						valueAdd(ns, node.name, aname, value, product, indent)
 
 			#for child in node.children:
 			#	if child.type == 'element':

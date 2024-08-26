@@ -534,6 +534,21 @@ class Products(STEP):
 
 
 	#________________________________________________________________________________________________
+	@args.operation(help='approve delete product by id')
+	@args.parameter(name='id', help='the ID of product')
+	def approve_delete(self, id):
+		result = super().post('%s/%s/approve-delete'%(self.base, id))
+		return result
+
+	#________________________________________________________________________________________________
+	@args.operation(help='purge product by id')
+	@args.parameter(name='id', help='the ID of product')
+	def purge(self, id):
+		result = super().post('%s/%s/purge'%(self.base, id))
+		return result
+
+
+	#________________________________________________________________________________________________
 	@args.operation(help='get children of product by id')
 	@args.parameter(name='id', help='the ID of product')
 	def children(self, id):

@@ -45,7 +45,12 @@ class Converter(object):
 	@args.property(short='p', help='prefix for STEP ID', default='ID')
 	def prefix(self): return
 	
-	def __init__(self):
+	def __init__(self, context=None, workspace=None, root=None, prefix=None):
+		if context: self.context = context
+		if workspace: self.workspace = workspace
+		if root: self.root = root
+		if prefix: self.prefix = prefix
+		
 		self.cname = '.cache.json'
 		try:
 			with open(self.cname,'r') as input:

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ns1:STEP-ProductInformation
 	ContextID="Context1"
-	ExportTime="2024-08-23 16:34:36.385174"
+	ExportTime="2024-08-26 12:23:17.709404"
 	SingleUpdateMode="Y"
 	UseContextLocale="false"
 	WorkspaceID="Main"
@@ -230,11 +230,11 @@
 	</ns1:AttributeList>
 	<ns1:Products>
 		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2">
-			<ns1:Product ID="XSD_3358c29ed8f0b1bb4b91d0e6a54062a5" UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c">
+			<ns1:Product ID="XSD_c25516272eb32df61869ee5f11de5ed3" UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c">
 				<ns1:Name>people</ns1:Name>
-				<ns1:Product ID="XSD_c0be2782c0668f4209f96b921878de20" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="XSD_7c74a300df91b7e9fcae15709490cc5d" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_800d25b5862b1a89543dd0f14a9940bb" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="XSD_19425ce4d7661db597a3f19a3d81e485" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
 						<ns1:Values>
 							<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>
@@ -250,11 +250,11 @@
 						<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">Stibo Systems</ns1:Value>
 					</ns1:Values>
 				</ns1:Product>
-				<ns1:Product ID="XSD_b0728c7dc27843d5a0b8127fdffaf972" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="XSD_6bd041159c72c9318b86b6534884fdde" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_a7607becc713dd5b4517a485fa98100d" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="XSD_306814b5c7e661e2610ee4f07f8ed7e8" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
-						<ns1:Product ID="XSD_b725f2f393ac7fe0cf83ee63ed39497b" UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e">
+						<ns1:Product ID="XSD_5fc188ab87813ecd9a19300a1fe0fe27" UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e">
 							<ns1:Name>contact</ns1:Name>
 							<ns1:Values>
 								<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>

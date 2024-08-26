@@ -347,7 +347,6 @@ class Assets(STEP):
 	def purge(self, id):
 		result = super().post('%s/%s/purge'%(self.base, id))
 		return result
-
 	
 
 #====================================================================================================
@@ -918,7 +917,6 @@ class Entities(STEP):
 	def purge(self, id):
 		result = super().post('%s/%s/purge'%(self.base, id))
 		return result
-
 
 	
 #====================================================================================================

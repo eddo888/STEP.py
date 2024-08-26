@@ -287,12 +287,67 @@ class Assets(STEP):
 
 
 	#________________________________________________________________________________________________
+	@args.operation(help='create or repalce an asset')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='parents', short='p', nargs='*')
+	@args.parameter(name='tipe', short='t')
+	@args.parameter(name='overwrite', short='o', flag=True)
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create_or_replace(self, id, parents=[], tipe=None, name=None, overwrite=False, values=[]):
+		body=dict(
+			values=dict()
+		)
+		if len(parents) > 0: body['classifications'] = parents
+		if tipe: body['objectType'] = tipe
+		if name: body['name'] = name
+		
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"allow-overwrite": overwrite,	
+		}
+
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
+		return json.loads(result)
+
+
+	#________________________________________________________________________________________________
 	@args.operation
 	def update(self, id, file):
 		with open(file) as input:
 			body = input.read()
 			headers = { 'Content-Type' : 'application/octet-stream' }
 			return super().put('%s/%s/content'%(self.base, id), body=body, headers=headers)
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='delete asset by id')
+	@args.parameter(name='id', help='the ID of asset')
+	def delete(self, id):
+		result = super().delete('%s/%s'%(self.base, id))
+		return result
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='approve delete asset by id')
+	@args.parameter(name='id', help='the ID of asset')
+	def approve_delete(self, id):
+		result = super().post('%s/%s/approve-delete'%(self.base, id))
+		return result
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='purge asset by id')
+	@args.parameter(name='id', help='the ID of asset')
+	def purge(self, id):
+		result = super().post('%s/%s/purge'%(self.base, id))
+		return result
+
 	
 
 #====================================================================================================
@@ -526,6 +581,36 @@ class Products(STEP):
 
 			
 	#________________________________________________________________________________________________
+	@args.operation(help='create or repalce a product')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='parent', short='p')
+	@args.parameter(name='tipe', short='t')
+	@args.parameter(name='overwrite', short='o', flag=True)
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create_or_replace(self, id, parent=None, tipe=None, name=None, overwrite=False, values=[]):
+		body=dict(
+			values=dict()
+		)
+		if parent: body['parent'] = parent
+		if tipe: body['objectType'] = tipe
+		if name: body['name'] = name
+
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"allow-overwrite": overwrite,	
+		}
+		
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
+		return json.loads(result)
+
+			
+	#________________________________________________________________________________________________
 	@args.operation(help='delete product by id')
 	@args.parameter(name='id', help='the ID of product')
 	def delete(self, id):
@@ -709,6 +794,35 @@ class Entities(STEP):
 		result = super().post('%s'%self.base, body=json.dumps(body))
 		return json.loads(result)
 
+	#________________________________________________________________________________________________
+	@args.operation(help='create or repalce an entity')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='parent', short='p')
+	@args.parameter(name='tipe', short='t')
+	@args.parameter(name='overwrite', short='o', flag=True)
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create_or_replace(self, id, parent=None, tipe=None, name=None, overwrite=False, values=[]):
+		body=dict(
+			values=dict()
+		)
+		if parent: body['parent'] = parent
+		if tipe: body['objectType'] = tipe
+		if name: body['name'] = name
+		
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"allow-overwrite": overwrite,	
+		}
+
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
+		return json.loads(result)
+
 			
 	#________________________________________________________________________________________________
 	@args.operation(help='approve entity by id')
@@ -790,6 +904,22 @@ class Entities(STEP):
 		result = super().delete('%s/%s'%(self.base, id))
 		return result
 
+
+	#________________________________________________________________________________________________
+	@args.operation(help='approve delete entity by id')
+	@args.parameter(name='id', help='the ID of entity')
+	def approve_delete(self, id):
+		result = super().post('%s/%s/approve-delete'%(self.base, id))
+		return result
+
+	#________________________________________________________________________________________________
+	@args.operation(help='purge entity by id')
+	@args.parameter(name='id', help='the ID of entity')
+	def purge(self, id):
+		result = super().post('%s/%s/purge'%(self.base, id))
+		return result
+
+
 	
 #====================================================================================================
 @args.command(name='classifications')
@@ -847,6 +977,36 @@ class Classifications(STEP):
 		
 
 	#________________________________________________________________________________________________
+	@args.operation(help='create or repalce a classification')
+	@args.parameter(name='name', short='n')
+	@args.parameter(name='parent', short='p')
+	@args.parameter(name='tipe', short='t')
+	@args.parameter(name='overwrite', short='o', flag=True)
+	@args.parameter(name='values', short='a', nargs='*', metavar='attr=value')
+	def create_or_replace(self, id, parent=None, tipe=None, name=None, overwrite=False, values=[]):
+		body=dict(
+			values=dict()
+		)
+		if parent: body['parent'] = parent
+		if tipe: body['objectType'] = tipe
+		if name: body['name'] = name
+		
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"allow-overwrite": overwrite,	
+		}
+
+		for nvp in values:
+			(attr,value) = tuple(nvp.split('='))
+			body['values'][attr] = dict(value=dict(value=value))
+		if self.verbose:
+			json.dump(body, sys.stderr, indent=4)
+		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
+		return json.loads(result)
+
+			
+	#________________________________________________________________________________________________
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
 	def references(self, parent_id, reference_id):
@@ -896,6 +1056,28 @@ class Classifications(STEP):
 			self.base, id, attributeID), body=json.dumps(payload), headers=headers
 		)
 		return json.loads(result)
+
+	#________________________________________________________________________________________________
+	@args.operation(help='delete classification by id')
+	@args.parameter(name='id', help='the ID of classification')
+	def delete(self, id):
+		result = super().delete('%s/%s'%(self.base, id))
+		return result
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='approve delete classification by id')
+	@args.parameter(name='id', help='the ID of classification')
+	def approve_delete(self, id):
+		result = super().post('%s/%s/approve-delete'%(self.base, id))
+		return result
+
+	#________________________________________________________________________________________________
+	@args.operation(help='purge classification by id')
+	@args.parameter(name='id', help='the ID of classification')
+	def purge(self, id):
+		result = super().post('%s/%s/purge'%(self.base, id))
+		return result
 
 
 #====================================================================================================

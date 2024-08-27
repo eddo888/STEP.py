@@ -1183,9 +1183,11 @@ class Exports(STEP):
 		if use_context:
 			params['useRequestContextWorkspace'] = json.dumps(use_context)
 		body = {
-			'stepUrls': urls,
 			'processDescription': process,
 		}
+		if len(urls) > 0:
+			body['stepUrls'] = urls
+
 		headers = { 'Content-Type' : 'application/json' }
 		result = super().post('%s/%s'%(self.base, id), body=json.dumps(body), headers=headers, params=params)
 		return json.loads(result)

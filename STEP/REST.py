@@ -455,55 +455,6 @@ class Processes(STEP):
 
 	
 #====================================================================================================
-@args.command(name='instances')
-class Instances(STEP):
-	'''
-	background processes instances running on STEP
-	'''
-	base = 'bgpinstance'
-
-	#________________________________________________________________________________________________
-	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
-		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
-
-	#________________________________________________________________________________________________
-	@args.operation
-	def list(self):
-		'''
-		return a list of instances
-		'''
-		return super().get(self.base)
-	
-
-	#________________________________________________________________________________________________
-	@args.operation
-	def report(self, id):
-		'''
-		report on the process id
-		'''
-		return super().get('%s/%s/executionreport'%(self.base,id))
-
-
-	#________________________________________________________________________________________________
-	@args.operation
-	def status(self, id):
-		'''
-		get the states of the process id
-		'''
-		return super().get('%s/%s/status'%(self.base,id))
-
-
-	#________________________________________________________________________________________________
-	@args.operation
-	def attachment(self, id, attchmentID):
-		'''
-		get the atachment by attachmentID for the process id
-		'''
-		return super().get('%s/%s/attachment/%s'%(self.base,id,attachmentID))
-
-
-#====================================================================================================
 @args.command(name='objects')
 class ObjectsByKey(STEP):
 
@@ -1446,4 +1397,64 @@ class Attributes(STEP):
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
 		
+
+#====================================================================================================
+@args.command(name='lovs')
+class ListsOfValues(STEP):
+
+	base = 'list-of-values'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+				
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get LOV definition by id')
+	@args.parameter(name='id', help='the ID LOV')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
+		
+	#________________________________________________________________________________________________
+	@args.operation(help='get LOV definition by id')
+	@args.parameter(name='id', help='the ID LOV')
+	def values(self, id):
+		return super().get('%s/%s/value-entries'%(self.base,id))
+
+
+#====================================================================================================
+@args.command(name='object-types')
+class ObjectTypes(STEP):
+
+	base = 'object-types'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+				
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get object type definition by id')
+	@args.parameter(name='id', help='the ID object type')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
+		
+#====================================================================================================
+@args.command(name='reference-types')
+class ReferenceTypes(STEP):
+
+	base = 'reference-types'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+				
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get reference definition by id')
+	@args.parameter(name='id', help='the ID reference type')
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
+		
+
 

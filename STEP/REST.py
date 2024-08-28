@@ -494,7 +494,7 @@ class Products(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get product by id')
 	@args.parameter(name='id', help='the ID of product')
-	@args.parameter(name='inheriteddata', help='Endpoint returns inherited data when parameter is supplied with the value true')
+	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
 	@args.parameter(name='save', short='s', flag=True, help='save to local /restapi')
 	def get(self, id, inheriteddata=False, save=False):
 
@@ -728,7 +728,7 @@ class Entities(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get entity by id')
 	@args.parameter(name='id', help='the ID of entity')
-	@args.parameter(name='inheriteddata', help='Endpoint returns inherited data when parameter is supplied with the value true')
+	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
 	def get(self, id, inheriteddata=False):
 
 		params={

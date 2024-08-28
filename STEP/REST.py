@@ -101,10 +101,11 @@ class STEP(object):
 		'''
 		url = '%s/%s/%s'%(self.hostname, self.path, path)
 		auth= (self.username, self.password)
-		params={
-			"context" : self.context,
-			"workspace" : self.workspace
-		}
+		if not params:
+			params={
+				"context" : self.context,
+				"workspace" : self.workspace
+			}
 		if self.verbose:
 			json.dump(dict(url=url, headers=self.headers, params=params), sys.stderr, indent=4)
 		result = None

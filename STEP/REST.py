@@ -494,9 +494,16 @@ class Products(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get product by id')
 	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='inheriteddata', help='Endpoint returns inherited data when parameter is supplied with the value true')
 	@args.parameter(name='save', short='s', flag=True, help='save to local /restapi')
-	def get(self, id, save=False):
-		result = super().get('%s/%s'%(self.base, id))
+	def get(self, id, inheriteddata=False, save=False):
+
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"includeInheritedData": inheriteddata
+		}
+		result = super().get('%s/%s'%(self.base, id), params=params)
 		if save:
 			with open('/restapi/products/%s'%id,'w') as output:
 				output.write(result)
@@ -721,8 +728,15 @@ class Entities(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get entity by id')
 	@args.parameter(name='id', help='the ID of entity')
-	def get(self, id):
-		return super().get('%s/%s'%(self.base,id))
+	@args.parameter(name='inheriteddata', help='Endpoint returns inherited data when parameter is supplied with the value true')
+	def get(self, id, inheriteddata=False):
+
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"includeInheritedData": inheriteddata
+		}
+		return super().get('%s/%s'%(self.base,id), params=params)
 
 
 	#________________________________________________________________________________________________
@@ -894,8 +908,15 @@ class Classifications(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get classification by id')
 	@args.parameter(name='id', help='the ID of classification')
-	def get(self, id):
-		return super().get('%s/%s'%(self.base,id))
+	@args.parameter(name='inheriteddata', help='Endpoint returns inherited data when parameter is supplied with the value true')
+	def get(self, id, inheriteddata=False):
+
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		   	"includeInheritedData": inheriteddata
+		}
+		return super().get('%s/%s'%(self.base,id), params=params)
 
 
 	#________________________________________________________________________________________________

@@ -110,9 +110,10 @@ class STEP(object):
 			json.dump(dict(url=url, headers=self.headers, params=params), sys.stderr, indent=4)
 		result = None
 		result = requests.get(url=url, auth=auth, headers=self.headers, params=params, **kwargs)
-		if result.status_code != 200 or self.verbose:
+		if result.status_code != 200:
+			result = None
+		if self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
-			return
 		return result
 
 	

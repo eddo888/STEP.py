@@ -112,13 +112,15 @@ class STEP(object):
 		result = requests.get(url=url, auth=auth, headers=self.headers, params=params, **kwargs)
 		if result.status_code != 200 or self.verbose:
 			sys.stderr.write('%s: %s\n'%(result, result.text))
+			return
 		return result
 
 	
 	#________________________________________________________________________________________________
 	def get(self, path, params=None):
 		result = self.process(path, params, kwargs=dict())
-		return self.export(result.text)
+		if result:
+			return self.export(result.text)
 
 	
 	#________________________________________________________________________________________________

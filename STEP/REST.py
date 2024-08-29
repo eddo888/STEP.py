@@ -119,9 +119,10 @@ class STEP(object):
 	#________________________________________________________________________________________________
 	def get(self, path, params=None):
 		result = self.process(path, params, kwargs=dict())
-		if result:
-			return self.export(result.text)
-
+		if not result:
+			raise Exception('not found')
+		return self.export(result.text)
+	
 	
 	#________________________________________________________________________________________________
 	def put(self, path, body=None, params=None, headers=None):

@@ -623,12 +623,12 @@ class Products(STEP):
 	@args.parameter(name='id', help='the ID of product')
 	@args.parameter(name='referenceID', help='the ID of reference')
 	@args.parameter(name='targetID', help='the ID of target')
-	@args.parameter(name='targetType', short=True, oneof=node_types, help='target type')
+	@args.parameter(name='targetType', short=True, flag=True, oneof=node_types, help='target type', default='P')
 	@args.parameter(name='values', short='m', metavar='attr=value', nargs='*', help='metadata attribute on reference')
 	@args.parameter(name='asid', short='i', flag=True, help='reference valus as lov id')
 	@args.parameter(name='overwrite', short='w', flag=True, help='allow overwrite')
 	@args.parameter(name='remove', short='r', flag=True, help='allow overwrite')
-	def reference(self, id, referenceID, targetID, targetType='product', values=[], asid=False, overwrite=False, remove=False):
+	def reference(self, id, referenceID, targetID, targetType='P', values=[], asid=False, overwrite=False, remove=False):
 		headers={
 			"accept": "application/json",
 			"Content-Type": "application/json",

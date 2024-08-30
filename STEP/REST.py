@@ -617,6 +617,57 @@ class Products(STEP):
 	def references(self, id, referenceID):
 		return super().get('%s/%s/references/%s'%(self.base, id, referenceID))
 	
+	#________________________________________________________________________________________________
+	@args.operation(help='replace references of product by id')
+	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='referenceID', help='the ID of reference')
+	@args.parameter(name='targetID', help='the ID of target')
+	@args.parameter(name='targetType', short=True, flag=True, oneof=node_types, help='target type', default='P')
+	@args.parameter(name='values', short='m', metavar='attr=value', nargs='*', help='metadata attribute on reference')
+	@args.parameter(name='asid', short='i', flag=True, help='reference valus as lov id')
+	@args.parameter(name='overwrite', short='w', flag=True, help='allow overwrite')
+	@args.parameter(name='remove', short='r', flag=True, help='allow overwrite')
+	def replace_references(self, id, referenceID, targetID, targetType='P', values=[], asid=False, overwrite=False, remove=False):
+		headers={
+			"accept": "application/json",
+			"Content-Type": "application/json",
+		}
+		payload={
+			"target": targetID,
+			"targetType": node_types[targetType],
+			"values": {
+			}
+		}
+		for nvp in values:
+			_name, _value = nvp.split('=')
+			payload['values'][_name] = { 
+				"calculated": False,
+				"contextLocal": True,
+				"value": {
+					"value": _value if not asid else None,
+					"valueId": _value if asid else None,
+					"unit": None
+				}
+			}
+
+		params = {
+			"context" : self.context,
+			"workspace": self.workspace,
+		}
+
+		if remove:
+			method = super().delete
+		else:
+			params["allow-overwrite"] = overwrite
+			method = super().put
+
+		result = method('%s/%s/references/%s/%s'%(
+			self.base, id, referenceID, targetID), body=json.dumps(payload), params=params, headers=headers
+		)
+		try:
+			return json.loads(result)
+		except:
+			return result
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get references of product by id')

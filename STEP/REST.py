@@ -733,15 +733,8 @@ class Entities(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get entity by id')
 	@args.parameter(name='id', help='the ID of entity')
-	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
-	def get(self, id, inheriteddata=False):
-
-		params={
-			"context" : self.context,
-			"workspace" : self.workspace,
-		   	"includeInheritedData": inheriteddata
-		}
-		return super().get('%s/%s'%(self.base,id), params=params)
+	def get(self, id):
+		return super().get('%s/%s'%(self.base,id))
 
 
 	#________________________________________________________________________________________________

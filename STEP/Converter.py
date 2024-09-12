@@ -171,7 +171,7 @@ class Converter(object):
 			'xs:long'               : 'integer',
 			'xs:gDay'               : 'integer',
 			'xs:decimal'            : 'number',
-			'xs:float'              : 'fraction',
+			'xs:float'              : 'number',
 			'xs:boolean'            : 'text', #'condition',
 		}
 

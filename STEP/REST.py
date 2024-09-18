@@ -1194,8 +1194,102 @@ class Endpoints(STEP):
 	@args.operation(help='invoke an outbound endpoint')
 	def invoke_outbound(self, id):
 		return super().post(f'outbound-integration-endponits/{id}/invoke')
-	
 
+#====================================================================================================
+@args.command(name='iieps')
+class IIEPs(STEP):
+
+	base = 'inbound-integration-endpoints'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get a list of inbound endpoints')
+	def list(self):
+		return super().get('%s'%self.base)
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the status of an inbound endpoint')
+	def status(self, id):
+		return super().get(f"{self.base}/{id}/status")
+
+	#________________________________________________________________________________________________
+	@args.operation(help='enable an endpoint')
+	def enable(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/enable")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the enable operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='disable an endpoint')
+	def disable(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/disable")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the enable operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the execution report of an inbound endpoint')
+	def execution_report(self, id):
+		return super().get(f"{self.base}/{id}/execution-report")
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the background processes of an inbound endpoint')
+	def worker_processes(self, id: str) -> dict:
+		try:
+			response = super().get(f"{self.base}/{id}/worker-processes")
+			return response
+		except Exception as e:
+			# Handle the exception or log the error
+			print(f"Error occurred: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='invoke an endpoint')
+	def invoke(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/invoke")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the invoke operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='invoke an endpoint')
+	def upload_invoke(self, id: str, file_path: str, file_name: str = None) -> dict:
+		try:
+			url = f"{self.base}/{id}/upload-and-invoke"
+			headers = {'Content-Type': 'application/octet-stream'}
+			params = {
+				"context" : self.context,
+				"workspace": self.workspace,
+			}
+			if file_name:
+				params['fileName'] = file_name
+
+			with open(file_path, 'rb') as file:
+				body = file.read()
+
+			response = super().post(url, body=body, params=params, headers=headers)	
+			return response
+		except FileNotFoundError:
+			logger.error(f"File not found: {file_path}")
+			return {}
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the upload and invoke operation: {e}")
+			return {}
+		
 #====================================================================================================
 @args.command(name='imports')
 class Imports(STEP):

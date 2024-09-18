@@ -1,8 +1,11 @@
 import os, sys, json, requests
 import urllib.parse
+import logging
 
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
+from gql.transport.requests import log as requests_logger
+requests_logger.setLevel(logging.WARNING)
 from graphql.language import print_ast
 from copy import copy
 from Argumental.Argue import Argue

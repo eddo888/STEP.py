@@ -3,6 +3,7 @@
 # PYTHON_ARGCOMPLETE_OK
 
 import os, sys, re, json, requests, xmltodict, shutil, base64, time
+import logging
 
 from copy import copy
 from datetime import datetime
@@ -13,6 +14,7 @@ from Perdy.parser import doParse, printXML
 from Perdy.pretty import prettyPrint
 from Argumental.Argue import Argue
 
+logger = logging.getLogger(__name__)
 args = Argue()
 
 dts = '%Y-%m-%dT%H:%M:%S'

@@ -1,76 +1,14 @@
-import os, sys, json, requests
-import urllib.parse
+import sys, json
 import logging
-
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 from gql.transport.requests import log as requests_logger
-requests_logger.setLevel(logging.WARNING)
-from graphql.language import print_ast
 from copy import copy
 from Argumental.Argue import Argue
 
 args = Argue()
 
-#====================================================================================================
-@args.command(name='graphqlbase')
-class GraphQLBase:
-	'''
-	base class to store the common properties and operations
-	'''
-	
-	@args.property(short='H', default='http://host')
-	def hostname(self): return
-
-	@args.property(short='U', default='stepsys')
-	def username(self): return
-
-	@args.property(short='P')
-	def password(self): return
-
-	@args.property(short='v', flag=True)
-	def verbose(self): return
-
-	#________________________________________________________________________________________________
-	def __init__(self, verbose=None, silent=True, hostname=None, username=None):
-		if verbose: self.verbose = verbose
-		if hostname: self.hostname = hostname
-		if username: self.username = username
-		self.silent = silent
-		tipe = 'application/json'
-		self.headers={
-			# 'Accept': tipe,
-			#'Content-Type': tipe
-		}
-		self.path = 'graphqlv2'
-		
-	#________________________________________________________________________________________________
-	def post(self, path, body=None, params=None, headers=None):
-		url = '%s/%s/%s'%(self.hostname, self.path, path)
-		auth= (self.username, self.password)
-		if not headers:
-			headers = copy(self.headers)
-			headers['Content-Type'] = headers['Accept']
-		if self.verbose:
-			json.dump(dict(url=url, headers=headers, params=params, data=body), sys.stderr, indent=4)
-		result = None
-		with requests.post(url=url, auth=auth, headers=headers, params=params, data=body) as result:
-			if result.status_code not in [200,201] or self.verbose:
-				sys.stderr.write('%s: %s\n'%(result, result.text))
-		return result.text
-	
-	#________________________________________________________________________________________________
-	def get_token(self):
-		path='%s'%('auth')
-		body = {
-			"userId": self.username,
-			"password" : self.password
-		}
-		encoded_body = urllib.parse.urlencode(body)
-		headers = {
-			'content-type': 'application/x-www-form-urlencoded',
-		}
-		return self.post(path=path,body=encoded_body, headers=headers)
+requests_logger.setLevel(logging.WARNING)
 
 #====================================================================================================
 @args.command(name='graphql')
@@ -91,36 +29,34 @@ class GraphQL:
     @args.property(short='v', flag=True)
     def verbose(self): return
 
-	#________________________________________________________________________________________________
+    #________________________________________________________________________________________________
     def __init__(self, verbose=None, hostname=None, context=None, workspace=None):
-        # Set up the transport and client
         if verbose: self.verbose = verbose
         if hostname: self.hostname = hostname
-        if context: self.context=context
+        if context: self.context = context
         if workspace: self.workspace = workspace
         self.use_json = True
-		
-        self.headers={
-		}
-		
+
+        self.headers = {}
         self.path = 'graphqlv2/graphql'
 
+	#________________________________________________________________________________________________
     def execute(self, query, params):
         url = '%s/%s'%(self.hostname, self.path)
         token = self.token
-		
+
         headers = copy(self.headers)
         headers['Authorization'] = f"Bearer {token}"
-			
+
         transport = RequestsHTTPTransport(
             url=url,
             headers=headers,
             use_json=self.use_json,
         )
-		
+
         if self.verbose:
             print(json.dumps({'url': url, 'headers': headers, 'params': params}, indent=4), file=sys.stderr)
-        
+
         client = Client(transport=transport, fetch_schema_from_transport=True)
         return client.execute(query, variable_values=params)
 

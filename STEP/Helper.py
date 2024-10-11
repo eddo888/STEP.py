@@ -92,7 +92,6 @@ class Helper:
             ],
             AllowInDesignTemplate='false',
             AllowQuarkTemplate='false',
-            IDPattern = f'{prefix}_[id]',
             IsCategory='true',
             ManuallySorted='false',
             ReferenceTargetLockPolicy='Strict',

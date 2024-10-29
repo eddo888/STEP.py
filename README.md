@@ -22,6 +22,7 @@ positional arguments:
     entities
     classifications
     endpoints
+    iieps
     imports             MIME type imports
     exports             MIME type exports
     workflow

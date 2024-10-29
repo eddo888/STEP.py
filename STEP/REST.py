@@ -249,10 +249,20 @@ class Assets(STEP):
 
 	#________________________________________________________________________________________________
 	@args.operation
-	def get(self, id):
+	@args.parameter(name='id', help='the ID of asset')
+	@args.parameter(name='keyid', flag=True, help='the id of the key')
+	def get(self, id, keyid=False):
 		'''
 		get the asset by ID
 		'''
+  
+		params={
+			"context" : self.context,
+			"workspace" : self.workspace,
+		}
+		if keyid:
+			params["keyId"] = keyid
+      
 		return super().get('%s/%s'%(self.base,id))
 
 
@@ -502,18 +512,24 @@ class Products(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get product by id')
 	@args.parameter(name='id', help='the ID of product')
+	@args.parameter(name='keyid', flag=True, help='the id of the key')
 	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
 	@args.parameter(name='save', short='s', flag=True, help='save to local /restapi')
-	def get(self, id, inheriteddata=False, save=False):
+	def get(self, id, keyid=False, inheriteddata=False, save=False):
 
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
 		}
+  
 		if inheriteddata:
-		   	params["includeInheritedData"] = inheriteddata
+			params["includeInheritedData"] = inheriteddata
+  
+		if keyid:
+			params["keyId"] = keyid
 				
 		result = super().get('%s/%s'%(self.base, id), params=params)
+  
 		if save:
 			with open('/restapi/products/%s'%id,'w') as output:
 				output.write(result)
@@ -789,15 +805,18 @@ class Entities(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get entity by id')
 	@args.parameter(name='id', help='the ID of entity')
+	@args.parameter(name='keyid', flag=True, help='the id of the key')
 	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
-	def get(self, id, inheriteddata=False):
+	def get(self, id, keyid=False, inheriteddata=False):
 			
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
 		}
 		if inheriteddata:
-		   	params["includeInheritedData"] = inheriteddata
+			params["includeInheritedData"] = inheriteddata
+		if keyid:
+			params["keyId"] = keyid
 
 		return super().get('%s/%s'%(self.base,id), params=params)
 
@@ -971,8 +990,9 @@ class Classifications(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='get classification by id')
 	@args.parameter(name='id', help='the ID of classification')
+	@args.parameter(name='keyid', flag=True, help='the id of the key')
 	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
-	def get(self, id, inheriteddata=False):
+	def get(self, id, keyid=False, inheriteddata=False):
 
 		params={
 			"context" : self.context,
@@ -980,6 +1000,8 @@ class Classifications(STEP):
 		}
 		if inheriteddata:
 			params["includeInheritedData"] = inheriteddata
+		if keyid:
+			params["keyId"] = keyid
 
 		return super().get('%s/%s'%(self.base,id), params=params)
 

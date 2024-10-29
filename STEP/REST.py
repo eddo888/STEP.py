@@ -191,18 +191,19 @@ class STEP(object):
 
 	
 	#________________________________________________________________________________________________
-	def file(self, path, destination):
-		params={
-			"context" : self.context,
-			"workspace" : self.workspace
-		}
+	def file(self, path, params=None, destination=None):
+		if not params:
+			params={
+				"context" : self.context,
+				"workspace" : self.workspace
+			}
 		self.headers = None
 		result = self.process(path, params=params, kwargs=dict(stream=True))
 		if destination:
 			with open(destination, 'wb') as output:
 				result.raw.decode_content = True
 				shutil.copyfileobj(result.raw, output)
-		return
+		return result.content
 
 
 	#________________________________________________________________________________________________

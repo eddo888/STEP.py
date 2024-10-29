@@ -1340,7 +1340,76 @@ class IIEPs(STEP):
 			return {}
 		except Exception as e:
 			# Log the error and return an empty dictionary or handle as needed
-			logger.error(f"An error occurred during the upload and invoke operation: {e}")
+ 
+#====================================================================================================
+@args.command(name='oieps')
+class OIEPs(STEP):
+
+	base = 'outbound-integration-endpoints'
+
+	#________________________________________________________________________________________________
+	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
+		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get a list of outbound endpoints')
+	def list(self):
+		return super().get('%s'%self.base)
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the status of an outbound endpoint')
+	def status(self, id):
+		return super().get(f"{self.base}/{id}/status")
+
+	#________________________________________________________________________________________________
+	@args.operation(help='enable an endpoint')
+	def enable(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/enable")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the enable operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='disable an endpoint')
+	def disable(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/disable")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the enable operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the execution report of an inbound endpoint')
+	def execution_report(self, id):
+		return super().get(f"{self.base}/{id}/execution-report")
+
+	#________________________________________________________________________________________________
+	@args.operation(help='get the background processes of an inbound endpoint')
+	def worker_processes(self, id: str) -> dict:
+		try:
+			response = super().get(f"{self.base}/{id}/worker-processes")
+			return response
+		except Exception as e:
+			# Handle the exception or log the error
+			print(f"Error occurred: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='invoke an endpoint')
+	def invoke(self, id: str) -> dict:
+		try:
+			response = super().post(f"{self.base}/{id}/invoke")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the invoke operation: {e}")
+			return {}
+
 			return {}
 		
 #====================================================================================================

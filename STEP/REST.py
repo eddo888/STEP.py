@@ -307,6 +307,7 @@ class Assets(STEP):
 
 	#________________________________________________________________________________________________
 	@args.operation(help='create or repalce an asset')
+	@args.parameter(name='id', help='the ID of asset')
 	@args.parameter(name='name', short='n')
 	@args.parameter(name='parents', short='p', nargs='*')
 	@args.parameter(name='tipe', short='t')
@@ -337,6 +338,7 @@ class Assets(STEP):
 
 	#________________________________________________________________________________________________
 	@args.operation
+	@args.parameter(name='id', help='the ID of asset')
 	def update(self, id, file):
 		with open(file) as input:
 			body = input.read()

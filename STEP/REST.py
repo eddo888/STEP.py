@@ -1318,28 +1318,91 @@ class IIEPs(STEP):
 			return {}
 
 	#________________________________________________________________________________________________
-	@args.operation(help='invoke an endpoint')
-	def upload_invoke(self, id: str, file_path: str, file_name: str = None) -> dict:
+	@args.operation(help='Invoke an endpoint with either file_path or binary_data')
+	def upload_invoke(self, id: str, file_path: str = None, binary_data: bytes = None, file_name: str = None) -> dict:
 		try:
+			# Ensure only one of file_path or binary_data is provided
+			if (file_path is None and binary_data is None) or (file_path and binary_data):
+				raise ValueError("Exactly one of 'file_path' or 'binary_data' must be provided, not both or neither.")
+
 			url = f"{self.base}/{id}/upload-and-invoke"
 			headers = {'Content-Type': 'application/octet-stream'}
 			params = {
-				"context" : self.context,
+				"context": self.context,
 				"workspace": self.workspace,
 			}
+
+			# Optional file name parameter
 			if file_name:
 				params['fileName'] = file_name
 
-			with open(file_path, 'rb') as file:
-				body = file.read()
+			# If file_path is provided, read the file content
+			if file_path:
+				try:
+					with open(file_path, 'rb') as file:
+						body = file.read()
+				except FileNotFoundError:
+					logger.error(f"File not found: {file_path}")
+					return {}
+			else:
+				# Use the provided binary_data
+				body = binary_data
 
-			response = super().post(url, body=body, params=params, headers=headers)	
+			# Execute the request
+			response = super().post(url, body=body, params=params, headers=headers)
 			return response
-		except FileNotFoundError:
-			logger.error(f"File not found: {file_path}")
+
+		except ValueError as ve:
+			logger.error(f"Input error: {ve}")
 			return {}
 		except Exception as e:
 			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the upload and invoke operation: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
+	@args.operation(help='Invoke an endpoint with either file_path or binary_data')
+	def upload_direct(self, id: str, file_path: str = None, binary_data: bytes = None, file_name: str = None) -> dict:
+		try:
+			# Ensure only one of file_path or binary_data is provided
+			if (file_path is None and binary_data is None) or (file_path and binary_data):
+				raise ValueError("Exactly one of 'file_path' or 'binary_data' must be provided, not both or neither.")
+
+			url = f"{self.base}/{id}/upload-direct"
+			headers = {'Content-Type': 'application/octet-stream'}
+			params = {
+				"context": self.context,
+				"workspace": self.workspace,
+			}
+
+			# Optional file name parameter
+			if file_name:
+				params['fileName'] = file_name
+
+			# If file_path is provided, read the file content
+			if file_path:
+				try:
+					with open(file_path, 'rb') as file:
+						body = file.read()
+				except FileNotFoundError:
+					logger.error(f"File not found: {file_path}")
+					return {}
+			else:
+				# Use the provided binary_data
+				body = binary_data
+
+			# Execute the request
+			response = super().post(url, body=body, params=params, headers=headers)
+			return response.content
+
+		except ValueError as ve:
+			logger.error(f"Input error: {ve}")
+			return {}
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the upload direct operation: {e}")
+			return {}
+
  
 #====================================================================================================
 @args.command(name='oieps')
@@ -1507,22 +1570,58 @@ class Imports(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(name='import')
 	@args.parameter(name='id', help='importConfigurationId')
-	@args.parameter(name='process', short='p', help='process BGP description')
-	def importer(self, id, file, process=None):
-		'''
-		returns the process BGP ID for the import process
-		'''
-		params = {
-			"context" : self.context,
-			"workspace": self.workspace,
-		}
-		if process:
-			params['processDescription'] = process
-		with open(file,'rb') as input:
-			body = input.read()
-			headers = { 'Content-Type' : 'application/octet-stream' }
-			result = super().post('%s/%s'%(self.base, id), body=body, headers=headers, params=params)
+	@args.parameter(name='file_path', help='Path to the file to import (mutually exclusive with binary_data)', required=False)
+	@args.parameter(name='binary_data', help='Binary data to import (mutually exclusive with file_path)', required=False)
+	@args.parameter(name='process', short='p', help='process BGP description', required=False)
+	def importer(self, id: str, file_path: str = None, binary_data: bytes = None, process: str = None) -> dict:
+		"""
+		Returns the process BGP ID for the import process.
+
+		:param id: ID of the import configuration.
+		:param file_path: Path to the file to import.
+		:param binary_data: Binary data to import.
+		:param process: Optional description of the process.
+		:return: The result of the import process.
+		"""
+		try:
+			# Ensure only one of file_path or binary_data is provided
+			if (file_path is None and binary_data is None) or (file_path and binary_data):
+				raise ValueError("Exactly one of 'file_path' or 'binary_data' must be provided, not both or neither.")
+
+			# Set parameters for the import process
+			params = {
+				"context": self.context,
+				"workspace": self.workspace,
+			}
+			if process:
+				params['processDescription'] = process
+
+			# If file_path is provided, read the file content
+			if file_path:
+				try:
+					with open(file_path, 'rb') as input_file:
+						body = input_file.read()
+				except FileNotFoundError:
+					logger.error(f"File not found: {file_path}")
+					return {}
+			else:
+				# Use the provided binary_data
+				body = binary_data
+
+			# Set headers for the request
+			headers = {'Content-Type': 'application/octet-stream'}
+
+			# Execute the request and return the result
+			result = super().post(f"{self.base}/{id}", body=body, headers=headers, params=params)
 			return result
+
+		except ValueError as ve:
+			logger.error(f"Input error: {ve}")
+			return {}
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the import operation: {e}")
+			return {}
 		
 
 #====================================================================================================

@@ -285,6 +285,7 @@ class Assets(STEP):
 		super().file(path=path, destination=output)
 
 
+	#________________________________________________________________________________________________
 	@args.operation
 	@args.parameter(name='parent_id', help='classification parent id')
 	@args.parameter(name='type_id', help='asset user type')
@@ -1224,6 +1225,7 @@ class Endpoints(STEP):
 	def invoke_outbound(self, id):
 		return super().post(f'outbound-integration-endponits/{id}/invoke')
 
+
 #====================================================================================================
 @args.command(name='iieps')
 class IIEPs(STEP):
@@ -1659,6 +1661,3 @@ class ReferenceTypes(STEP):
 	@args.parameter(name='id', help='the ID reference type')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
-
-

@@ -272,17 +272,37 @@ class Assets(STEP):
 	def approve(self, id):
 		return super().post('%s/%s/approve'%(self.base,id))
 
+	#________________________________________________________________________________________________
+	@args.operation
+	@args.parameter(name='id', help='the ID of asset')
+	def content(self, id, conversion_configuration_id = None):
+		'''
+		get the asset as a
+		'''
+  
+		params={
+					"context" : self.context,
+					"workspace" : self.workspace
+				}
+  
+		if conversion_configuration_id:
+			params['conversion-configuration-id'] = conversion_configuration_id
+  
+  
+		path='%s/%s/content'%(self.base, id)
+		return super().file(path=path, params=params)
 
 	#________________________________________________________________________________________________
 	@args.operation
+	@args.parameter(name='id', help='the ID of asset')
 	@args.parameter(name='output', short='o', help='where to store the content, defautls to stdout')
-	def content(self, id, output=None):
+	def download_content(self, id, output=None):
 		'''
 		downlaod the asset to a local directory
 		'''
 		path='%s/%s/content'%(self.base, id)
-		name='/%s/%s/%s/content'%(self.path, self.base, id)
-		super().file(path=path, destination=output)
+		# name='/%s/%s/%s/content'%(self.path, self.base, id)
+		result = super().get(path=path)
 
 
 	#________________________________________________________________________________________________

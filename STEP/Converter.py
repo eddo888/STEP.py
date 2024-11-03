@@ -347,19 +347,28 @@ class Converter(object):
 
 		self.__groups(nsp, tns)
 					
-
+		
 		for simpleType in getElements(ctx,'/xs:schema/xs:simpleType'):
 			name = getAttribute(simpleType, 'name')
-			tipe = getAttribute(simpleType, 'type')
 			desc = getElementText(ctx, 'xs:annotation/xs:documentation', simpleType)
 			u = nsp[prefix]
 
+			multi = False
+			
+			for restriction in getElements(ctx, 'xs:restriction', simpleType):
+				tipe = getAttribute(restriction, 'base')
+				multi = False
+
+			for lizt in getElements(ctx, 'xs:list', simpleType):
+				tipe = getAttribute(lizt, 'itemType')
+				multi = True
+				
 			myAttribute = AttributeType(
 				ID = self.__uuid(u, name, 'Attribute'),
 				Name = [
 					NameType(name)
 				],
-				MultiValued = 'false',
+				MultiValued = multi,
 				ProductMode = 'Property',
 				FullTextIndexed = 'false',
 				ExternallyMaintained = 'false',
@@ -414,7 +423,7 @@ class Converter(object):
 					BaseType=getattr(self.xs, str(tipe), 'text') ,
 					MaxLength=None
 				)
-
+		
 		return
 	
 	def __complexTypes(self, doc, ctx, nsp, tns, prefix):

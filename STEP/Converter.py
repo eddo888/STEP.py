@@ -14,6 +14,7 @@ from dateutil import tz
 from io import StringIO
 from collections import OrderedDict
 
+from Baubles.Logger import Logger
 from Baubles.Colours import Colours
 from Perdy.pyxbext import directory
 from Argumental.Argue import Argue
@@ -24,6 +25,7 @@ from GoldenChild.xpath import *
 
 from STEP.XML import *
 
+logger = Logger()
 colours = Colours(colour=True)
 args = Argue()
 
@@ -484,13 +486,16 @@ class Converter(object):
 					t = tipe
 					u = tns
 
-				source = self.step[u][t]['UserType']
-
-				source.UserTypeLink.append(
-					UserTypeLinkType(
-						UserTypeID = userType.ID
+				if 'UserType' in self.step[u][t].keys():
+					source = self.step[u][t]['UserType']
+					
+					source.UserTypeLink.append(
+						UserTypeLinkType(
+							UserTypeID = userType.ID
+						)
 					)
-				)
+				else:
+					logger.warning(f'missing UserType for {u}:{t}')
 					
 		return
 
@@ -616,6 +621,10 @@ class Converter(object):
 			#if not child:
 			#	child = complexType
 
+			if 'UserType' not in self.step[url][etipe].keys():
+				logger.warning(f'missing UserType for {url}:{etipe}')
+				continue
+
 			source = self.step[url][etipe]['UserType']
 			source.NamePattern = name
 			
@@ -641,10 +650,13 @@ class Converter(object):
 					u = nsp[p]
 				else:
 					u = tns
-					
-				target = self.step[u][t]['UserType']
 
-				self.elements[tns][elem] = target
+				if 'UserType' in self.step[u][t].keys():
+					target = self.step[u][t]['UserType']
+
+					self.elements[tns][elem] = target
+				else:
+					logger.warning(f'missing UserType {u}:{t}')
 
 		return
 	

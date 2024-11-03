@@ -4,3 +4,4 @@ dist
 .dbeaver/
 HTML
 **/.ipynb_checkpoints
+STEP/.cache.json

@@ -19,6 +19,7 @@
         <xs:sequence>
             <xs:element name="person" type="fyayc:PersonType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+        <xs:attribute name="primes" type="fyayc:PrimesType" use="optional"/>
         <xs:attribute name="ID" type="xs:string" use="required"/>
         <xs:attribute name="name" type="xs:string" use="required"/>
     </xs:complexType>
@@ -26,6 +27,7 @@
     <xs:complexType name="PersonType">
         <xs:sequence>
             <xs:element name="contact" type="fyayc:ContactType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            <xs:element name="primes" type="fyayc:PrimesType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="ID" type="xs:string" use="required"/>
         <xs:attribute name="name" type="xs:string" use="required"/>
@@ -33,11 +35,20 @@
         <xs:attribute name="phone" type="xs:string" use="optional"/>
         <xs:attribute name="when" type="xs:dateTime" use="optional"/>
         <xs:attribute name="role" type="fyayc:RoleType" use="required"/>
+        
     </xs:complexType>
 
     <xs:complexType name="ContactType">
         <xs:attribute name="ID" type="xs:string" use="required"/>
     </xs:complexType>
+    
+    <xs:simpleType name="PrimeType">
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PrimesType">
+        <xs:list itemType="fyayc:PrimeType"/>
+     </xs:simpleType>
     
     <xs:simpleType name="RoleType">
         <xs:restriction base="xs:string">

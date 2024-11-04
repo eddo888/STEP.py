@@ -405,11 +405,14 @@ class Converter(object):
 				)
 
 				for enum in enumerations:
-					LOV.Value.append(
-						ValueType(
-							getAttribute(enum,'value')
+					ev = getAttribute(enum,'value')
+
+					if ev and len(ev):
+						LOV.Value.append(
+							ValueType(
+								ev
+							)
 						)
-					)
 					
 				self.__store(u, name, 'LOV', LOV)
 				self.dom.ListsOfValues.append(LOV)
@@ -503,8 +506,20 @@ class Converter(object):
 							UserTypeID = userType.ID
 						)
 					)
-				else:
-					logger.warning(f'missing UserType for {u}:{t}')
+
+				if 'Attribute' in self.step[u][t].keys():
+					attribute = self.step[u][t]['Attribute']
+
+					#attribute.UserTypeLink.append(
+					#	UserTypeLinkType(
+					#		UserTypeID=userType.ID
+					#	)
+					#)
+					userType.AttributeLink.append(
+						AttributeLinkType(
+							AttributeID=attribute.ID
+						)
+					)
 					
 		return
 
@@ -631,7 +646,6 @@ class Converter(object):
 			#	child = complexType
 
 			if 'UserType' not in self.step[url][etipe].keys():
-				logger.warning(f'missing UserType for {url}:{etipe}')
 				continue
 
 			source = self.step[url][etipe]['UserType']
@@ -664,8 +678,6 @@ class Converter(object):
 					target = self.step[u][t]['UserType']
 
 					self.elements[tns][elem] = target
-				else:
-					logger.warning(f'missing UserType {u}:{t}')
 
 		return
 	

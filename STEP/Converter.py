@@ -29,6 +29,8 @@ logger = Logger()
 colours = Colours(colour=True)
 args = Argue()
 
+logger.setLevel(logging.INFO)
+
 @args.command(single=True)
 class Converter(object):
 
@@ -178,9 +180,9 @@ class Converter(object):
 		}
 
 		for name, tipe in self.xs.items():
-			#print('\t%s,%s'%(name, tipe))
+			logger.debug('\t%s,%s'%(name, tipe))
 			(p, t) = tuple(name.split(':'))
-			#print('\t%s,%s'%(p, t))
+			logger.debug('\t%s,%s'%(p, t))
 
 			u = self.nsp[p]
 
@@ -277,7 +279,7 @@ class Converter(object):
 		self.xsd.add(file)
 		
 		# todo fix up the nsp root and tns
-		#print(file)
+		logger.debug(file)
 		
 		xsd = '%s/%s'%(dir, file) if len(dir) else file
 		(doc, ctx, nsp) = getContextFromFile(xsd)
@@ -286,7 +288,7 @@ class Converter(object):
 		tns = getAttribute(root, 'targetNamespace')
 		prefix = None
 
-		#print(tns)
+		logger.debug(tns)
 		
 		nsp[prefix] = tns
 
@@ -322,7 +324,7 @@ class Converter(object):
 
 		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
 			name = getAttribute(complexType,'name')
-			#print('\t%s,%s'%(prefix, name))
+			logger.debug('\t%s,%s'%(prefix, name))
 			u = nsp[prefix]
 			
 			ag = AttributeGroupType(
@@ -548,7 +550,7 @@ class Converter(object):
 				u = nsp[p]
 
 				source = self.step[u][t]['Attribute']
-				#print(source.ID)
+				logger.debug(source.ID)
 				
 				# create a copy
 				attribute = AttributeType(
@@ -686,7 +688,7 @@ class Converter(object):
 		load sample data
 		'''
 
-		#print(self.elements)
+		logger.debug(self.elements)
 
 		ltz = tz.gettz('AEST')
 		mt = os.stat(xml).st_mtime
@@ -724,7 +726,7 @@ class Converter(object):
 			if key not in self.elements[tns].keys(): return
 
 			attribute = self.elements[tns][key]
-			print(f'\t{indent}@{aname} = {value}')
+			logger.info(f'\t{indent}@{aname} = {value}')
 
 			if attribute.Validation:
 				if attribute.Validation.BaseType == 'date':
@@ -764,7 +766,7 @@ class Converter(object):
 
 			name = node.name
 			ns = str(node.ns().content)
-			print(f'{indent}{ns}:{name}')# -> {path}')
+			logger.info(f'{indent}{ns}:{name}')# -> {path}')
 
 			id = self.__hash(path)
 			
@@ -821,7 +823,7 @@ class Converter(object):
 					self.__products(xsd, xf) # todo: update and test
 				
 		if self.verbose:
-			print('step: ',prettyPrint(self.step))
+			logger.info('step: ',prettyLogger.Info(self.step))
 
 		xml = str(self.dom.toxml())
 		if output:
@@ -844,7 +846,7 @@ class Converter(object):
 		'''
 		list IDs to stdout and names to stderr
 		'''
-		print(self.cache)
+		logger.info(self.cache)
 		def walker(node,indent=''):
 			if type(node) == dict:
 				for name,child in node.items():

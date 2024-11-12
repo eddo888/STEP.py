@@ -552,9 +552,11 @@ class Converter(object):
 				source = self.step[u][t]['Attribute']
 				logger.debug(source.ID)
 				
+				key = f'{name}@{attr}'				
+
 				# create a copy
 				attribute = AttributeType(
-					ID = self.__uuid(u, attr, 'Attribute'),
+					ID = self.__uuid(u, key, 'Attribute'),
 					Name = [
 						NameType(attr)
 					],
@@ -576,7 +578,6 @@ class Converter(object):
 						)
 					]
 				)
-				key = f'{name}@{attr}'				
 				self.__store(u, key, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				

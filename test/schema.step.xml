@@ -1,57 +1,59 @@
 <?xml version="1.0"?>
 <ns1:STEP-ProductInformation
 	ContextID="Context1"
-	ExportTime="2024-08-26 12:23:17.709404"
+	ExportTime="2024-11-13 10:47:39.230793"
 	SingleUpdateMode="Y"
 	UseContextLocale="false"
 	WorkspaceID="Main"
 	xmlns:ns1="http://www.stibosystems.com/step"
 >
 	<ns1:UserTypes>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_4edfd128dfc075fce5b7fda6192e18f2" IDPattern="XSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="EDDO" ReferenceTargetLockPolicy="Strict" Referenced="true">
-			<ns1:Name>EDDO</ns1:Name>
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="ID_3842fe4f462b30306459a0694aed8fc8" IDPattern="ID_[id]" IsCategory="true" ManuallySorted="false" NamePattern="XSD" ReferenceTargetLockPolicy="Strict" Referenced="true">
+			<ns1:Name>XSD</ns1:Name>
 			<ns1:UserTypeLink UserTypeID="Product user-type root"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_6fe064606fe4005520cdee18f2b7510c" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="people" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="ID_6fe064606fe4005520cdee18f2b7510c" IDPattern="fID_[id]" IsCategory="true" ManuallySorted="false" NamePattern="people" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>PeopleType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2"/>
+			<ns1:UserTypeLink UserTypeID="ID_3842fe4f462b30306459a0694aed8fc8"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_49dc65673f2d236498a685a2dabd02f2" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="group" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="ID_49dc65673f2d236498a685a2dabd02f2" IDPattern="fID_[id]" IsCategory="true" ManuallySorted="false" NamePattern="group" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>GroupType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c"/>
-			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
-			<ns1:AttributeLink AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb"/>
+			<ns1:UserTypeLink UserTypeID="ID_6fe064606fe4005520cdee18f2b7510c"/>
+			<ns1:AttributeLink AttributeID="ID_d32eccfc66be66b12e9e2be1495d5d3b"/>
+			<ns1:AttributeLink AttributeID="ID_c74d938c54728fedb6008240be32de06"/>
+			<ns1:AttributeLink AttributeID="ID_3892a6577fa86abb7225dfbaf694c74d"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_c5db2f624b174d6867f1b7ec12def059" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="person" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="ID_c5db2f624b174d6867f1b7ec12def059" IDPattern="fID_[id]" IsCategory="true" ManuallySorted="false" NamePattern="person" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>PersonType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
-			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
-			<ns1:AttributeLink AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb"/>
-			<ns1:AttributeLink AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0"/>
-			<ns1:AttributeLink AttributeID="XSD_5291c4292a5bf459c39dd5fa115b90c9"/>
-			<ns1:AttributeLink AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340"/>
-			<ns1:AttributeLink AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:AttributeLink AttributeID="ID_f5cffc2651f72ca32f62213fcea2732e"/>
+			<ns1:AttributeLink AttributeID="ID_7e6f944e143497bb1a983ade8346f156"/>
+			<ns1:AttributeLink AttributeID="ID_7c2a50a783da80383035f8354d863dc5"/>
+			<ns1:AttributeLink AttributeID="ID_8c10f3f6e32737866bdedbf6b43bd3ba"/>
+			<ns1:AttributeLink AttributeID="ID_a51fd945ba5f11c6ea8f5c9e96f29d21"/>
+			<ns1:AttributeLink AttributeID="ID_49dd944997cd1fcc3e7282774043ee72"/>
+			<ns1:AttributeLink AttributeID="ID_b184aad6d0448f7f42f860af5226be71"/>
 		</ns1:UserType>
-		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="XSD_e1069d5be446a51506e34e1d5c21007e" IDPattern="fXSD_[id]" IsCategory="true" ManuallySorted="false" NamePattern="contact" ReferenceTargetLockPolicy="Strict" Referenced="true">
+		<ns1:UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="ID_e1069d5be446a51506e34e1d5c21007e" IDPattern="fID_[id]" IsCategory="true" ManuallySorted="false" NamePattern="contact" ReferenceTargetLockPolicy="Strict" Referenced="true">
 			<ns1:Name>ContactType</ns1:Name>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:AttributeLink AttributeID="XSD_2b746b3876f65af76ef139c191302a84"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeLink AttributeID="ID_7517efd27841e2b77a7a5a8a33b0c807"/>
 		</ns1:UserType>
 	</ns1:UserTypes>
 	<ns1:CrossReferenceTypes/>
 	<ns1:ListOfValuesGroupList>
-		<ns1:ListOfValuesGroup ID="XSD_bc6030063c05d1388a3e744958bf4be1">
-			<ns1:Name>EDDO_LOVs</ns1:Name>
-			<ns1:ListOfValuesGroup ID="XSD_3391205bab2fa00d7e8fb09897b70093">
+		<ns1:ListOfValuesGroup ID="ID_572b387d2517112f07af360f54b1a4c6">
+			<ns1:Name>XSD_LOVs</ns1:Name>
+			<ns1:ListOfValuesGroup ID="ID_3391205bab2fa00d7e8fb09897b70093">
 				<ns1:Name>http://www.w3.org/2001/XMLSchema</ns1:Name>
 			</ns1:ListOfValuesGroup>
-			<ns1:ListOfValuesGroup ID="XSD_88da64de9ea7f6b6e6f916f2287e1d52">
+			<ns1:ListOfValuesGroup ID="ID_88da64de9ea7f6b6e6f916f2287e1d52">
 				<ns1:Name>https://foryouandyourcustomers.com/people</ns1:Name>
 			</ns1:ListOfValuesGroup>
 		</ns1:ListOfValuesGroup>
 	</ns1:ListOfValuesGroupList>
 	<ns1:ListsOfValues>
-		<ns1:ListOfValue ID="XSD_f0d3244a1d1dce75ceebfb5d313fd57d" ParentID="XSD_bc6030063c05d1388a3e744958bf4be1" UseValueID="false">
+		<ns1:ListOfValue ID="ID_f0d3244a1d1dce75ceebfb5d313fd57d" ParentID="ID_572b387d2517112f07af360f54b1a4c6" UseValueID="false">
 			<ns1:Name>RoleType</ns1:Name>
 			<ns1:Validation BaseType="text"/>
 			<ns1:Value>Solution Architect</ns1:Value>
@@ -61,216 +63,234 @@
 		</ns1:ListOfValue>
 	</ns1:ListsOfValues>
 	<ns1:AttributeGroupList>
-		<ns1:AttributeGroup ID="XSD_342a08aaf195f78555eba52d1f124f49" ManuallySorted="false" ShowInWorkbench="true">
-			<ns1:Name>EDDO Attribute</ns1:Name>
-			<ns1:AttributeGroup ID="XSD_f9cbf7b55022d07e4e95f69637101c96" ManuallySorted="false" ShowInWorkbench="true">
+		<ns1:AttributeGroup ID="ID_8105509a34318506797b231c0c178978" ManuallySorted="false" ShowInWorkbench="true">
+			<ns1:Name>XSD Attribute</ns1:Name>
+			<ns1:AttributeGroup ID="ID_f9cbf7b55022d07e4e95f69637101c96" ManuallySorted="false" ShowInWorkbench="true">
 				<ns1:Name>http://www.w3.org/2001/XMLSchema</ns1:Name>
 			</ns1:AttributeGroup>
-			<ns1:AttributeGroup ID="XSD_249ea994b75e209dcb8632573da7a559" ManuallySorted="false" ShowInWorkbench="true">
+			<ns1:AttributeGroup ID="ID_249ea994b75e209dcb8632573da7a559" ManuallySorted="false" ShowInWorkbench="true">
 				<ns1:Name>https://foryouandyourcustomers.com/people</ns1:Name>
-				<ns1:AttributeGroup ID="XSD_a6c3ef798948ac9cfc6581c703bd48ca" ManuallySorted="false" ShowInWorkbench="true">
+				<ns1:AttributeGroup ID="ID_a6c3ef798948ac9cfc6581c703bd48ca" ManuallySorted="false" ShowInWorkbench="true">
 					<ns1:Name>PeopleType</ns1:Name>
 				</ns1:AttributeGroup>
-				<ns1:AttributeGroup ID="XSD_087bdf698d99b53f198d1087766077c3" ManuallySorted="false" ShowInWorkbench="true">
+				<ns1:AttributeGroup ID="ID_087bdf698d99b53f198d1087766077c3" ManuallySorted="false" ShowInWorkbench="true">
 					<ns1:Name>GroupType</ns1:Name>
 				</ns1:AttributeGroup>
-				<ns1:AttributeGroup ID="XSD_ebdd9a5612b9bc015bf23595a94e477e" ManuallySorted="false" ShowInWorkbench="true">
+				<ns1:AttributeGroup ID="ID_ebdd9a5612b9bc015bf23595a94e477e" ManuallySorted="false" ShowInWorkbench="true">
 					<ns1:Name>PersonType</ns1:Name>
 				</ns1:AttributeGroup>
-				<ns1:AttributeGroup ID="XSD_40d431032961479b0d317aaa7a8ee460" ManuallySorted="false" ShowInWorkbench="true">
+				<ns1:AttributeGroup ID="ID_40d431032961479b0d317aaa7a8ee460" ManuallySorted="false" ShowInWorkbench="true">
 					<ns1:Name>ContactType</ns1:Name>
 				</ns1:AttributeGroup>
 			</ns1:AttributeGroup>
 		</ns1:AttributeGroup>
 	</ns1:AttributeGroupList>
 	<ns1:AttributeList>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_b959ae6d784391f3d54a0344bdd2e616" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_b959ae6d784391f3d54a0344bdd2e616" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:string</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_cb2fcd6057e8076940aee1f9e754192c" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_cb2fcd6057e8076940aee1f9e754192c" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:NMTOKEN</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_ca9ea42200d1fbab69a1d3bd12624a35" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_ca9ea42200d1fbab69a1d3bd12624a35" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:NCName</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_311ccaf4757bea72a3b2691580bf04a3" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_311ccaf4757bea72a3b2691580bf04a3" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:dateTime</ns1:Name>
 			<ns1:Validation BaseType="isodatetime"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_8299670fe24b1ffe31262d0f3641f944" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_8299670fe24b1ffe31262d0f3641f944" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:date</ns1:Name>
 			<ns1:Validation BaseType="isodate"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_bec666744fbc1cdc6b7f6eac87a3096e" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_bec666744fbc1cdc6b7f6eac87a3096e" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:time</ns1:Name>
 			<ns1:Validation BaseType="isodate"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2661490aa7d1146c9ec27667d865f6d7" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_2661490aa7d1146c9ec27667d865f6d7" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:int</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_296776be5e4b3cdbfda1c5cd55b8db14" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_296776be5e4b3cdbfda1c5cd55b8db14" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:integer</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_7082c7078b20fbe117b29963bf7d58d0" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_7082c7078b20fbe117b29963bf7d58d0" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:positiveInteger</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_c72d7ae193cce401611cc2364aa4b047" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_c72d7ae193cce401611cc2364aa4b047" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:nonNegativeInteger</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_1a0459a3bd2b0029ab91cdb742ac3692" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_1a0459a3bd2b0029ab91cdb742ac3692" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:long</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_95f2863a9e3bb678b0d8e161efd61b24" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_95f2863a9e3bb678b0d8e161efd61b24" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:gDay</ns1:Name>
 			<ns1:Validation BaseType="integer"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_23af7f453ec4e24da769bf507f3d7bf5" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_23af7f453ec4e24da769bf507f3d7bf5" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:decimal</ns1:Name>
 			<ns1:Validation BaseType="number"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_eed9edf7d99f0d7ae203118e8f98c08d" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_eed9edf7d99f0d7ae203118e8f98c08d" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:float</ns1:Name>
-			<ns1:Validation BaseType="fraction"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:Validation BaseType="number"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_ec6f25d8d0a72050d3c09591e3f56b99" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_ec6f25d8d0a72050d3c09591e3f56b99" MultiValued="false" ProductMode="Property">
 			<ns1:Name>xs:boolean</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_f9cbf7b55022d07e4e95f69637101c96"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_f9cbf7b55022d07e4e95f69637101c96"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_9cea20bbfb1fe491ac2fc07dae142f21" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_aeb6497fe67879ec005a9e421a41c9c5" MultiValued="false" ProductMode="Property">
+			<ns1:Name>PrimeType</ns1:Name>
+			<ns1:Validation BaseType="text"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_249ea994b75e209dcb8632573da7a559"/>
+		</ns1:Attribute>
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_f5cffc2651f72ca32f62213fcea2732e" MultiValued="true" ProductMode="Property">
+			<ns1:Name>PrimesType</ns1:Name>
+			<ns1:Validation BaseType="text"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_249ea994b75e209dcb8632573da7a559"/>
+		</ns1:Attribute>
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_9cea20bbfb1fe491ac2fc07dae142f21" MultiValued="false" ProductMode="Property">
 			<ns1:Name>RoleType</ns1:Name>
-			<ns1:ListOfValueLink ListOfValueID="XSD_f0d3244a1d1dce75ceebfb5d313fd57d"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_249ea994b75e209dcb8632573da7a559"/>
+			<ns1:ListOfValueLink ListOfValueID="ID_f0d3244a1d1dce75ceebfb5d313fd57d"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_249ea994b75e209dcb8632573da7a559"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_d32eccfc66be66b12e9e2be1495d5d3b" MultiValued="true" ProductMode="Property">
+			<ns1:Name>primes</ns1:Name>
+			<ns1:Validation BaseType="text"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_087bdf698d99b53f198d1087766077c3"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
+		</ns1:Attribute>
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_c74d938c54728fedb6008240be32de06" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_087bdf698d99b53f198d1087766077c3"/>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_087bdf698d99b53f198d1087766077c3"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5383e8ad49ac9991a32df960dc5812bb" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_3892a6577fa86abb7225dfbaf694c74d" MultiValued="false" ProductMode="Property">
 			<ns1:Name>name</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_087bdf698d99b53f198d1087766077c3"/>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
-			<ns1:UserTypeLink UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_087bdf698d99b53f198d1087766077c3"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
+			<ns1:UserTypeLink UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_7e6f944e143497bb1a983ade8346f156" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5383e8ad49ac9991a32df960dc5812bb" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_7c2a50a783da80383035f8354d863dc5" MultiValued="false" ProductMode="Property">
 			<ns1:Name>name</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5acabc2848c2b4a1a67223420f4162b0" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_8c10f3f6e32737866bdedbf6b43bd3ba" MultiValued="false" ProductMode="Property">
 			<ns1:Name>email</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_5291c4292a5bf459c39dd5fa115b90c9" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_a51fd945ba5f11c6ea8f5c9e96f29d21" MultiValued="false" ProductMode="Property">
 			<ns1:Name>phone</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_36bc00a26f2c770ceb5dca9eb7856340" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_49dd944997cd1fcc3e7282774043ee72" MultiValued="false" ProductMode="Property">
 			<ns1:Name>when</ns1:Name>
 			<ns1:Validation BaseType="isodatetime"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_693f42e19a54bb8d84617c96f08bbd05" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_b184aad6d0448f7f42f860af5226be71" MultiValued="false" ProductMode="Property">
 			<ns1:Name>role</ns1:Name>
-			<ns1:ListOfValueLink ListOfValueID="XSD_f0d3244a1d1dce75ceebfb5d313fd57d"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_ebdd9a5612b9bc015bf23595a94e477e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
-			<ns1:UserTypeLink UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:ListOfValueLink ListOfValueID="ID_f0d3244a1d1dce75ceebfb5d313fd57d"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_ebdd9a5612b9bc015bf23595a94e477e"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
+			<ns1:UserTypeLink UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059"/>
 		</ns1:Attribute>
-		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="XSD_2b746b3876f65af76ef139c191302a84" MultiValued="false" ProductMode="Property">
+		<ns1:Attribute Derived="false" ExternallyMaintained="false" FullTextIndexed="false" ID="ID_7517efd27841e2b77a7a5a8a33b0c807" MultiValued="false" ProductMode="Property">
 			<ns1:Name>ID</ns1:Name>
 			<ns1:Validation BaseType="text"/>
-			<ns1:AttributeGroupLink AttributeGroupID="XSD_40d431032961479b0d317aaa7a8ee460"/>
-			<ns1:UserTypeLink UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e"/>
-			<ns1:UserTypeLink UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e"/>
+			<ns1:AttributeGroupLink AttributeGroupID="ID_40d431032961479b0d317aaa7a8ee460"/>
+			<ns1:UserTypeLink UserTypeID="ID_e1069d5be446a51506e34e1d5c21007e"/>
+			<ns1:UserTypeLink UserTypeID="ID_e1069d5be446a51506e34e1d5c21007e"/>
 		</ns1:Attribute>
 	</ns1:AttributeList>
 	<ns1:Products>
-		<ns1:Product ID="XSD_84c41a407d1a753c9c567968f889d76e" ParentID="Product hierarchy root" UserTypeID="XSD_4edfd128dfc075fce5b7fda6192e18f2">
-			<ns1:Product ID="XSD_c25516272eb32df61869ee5f11de5ed3" UserTypeID="XSD_6fe064606fe4005520cdee18f2b7510c">
+		<ns1:Product ID="ID_8813a5719da5048b53cf6629541c7267" ParentID="Product hierarchy root" UserTypeID="ID_3842fe4f462b30306459a0694aed8fc8">
+			<ns1:Product ID="ID_b4edd601a41349f42d391145208ed20d" UserTypeID="ID_6fe064606fe4005520cdee18f2b7510c">
 				<ns1:Name>people</ns1:Name>
-				<ns1:Product ID="XSD_7c74a300df91b7e9fcae15709490cc5d" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="ID_62e6fc04f404c51f620166eecfc3d727" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_19425ce4d7661db597a3f19a3d81e485" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="ID_c69e525f92d7b9b50747ea03ad933bd0" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
 						<ns1:Values>
-							<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>
-							<ns1:Value AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0">dave@stibosystems.com</ns1:Value>
-							<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">David Edson</ns1:Value>
-							<ns1:Value AttributeID="XSD_5291c4292a5bf459c39dd5fa115b90c9">+614 0868 0808</ns1:Value>
-							<ns1:Value AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05">Solution Architect</ns1:Value>
-							<ns1:Value AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340">2020-10-18 09:00:00</ns1:Value>
+							<ns1:Value AttributeID="ID_7e6f944e143497bb1a983ade8346f156">DE</ns1:Value>
+							<ns1:Value AttributeID="ID_8c10f3f6e32737866bdedbf6b43bd3ba">dave@stibosystems.com</ns1:Value>
+							<ns1:Value AttributeID="ID_7c2a50a783da80383035f8354d863dc5">David Edson</ns1:Value>
+							<ns1:Value AttributeID="ID_a51fd945ba5f11c6ea8f5c9e96f29d21">+614 0868 0808</ns1:Value>
+							<ns1:Value AttributeID="ID_b184aad6d0448f7f42f860af5226be71">Solution Architect</ns1:Value>
+							<ns1:Value AttributeID="ID_49dd944997cd1fcc3e7282774043ee72">2020-10-18 09:00:00</ns1:Value>
 						</ns1:Values>
 					</ns1:Product>
 					<ns1:Values>
-						<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">STIBO</ns1:Value>
-						<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">Stibo Systems</ns1:Value>
+						<ns1:Value AttributeID="ID_c74d938c54728fedb6008240be32de06">STIBO</ns1:Value>
+						<ns1:Value AttributeID="ID_3892a6577fa86abb7225dfbaf694c74d">Stibo Systems</ns1:Value>
+						<ns1:Value AttributeID="ID_d32eccfc66be66b12e9e2be1495d5d3b">11</ns1:Value>
 					</ns1:Values>
 				</ns1:Product>
-				<ns1:Product ID="XSD_6bd041159c72c9318b86b6534884fdde" UserTypeID="XSD_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="ID_97e63066ddc59f176eb880ce597503c9" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="XSD_306814b5c7e661e2610ee4f07f8ed7e8" UserTypeID="XSD_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="ID_7ab9978ce05b6ad596c53cffc71d53b4" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
-						<ns1:Product ID="XSD_5fc188ab87813ecd9a19300a1fe0fe27" UserTypeID="XSD_e1069d5be446a51506e34e1d5c21007e">
+						<ns1:Product ID="ID_ee289be9b72365e62f9e77004ecd5cfa" UserTypeID="ID_e1069d5be446a51506e34e1d5c21007e">
 							<ns1:Name>contact</ns1:Name>
 							<ns1:Values>
-								<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">DE</ns1:Value>
+								<ns1:Value AttributeID="ID_7517efd27841e2b77a7a5a8a33b0c807">DE</ns1:Value>
 							</ns1:Values>
 						</ns1:Product>
 						<ns1:Values>
-							<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">BM</ns1:Value>
-							<ns1:Value AttributeID="XSD_5acabc2848c2b4a1a67223420f4162b0">bem@foryouandyourcustomers.com</ns1:Value>
-							<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">Bernhard Mueller</ns1:Value>
-							<ns1:Value AttributeID="XSD_693f42e19a54bb8d84617c96f08bbd05">General Manager</ns1:Value>
-							<ns1:Value AttributeID="XSD_36bc00a26f2c770ceb5dca9eb7856340">2020-10-18 09:00:00</ns1:Value>
+							<ns1:Value AttributeID="ID_7e6f944e143497bb1a983ade8346f156">BM</ns1:Value>
+							<ns1:Value AttributeID="ID_8c10f3f6e32737866bdedbf6b43bd3ba">bem@foryouandyourcustomers.com</ns1:Value>
+							<ns1:Value AttributeID="ID_7c2a50a783da80383035f8354d863dc5">Bernhard Mueller</ns1:Value>
+							<ns1:Value AttributeID="ID_b184aad6d0448f7f42f860af5226be71">General Manager</ns1:Value>
+							<ns1:Value AttributeID="ID_49dd944997cd1fcc3e7282774043ee72">2020-10-18 09:00:00</ns1:Value>
 						</ns1:Values>
 					</ns1:Product>
 					<ns1:Values>
-						<ns1:Value AttributeID="XSD_2b746b3876f65af76ef139c191302a84">FYAYC</ns1:Value>
-						<ns1:Value AttributeID="XSD_5383e8ad49ac9991a32df960dc5812bb">for you and your customers</ns1:Value>
+						<ns1:Value AttributeID="ID_c74d938c54728fedb6008240be32de06">FYAYC</ns1:Value>
+						<ns1:Value AttributeID="ID_3892a6577fa86abb7225dfbaf694c74d">for you and your customers</ns1:Value>
 					</ns1:Values>
 				</ns1:Product>
 				<ns1:Values/>

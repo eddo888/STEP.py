@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ImportManagerConfig Version="2" Name="STEP.XML import" ContextID="Context1" WorkspaceID="From file" Approver="DAVE" RejectNewProducts="no" RejectProductUpdates="no" MatchUnitsByID="no" CountUnmapped="no" ProcessTemplate="Importer" TestImport="no" ReplaceTerms="CLEAR_ONLY_FOR_IMPORTED_PRODUCTS" DefaultProductParentID="Product hierarchy root" DefaultProductTypeID="Product user-type root" BatchDirectoryID="" SelectedURLType="product">
+  <Source Name="File">
+    <Parameter Name="Filename">C:\Users\eddo8\Documents\_gitlab.stibo.dk\dave\Stibo\StepCICD\schema.step.xml</Parameter>
+  </Source>
+  <Format Name="STEPXML">
+    <Parameter Name="Validate">Yes</Parameter>
+  </Format>
+  <ProductMapping>  </ProductMapping>
+  <ReplacementRules>
+  </ReplacementRules>
+</ImportManagerConfig>

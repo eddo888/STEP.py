@@ -14,6 +14,7 @@ from dateutil import tz
 from io import StringIO
 from collections import OrderedDict
 
+from Baubles.Logger import Logger
 from Baubles.Colours import Colours
 from Perdy.pyxbext import directory
 from Argumental.Argue import Argue
@@ -24,8 +25,11 @@ from GoldenChild.xpath import *
 
 from STEP.XML import *
 
+logger = Logger()
 colours = Colours(colour=True)
 args = Argue()
+
+logger.setLevel(logging.INFO)
 
 @args.command(single=True)
 class Converter(object):
@@ -176,9 +180,9 @@ class Converter(object):
 		}
 
 		for name, tipe in self.xs.items():
-			#print('\t%s,%s'%(name, tipe))
+			logger.debug('\t%s,%s'%(name, tipe))
 			(p, t) = tuple(name.split(':'))
-			#print('\t%s,%s'%(p, t))
+			logger.debug('\t%s,%s'%(p, t))
 
 			u = self.nsp[p]
 
@@ -275,7 +279,7 @@ class Converter(object):
 		self.xsd.add(file)
 		
 		# todo fix up the nsp root and tns
-		#print(file)
+		logger.debug(file)
 		
 		xsd = '%s/%s'%(dir, file) if len(dir) else file
 		(doc, ctx, nsp) = getContextFromFile(xsd)
@@ -284,7 +288,7 @@ class Converter(object):
 		tns = getAttribute(root, 'targetNamespace')
 		prefix = None
 
-		#print(tns)
+		logger.debug(tns)
 		
 		nsp[prefix] = tns
 
@@ -320,7 +324,7 @@ class Converter(object):
 
 		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
 			name = getAttribute(complexType,'name')
-			#print('\t%s,%s'%(prefix, name))
+			logger.debug('\t%s,%s'%(prefix, name))
 			u = nsp[prefix]
 			
 			ag = AttributeGroupType(
@@ -345,19 +349,28 @@ class Converter(object):
 
 		self.__groups(nsp, tns)
 					
-
+		
 		for simpleType in getElements(ctx,'/xs:schema/xs:simpleType'):
 			name = getAttribute(simpleType, 'name')
-			tipe = getAttribute(simpleType, 'type')
 			desc = getElementText(ctx, 'xs:annotation/xs:documentation', simpleType)
 			u = nsp[prefix]
 
+			multi = False
+			
+			for restriction in getElements(ctx, 'xs:restriction', simpleType):
+				tipe = getAttribute(restriction, 'base')
+				multi = False
+
+			for lizt in getElements(ctx, 'xs:list', simpleType):
+				tipe = getAttribute(lizt, 'itemType')
+				multi = True
+				
 			myAttribute = AttributeType(
 				ID = self.__uuid(u, name, 'Attribute'),
 				Name = [
 					NameType(name)
 				],
-				MultiValued = 'false',
+				MultiValued = multi,
 				ProductMode = 'Property',
 				FullTextIndexed = 'false',
 				ExternallyMaintained = 'false',
@@ -394,11 +407,14 @@ class Converter(object):
 				)
 
 				for enum in enumerations:
-					LOV.Value.append(
-						ValueType(
-							getAttribute(enum,'value')
+					ev = getAttribute(enum,'value')
+
+					if ev and len(ev):
+						LOV.Value.append(
+							ValueType(
+								ev
+							)
 						)
-					)
 					
 				self.__store(u, name, 'LOV', LOV)
 				self.dom.ListsOfValues.append(LOV)
@@ -412,7 +428,7 @@ class Converter(object):
 					BaseType=getattr(self.xs, str(tipe), 'text') ,
 					MaxLength=None
 				)
-
+		
 		return
 	
 	def __complexTypes(self, doc, ctx, nsp, tns, prefix):
@@ -484,13 +500,28 @@ class Converter(object):
 					t = tipe
 					u = tns
 
-				source = self.step[u][t]['UserType']
-
-				source.UserTypeLink.append(
-					UserTypeLinkType(
-						UserTypeID = userType.ID
+				if 'UserType' in self.step[u][t].keys():
+					source = self.step[u][t]['UserType']
+					
+					source.UserTypeLink.append(
+						UserTypeLinkType(
+							UserTypeID = userType.ID
+						)
 					)
-				)
+
+				if 'Attribute' in self.step[u][t].keys():
+					attribute = self.step[u][t]['Attribute']
+
+					#attribute.UserTypeLink.append(
+					#	UserTypeLinkType(
+					#		UserTypeID=userType.ID
+					#	)
+					#)
+					userType.AttributeLink.append(
+						AttributeLinkType(
+							AttributeID=attribute.ID
+						)
+					)
 					
 		return
 
@@ -519,11 +550,13 @@ class Converter(object):
 				u = nsp[p]
 
 				source = self.step[u][t]['Attribute']
-				#print(source.ID)
+				logger.debug(source.ID)
 				
+				key = f'{name}@{attr}'				
+
 				# create a copy
 				attribute = AttributeType(
-					ID = self.__uuid(u, attr, 'Attribute'),
+					ID = self.__uuid(u, key, 'Attribute'),
 					Name = [
 						NameType(attr)
 					],
@@ -545,7 +578,6 @@ class Converter(object):
 						)
 					]
 				)
-				key = f'{name}@{attr}'				
 				self.__store(u, key, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
 				
@@ -616,6 +648,9 @@ class Converter(object):
 			#if not child:
 			#	child = complexType
 
+			if 'UserType' not in self.step[url][etipe].keys():
+				continue
+
 			source = self.step[url][etipe]['UserType']
 			source.NamePattern = name
 			
@@ -641,10 +676,11 @@ class Converter(object):
 					u = nsp[p]
 				else:
 					u = tns
-					
-				target = self.step[u][t]['UserType']
 
-				self.elements[tns][elem] = target
+				if 'UserType' in self.step[u][t].keys():
+					target = self.step[u][t]['UserType']
+
+					self.elements[tns][elem] = target
 
 		return
 	
@@ -653,7 +689,7 @@ class Converter(object):
 		load sample data
 		'''
 
-		#print(self.elements)
+		logger.debug(self.elements)
 
 		ltz = tz.gettz('AEST')
 		mt = os.stat(xml).st_mtime
@@ -691,7 +727,7 @@ class Converter(object):
 			if key not in self.elements[tns].keys(): return
 
 			attribute = self.elements[tns][key]
-			print(f'\t{indent}@{aname} = {value}')
+			logger.info(f'\t{indent}@{aname} = {value}')
 
 			if attribute.Validation:
 				if attribute.Validation.BaseType == 'date':
@@ -731,7 +767,7 @@ class Converter(object):
 
 			name = node.name
 			ns = str(node.ns().content)
-			print(f'{indent}{ns}:{name}')# -> {path}')
+			logger.info(f'{indent}{ns}:{name}')# -> {path}')
 
 			id = self.__hash(path)
 			
@@ -788,7 +824,7 @@ class Converter(object):
 					self.__products(xsd, xf) # todo: update and test
 				
 		if self.verbose:
-			print('step: ',prettyPrint(self.step))
+			logger.info('step: ',prettyLogger.Info(self.step))
 
 		xml = str(self.dom.toxml())
 		if output:
@@ -811,7 +847,7 @@ class Converter(object):
 		'''
 		list IDs to stdout and names to stderr
 		'''
-		print(self.cache)
+		logger.info(self.cache)
 		def walker(node,indent=''):
 			if type(node) == dict:
 				for name,child in node.items():

@@ -1516,6 +1516,17 @@ class EventProcessors(STEP):
 			return {}
 
 	#________________________________________________________________________________________________
+	@args.operation(help='get the status of the event queue associated with an event processor')
+	def queue_status(self, id):
+		try:
+			response = super().get(f"{self.base}/{id}/queue/status")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred getting the status of the queue: {e}")
+			return {}
+
+	#________________________________________________________________________________________________
 	@args.operation(help='enable the event queue associated with an event processor')
 	def queue_enable(self, id: str) -> dict:
 		try:
@@ -1536,6 +1547,19 @@ class EventProcessors(STEP):
 			# Log the error and return an empty dictionary or handle as needed
 			logger.error(f"An error occurred during the queue disable operation: {e}")
 			return {}
+
+
+	#________________________________________________________________________________________________
+	@args.operation(help='number of unread events for the event queue associated with an event processor')
+	def queue_unreadevents(self, id: str) -> dict:
+		try:
+			response = super().get(f"{self.base}/{id}/queue/number-of-unread-events")
+			return response
+		except Exception as e:
+			# Log the error and return an empty dictionary or handle as needed
+			logger.error(f"An error occurred during the queue number of unread events operation: {e}")
+			return {}
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the execution report of an inbound endpoint')

@@ -1477,7 +1477,7 @@ class OIEPs(STEP):
 @args.command(name='eventprocessors')
 class EventProcessors(STEP):
 
-	base = 'event-processorss'
+	base = 'event-processors'
 
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):

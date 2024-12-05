@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<STEP-ProductInformation ContextID="Context1" ExportContext="Context1" ExportTime="2024-12-05 09:45:01" UseContextLocale="false" WorkspaceID="Main" xmlns="http://www.stibosystems.com/step" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stibosystems.com/step PIM.xsd">
+    <UserTypes>
+        <UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="Entity user-type root" IsCategory="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Revisability="Global" Selected="true">
+            <Name>Entity user-type root</Name>
+        </UserType>
+        <UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ClassificationOwnsProductLinks="false" ID="Classification 1 user-type root" ManuallySorted="false" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+            <Name>Alternate Classifications</Name>
+        </UserType>
+        <UserType AllowInDesignTemplate="false" AllowQuarkTemplate="false" ID="Product user-type root" IsCategory="true" ManuallySorted="true" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+            <Name>Product UserType root</Name>
+        </UserType>
+        <UserType ID="Setup Group user-type root" Referenced="true" Selected="true">
+            <Name>Setup Group type root</Name>
+        </UserType>
+        <UserType ID="Asset user-type root" ReferenceTargetLockPolicy="Strict" Referenced="true" Selected="true">
+            <Name>Assets</Name>
+        </UserType>
+    </UserTypes>
+    <ListOfValuesGroupList>
+        <ListOfValuesGroup ID="List Of Values group root" Referenced="true" Selected="true">
+            <Name>Lists of Values / LOVs</Name>
+        </ListOfValuesGroup>
+    </ListOfValuesGroupList>
+    <AttributeGroupList>
+        <AttributeGroup ID="Attribute group root" Referenced="true" Selected="true">
+            <Name>Attribute Groups</Name>
+        </AttributeGroup>
+    </AttributeGroupList>
+</STEP-ProductInformation>

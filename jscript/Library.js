@@ -315,9 +315,6 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		putCache(cache, stereotype, result);
 		//Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}	
-	
-	//Session.Output('element id='+result.ElementID);
-	
 	return result;
 	
 }
@@ -382,6 +379,8 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 		
 	if (! target) return;
 	if (! source) return;
+	
+	if (! target.Connectors) return;
 		
 	for (var c=0; c<target.Connectors.Count; c++) {
 		connector = target.Connectors.GetAt(c);

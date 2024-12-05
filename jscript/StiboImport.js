@@ -5,6 +5,7 @@
 !INC User Scripts.Library
 //!INC Stibo STEP.Library
 
+
 function readUnitsOfMeasures(package, doc, cache) {
 	Session.Output("Units of Measure");
 	/*
@@ -53,6 +54,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 		//var uom_items_diagram = setupDiagram(uom_items, 'UOM '+ UnitFamily_name, 'Object');
 
 		uom_type = findOrCreateElement(uom_items, 'Class', 'UOM', UnitFamily_name, UnitFamily_id, cache);
+		uom_type.Name = UnitFamily_name
 		setTaggedValue(uom_type, '@ID', UnitFamily_id);
 		setTaggedValue(uom_type, 'Name', UnitFamily_name);
 
@@ -78,6 +80,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 			//Session.Output('  Unit name="'+Unit_name+'" id="'+Unit_id+'"');
 			
 			uom_item = findOrCreateElement(uom_items, 'Object', 'UOM instance', Unit_name, Unit_id, cache);
+			uom_item.Name = Unit_name
 			setTaggedValue(uom_item, '@ID', Unit_id);
 			setTaggedValue(uom_item, 'Name', Unit_name);
 			
@@ -136,7 +139,7 @@ function readUnitsOfMeasures(package, doc, cache) {
 	}
 }
 
-function digListOfValuesGroups(package, parent, cache) {
+function digListOfValuesGroups(package, parent, cache, parent_id) {
 	/*
 		<ListOfValuesGroup 
 			ID="Movie_LOVs" 
@@ -153,8 +156,13 @@ function digListOfValuesGroups(package, parent, cache) {
 	var root as EA.Package;
 	
 	if (!parent) return;
+	
+	var xpath = 's:ListOfValuesGroup';
+	if (parent_id) {
+		xpath = xpath + '[@ParentID="'+parent_id+'"]';
+	}
 		
-	var groups = parent.selectNodes('s:ListOfValuesGroup');
+	var groups = parent.selectNodes(xpath);
 		
 	for (var g=0; g<groups.length; g++) {
 		var group = groups[g];
@@ -163,6 +171,7 @@ function digListOfValuesGroups(package, parent, cache) {
 		//Session.Output('LOV group name="'+name+'" id="'+id+'"');
 		
 		_group = findOrCreatePackage(package, 'LOV Group', name, id, cache);
+		_group.Name = name
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
 		
@@ -175,7 +184,12 @@ function digListOfValuesGroups(package, parent, cache) {
 		_diagram = setupDiagram(_group, 'LOVs', 'Class');	
 		//add_diagram_element(_diagram, _group);
 		
-		digListOfValuesGroups(_group, group, cache);
+		if (parent_id) {
+			digListOfValuesGroups(_group, group, cache, id);
+		}
+		else {
+			digListOfValuesGroups(_group, group, cache);
+		}
 	}
 	
 	return root;
@@ -185,18 +199,26 @@ function readListOfValuesGroups(package, doc, cache) {
 	Session.Output("LOV Groups");
 	
 	var package as EA.Package;
-	var root as EA.Package;
 	
-	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
-	if (groups) {
-		root = digListOfValuesGroups(package, groups, cache);
-	}
+	var lov_root_id = 'List Of Values group root';
 	
+	var root = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList/s:ListOfValuesGroup[@ID="'+lov_root_id+'"]')
 	if (!root) {
-		root = findOrCreatePackage(package, 'LOV Group', 'List Of Values group root', 'Lists of Values / LOVs');
+		package = findOrCreatePackage(package, 'LOV Group', 'Lists of Values / LOVs', lov_root_id, cache);
 	}
 
-	readListOfValues(root, doc, cache);
+	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:ListOfValuesGroupList');
+	if (groups) {
+		var uses_parent_id = doc.selectNodes('/s:STEP-ProductInformation/s:ListOfValuesGroupList/s:ListOfValuesGroup[@ParentID="'+lov_root_id+'"]');
+		if (uses_parent_id.length > 0) {
+			package = digListOfValuesGroups(package, groups, cache, lov_root_id);
+		}
+		else {
+			package = digListOfValuesGroups(package, groups, cache);
+		}
+	}	
+	
+	readListOfValues(package, doc, cache);
 }
 
 function readListOfValues(package, doc, cache) {
@@ -233,8 +255,10 @@ function readListOfValues(package, doc, cache) {
 		//Session.Output('LOV parent='+parent);
 		if (parent) {
 			element = findOrCreateElement(parent, 'Enum', 'LOV', name, id, cache) ;
+			element.Name = name
 			setTaggedValue(element, '@ID', id);
 			setTaggedValue(element, 'Name', name);
+			
 			var UseValueID = readYesNo(lov, element, 'UseValueID');
 			readYesNo(lov, element, 'Selected');
 			readYesNo(lov, element, 'Referenced');
@@ -258,7 +282,7 @@ function readListOfValues(package, doc, cache) {
 	}
 }
 
-function digAttributeGroups(package, parent, cache) {
+function digAttributeGroups(package, parent, cache, parent_id) {
 	/*
 	   <AttributeGroup 
 			ID="Movie_Character" 
@@ -278,7 +302,12 @@ function digAttributeGroups(package, parent, cache) {
 	
 	if (!parent) return;
 		
-	var groups = parent.selectNodes('s:AttributeGroup');
+	var xpath = 's:AttributeGroup';
+	if (parent_id) {
+		xpath = xpath + '[@ParentID="'+parent_id+'"]';
+	}
+
+	var groups = parent.selectNodes(xpath);
 		
 	for (var g=0; g<groups.length; g++) {
 		var group = groups[g];
@@ -287,8 +316,10 @@ function digAttributeGroups(package, parent, cache) {
 		//Session.Output('Attribute group name="'+name+'" id="'+id+'"');
 		
 		_group = findOrCreatePackage(package, 'Attribute Group', name, id, cache);
+		_group.Name = name
 		setTaggedValue(_group, '@ID', id);
 		setTaggedValue(_group, 'Name', name);
+		
 		readYesNo(group, _group, 'Selected');
 		readYesNo(group, _group, 'Referenced');
 		readYesNo(group, _group, 'ManuallySorted');
@@ -301,7 +332,12 @@ function digAttributeGroups(package, parent, cache) {
 		_diagram = setupDiagram(_group, 'Attributes', 'Class');	
 		//add_diagram_package(_diagram, _group);
 		
-		digAttributeGroups(_group, group, cache);
+		if (parent_id) {
+			digAttributeGroups(_group, group, cache, id);
+		}
+		else {
+			digAttributeGroups(_group, group, cache);
+		}
 	}
 	
 	return root;
@@ -311,18 +347,30 @@ function readAttributeGroups(package, doc, cache) {
 	Session.Output("Attribute Groups");
 	
 	var package as EA.Package;
-	var root as EA.Package;
+
+	var attributes = findOrCreatePackage(package, 'Attributes', 'Attributes', 'Core Attributes', cache);
+	
+	var ag_root_id = 'Attribute group root';
+	
+	var root = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList/s:AttributeGroup[@ID="'+ag_root_id+'"]');
+	if (!root) {
+		package = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', ag_root_id, cache);
+	}
 	
 	var groups = doc.selectSingleNode('/s:STEP-ProductInformation/s:AttributeGroupList');
 	if (groups) {
-		root = digAttributeGroups(package, groups, cache);
-	}	
-
-	if (!root) {
-		root = findOrCreatePackage(package, 'Attribute Group', 'Attribute Groups', 'Attribute group root');
+		
+		var users_parent_id = doc.selectNodes('/s:STEP-ProductInformation/s:AttributeGroupList/s:AttributeGroup[@ParentID="'+ag_root_id+'"]');
+		if (users_parent_id.length > 0) {
+			package = digAttributeGroupsGroups(package, groups, cache, ag_root_id);
+		}	
+		else {
+			package = digAttributeGroups(package, groups, cache);
+		}
+		
 	}
 	
-    readAttributes(root, doc, cache);
+    readAttributes(attributes, doc, cache);
 }
 	
 function readAttributes(package, doc, cache) {
@@ -358,6 +406,7 @@ function readAttributes(package, doc, cache) {
 		var ProductMode = XMLGetNamedAttribute(attribute, 'ProductMode');
 		
 		element = findOrCreateElement(package, 'Class', 'Attribute', name, id, cache) ;
+		//element.Name = name
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		if (ProductMode == 'Normal') {
@@ -450,6 +499,31 @@ function readUserTypes(package, doc, cache) {
 	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : element }
 	var child2parents = new ActiveXObject("Scripting.Dictionary");  // { child.@ID : [ parent.@ID ] }
 	
+	// create roots if none exist
+			
+	var types = new ActiveXObject("Scripting.Dictionary");  // { @ID : stereotype,Name }
+	types.Add('Product user-type root',          'Product,Product UserType root'              );
+	types.Add('Entity user-type root',           'Entity,Entity user-type root'               );
+	types.Add('Classification 1 user-type root', 'Classification,Alternate Classifications'   );
+	types.Add('Asset user-type root',            'Asset,Assets'                               );
+	types.Add('Setup Group user-type root',      'SetupGroup,Setup Group type root'           );
+
+	var ids = types.Keys().toArray();
+	for (var i=0; i<ids.length; i++) {
+		var id = ids[i];
+		var st_name = types.Item(id);
+		var st = st_name.split(',')[0];
+		var name = st_name.split(',')[1];
+
+		var root = doc.selectSingleNode('/s:STEP-ProductInformation/s:UserTypes/s:UserType[@ID="'+id+'"]');
+		if (!root) {
+			element = findOrCreateElement(package, 'Class', st, name, id, cache);
+			element.Name = name
+			setTaggedValue(element, '@ID', id);
+			setTaggedValue(element, 'Name', name);
+		}
+	}
+	
 	var userType_list = doc.selectNodes('/s:STEP-ProductInformation/s:UserTypes/s:UserType');
 	for (var l=0; l<userType_list.length; l++) {
 		var userType = userType_list[l];
@@ -480,6 +554,7 @@ function readUserTypes(package, doc, cache) {
 		
 		parent = packages.Item(stereotype);
 		element = findOrCreateElement(parent, 'Class', stereotype, name, id, cache) ;
+		element.Name = name
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
 		
@@ -491,7 +566,7 @@ function readUserTypes(package, doc, cache) {
 		//diagram = diagrams.Item(stereotype);
 		//add_diagram_element(diagram, element);
 		
-		types.Add(id, element);
+		//types.Add(id, element);
 		child2parents.Add(id, []);
 		
 		var UserTypeLinks = userType.selectNodes('s:UserTypeLink');
@@ -598,6 +673,7 @@ function readReferences(package, doc, cache) {
 		
 		var stereotype = types.Item(reference.nodeName);
 		var reference_element = findOrCreateElement(reference_package, 'Class', 'Reference Definition', name, id, cache);
+		
 		setTaggedValue(reference_element, '@ID', id);
 		setTaggedValue(reference_element, 'Name', name);
 		setTaggedValue(reference_element, 'Type', stereotype);
@@ -649,6 +725,7 @@ function readReferences(package, doc, cache) {
 }
 
 function readSetupGroup(package, node, cache) {
+	Session.Output("Setup Groups");
 	
 	/*
 		<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
@@ -685,7 +762,6 @@ function readSetupGroup(package, node, cache) {
 }
 
 function readSetupGroups(package, doc, cache) {
-	Session.Output("Setup Groups");
 	/*
 		<SetupGroups>
 			<SetupGroup ID="GlobalBusinessRulesRoot" UserTypeID="GlobalBusinessRules">
@@ -732,9 +808,7 @@ function addRule(node, dependencies, elements, cache) {
 	var id = XMLGetNamedAttribute(node, 'ID');
 	var name = XMLGetNodeText(node, 's:Name');
 	var tipe = XMLGetNamedAttribute(node, 'Type');
-	Session.Output('id="'+id+'"'+' type="'+tipe+'"');
-	var config = XMLGetNodeText(node, 's:Configuration');	
-	//Session.Output('len='+config.length);
+	//Session.Output('id="'+id+'"'+' type="'+tipe+'"');
 	
 	addDependencies(id, node, dependencies);
 	
@@ -748,13 +822,13 @@ function addRule(node, dependencies, elements, cache) {
 		var parent_diagram = setupDiagram(parent_package, null, 'Class');
 		
 		var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
+		
 		setTaggedValue(element, '@ID', id);
 		setTaggedValue(element, 'Name', name);
-
-		var file as EA.File;
-		file = element.Files.AddNew(id, 'Local File');
-		file.Notes = config;
-		file.Update();
+		//setTaggedValue(element, 'Type', stereotype);
+		//element.Update();
+		
+		//add_diagram_element(parent_diagram, element);
 	}
 	
 	elements.Add(id, element);
@@ -837,70 +911,7 @@ function readRules(package, doc, cache) {
 	}
 	
 }
-
-function addWorkflow(node, dependencies, elements, cache) {
-	var element = null;
-	var id = XMLGetNamedAttribute(node, 'ID');
-	var name = XMLGetNodeText(node, 's:Name');
-	var tipe = XMLGetNamedAttribute(node, 'Type');
-	//Session.Output('id="'+id+'"'+' type="'+tipe+'"');
-	
-	addDependencies(id, node, dependencies);
-	
-	var parents = node.selectNodes('s:SetupGroupLink');
-	if (parents.length > 0) {
-		var parent = parents[0];
-		var parent_id = XMLGetNamedAttribute(parent, 'SetupGroupID');
-		//Session.Output('  parent id="'+parent_id+'"');
 		
-		var parent_package = getCache(cache, 'Business Rules', parent_id);
-		var parent_diagram = setupDiagram(parent_package, null, 'Class');
-		
-		var element = findOrCreateElement(parent_package, 'Class', tipe, name, id, cache);
-		setTaggedValue(element, '@ID', id);
-		setTaggedValue(element, 'Name', name);
-		//setTaggedValue(element, 'Type', stereotype);
-		//element.Update();
-		
-		//add_diagram_element(parent_diagram, element);
-	}
-	
-	elements.Add(id, element);
-	return element;
-}
-
-function readWorkflows(package, doc, cache) {	
-	Session.Output("Workflows");
-	
-	var package as EA.Package;
-	var diagram as EA.Element;
-
-	var elements = new ActiveXObject("Scripting.Dictionary");  // { id : element }
-
-	var dependencies = new ActiveXObject("Scripting.Dictionary");  // { source_id : [{id, alias}] }
-
-	/*
-	<STEPWorkflows>
-		<STEPWorkflow ID="wf_SubrangePriceChange" Selected="true" Referenced="true">
-			<SetupGroupLink SetupGroupID="mi_workflow"/>
-			<Name>Approved Subrange Submissions Corporate - Price Changes</Name>
-			<ValidUserTypeLink UserTypeID="sch_srh_sbrg"/>
-			<Configuration>base64 encoded xml of workflow</Configuration>
-			<LocalBusinessRule ID="acn-deda3001-de52-4641-b5f1-d47851c40cbc" Scope="Local" Type="Action" RunPrivileged="true">	
-		</STEPWorkflow>
-	</STEPWorkflows>
-	*/
-			
-	var workflows = doc.selectNodes('/s:STEP-ProductInformation/s:STEPWorkflows/*');
-	
-	for (var l=0; l<workflows.length; l++) {
-		var workflow = workflows[l];
-		var element = addWorkflow(workflow, dependencies, elements, cache);
-		// specifics
-	}
-	
-}
-
 function readKeys(package, doc, cache) {
 	Session.Output("Keys");
 }
@@ -950,20 +961,19 @@ function importStepXML(package) {
 		readAttrToTag(node, package, 'WorkspaceID');
 	}
 	
-	/*readUnitsOfMeasures(package, doc, cache);
+	readUnitsOfMeasures(package, doc, cache);
 	readListOfValuesGroups(package, doc, cache);
 	readAttributeGroups(package, doc, cache);
 	readUserTypes(package, doc, cache);
 	readUserTypeLinks(package, doc, cache);
-	readReferences(package, doc, cache);*/
+	readReferences(package, doc, cache);
 	readSetupGroups(package, doc, cache);
 	readRules(package, doc, cache);
-	readWorkflows(package, doc, cache);
-	/*readKeys(package, doc, cache);
+	readKeys(package, doc, cache);
 	readProducts(package, doc, cache);
 	readClassifications(package, doc, cache);
 	readEntities(package, doc, cache);
-	readAssets(package, doc, cache);*/
+	readAssets(package, doc, cache);
 }
 
 Repository.EnsureOutputVisible( "Debug" );

@@ -9,8 +9,13 @@ var element as EA.Element;
 var stereotype as EA.Stereotype;
 var taggedvalue as EA.TaggedValue;
 
+var done = new ActiveXObject("Scripting.Dictionary");  // { Element.ElementID : Element }
+
 function reset_geneology(package, diagram, element, stereotype, cache) {
 	Session.Output(element.Name+" id="+element.ElementID);
+	
+	if (done.Exists(element.ElementID)) return;
+	done.Add(element.ElementID, element);
 	
 	for (var c=0; c<element.Connectors.Count; c++) {
 		var connector as EA.Connector;

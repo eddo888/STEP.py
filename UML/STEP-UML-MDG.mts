@@ -1,7 +1,7 @@
 <MDG.Selections model="STEP-Model --- DBType=11;Connect=Provider=SSDB;SRC=C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\STEP-Model.qea;UID=;PWD=;">
-	<Technology id="Stibo STEP" name="Stibo STEP" version="2.5" notes="Stibo Systems STEP design model" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au" icon="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp" logo="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp"/>
+	<Technology id="Stibo STEP" name="Stibo STEP" version="2.6" notes="Stibo Systems STEP design model" filename="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML\Stibo-STEP-MDG.xml" infoURI="https://github.com/eddo888/STEP.py" supportURI="david.edson@stibosystems.com.au" icon="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp" logo="F:\mCloud\OneDrive - Stibo\Pictures\Logos\STEP\logo.bmp"/>
 	<Profiles directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Stereotypes.xml"/>
-	<TagVals tags="@ID,Accumulated,AllowUserValueAddition,Can Create,Can Delete,Can Instantiate,Can Join,Can Read,Can Terminate,Can Update,ContextID,Derived,ExternallyMaintained,Factor,FullTextIndexed,Inherited,InputMask,Mandatory,ManuallySorted,MaxLength,MaxValue,MinValue,MultiValued,Name,Offset,Referenced,ReferenceTargetLockedPolicy,Revised,Revision,Selected,ShowInWorkbench,UseValueID,WorkspaceID"/>
+	<TagVals tags="@ID,@ParentID,Accumulated,AllowUserValueAddition,Can Create,Can Delete,Can Instantiate,Can Join,Can Read,Can Terminate,Can Update,ContextID,Derived,ExternallyMaintained,Factor,FullTextIndexed,Inherited,InputMask,Mandatory,ManuallySorted,MaxLength,MaxValue,MinValue,MultiValued,Name,Offset,Referenced,ReferenceTargetLockedPolicy,Revised,Revision,Selected,ShowInWorkbench,UseValueID,WorkspaceID"/>
 	<DiagramProfile directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Diagram.xml"/>
 	<UIToolboxes directory="C:\Users\eddo8\git\github.com\eddo888\STEP.py\UML" files="STEP-UML-Profile-Toolbox.xml"/>
 	<Scripts>
@@ -23,11 +23,10 @@
 		<Script id="{B00A2572-E59F-4953-861E-21B0D7363F52}" name="Library" type="normal" language="JScript"/>
 		<Script id="{85B0216F-78EF-4e8d-BE55-3F63AF498BEF}" name="Stibo Export" type="normal" language="JScript"/>
 		<Script id="{794E7B21-B725-4d4b-9CA1-E0F4816AECC3}" name="Include Linked Parts" type="normal" language="JScript"/>
+		<Script id="{15221794-48D7-4e91-B1AA-A69035486621}" name="search_database" type="normal" language="JScript"/>
 		<Script id="{DF93B027-FD4B-48d3-9F03-1BE2468B49F5}" name="Import Connection References" type="normal" language="JScript"/>
 		<Script id="{A598A0AE-CEF2-4c04-AAF0-C5DD5813D731}" name="_set an ID for all in package" type="normal" language="JScript"/>
 		<Script id="{DE99F0F2-04E4-42c0-81F4-4E0005502D51}" name="JScript-XML" type="normal" language="JScript"/>
 	</Scripts>
-	<WorkspaceLayouts>
-		<WorkspaceLayout name="Stibo STEP"/>
-	</WorkspaceLayouts>
+	<WorkspaceLayouts/>
 </MDG.Selections>

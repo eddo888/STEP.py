@@ -1,5 +1,7 @@
 !INC Local Scripts.EAConstants-JScript
 //!INC EAScriptLib.JScript-XML
+//!INC User Scripts.JScript-XML[!INC Local Scripts.EAConstants-JScript
+//!INC EAScriptLib.JScript-XML
 //!INC User Scripts.JScript-XML
 !INC Stibo STEP.JScript-XML
 
@@ -380,7 +382,7 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 	if (! target) return;
 	if (! source) return;
 	
-	if (! target.Connectors) return;
+	//if (! target.Connectors) return;
 		
 	for (var c=0; c<target.Connectors.Count; c++) {
 		connector = target.Connectors.GetAt(c);

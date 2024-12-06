@@ -1,6 +1,6 @@
 <?xml  version='1.0' encoding='windows-1252' ?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="8017159A-0" name="STEP Types" version="2.5" notes="STEP Types"/>
+	<Documentation id="35B9027FE6" name="STEP Types" version="2.6" notes="STEP Types"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="Action" notes="" cx="0" cy="0" bgcolor="8036607" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Class" baseStereotypes="Stibo%20Class">
@@ -77,6 +77,7 @@
 			<Stereotype name="Attribute Group" notes="" cx="0" cy="0" bgcolor="2330219" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package">
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
+					<Tag name="@ParentID" type="" description="" unit="" values="" default=""/>
 					<Tag name="ManuallySorted" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
@@ -369,6 +370,7 @@
 			<Stereotype name="LOV Group" notes="" cx="0" cy="0" bgcolor="10025880" fontcolor="-1" bordercolor="-1" borderwidth="1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package">
 				<TaggedValues>
 					<Tag name="@ID" type="String" description="" unit="" values="" default=""/>
+					<Tag name="@ParentID" type="" description="" unit="" values="" default=""/>
 					<Tag name="Name" type="" description="" unit="" values="" default=""/>
 					<Tag name="Referenced" type="" description="" unit="" values="" default=""/>
 					<Tag name="Selected" type="" description="" unit="" values="" default=""/>
@@ -594,6 +596,13 @@
 						<Property name="isService" value="true"/>
 					</Apply>
 				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="Setup Group Types" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="Stibo Package" baseStereotypes="Stibo%20Package">
+				<TaggedValues>
+					<Tag name="@ID" type="" description="" unit="" values="" default=""/>
+					<Tag name="@ParentID" type="" description="" unit="" values="" default=""/>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="sFTP" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>

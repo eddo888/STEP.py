@@ -27,6 +27,7 @@
 		<Script id="{DF93B027-FD4B-48d3-9F03-1BE2468B49F5}" name="Import Connection References" type="normal" language="JScript"/>
 		<Script id="{A598A0AE-CEF2-4c04-AAF0-C5DD5813D731}" name="_set an ID for all in package" type="normal" language="JScript"/>
 		<Script id="{DE99F0F2-04E4-42c0-81F4-4E0005502D51}" name="JScript-XML" type="normal" language="JScript"/>
+		<Script id="{77B1AB25-97CF-4c4b-9F02-DA6C560833E5}" name="Reset Geneology" type="normal" language="JScript"/>
 	</Scripts>
 	<WorkspaceLayouts/>
 </MDG.Selections>

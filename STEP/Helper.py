@@ -31,8 +31,7 @@ class Helper:
 	def __init__(self, context=None, workspace=None, et_dts=datetime.now()):
 		if context: self.context = context
 		if workspace: self.workspace = workspace
-		self.et_dts = et_dts
-		
+		self.et_dts = et_dts	
 	def doc(self):
 		return STEP_ProductInformation(
 			ExportTime = self.et_dts,
@@ -51,7 +50,6 @@ class Helper:
 			Classifications = ClassificationsType(),
 			Entities = EntitiesType(),
 		)
-	
 	def cleaner(self, text):
 		tokens = OrderedDict([
 			['<','%%%%%lt%%%%%'],
@@ -64,12 +62,10 @@ class Helper:
 			while left in result:
 				result = result.replace(left, right)
 		return result
-
 	def hash(self, text):
 		hasher = hashlib.md5()
 		hasher.update(text.encode('UTF8'))
 		return hasher.hexdigest()
-
 	def create_attribute_group(self, id, name, parent=None):
 		attribute_group = AttributeGroupType(
 			ID = id,
@@ -83,8 +79,7 @@ class Helper:
 		if parent and isinstance(parent, AttributeGroupType):
 			parent.append(attribute_group)
 		
-		return attribute_group
-		
+		return attribute_group	
 	def create_user_type(self, id, name, parent, object_type=ObjectType.Product):
 		if isinstance(parent, UserTypeType):
 			parent_id = parent.ID
@@ -127,7 +122,6 @@ class Helper:
 			pass
 		
 		return user_type
-	
 	def create_attribute(self, id, name, validation='text', user_type=None, parent=None, field_type=FieldType.Specification):
 
 		attribute = AttributeType(
@@ -172,7 +166,6 @@ class Helper:
 			)
 
 		return attribute
-
 	def create_product(self, id, name, user_type, parent=None):
 
 		product = ProductType(
@@ -193,7 +186,6 @@ class Helper:
 				product.ParentID = parent
 
 		return product
-	
 	def create_classification(self, id, name, user_type, parent=None):
 
 		classification = ClassificationType(
@@ -214,7 +206,6 @@ class Helper:
 				classification.ParentID = parent
 
 		return classification
-	
 	def create_entity(self, id, name, user_type, parent=None):
 
 		entity = EntityType(
@@ -235,7 +226,6 @@ class Helper:
 				entity.ParentID = parent
 
 		return entity
-	
 	def create_asset(self, id, name, user_type, parent=None):
 
 		asset = AssetType(
@@ -256,7 +246,6 @@ class Helper:
 				asset.ParentID = parent
 
 		return asset
-	
 	def save(self, doc, file_name):
 		with open(file_name, 'w') as output:
 			printXML(str(doc.toxml()), output=output, colour=False)

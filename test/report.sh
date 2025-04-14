@@ -1,1 +1,1 @@
-C:/Users/eddo8/git/gitlab.stibo.dk/dave/Stibo/StepAPI/report.sh
+/cygdrive/c/Users/eddo8/git/gitlab.stibo.dk/dave/Stibo/StepAPI/report.sh

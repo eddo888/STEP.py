@@ -42,19 +42,19 @@ class Converter(object):
 
 	@args.property(short='w', help='workspace', default='Main')
 	def workspace(self): return
-	
+
 	@args.property(short='r', help='user type root node', default='XSD')
 	def root(self): return
-	
+
 	@args.property(short='p', help='prefix for STEP ID', default='ID')
 	def prefix(self): return
-	
+
 	def __init__(self, context=None, workspace=None, root=None, prefix=None):
 		if context: self.context = context
 		if workspace: self.workspace = workspace
 		if root: self.root = root
 		if prefix: self.prefix = prefix
-		
+
 		self.cname = '.cache.json'
 		try:
 			with open(self.cname,'r') as input:
@@ -71,13 +71,13 @@ class Converter(object):
 			ProductCrossReference = ProductCrossReferenceType,
 			Product	= ProductsType,
 		)
-		
+
 		self.step = {
 		    '/': {
 				self.root: {}
 			}
 		}
-		
+
 		self.ids = dict() # { type: { id: step}}
 
 		self.elements = dict() # { ns : { name : tipe }}
@@ -95,14 +95,14 @@ class Converter(object):
 			ListsOfValues = ListsOfValuesType(),
 			AttributeGroupList = AttributeGroupListType(),
 			AttributeList = AttributeListType(),
-			UserTypes = UserTypesType(), 
+			UserTypes = UserTypesType(),
 			CrossReferenceTypes = CrossReferenceTypesType(),
-			
-			Products = ProductsType(),			
+
+			Products = ProductsType(),
 		)
 
 		# add python Roots
-		
+
 		user_type_root = UserTypeType(
 			ID = self.__uuid('/', self.root, 'UserType'),
 			Name = [
@@ -135,7 +135,7 @@ class Converter(object):
 		)
 		self.__store('/', self.root, 'Group', attribute_group_root)
 		self.dom.AttributeGroupList.append(attribute_group_root)
-		
+
 		lovs_root = ListOfValuesGroupType(
 			ID = self.__uuid('/', self.root, 'LOVs'),
 			Name = [
@@ -157,7 +157,7 @@ class Converter(object):
 		self.nsp = {
 			'xs': 'http://www.w3.org/2001/XMLSchema',
 		}
-		
+
 		self.__groups(self.nsp, self.nsp['xs'])
 
 		# base types for duplication to actual
@@ -202,7 +202,7 @@ class Converter(object):
 					)
 				],
 				Validation = ValidationType(
-					BaseType=tipe, 
+					BaseType=tipe,
 					MaxLength=None
 				)
 			)
@@ -238,7 +238,7 @@ class Converter(object):
 		if tipe not in self.ids.keys():
 			self.ids[tipe] = dict()
 		self.ids[tipe][value.ID] = value
-		
+
 	def __groups(self, nsp, tns):
 		# setup main namespaces and groups
 		for p, name in nsp.items():
@@ -259,7 +259,7 @@ class Converter(object):
 			)
 			self.__store(u, name, 'Group', ag)
 			self.step['/'][self.root]['Group'].append(ag)
-			
+
 			LOVs = ListOfValuesGroupType(
 				ID = self.__uuid(u, name, 'LOVs'),
 				Name = [
@@ -268,7 +268,7 @@ class Converter(object):
 			)
 			self.__store(u, name, 'LOVs', LOVs)
 			self.step['/'][self.root]['LOVs'].append(LOVs)
-		
+
 	def __schema(self, dir, file):
 		'''
 		setup the containers for the schem types
@@ -277,10 +277,10 @@ class Converter(object):
 		if file in self.xsd:
 			return
 		self.xsd.add(file)
-		
+
 		# todo fix up the nsp root and tns
 		logger.debug(file)
-		
+
 		xsd = '%s/%s'%(dir, file) if len(dir) else file
 		(doc, ctx, nsp) = getContextFromFile(xsd)
 
@@ -289,18 +289,18 @@ class Converter(object):
 		prefix = None
 
 		logger.debug(tns)
-		
+
 		nsp[prefix] = tns
 
 		# xmlns not setting in nsp ??
-		
+
 		for p, n in self.nsp.items():
 			if p not in nsp.keys():
 				nsp[p] = n
 				ctx.xpathRegisterNs(p, n)
 
 		self.__groups(nsp, tns)
-		
+
 		for xsi in getElements(ctx,'/xs:schema/xs:import'):
 			xsd = getAttribute(xsi,'schemaLocation')
 			if not xsd: continue
@@ -308,13 +308,13 @@ class Converter(object):
 			if _nsp:
 				for p, n in _nsp.items():
 					nsp[p] = n
-			
+
 		self.__containers(doc, ctx, nsp, tns, prefix)
 		self.__simpleTypes(doc, ctx, nsp, tns, prefix)
 		self.__complexTypes(doc, ctx, nsp, tns, prefix)
 		self.__complexAttrs(doc, ctx, nsp, tns, prefix)
 		self.__elements(doc, ctx, nsp, tns, prefix)
-				
+
 		return nsp
 
 	def __containers(self, doc, ctx, nsp, tns, prefix):
@@ -326,7 +326,7 @@ class Converter(object):
 			name = getAttribute(complexType,'name')
 			logger.debug('\t%s,%s'%(prefix, name))
 			u = nsp[prefix]
-			
+
 			ag = AttributeGroupType(
 				ID = self.__uuid(u, name, 'Group'),
 				ShowInWorkbench = 'true',
@@ -338,25 +338,25 @@ class Converter(object):
 			self.__store(tns, name, 'Group', ag)
 
 			self.step[tns][tns]['Group'].append(ag)
-			
+
 		return
-		
+
 	def __simpleTypes(self, doc, ctx, nsp, tns, prefix):
 		'''
 		setup simple types as LOV and Attributes
 		'''
-		
+
 
 		self.__groups(nsp, tns)
-					
-		
+
+
 		for simpleType in getElements(ctx,'/xs:schema/xs:simpleType'):
 			name = getAttribute(simpleType, 'name')
 			desc = getElementText(ctx, 'xs:annotation/xs:documentation', simpleType)
 			u = nsp[prefix]
 
 			multi = False
-			
+
 			for restriction in getElements(ctx, 'xs:restriction', simpleType):
 				tipe = getAttribute(restriction, 'base')
 				multi = False
@@ -364,7 +364,7 @@ class Converter(object):
 			for lizt in getElements(ctx, 'xs:list', simpleType):
 				tipe = getAttribute(lizt, 'itemType')
 				multi = True
-				
+
 			myAttribute = AttributeType(
 				ID = self.__uuid(u, name, 'Attribute'),
 				Name = [
@@ -386,7 +386,7 @@ class Converter(object):
 				myAttribute.Name = [
 					NameType(desc)
 				]
-				
+
 			self.__store(u, name, 'Attribute', myAttribute)
 			self.dom.AttributeList.append(myAttribute)
 
@@ -400,7 +400,7 @@ class Converter(object):
 						NameType(name)
 					],
 					Validation = ValidationType(
-						BaseType='text', 
+						BaseType='text',
 						MaxLength=None
 					),
 					ParentID = self.step['/'][self.root]['LOVs'].ID  # could nest this
@@ -415,7 +415,7 @@ class Converter(object):
 								ev
 							)
 						)
-					
+
 				self.__store(u, name, 'LOV', LOV)
 				self.dom.ListsOfValues.append(LOV)
 
@@ -428,9 +428,9 @@ class Converter(object):
 					BaseType=getattr(self.xs, str(tipe), 'text') ,
 					MaxLength=None
 				)
-		
+
 		return
-	
+
 	def __complexTypes(self, doc, ctx, nsp, tns, prefix):
 		'''
 		setup complex types to usertypes
@@ -438,7 +438,7 @@ class Converter(object):
 		'''
 
 		# first pass create usertypes
-		
+
 		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
 			name = getAttribute(complexType, 'name')
 			desc = getElementText(ctx, 'xs:annotation/xs:documentation', complexType)
@@ -474,10 +474,10 @@ class Converter(object):
 				else:
 					t = base
 					u = tns
-			
+
 			self.__store(url, name, 'UserType', userType)
 			self.dom.UserTypes.append(userType)
-		
+
 
 		# second pass, link parents
 
@@ -492,7 +492,7 @@ class Converter(object):
 				tipe = getAttribute(xse, 'type')
 
 				if not tipe: continue
-				
+
 				if ':' in tipe:
 					(p,t) = tuple(tipe.split(':'))
 					u = nsp[p]
@@ -502,7 +502,7 @@ class Converter(object):
 
 				if 'UserType' in self.step[u][t].keys():
 					source = self.step[u][t]['UserType']
-					
+
 					source.UserTypeLink.append(
 						UserTypeLinkType(
 							UserTypeID = userType.ID
@@ -522,7 +522,7 @@ class Converter(object):
 							AttributeID=attribute.ID
 						)
 					)
-					
+
 		return
 
 	def __complexAttrs(self, doc, ctx, nsp, tns, prefix):
@@ -531,7 +531,7 @@ class Converter(object):
 		'''
 
 		# todo, make elements referencing simple types use attributes.
-		
+
 		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
 			name = getAttribute(complexType, 'name')
 			url = nsp[prefix]
@@ -551,8 +551,8 @@ class Converter(object):
 
 				source = self.step[u][t]['Attribute']
 				logger.debug(source.ID)
-				
-				key = f'{name}@{attr}'				
+
+				key = f'{name}@{attr}'
 
 				# create a copy
 				attribute = AttributeType(
@@ -580,7 +580,7 @@ class Converter(object):
 				)
 				self.__store(u, key, 'Attribute', attribute)
 				self.dom.AttributeList.append(attribute)
-				
+
 				attribute.UserTypeLink.append(
 					UserTypeLinkType(
 						UserTypeID = userType.ID
@@ -592,7 +592,7 @@ class Converter(object):
 						AttributeID = attribute.ID
 					)
 				)
-				
+
 
 		return
 
@@ -611,14 +611,14 @@ class Converter(object):
 		for element in getElements(ctx,'/xs:schema/xs:element'):
 			name = getAttribute(element, 'name')
 			tipe = getAttribute(element, 'type')
-			
+
 			if ':' in tipe:
 				(p,etipe) = tuple(tipe.split(':'))
 				url = nsp[p]
 			else:
 				etipe = tipe
 				url = tns
-		
+
 			source = self.step[url][etipe]['UserType']
 			source.NamePattern = name
 
@@ -635,14 +635,14 @@ class Converter(object):
 		for element in getElements(ctx,'//xs:element'):
 			name = getAttribute(element, 'name')
 			tipe = getAttribute(element, 'type')
-			
+
 			if ':' in tipe:
 				(p,etipe) = tuple(tipe.split(':'))
 				url = nsp[p]
 			else:
 				etipe = tipe
 				url = tns
-		
+
 			complex_type = getElement(ctx, f'//xs:complexType[@name="{etipe}"]')
 			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
 			#if not child:
@@ -653,7 +653,7 @@ class Converter(object):
 
 			source = self.step[url][etipe]['UserType']
 			source.NamePattern = name
-			
+
 			for xsa in getElements(ctx, 'xs:attribute', complex_type):
 				attr = getAttribute(xsa, 'name')
 				tipe = getAttribute(xsa, 'type')
@@ -670,7 +670,7 @@ class Converter(object):
 				elem = getAttribute(xse, 'name')
 				t = getAttribute(xse, 'type')
 				if not etipe: continue
-				
+
 				if ':' in t:
 					(p,t) = tuple(t.split(':'))
 					u = nsp[p]
@@ -683,7 +683,7 @@ class Converter(object):
 					self.elements[tns][elem] = target
 
 		return
-	
+
 	def __products(self, xsd, xml):
 		'''
 		load sample data
@@ -705,7 +705,7 @@ class Converter(object):
 		if validation != 0:
 			sys.stderr.write('schema invalid %s\n'%validation)
 			return
-		
+
 		root = DATA.doc.getRootElement()
 		tns = str(root.ns().content)
 		root_home = self.step['/'][self.root]['Product']
@@ -718,7 +718,7 @@ class Converter(object):
 		xdtf = '%Y-%m-%dT%H:%M:%S'
 		sdf = '%d-%b-%Y'
 		sdtf = '%Y-%m-%d %H:%M:%S'
-		
+
 		def valueAdd(ns, ename, aname, value, product, indent):
 
 			#if aname not in self.step[ns][ename]['Attributes'].keys(): return
@@ -762,7 +762,7 @@ class Converter(object):
 					)
 
 			return
-			
+
 		def walk(node, parent=None, indent='', path=''):
 
 			name = node.name
@@ -770,7 +770,7 @@ class Converter(object):
 			logger.info(f'{indent}{ns}:{name}')# -> {path}')
 
 			id = self.__hash(path)
-			
+
 			usertype = self.elements[tns][name]
 
 			product = ProductType(
@@ -800,12 +800,12 @@ class Converter(object):
 			for index, child in enumerate(getElements(DATA.ctx, '*', node)):
 				if child.name in self.elements[tns].keys():
 				   	walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
-					
+
 			return
 
 		walk(root, parent=root_home, path=salt)
 		return
-	
+
 	@args.operation
 	@args.parameter(name='xsd', param='xsds', short='s', nargs='*', help='XML Schema Definition')
 	@args.parameter(name='xml', short='x', help='XML Sample Data')
@@ -822,7 +822,7 @@ class Converter(object):
 				xf = os.path.expanduser(xml)
 				if os.path.isfile(xf):
 					self.__products(xsd, xf) # todo: update and test
-				
+
 		if self.verbose:
 			logger.info('step: ',prettyLogger.Info(self.step))
 
@@ -831,7 +831,7 @@ class Converter(object):
 			_output = open(output,'w')
 		else:
 			_output = sys.stdout
-			
+
 		doParse(StringIO(xml), _output, colour=False, rformat=True)
 
 		if output:
@@ -841,7 +841,7 @@ class Converter(object):
 			json.dump(self.cache, output, indent=4, sort_keys=True)
 
 		return
-	
+
 	@args.operation
 	def export(self):
 		'''
@@ -857,6 +857,6 @@ class Converter(object):
 				sys.stdout.write('%s\n'%node)
 		walker(self.cache)
 
-		
+
 if __name__ == '__main__': args.execute()
 

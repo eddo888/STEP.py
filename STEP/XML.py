@@ -27,7 +27,7 @@ class Converter(object):
 	tool to convert excel into step xml formats
 
 	'''
-	
+
 	@args.property(default='PIM', help='prefix to use on ID definitions')
 	def prefix(self): return
 
@@ -38,12 +38,12 @@ class Converter(object):
 	def workspace(self): return
 
 	parent_type_id = 'Product user-type root'
-	parent_product_id = 'Product hierarchy root' 
+	parent_product_id = 'Product hierarchy root'
 
 	#_____________________________________________________________
 	def __init__(self):
 		self.ids = IdentityCache()
-		
+
 		self.types   = OrderedDict()
 		self.ag      = None    # parent attribute group
 		self.ags     = OrderedDict()
@@ -66,7 +66,7 @@ class Converter(object):
 			Classifications = ClassificationsType(),
 		)
 
-		
+
 	#_____________________________________________________________
 	def __del__(self):
 		self.close()
@@ -76,17 +76,17 @@ class Converter(object):
 	def close(self):
 		if hasattr(self, 'ids'):
 			self.ids.save()
-		
+
 
 	#_____________________________________________________________
 	def save(self, file):
 		with codecs.open(file, 'w', encoding='utf8') as output:
 			printXML(self.doc.toxml(), output=output)
-					
+
 
 	#_____________________________________________________________
 	def make_prod(self, id, name, type_id, parent_id):
-		
+
 		self.prods[id] = ProductType(
 			ID = id,
 			Name = [NameType(name)],
@@ -97,7 +97,7 @@ class Converter(object):
 
 		return self.prods[id]
 
-				
+
 	#_____________________________________________________________
 	def make_type(self, id, name, parent_type_id):
 
@@ -137,7 +137,7 @@ class Converter(object):
 
 		if id not in self.attrs.keys():
 			attr = AttributeType(
-				ID = id, 
+				ID = id,
 				Name = [NameType(name)],
 				MultiValued = 'false',
 				ProductMode = 'Normal', #specification, use "Property" for description
@@ -153,7 +153,7 @@ class Converter(object):
 
 				MetaData = MetaDataType(
 				),
-				
+
 				UserTypeLink = [
 					UserTypeLinkType(
 						UserTypeID = user_type_id
@@ -178,16 +178,16 @@ class Converter(object):
 					tooltip,
 					AttributeID='ToolTip'
 				))
-								 
+
 			self.doc.AttributeList.append(attr)
 			self.attrs[id] = attr
 
 		return self.attrs[id]
-	
-		
+
+
 	#_____________________________________________________________
 	def make_ref(self, id, name, source, target):
-			
+
 		reference = ProductCrossReferenceTypeType(
 			ID = id,
 			Name = [NameType(name)],
@@ -202,10 +202,10 @@ class Converter(object):
 				)
 			]
 		)
-		
+
 		self.doc.CrossReferenceTypes.append(reference)
 
-			
+
 	#_____________________________________________________________
 	def make_lov(self, id, name, tipe, length, parent='List Of Values group root'):
 		if id not in self.lovs.keys():
@@ -216,15 +216,15 @@ class Converter(object):
 				UseValueID = 'true',
 				AllowUserValueAddition = 'false',
 				Validation = ValidationType(
-					BaseType=tipe, 
+					BaseType=tipe,
 					MaxLength=length
 				),
 				Value = [
 				]
-			)	
+			)
 			self.doc.ListsOfValues.append(lov)
 			self.lovs[id] = lov
-			
+
 		return self.lovs[id]
 
 
@@ -249,7 +249,7 @@ class Converter(object):
 		| a  | aye  |
 		| b  | bee  |
 		|----+------|
- 
+
 		<group_id=sheet_name/>
 
 		'''
@@ -280,7 +280,7 @@ class Converter(object):
 			lov.Value.append(ValueType(value_name, ID=value_id))
 
 		self.save(output)
-				
+
 
 	#_____________________________________________________________
 	@args.operation
@@ -290,13 +290,13 @@ class Converter(object):
 		'''
 		process an excel file to create a STEP import
 
-		| Class  | CSV        | Name | Type    | Length | 
+		| Class  | CSV        | Name | Type    | Length |
 		|--------+------------+------+---------+--------|
 		| Group1 | group1.csv | id   | varchar | 40     |
 		| Group1 | group1.csv | name | varchar | 256    |
 
 		'''
-		
+
 		self.ag = AttributeGroupType(
 			ID = self.prefix,
 			ShowInWorkbench = 'true',
@@ -353,7 +353,7 @@ class Converter(object):
 
 		Source = None
 		CSV = None
-		
+
 		for r in list(range(sheet.nrows))[1:]:
 			cols = list(map(
 				lambda x: sheet.cell(r, x).value,
@@ -364,7 +364,7 @@ class Converter(object):
 			if row.Source != Source:
 				Source = row.Source
 				print('%s'%Source)
-				
+
 				root_path = 'Root_%s'%(row.Source)
 				root_id  = '%s_%s'%(self.prefix, self.ids.get(root_path))
 				root_name = root_path.replace('_',' ')
@@ -373,7 +373,7 @@ class Converter(object):
 
 			if row.CSV != CSV:
 				CSV = row.CSV
-					  
+
 				types_path = 'Node_%s_%s'%(row.Source, row.CSV)
 				types_id   = '%s_%s'%(self.prefix, self.ids.get(types_path))
 				types_name = types_path.replace('_',' ')
@@ -398,7 +398,7 @@ class Converter(object):
 				attr_len  = length
 			else:
 				attr_len = None
-				
+
 			print('\t\t\t%s'%attr_path)
 
 			attr = self.make_attr(attr_id, attr_name, attr_type, attr_len, self.ags[tipe.ID].ID, tipe.ID)
@@ -414,7 +414,7 @@ class Converter(object):
 					AttributeID=attribute.ID
 				)
 			)
-			
+
 		self.save(output)
 
 

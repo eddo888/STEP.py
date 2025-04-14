@@ -10,7 +10,7 @@ with codecs.open(path.join(pwd, 'README.md'), 'r', encoding='utf8') as input:
 
 name='STEP.py'
 user='eddo888'
-version='2.42'
+version='2.43'
 
 setup(
 	name=name,
@@ -48,6 +48,6 @@ setup(
 		'bin/step2uml.py',
 		'bin/uml2step.py',
 		'bin/converter.py',
-	], 
+	],
 )
 

@@ -42,7 +42,7 @@ class STEP(object):
 	'''
 	base class to store the common properties and operations
 	'''
-	
+
 	@args.property(short='H', default='http://host')
 	def hostname(self): return
 
@@ -63,7 +63,7 @@ class STEP(object):
 
 	@args.property(short='C', default='Context1')
 	def context(self): return
-	
+
 	@args.property(short='W', default='Main')
 	def workspace(self): return
 
@@ -93,7 +93,7 @@ class STEP(object):
 		}
 		self.path = 'restapi' if self.asXML else 'restapiv2'
 
-		
+
 	#________________________________________________________________________________________________
 	def process(self, path, params=None, kwargs=dict()):
 		'''
@@ -116,15 +116,15 @@ class STEP(object):
 			sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result
 
-	
+
 	#________________________________________________________________________________________________
 	def get(self, path, params=None):
 		result = self.process(path, params, kwargs=dict())
 		if not result:
 			raise Exception('not found')
 		return self.export(result.text)
-	
-	
+
+
 	#________________________________________________________________________________________________
 	def put(self, path, body=None, params=None, headers=None):
 		url = '%s/%s/%s'%(self.hostname, self.path, path)
@@ -145,7 +145,7 @@ class STEP(object):
 				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result.text
 
-	
+
 	#________________________________________________________________________________________________
 	def post(self, path, body=None, params=None, headers=None):
 		url = '%s/%s/%s'%(self.hostname, self.path, path)
@@ -187,7 +187,7 @@ class STEP(object):
 				sys.stderr.write('%s: %s\n'%(result, result.text))
 		return result.text
 
-	
+
 	#________________________________________________________________________________________________
 	def file(self, path, destination):
 		params={
@@ -213,22 +213,22 @@ class STEP(object):
 			dir = os.path.dirname(self.output)
 			if dir and len(dir) > 0 and not os.path.isdir(dir):
 				os.makedirs(os.path.dirname(self.output))
-				
+
 			_output = open(self.output,'w')
 
 		elif self.silent:
 			_output = Silencer()
-		
+
 		else:
 			_output = sys.stdout
-			 
+
 		_output.write(result)
 
 		if self.output:
 			_output.close()
-			
+
 		return result
-			
+
 
 #====================================================================================================
 @args.command(name='assets')
@@ -236,13 +236,13 @@ class Assets(STEP):
 	'''
 	MIME type assets
 	'''
-	
+
 	base = 'assets'
-	
+
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation
@@ -305,11 +305,11 @@ class Assets(STEP):
 		if len(parents) > 0: body['classifications'] = parents
 		if tipe: body['objectType'] = tipe
 		if name: body['name'] = name
-		
+
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
-		   	"allow-overwrite": overwrite,	
+		   	"allow-overwrite": overwrite,
 		}
 
 		for nvp in values:
@@ -352,7 +352,7 @@ class Assets(STEP):
 	def purge(self, id):
 		result = super().post('%s/%s/purge'%(self.base, id))
 		return result
-	
+
 
 #====================================================================================================
 @args.command(name='process-types')
@@ -365,7 +365,7 @@ class ProcessTypes(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation
@@ -387,7 +387,7 @@ class ProcessTypes(STEP):
 		else:
 			return super().get('%s/%s/processes'%(self.base, id))
 
-	
+
 #====================================================================================================
 @args.command(name='processes')
 class Processes(STEP):
@@ -399,7 +399,7 @@ class Processes(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation
@@ -409,7 +409,7 @@ class Processes(STEP):
 		'''
 		return super().get(self.base)
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation
 	def get(self, id):
@@ -421,7 +421,7 @@ class Processes(STEP):
 		else:
 			return super().get('background-processes/%s'%id)
 
-		
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get error report, JSON only !')
 	def report(self, id):
@@ -430,7 +430,7 @@ class Processes(STEP):
 		'''
 		return super().get('background-processes/%s/execution-report'%id)
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get attachments, JSON only !')
 	def attachments(self, id):
@@ -439,7 +439,7 @@ class Processes(STEP):
 		'''
 		return super().get('background-processes/%s/attachments'%id)
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get attachment metadata, JSON only !')
 	def attachment_metadata(self, id, attachmentId):
@@ -458,17 +458,17 @@ class Processes(STEP):
 		'''
 		return super().file('background-processes/%s/attachments/%s/content'%(id,attachmentId), output)
 
-	
+
 #====================================================================================================
 @args.command(name='objects')
 class ObjectsByKey(STEP):
 
 	base = 'objectsbykey'
-	
+
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get object by keyid and key')
@@ -487,7 +487,7 @@ class Products(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='list the products')
@@ -509,14 +509,14 @@ class Products(STEP):
 		}
 		if inheriteddata:
 		   	params["includeInheritedData"] = inheriteddata
-				
+
 		result = super().get('%s/%s'%(self.base, id), params=params)
 		if save:
 			with open('/restapi/products/%s'%id,'w') as output:
 				output.write(result)
 		return result
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='approve product by id')
 	@args.parameter(name='id', help='the ID of product')
@@ -543,7 +543,7 @@ class Products(STEP):
 		result = super().post('%s'%self.base, body=json.dumps(body))
 		return json.loads(result)
 
-			
+
 	#________________________________________________________________________________________________
 	@args.operation(help='create or repalce a product')
 	@args.parameter(name='name', short='n')
@@ -562,9 +562,9 @@ class Products(STEP):
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
-		   	"allow-overwrite": overwrite,	
+		   	"allow-overwrite": overwrite,
 		}
-		
+
 		for nvp in values:
 			(attr,value) = tuple(nvp.split('='))
 			body['values'][attr] = dict(value=dict(value=value))
@@ -573,7 +573,7 @@ class Products(STEP):
 		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
 		return json.loads(result)
 
-			
+
 	#________________________________________________________________________________________________
 	@args.operation(help='delete product by id')
 	@args.parameter(name='id', help='the ID of product')
@@ -618,7 +618,7 @@ class Products(STEP):
 	@args.parameter(name='referenceID', help='the ID of reference')
 	def references(self, id, referenceID):
 		return super().get('%s/%s/references/%s'%(self.base, id, referenceID))
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get references of product by id')
@@ -643,7 +643,7 @@ class Products(STEP):
 		}
 		for nvp in values:
 			_name, _value = nvp.split('=')
-			payload['values'][_name] = { 
+			payload['values'][_name] = {
 				"calculated": False,
 				"contextLocal": True,
 				"value": {
@@ -721,11 +721,11 @@ class Entities(STEP):
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 
-		
+
 	#________________________________________________________________________________________________
 	@args.property(short='r', default='Entity hierarchy root')
 	def root(self): return
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='list of children of entity hierarchy root')
 	def list(self):
@@ -737,7 +737,7 @@ class Entities(STEP):
 	@args.parameter(name='id', help='the ID of entity')
 	@args.parameter(name='inheriteddata', short='i', flag=True, help='include inherited data')
 	def get(self, id, inheriteddata=False):
-			
+
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
@@ -781,11 +781,11 @@ class Entities(STEP):
 		if parent: body['parent'] = parent
 		if tipe: body['objectType'] = tipe
 		if name: body['name'] = name
-		
+
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
-		   	"allow-overwrite": overwrite,	
+		   	"allow-overwrite": overwrite,
 		}
 
 		for nvp in values:
@@ -796,7 +796,7 @@ class Entities(STEP):
 		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
 		return json.loads(result)
 
-			
+
 	#________________________________________________________________________________________________
 	@args.operation(help='approve entity by id')
 	@args.parameter(name='id', help='the ID of entity')
@@ -860,7 +860,7 @@ class Entities(STEP):
 					},
 					{
 						"conditionType": conditionType,
-						"operator": operator, 
+						"operator": operator,
 						"queryString": queryString,
 					}
 				]
@@ -868,7 +868,7 @@ class Entities(STEP):
 		})
 		headers = { 'Content-Type' : 'application/json' }
 		return super().post('%s/search'%(self.base), body=body, headers=headers)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='delete entity by id')
@@ -892,7 +892,7 @@ class Entities(STEP):
 		result = super().post('%s/%s/purge'%(self.base, id))
 		return result
 
-	
+
 #====================================================================================================
 @args.command(name='classifications')
 class Classifications(STEP):
@@ -903,11 +903,11 @@ class Classifications(STEP):
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
 
-		
+
 	#________________________________________________________________________________________________
 	@args.property(short='r', default='Metcash_Root_Metcash')
 	def root(self): return
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='list of children of classification hierarchy root')
 	def list(self):
@@ -955,7 +955,7 @@ class Classifications(STEP):
 			json.dump(body, sys.stderr, indent=4)
 		result = super().post('%s'%self.base, body=json.dumps(body))
 		return json.loads(result)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='create or repalce a classification')
@@ -971,11 +971,11 @@ class Classifications(STEP):
 		if parent: body['parent'] = parent
 		if tipe: body['objectType'] = tipe
 		if name: body['name'] = name
-		
+
 		params={
 			"context" : self.context,
 			"workspace" : self.workspace,
-		   	"allow-overwrite": overwrite,	
+		   	"allow-overwrite": overwrite,
 		}
 
 		for nvp in values:
@@ -986,34 +986,34 @@ class Classifications(STEP):
 		result = super().put('%s/%s'%(self.base, id), params=params, body=json.dumps(body))
 		return json.loads(result)
 
-			
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
 	def references(self, parent_id, reference_id):
 		return super().get('%s/%s/incoming-references/%s'%(self.base, parent_id, reference_id))
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
 	def assets(self, id):
 		return super().get('%s/%s/assets'%(self.base, id))
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get children of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
 	def children(self, id):
 		return super().get('%s/%s/children'%(self.base,id))
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get values of classification by id')
 	@args.parameter(name='id', help='the ID of classification')
 	def values(self, id):
 		return super().get('%s/%s/values'%(self.base,id))
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='set values of classification by id')
@@ -1070,68 +1070,68 @@ class Endpoints(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
-		
+
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of endpoints')
 	def list(self):
 		return super().get('%s'%self.base)
 
-	
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of inbound endpoints, JSON only !')
 	def list_inbound(self):
 		return super().get('inbound-integration-endpoints')
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the status of an inbound endpoint, JSON only !')
 	def status_inbound(self, id):
 		return super().get('inbound-integration-endpoints/%s/status'%id)
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the background processes of an inbound endpoint, JSON only !')
 	def processes_inbound(self, id):
 		return super().get('inbound-integration-endpoints/%s/worker-processes'%id)
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of outbound endpoints, JSON only !')
 	def list_outbound(self):
 		return super().get('outbound-integration-endpoints')
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the status of an outbound endpoint, JSON only !')
 	def status_outbound(self, id):
 		return super().get('outbound-integration-endpoints/%s/status'%id)
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the background processes of an outbound endpoint, JSON only !')
 	def processes_outbound(self, id):
 		return super().get('outbound-integration-endpoints/%s/worker-processes'%id)
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get the logs')
 	def log(self, id):
 		return super().get('%s/%s/log'%(self.base, id))
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get errors')
 	def errors(self, id):
 		return super().get('%s/%s/errorexcerpts'%(self.base, id))
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get background processes')
 	def processes(self, id):
 		return super().get('%s/%s/backgroundprocesses'%(self.base, id))
-	
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='invoke an endpoint')
@@ -1147,7 +1147,7 @@ class Endpoints(STEP):
 	@args.operation(help='invoke an outbound endpoint')
 	def invoke_outbound(self, id):
 		return super().post(f'outbound-integration-endponits/{id}/invoke')
-	
+
 
 #====================================================================================================
 @args.command(name='imports')
@@ -1155,13 +1155,13 @@ class Imports(STEP):
 	'''
 	MIME type imports
 	'''
-	
+
 	base = 'import'
-	
+
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(name='import')
@@ -1182,7 +1182,7 @@ class Imports(STEP):
 			headers = { 'Content-Type' : 'application/octet-stream' }
 			result = super().post('%s/%s'%(self.base, id), body=body, headers=headers, params=params)
 			return result
-		
+
 
 #====================================================================================================
 @args.command(name='exports')
@@ -1190,13 +1190,13 @@ class Exports(STEP):
 	'''
 	MIME type exports
 	'''
-	
+
 	base = 'export'
-	
+
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(name='export')
@@ -1234,12 +1234,12 @@ class Workflow(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of workflows')
 	def list(self):
-		return super().get('%s'%self.base)				
+		return super().get('%s'%self.base)
 
 
 	#________________________________________________________________________________________________
@@ -1260,7 +1260,7 @@ class Workflow(STEP):
 		'''
 		instantiate a workflow process instance for node
 		'''
-		
+
 		body = json.dumps(dict(
 			node=dict(
 				id=node_id,
@@ -1268,20 +1268,20 @@ class Workflow(STEP):
 			),
 			message=message
 		))
-		
+
 		headers = { 'Content-Type' : 'application/json' }
-		result = super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)		
+		result = super().post('%s/%s/instances'%(self.base, workflow_id), body=body, headers=headers)
 
 		response = json.loads(result)
 		if not 'id' in response.keys():
 			return response
-				
+
 		if id_as_base64:
 			return response['id']
-			
+
 		instance = base64.b64decode(response['id']).decode('UTF-8')
 		return json.loads(instance)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='terminate a workflow instance')
@@ -1291,8 +1291,8 @@ class Workflow(STEP):
 		'''
 		terminate workflow process instance
 		'''
-		return super().delete('%s/%s/instances/%s'%(self.base, workflow_id, instance_id))		
-		
+		return super().delete('%s/%s/instances/%s'%(self.base, workflow_id, instance_id))
+
 
 #====================================================================================================
 @args.command(name='tasks')
@@ -1303,7 +1303,7 @@ class Task(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get a list of workflows')
@@ -1317,63 +1317,63 @@ class Task(STEP):
 		'''
 		search for workflow instances
 		'''
-		
+
 		query = dict(
 			workflow=workflow_id,
 			state=state_id,
 		)
-		
+
 		if node_id:
 			query['node'] = dict(
 				id=node_id,
 				type=node_types[node_type]
 			)
-				
+
 		body = json.dumps(query)
-		
-		headers = { 
+
+		headers = {
 			'Content-Type' : 'application/json',
 			'Accept' : 'application/json',
 		}
-			
+
 		result = super().post('%s/search'%(self.base), body=body, headers=headers)
-		
+
 		#print(result)
-		
+
 		items = json.loads(result)
-		
+
 		if id_as_base64:
 			return items
-			
+
 		instances=[]
-		
+
 		for item in items:
-			instance = base64.b64decode(item)		
+			instance = base64.b64decode(item)
 			instances.append(json.loads(instance.decode('UTF-8')))
-		
+
 		return instances
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get workflow task by id')
 	@args.parameter(name='id', help='the ID of workflow task')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='claim workflow task by id')
 	@args.parameter(name='id', help='the ID of workflow task')
 	def claim(self, id):
 		return super().post('%s/%s/claim'%(self.base,id))
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get events for workflow task by id')
 	@args.parameter(name='id', help='the ID of workflow task')
 	def events(self, id):
 		return super().get('%s/%s/events'%(self.base,id))
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='trigger events workflow task by id')
@@ -1382,7 +1382,7 @@ class Task(STEP):
 	@args.parameter(name='anonymous', short='a', help='anonymously')
 	@args.parameter(name='message', short='m', help='optional message for transition')
 	def trigger(self, id, event_id, anonymous=False, message=None):
-		
+
 		payload = dict(
 			event = dict(
 				id=event_id,
@@ -1392,28 +1392,28 @@ class Task(STEP):
 
 		if message:
 			payload['message'] = message
-		
+
 		if self.verbose:
 			print(json.dumps(payload, indent='\t'))
 
 		body = json.dumps(payload)
 
-		headers = { 
+		headers = {
 			'Content-Type' : 'application/json',
 			'Accept' : 'application/json',
 		}
-			
+
 		result = super().post('%s/%s/trigger-event'%(self.base, id), body=body, headers=headers)
 		return json.loads(result)
-		
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='release workflow task by id')
 	@args.parameter(name='id', help='the ID of workflow task')
 	def release(self, id):
 		return super().post('%s/%s/release'%(self.base,id))
-		
-	
+
+
 #====================================================================================================
 @args.command(name='attributes')
 class Attributes(STEP):
@@ -1423,14 +1423,14 @@ class Attributes(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-				
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get attribute definition by id')
 	@args.parameter(name='id', help='the ID attribute')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
+
 
 #====================================================================================================
 @args.command(name='lovs')
@@ -1441,14 +1441,14 @@ class ListsOfValues(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-				
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get LOV definition by id')
 	@args.parameter(name='id', help='the ID LOV')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
+
 	#________________________________________________________________________________________________
 	@args.operation(help='get LOV definition by id')
 	@args.parameter(name='id', help='the ID LOV')
@@ -1465,14 +1465,14 @@ class ObjectTypes(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-				
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get object type definition by id')
 	@args.parameter(name='id', help='the ID object type')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
+
 #====================================================================================================
 @args.command(name='reference-types')
 class ReferenceTypes(STEP):
@@ -1482,13 +1482,13 @@ class ReferenceTypes(STEP):
 	#________________________________________________________________________________________________
 	def __init__(self, asXML=None, verbose=None, output=None, silent=True, hostname=None, username=None, context=None, workspace=None):
 		super().__init__(asXML=asXML, verbose=verbose, output=output, silent=silent, hostname=hostname, username=username, context=context, workspace=workspace)
-				
+
 
 	#________________________________________________________________________________________________
 	@args.operation(help='get reference definition by id')
 	@args.parameter(name='id', help='the ID reference type')
 	def get(self, id):
 		return super().get('%s/%s'%(self.base,id))
-		
+
 
 

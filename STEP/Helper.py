@@ -27,11 +27,11 @@ class Helper:
 	verbose = False
 	context = 'Context1'
 	workspace = 'Main'
-	
+
 	def __init__(self, context=None, workspace=None, et_dts=datetime.now()):
 		if context: self.context = context
 		if workspace: self.workspace = workspace
-		self.et_dts = et_dts	
+		self.et_dts = et_dts
 	def doc(self):
 		return STEP_ProductInformation(
 			ExportTime = self.et_dts,
@@ -43,9 +43,9 @@ class Helper:
 			ListsOfValues = ListsOfValuesType(),
 			AttributeGroupList = AttributeGroupListType(),
 			AttributeList = AttributeListType(),
-			UserTypes = UserTypesType(), 
+			UserTypes = UserTypesType(),
 			CrossReferenceTypes = CrossReferenceTypesType(),
-			
+
 			Products = ProductsType(),
 			Classifications = ClassificationsType(),
 			Entities = EntitiesType(),
@@ -75,11 +75,11 @@ class Helper:
 					NameType(name)
 				]
 		)
-		
+
 		if parent and isinstance(parent, AttributeGroupType):
 			parent.append(attribute_group)
-		
-		return attribute_group	
+
+		return attribute_group
 	def create_user_type(self, id, name, parent, object_type=ObjectType.Product):
 		if isinstance(parent, UserTypeType):
 			parent_id = parent.ID
@@ -105,7 +105,7 @@ class Helper:
 			user_type.IsCategory="true"
 			user_type.AllowInDesignTemplate='false'
 			user_type.AllowQuarkTemplate='false'
-			
+
 		if object_type == ObjectType.Classification:
 			user_type.ClassificationOwnsProductLinks="false"
 			user_type.AllowInDesignTemplate='false'
@@ -120,7 +120,7 @@ class Helper:
 
 		if object_type == ObjectType.Asset:
 			pass
-		
+
 		return user_type
 	def create_attribute(self, id, name, validation='text', user_type=None, parent=None, field_type=FieldType.Specification):
 
@@ -135,14 +135,14 @@ class Helper:
 				NameType(name)
 			],
 			Validation = ValidationType(
-				BaseType=validation, 
+				BaseType=validation,
 				MaxLength=None
 			),
 			AttributeGroupLink = [],
 			UserTypeLink = [],
 		)
 
-		if parent:		
+		if parent:
 			if isinstance(parent, AttributeGroupType):
 				parent_id = parent.ID
 			else:

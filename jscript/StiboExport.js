@@ -384,6 +384,8 @@ function writeUserTypes(package, doc, cache) {
 		var tipe = tipes[t];
 		//Session.Output('tipe='+tipe);
 		
+		if (! cache.Exists(tipe)) continue;
+			
 		var items = cache.Item(tipe).Items().toArray();
 		for (var i=0; i<items.length; i++) {
 			var item as EA.Element;
@@ -397,9 +399,9 @@ function writeUserTypes(package, doc, cache) {
 			writeYesNo(_UserType, item, 'Selected');
 			writeYesNo(_UserType, item, 'Referenced');
 			writeTagToAttr(_UserType, item, 'ReferenceTargetLockPolicy');
-			writeTagToAttr(_UserType, item, 'ManuallySorted');
+			writeYesNo(_UserType, item, 'ManuallySorted');
 
-			if (tipe == 'UserType') {
+			if (tipe == 'UserType' || tipe == 'Product') {
 				_UserType.setAttribute('AllowInDesignTemplate','false');
 				_UserType.setAttribute('AllowQuarkTemplate','false');
 				_UserType.setAttribute('IsCategory','true');
@@ -561,6 +563,10 @@ function exportStepXML(package) {
     root = AddElementNS(doc, 'STEP-ProductInformation', namespace);
     root.setAttribute('ExportTime', package.Modified);
 
+	root.setAttribute('xmlns',"http://www.stibosystems.com/step");
+	root.setAttribute('xmlns:xsi',"http://www.w3.org/2001/XMLSchema-instance");
+	root.setAttribute('xsi:schemaLocation',"http://www.stibosystems.com/step PIM.xsd");
+	
 	writeTagToAttr(root, package, 'ContextID');
 	writeTagToAttr(root, package, 'WorkspaceID');
 		

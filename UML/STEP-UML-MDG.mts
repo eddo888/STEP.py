@@ -12,6 +12,7 @@
 		<Script id="{F00BF06E-D5FD-468c-B194-EAFEFBBA23E8}" name="_set tag defaults" type="normal" language="JScript"/>
 		<Script id="{10B5221B-4ED1-4c85-A57B-EB92688910BD}" name="Stibo Import" type="normal" language="JScript"/>
 		<Script id="{2DAD3A0C-06D8-4479-A1C0-F933ADC9B3E0}" name="_find uses of attribute" type="normal" language="JScript"/>
+		<Script id="{4A1120BD-BE78-487b-9A01-517186C9F5AE}" name="Set Defaults" type="normal" language="JScript"/>
 		<Script id="{6CB7FA3D-C056-4b60-8E0D-42F97E1A1849}" name="_read_tags" type="normal" language="JScript"/>
 		<Script id="{69E923B9-61C0-4a1f-B2C3-B6262D164237}" name="Set Link Names" type="normal" language="JScript"/>
 		<Script id="{B57EE350-3252-4c6c-B598-CC8C37FBE5FE}" name="Set Stereotype" type="normal" language="JScript"/>

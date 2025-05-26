@@ -29,6 +29,17 @@ product_nvps.Add('ReferenceTargetLockPolicy',"Strict");
 product_nvps.Add('Referenced',"true");
 product_nvps.Add('Selected',"true");
 
+var reference_nvps = new ActiveXObject("Scripting.Dictionary");  // { name: value }
+defaults.Add('Reference Definition', reference_nvps);
+
+reference_nvps.Add('Selected','true');
+reference_nvps.Add('Referenced','true');
+reference_nvps.Add('Inherited', 'false');
+reference_nvps.Add('Accumulated', 'false');
+reference_nvps.Add('Revised', 'false');
+reference_nvps.Add('Mandatory', 'false');
+reference_nvps.Add('MultiValued','true');
+
 var diagram = Repository.GetCurrentDiagram();
 
 for (var e=0; e<diagram.SelectedObjects.Count; e++) {

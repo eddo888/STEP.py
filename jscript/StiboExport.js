@@ -15,6 +15,8 @@ function writeUnitsOfMeasures(package, doc, cache) {
 	*/
 	var package as EA.Package;
 
+	Session.Output('UOMs');
+	
 	var root = doc.documentElement;
 	var _unit_list = AddElementNS(root, 'UnitList', namespace);
 	if (! cache.Exists('UOM')) return;
@@ -140,6 +142,8 @@ function writeListOfValues(package, doc, cache) {
 	var element as EA.Element;
 	var diagram as EA.Diagram;
 
+	Session.Output('LOVs')
+	
 	var root = doc.documentElement;
 	var _list = AddElementNS(root, 'ListsOfValues', namespace);
 	if (! cache.Exists('LOV')) return;
@@ -229,6 +233,8 @@ function writeAttributeGroups(package, doc, cache) {
 	var diagram as EA.Diagram;
 	var _diagram as EA.Diagram;
 	
+	Session.Output('Attribute Groups');
+	
 	var root = doc.documentElement;
 	var _parent = AddElementNS(root, 'AttributeGroupList', namespace);
 	
@@ -262,6 +268,8 @@ function writeAttributes(package, doc, cache) {
 		</Attribute>
 	*/
 	var package as EA.Package;
+	
+	Session.Output('Attributes');
 	
 	var root = doc.documentElement;
 	var _parent = AddElementNS(root, 'AttributeList', namespace);
@@ -327,20 +335,21 @@ function writeAttributes(package, doc, cache) {
 			writeTagToAttr(_Validation, attribute, 'InputMask');
 		}
 		
+		//Session.Output('attribute name='+attribute.Name);
 		// attribute group link
 		for (var c=0; c<attribute.Connectors.Count; c++) {
 			var connector as EA.Connector;
 			connector = attribute.Connectors.GetAt(c);
 			//Session.Output('  connector stereotype='+connector.Stereotype);
 			if (connector.Stereotype == 'Attribute Link') {
-				var link as EA.Element;
-				link = Repository.GetElementByID(connector.ClientID);
-				//Session.Output('    client name='+link.Name);
-				if (link.Stereotype == 'Attribute Group') {
-					var _AttributeGroupLink = AddElementNS(_attribute, 'AttributeGroupLink', namespace);
-					writeTagToAttr(_AttributeGroupLink, link, 'AttributeGroupID', '@ID');
+				var other as EA.Element;
+				other =  Repository.GetElementByID(connector.ClientID);
+				if (other.Stereotype != 'Attribute Group') {
+					other = Repository.GetElementByID(connector.SupplierID);
 				}
-				
+				//Session.Output(attribute.Name + ' -> ' + other.Name);
+				var _AttributeGroupLink = AddElementNS(_attribute, 'AttributeGroupLink', namespace);
+				writeTagToAttr(_AttributeGroupLink, other, 'AttributeGroupID', '@ID');
 			}
 		}
 		
@@ -375,6 +384,7 @@ function writeUserTypes(package, doc, cache) {
         </UserType>
 	*/	
 	var package as EA.Package;
+	Session.Output('User Types');
 	
 	var root = doc.documentElement;
 	var _parent = AddElementNS(root, 'UserTypes', namespace);
@@ -468,6 +478,8 @@ function writeReferences(package, doc, cache) {
 	
 	var package as EA.Package;
 	
+	Session.Output('References');
+	
 	var root = doc.documentElement;
 	var _parent = AddElementNS(root, 'CrossReferenceTypes', namespace);
 	
@@ -518,7 +530,7 @@ function writeReferences(package, doc, cache) {
 				for (var c=0; c<item.Connectors.Count; c++) {
 					var connector as EA.Connector;
 					connector = item.Connectors.GetAt(c);
-					if (connector.Stereotype == 'Source' && connector.ClientID == item.ElementID) {
+					if (connector.Stereotype == 'Valid Source' && connector.ClientID == item.ElementID) {
 						var source as EA.Element;
 						source = Repository.GetElementByID(connector.SupplierID);
 						var _UserTypeLink = AddElementNS(reference, 'UserTypeLink', namespace);
@@ -530,7 +542,7 @@ function writeReferences(package, doc, cache) {
 				for (var c=0; c<item.Connectors.Count; c++) {
 					var connector as EA.Connector;
 					connector = item.Connectors.GetAt(c);
-					if (connector.Stereotype == 'Target' && connector.ClientID == item.ElementID) {
+					if (connector.Stereotype == 'Valid Target' && connector.ClientID == item.ElementID) {
 						var target as EA.Element;
 						target = Repository.GetElementByID(connector.SupplierID);
 						var _TargetUserTypeLink = AddElementNS(reference, 'TargetUserTypeLink', namespace);
@@ -553,7 +565,7 @@ function exportStepXML(package) {
     var doc; // as MSXML2.DOMDocument;
     var root; // as MSXML2.DOMNode;
 
-    //Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
+    Session.output('package.GUID="'+package.PackageGUID+'" modified="'+package.Modified+'"');
 
     fileName = getFileName(package, 1); // 0==open, 1==save
 

@@ -31,7 +31,7 @@ setup(
 		'xlrd',
 		'xlwt',
 		'dotmap',
-		'pyxb',
+		'pyxb-x',
 		'suds-py3',
 		'xmltodict',
 		'Baubles',

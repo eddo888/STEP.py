@@ -1146,7 +1146,7 @@ class Endpoints(STEP):
 	#________________________________________________________________________________________________
 	@args.operation(help='invoke an outbound endpoint')
 	def invoke_outbound(self, id):
-		return super().post(f'outbound-integration-endponits/{id}/invoke')
+		return super().post(f'outbound-integration-endpoints/{id}/invoke')
 
 
 #====================================================================================================

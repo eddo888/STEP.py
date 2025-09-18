@@ -324,7 +324,7 @@ class Assets(STEP):
 	#________________________________________________________________________________________________
 	@args.operation
 	def update(self, id, file):
-		with open(file) as input:
+		with open(file,'rb') as input:
 			body = input.read()
 			headers = { 'Content-Type' : 'application/octet-stream' }
 			return super().put('%s/%s/content'%(self.base, id), body=body, headers=headers)

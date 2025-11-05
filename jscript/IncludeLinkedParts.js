@@ -1,6 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
-!INC User Scripts.Library
-//!INC Stibo STEP.Library
+//!INC User Scripts.Library
+!INC Stibo STEP.Library
 
 function IncludeLinkedElements(diagram, depth) {
 	if (depth == null) depth = '';
@@ -21,7 +21,10 @@ function IncludeLinkedElements(diagram, depth) {
 		element = Repository.GetElementByID(diagram_object.ElementID);
 		Session.Output(element.Name+" id="+element.ElementID);
 		
-		for (var c=0; c<element.Connectors.Count; c++) {
+		// save set for later de duplication
+		var existing = new ActiveXObject("Scripting.Dictionary");  // { target id  : source id}
+		
+		for (var c=element.Connectors.Count-1; c>=0; c--) {
 			var connector as EA.Connector;
 			connector = element.Connectors.GetAt(c);
 			var other as EA.Element;
@@ -34,8 +37,16 @@ function IncludeLinkedElements(diagram, depth) {
 			if (other) {
 				Session.Output("    "+other.Name);
 				add_diagram_element(_diagram, other);
+				if (existing.Exists(other.ElementID)) {
+					element.Connectors.Delete(c);
+					element.update();
+				}
+				else {
+					existing.Add(other.ElementID, element.ElementID);
+				}
 			}
 		}
+		
 		
 		/*
 		var references = element.GetRelationSet(rsDependEnd);

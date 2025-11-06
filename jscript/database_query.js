@@ -22,22 +22,22 @@ if ( result.length > 0 )
 	var dom = XMLParseXML( result );
 	if ( dom) {
 		//Session.Output(dom);
-		
+
 		var nodes = dom.selectNodes('/EADATA/Dataset_0/Data/Row');
 		for (var n=0; n<1/*nodes.length*/;n++) {
 			var node = nodes[n];
-			
+
 			var children = node.selectNodes('*');
 			for (var c=0; c<children.length; c++) {
 				var child = children[c];
 				Session.Output(child.nodeName + '=' + child.text);
 			}
-			
+
 			//var s = XMLGetNodeText(node, "Object_ID");
 			//Session.Output('object_id='+s);
 		}
-		
-		
+
+
 	}
 }
 

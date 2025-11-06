@@ -2,7 +2,7 @@
 
 /**
  * @file JScript-XML
- * This script library contains helper functions to assist with reading and writing XML. Functions 
+ * This script library contains helper functions to assist with reading and writing XML. Functions
  * provided by this module are identified by the prefix XML
  * @author Sparx Systems
  * @date 2017-02-14
@@ -15,7 +15,7 @@ var XMLDOMDocumentVersion = "";
  * Attempts to create an MSXML2.DOMDocument object, depending upon the versions of MSXML available
  * on the current system. It will try to create in order of preference: 6.0, 3.0 or 4.0.
  *
- * @return A new XML DOMDocument object ready for processing. If the object could not be 
+ * @return A new XML DOMDocument object ready for processing. If the object could not be
  * created, the function will return null. Errors will be logged at the WARNING level.
  * Success will be logged at the TRACE level.
  */
@@ -24,7 +24,7 @@ function XMLCreateXMLObject()
 	var xmlDOM = null;
 	var ProgId = "";
 	var attempt = 0;
-	
+
 	while (xmlDOM == null)
 	{
 		switch (attempt++)
@@ -45,14 +45,14 @@ function XMLCreateXMLObject()
 			xmlDOM = null;
 		}
 	}
-	
+
 	if (xmlDOM != null)
 	{
 		xmlDOM.validateOnParse = false;
 		xmlDOM.async = false;
 		XMLDOMDocumentVersion = ProgId;
 	}
-	
+
 	return xmlDOM;
 }
 
@@ -61,14 +61,14 @@ function XMLCreateXMLObject()
  *
  * @param[in] xmlDocument (String) A String value containing an XML document.
  *
- * @return An XML DOMDocument representing the parsed XML Document. If the document could not be 
+ * @return An XML DOMDocument representing the parsed XML Document. If the document could not be
  * parsed, the function will return null. Parse errors will be logged at the WARNING level
  */
 function XMLParseXML( xmlDocument /* : String */ ) /* : MSXML2.DOMDocument */
 {
 	// Create a new DOM object
 	var xmlDOM = XMLCreateXMLObject();
-	
+
 	// Parse the string into the DOM
 	var parsed = xmlDOM.loadXML( xmlDocument );
 	if ( !parsed )
@@ -77,7 +77,7 @@ function XMLParseXML( xmlDocument /* : String */ ) /* : MSXML2.DOMDocument */
 		//LOGWarning( _XMLDescribeParseError(xmlDOM.parseError) );
 		xmlDOM = null;
 	}
-	
+
 	return xmlDOM;
 }
 
@@ -86,7 +86,7 @@ function XMLParseXML( xmlDocument /* : String */ ) /* : MSXML2.DOMDocument */
  *
  * @param[in] xmlPath (String) A String value containing the path name to the XML file to parse.
  *
- * @return An XML DOMDocument representing the parsed XML File.  If the document could not be 
+ * @return An XML DOMDocument representing the parsed XML File.  If the document could not be
  * parsed, the function will return null. Parse errors will be logged at the WARNING level
  */
 function XMLReadXMLFromFile( xmlPath /* : String */ ) /* : MSXML2.DOMDocument */
@@ -101,7 +101,7 @@ function XMLReadXMLFromFile( xmlPath /* : String */ ) /* : MSXML2.DOMDocument */
 		//LOGWarning( _XMLDescribeParseError(xmlDOM.parseError) );
 		xmlDOM = null;
 	}
-	
+
 	return xmlDOM;
 }
 
@@ -110,26 +110,26 @@ function XMLReadXMLFromFile( xmlPath /* : String */ ) /* : MSXML2.DOMDocument */
  *
  * @parameter[in] xmlDOM (MSXML2.DOMDocument) The XML DOMDocument to save
  * @parameter[in] filePath (String) The path to save the file to
- * @parameter[in] xmlDeclaration (Boolean) Whether the XML declaration should be included in the 
+ * @parameter[in] xmlDeclaration (Boolean) Whether the XML declaration should be included in the
  * output file
  * @parameter[in] indent (Boolean) Whether the output should be formatted with indents
  */
-function XMLSaveXMLToFile( xmlDOM /* : MSXML2.DOMDocument */, filePath /* : String */ , 
+function XMLSaveXMLToFile( xmlDOM /* : MSXML2.DOMDocument */, filePath /* : String */ ,
 	xmlDeclaration /* : Boolean */, indent /* : Boolean */ ) /* : void */
 {
 	// Create the file to write out to
 	var fileIOObject = new ActiveXObject( "Scripting.FileSystemObject" );
 	var outFile = fileIOObject.CreateTextFile( filePath, true );
-	
+
 	// Create the formatted writer
 	var xmlWriter = new ActiveXObject( "MSXML2.MXXMLWriter" );
 	xmlWriter.omitXMLDeclaration = !xmlDeclaration;
 	xmlWriter.indent = indent;
-		
+
 	// Create the sax reader and assign the formatted writer as its content handler
 	var xmlReader = new ActiveXObject( "MSXML2.SAXXMLReader" );
 	xmlReader.contentHandler = xmlWriter;
-	
+
 	// Parse and write the output
 	xmlReader.parse( xmlDOM );
 	outFile.Write( xmlWriter.output );
@@ -145,11 +145,11 @@ function XMLSaveXMLToFile( xmlDOM /* : MSXML2.DOMDocument */, filePath /* : Stri
  *
  * @return A String representing the value of the requested attribute
  */
-function XMLGetAttributeValue( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : String */, 
+function XMLGetAttributeValue( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : String */,
 	attributeName /* : String */ ) /* : String */
 {
 	var value = "";
-	
+
 	// Get the node at the specified path
 	var node = xmlDOM.selectSingleNode( nodePath );
 	if ( node )
@@ -182,7 +182,7 @@ function XMLGetAttributeValue( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : 
 		// Specified node not found
 		//LOGWarning( "Node not found at path: " + nodePath );
 	}
-	
+
 	return value;
 }
 
@@ -197,7 +197,7 @@ function XMLGetAttributeValue( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : 
 function XMLGetNodeText( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : String */ ) /* : String */
 {
 	var value = "";
-	
+
 	// Get the node at the specified path
 	var node = xmlDOM.selectSingleNode( nodePath );
 	if ( node != null )
@@ -207,9 +207,9 @@ function XMLGetNodeText( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : String
 	else
 	{
 		// Specified node not found
-		//LOGWarning( "Node not found at path: " + nodePath );	
+		//LOGWarning( "Node not found at path: " + nodePath );
 	}
-	
+
 	return value;
 }
 
@@ -225,13 +225,13 @@ function XMLGetNodeTextArray( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : S
 {
 	var nodeList = xmlDOM.documentElement.selectNodes( nodePath );
 	var textArray = new Array( nodeList.length );
-	
+
 	for ( var i = 0 ; i < nodeList.length ; i++ )
 	{
 		var currentNode = nodeList.item( i );
 		textArray[i] = currentNode.text;
 	}
-	
+
 	return textArray;
 }
 
@@ -247,7 +247,7 @@ function XMLGetNodeTextArray( xmlDOM /* : MSXML2.DOMDocument */, nodePath /* : S
 function XMLGetNamedAttribute( node /* : IXMLDOMNode */, attName /* : String */ ) /* : String */
 {
 	var value = "";
-	
+
 	var attrib = node.attributes.getNamedItem( attName );
 	if (attrib != null)
 	{
@@ -257,7 +257,7 @@ function XMLGetNamedAttribute( node /* : IXMLDOMNode */, attName /* : String */ 
 	{
 		//LOGWarning( "Attribute not found: " + attName );
 	}
-	
+
 	return value;
 }
 
@@ -269,14 +269,14 @@ function XMLGetNamedAttribute( node /* : IXMLDOMNode */, attName /* : String */ 
 function _XMLDescribeParseError( parseError )
 {
 	var reason = "Unknown Error";
-	
+
 	// If we have an error
 	if ( typeof(parseError) != "undefined" )
 	{
 		// Format a description of the error
-		reason = "XML Parse Error at [line: " + parseError.line + ", pos: " + 
+		reason = "XML Parse Error at [line: " + parseError.line + ", pos: " +
 			parseError.linepos + "] " + parseError.reason;
 	}
-	
+
 	return reason;
 }

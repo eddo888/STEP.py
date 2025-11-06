@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );

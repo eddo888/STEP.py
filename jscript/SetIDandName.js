@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -32,7 +32,7 @@ function dig_package(package) {
 		setTaggedValue(package, 'Name', prefix +' ' + package.Name);
 		package.Update();
 	}
-	
+
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
@@ -43,8 +43,8 @@ function dig_package(package) {
 		}
 		Session.Output('\telement stereotype='+element.Stereotype + ' name='+element.Name);
 	}
-	
-	for (var p=0; p<package.Packages.Count; p++) {	
+
+	for (var p=0; p<package.Packages.Count; p++) {
 		dig_package(package.Packages.GetAt(p));
 	}
 }

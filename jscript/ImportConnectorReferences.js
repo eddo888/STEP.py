@@ -10,7 +10,7 @@ var importIsImporting = false;
 var FSREAD = 1;
 
 Session.Output( "Starting" );
-//diagram = Repository.GetCurrentDiagram();	
+//diagram = Repository.GetCurrentDiagram();
 //package = Repository.GetPackageByID(diagram.PackageID);
 
 var benefit as EA.Element;
@@ -36,7 +36,7 @@ while ( !inputStream.AtEndOfStream )
 	// Get the curnet line and split it into segments based on the CSV_DELIMITER
 	var currentLine = inputStream.ReadLine();
 	var currentLineTokens = currentLine.split( CSV_DELIMITER );
-	
+
 	if ( currentLineTokens.length > 0 )
 	{
 		for ( var i = 0 ; i < currentLineTokens.length ; i++ )
@@ -44,11 +44,11 @@ while ( !inputStream.AtEndOfStream )
 			// Strip leading/trailing quotation marks
 			var quotationLeadRegEx = new RegExp( "^\"+?|^'+?", "gm" );
 			var quotationTrailRegEx = new RegExp( "\"+?$|'+?$", "gm" );
-			
+
 			currentLineTokens[i] = currentLineTokens[i].replace( quotationLeadRegEx, "" );
 			currentLineTokens[i] = currentLineTokens[i].replace( quotationTrailRegEx, "" );
 		}
-		
+
 		if ( lineCounter == 0 && firstRowContainsHeadings )
 		{
 			// Cache column heading positions
@@ -66,25 +66,25 @@ while ( !inputStream.AtEndOfStream )
 			var measurement_id = importCurrentRow[1];
 
 			if (benefit_id.length > 0) {
-				
+
 				benefit = Repository.GetElementByGuid(benefit_id);
 				measurement = Repository.GetElementByGuid(measurement_id);
-				
+
 				if (benefit && measurement) {
 					Session.Output('from '+benefit.Stereotype+' to '+measurement.Stereotype);
-					
+
 					connector = measurement.Connectors.AddNew('','Association');
 					connector.SupplierID = benefit.ElementID;
 					connector.StereotypeEx = 'Stibo BVA::Benefit 2 Measurement';
 					connector.Update();
-					
+
 					benefit.Connectors.Refresh();
 					measurement.Connectors.Refresh();
-					
+
 				}
 			}
 		}
-		
+
 		++lineCounter;
 	}
 }

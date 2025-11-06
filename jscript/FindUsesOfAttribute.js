@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -29,7 +29,7 @@ for (var a=0; a<attributes.Count; a++) {
 	attribute = attributes.getAt(a);
 	if (attribute.Stereotype == 'Attribute') {
 		Session.Output('attribute name='+attribute.Name);
-		
+
 		var claszes = findClassesThatUsesAttribute(cache, attribute);
 		for (var c=0; c<claszes.length; c++) {
 			var clasz as EA.Element;

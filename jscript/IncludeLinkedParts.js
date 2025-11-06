@@ -4,7 +4,7 @@
 
 function IncludeLinkedElements(diagram, depth) {
 	if (depth == null) depth = '';
-		
+
 	var _diagram as EA.Diagram;
 	_diagram = diagram;
 	/*
@@ -12,18 +12,18 @@ function IncludeLinkedElements(diagram, depth) {
 	Repository.ReloadDiagram(_diagram.DiagramID);
 	LayoutThisDiagram(_diagram);
 	*/
-	
+
 	for (var e=0; e<_diagram.SelectedObjects.Count; e++) {
 		var diagram_object as EA.DiagramObject;
 		diagram_object = _diagram.SelectedObjects.GetAt(e);
-		
+
 		var element as EA.Element;
 		element = Repository.GetElementByID(diagram_object.ElementID);
 		Session.Output(element.Name+" id="+element.ElementID);
-		
+
 		// save set for later de duplication
 		var existing = new ActiveXObject("Scripting.Dictionary");  // { target id  : source id}
-		
+
 		for (var c=element.Connectors.Count-1; c>=0; c--) {
 			var connector as EA.Connector;
 			connector = element.Connectors.GetAt(c);
@@ -35,7 +35,7 @@ function IncludeLinkedElements(diagram, depth) {
 				other = Repository.GetElementByID(connector.ClientID);
 			}
 			if (other) {
-				Session.Output("    "+other.Name);
+				Session.Output("	"+other.Name);
 				add_diagram_element(_diagram, other);
 				if (existing.Exists(other.ElementID)) {
 					element.Connectors.Delete(c);
@@ -46,8 +46,8 @@ function IncludeLinkedElements(diagram, depth) {
 				}
 			}
 		}
-		
-		
+
+
 		/*
 		var references = element.GetRelationSet(rsDependEnd);
 		if (references) {
@@ -56,17 +56,17 @@ function IncludeLinkedElements(diagram, depth) {
 			for (var r=0; r<parts.length; r++) {
 				var source as EA.Element;
 				source = Repository.GetElementById(parts[r]);
-				Session.Output("    "+source.Name);
+				Session.Output("	"+source.Name);
 				add_diagram_element(_diagram, source);
 			}
 		}
 		*/
 	}
-	
+
 	_diagram.Update();
 	Repository.ReloadDiagram(_diagram.DiagramID);
 	LayoutThisDiagram(_diagram);
-	
+
 }
 
 function IncludeLinkedParts() {

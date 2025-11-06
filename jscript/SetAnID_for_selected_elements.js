@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -29,9 +29,9 @@ for (var e=0; e<elements.Count; e++) {
 		underscored = underscored.replace(' ','_');
 	}
 
-	_name = setTaggedValue(element, 'Name', element.Name);	
+	_name = setTaggedValue(element, 'Name', element.Name);
 	_id = setTaggedValue(element, '@ID', prefix+underscored);
-	
+
 	Session.Output('element stereotype='+element.Stereotype+' name='+_name.Value+' id='+_id.Value);
 }
 

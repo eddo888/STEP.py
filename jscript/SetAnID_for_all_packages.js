@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -49,10 +49,10 @@ function dig(parent) {
 	for (var e=0; e<parent.Elements.Count; e++) {
 		var element as EA.Element;
 		element = parent.Elements.GetAt(e);
-		
+
 		for (var t=0; t<tipes.length; t++) {
 			var tipe = tipes[t];
-			
+
 			if (element.Stereotype == tipe) {
 				var tid = getTaggedValue(element, '@ID');
 				if (!tid || !tid.Value) {
@@ -66,7 +66,7 @@ function dig(parent) {
 	for	(var p=0; p<parent.Packages.Count; p++) {
 		var child as EA.Package;
 		child = parent.Packages.GetAt(p);
-		
+
 		dig(child);
 	}
 }

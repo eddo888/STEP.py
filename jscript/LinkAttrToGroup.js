@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -22,7 +22,7 @@ package = Repository.GetPackageByID(diagram.PackageID);
 add_diagram_package(diagram, package);
 
 if (package.StereotypeEx == 'Attribute Group') {
-	
+
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);

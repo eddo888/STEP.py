@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -25,11 +25,11 @@ defaults.Add('FullTextIndexed','No');
 defaults.Add('MultiValued','No');
 defaults.Add('ShowInWorkbench','Yes');
 defaults.Add('Type','Description');
- 
-function dog(package, element) { 
+
+function dog(package, element) {
 	var package as EA.Package;
 	var element as EA.Element;
-	
+
 	if (element.Stereotype == 'Attribute') {
 		var tag = setTaggedValue(element, 'Type', defaults.Item('Type'));
 		tag.Update();
@@ -51,13 +51,13 @@ function dog(package, element) {
 function dig(package) {
 	var package as EA.Package;
 	dog(package, package.Element);
-	
+
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
 		dog(package, element);
 	}
-	
+
 	for (var p=0; p<package.Packages.Count; p++) {
 		var child as EA.Package;
 		child = package.Packages.getAt(p);

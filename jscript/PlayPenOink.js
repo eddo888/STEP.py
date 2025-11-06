@@ -2,10 +2,10 @@
 !INC User Scripts.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -18,7 +18,7 @@ for (var i=0; i<items.Count; i++) {
 	var item as EA.Element;
 	var item = items.GetAt(i);
 	Session.Output('item stereotype='+item.Stereotype+' name='+item.Name);
-	
+
 	if (item.Stereotype == 'Attribute') {
 
 		var claszes = findClassesThatUsesAttribute(item);

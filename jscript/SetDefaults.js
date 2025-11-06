@@ -3,10 +3,10 @@
 !INC Stibo STEP.Library
 
 /*
- * Script Name: 
- * Author: 
- * Purpose: 
- * Date: 
+ * Script Name:
+ * Author:
+ * Purpose:
+ * Date:
  */
 
 Repository.EnsureOutputVisible( "Script" );
@@ -45,26 +45,26 @@ var diagram = Repository.GetCurrentDiagram();
 for (var e=0; e<diagram.SelectedObjects.Count; e++) {
 	var diagram_object as EA.DiagramObject;
 	diagram_object = diagram.SelectedObjects.GetAt(e);
-	
+
 	var element as EA.Element;
 	element = Repository.GetElementByID(diagram_object.ElementID);
 	Session.Output(element.Name+", id="+element.ElementID+", stereotype="+element.StereoType);
-	
+
 	if (defaults.Exists(element.StereoType)) {
 		var nvps = defaults.Item(element.StereoType);
-		
+
 		var keys = nvps.Keys().toArray();
 		for (var k=0; k<keys.length; k++) {
 			var key = keys[ k];
 			var value = nvps.Item(key);
-			
+
 			Session.Output('  key='+key+', value='+value);
 			setTaggedValue(element, key, value);
 		}
-		
+
 		element.Update();
 	}
-		
+
 }
 
 

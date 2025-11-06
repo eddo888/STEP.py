@@ -12,12 +12,12 @@ var elements = Repository.GetTreeSelectedElements();
 for (var e=0; e<elements.Count; e++) {
 	var element as EA.Element;
 	element = elements.GetAt(e);
-	
+
 	var stereotype as EA.Stereotype;
 	stereotype = element.Stereotype;
-	
+
 	Session.Output('element type="'+element.Type+'" name="'+element.Name+'" stereotype="'+stereotype+'"');
-	
+
 	element.Type = 'Action';
 	element.Stereotype = 'STEP Types::Business Action';
 	element.Update();

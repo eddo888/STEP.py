@@ -1,6 +1,6 @@
 !INC Local Scripts.EAConstants-JScript
 //!INC EAScriptLib.JScript-XML
-//!INC User Scripts.JScript-XML[!INC Local Scripts.EAConstants-JScript
+//!INC User Scripts.JScript-XML
 //!INC EAScriptLib.JScript-XML
 //!INC User Scripts.JScript-XML
 !INC Stibo STEP.JScript-XML
@@ -9,7 +9,7 @@ function DoNotDisturb(diagram) {
 	var diagram as EA.Diagram;
 	var package as EA.Package;
 	var tag as EA.TaggedValue;
-
+	
 	package = Repository.GetPackageByID(diagram.PackageID);
 	tag = getTaggedValue(package, 'DoNotLayout');
 	if (!tag) {
@@ -24,7 +24,7 @@ function LayoutThisDiagram(diagram) {
 	var diagram as EA.Diagram;
 	var package as EA.Package;
 	var tag as EA.TaggedValue;
-
+	
 	package = Repository.GetPackageByID(diagram.PackageID);
 	tag = getTaggedValue(package, 'DoNotLayout');
 	if (tag) {
@@ -36,33 +36,33 @@ function LayoutThisDiagram(diagram) {
 	}
 
 	var DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram;
-	var Project as EA.Project;
-
-	Project = Repository.GetProjectInterface();
-
-	DiagramGUID = Project.GUIDtoXML( diagram.DiagramGUID );
-
-	  //See ConstLayoutStyles in EAConstants-JScript
-	  //LayoutStyle = lsDiagramDefault
-	  LayoutStyle
-		= lsCycleRemoveDFS
-		| lsLayeringOptimalLinkLength
-		| lsInitializeDFSOut
+    var Project as EA.Project;
+      
+    Project = Repository.GetProjectInterface();
+      
+    DiagramGUID = Project.GUIDtoXML( diagram.DiagramGUID );
+      
+      //See ConstLayoutStyles in EAConstants-JScript
+      //LayoutStyle = lsDiagramDefault
+      LayoutStyle 
+		= lsCycleRemoveDFS 
+		| lsLayeringOptimalLinkLength 
+		| lsInitializeDFSOut 
 		| lsLayoutDirectionUp
 		;
+      
+      Iterations = 4;
+      LayerSpacing = 40;
+      ColumnSpacing = 20;
+      SaveToDiagram = false;
 
-	  Iterations = 4;
-	  LayerSpacing = 40;
-	  ColumnSpacing = 20;
-	  SaveToDiagram = false;
-
-	  Project.LayoutDiagramEx( DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram );
+      Project.LayoutDiagramEx( DiagramGUID, LayoutStyle, Iterations, LayerSpacing, ColumnSpacing, SaveToDiagram );
 }
 
 function set_stereotype(new_stereotype) {
 	// Show the script output window
 	Repository.EnsureOutputVisible( "Script" );
-
+		
 	// Create a diagram in the test package
 	var testDiagram as EA.Diagram;
 	testDiagram = Repository.GetCurrentDiagram();
@@ -72,11 +72,11 @@ function set_stereotype(new_stereotype) {
 
 	Session.Output("---------------------------------------------------------------------------------");
 	Session.Output( "diagramPackage[" + testDiagram.Name + "]=" + testPackage.Name );
-
+	
 	for (var o=0; o<testDiagram.SelectedObjects.Count; o++) {
 		var object as EA.DiagramObject;
 		object = testDiagram.SelectedObjects.GetAt(o);
-
+		
 		var element as EA.Element;
 		element = Repository.GetElementByID(object.ElementID);
 
@@ -84,7 +84,7 @@ function set_stereotype(new_stereotype) {
 		if (element.StereotypeEx != new_stereotype) {
 			element.StereotypeEx = new_stereotype;
 			element.Update();
-		}
+		}	
 	}
 
 	//Repository.ReloadDiagram(testDiagram.DiagramID);
@@ -97,7 +97,7 @@ function add_diagram_package(diagram, package) {
 	if (!diagram) return;
 	if (!package) return;
 	if (!package.Element) return;
-
+		
 	diagram_object = diagram.FindElementInDiagram(package.Element.ElementID);
 
 	if (diagram_object) {
@@ -115,7 +115,7 @@ function add_diagram_package(diagram, package) {
 function add_diagram_element(diagram, element) {
 	var diagram_object as EA.Diagram;
 	if (! diagram) return;
-
+		
 	diagram_object = diagram.FindElementInDiagram(element.ElementID);
 
 	if (diagram_object) {
@@ -157,13 +157,13 @@ function showCache(cache, package) {
 function fillCache(cache, package, indent) {
 	if (! indent) indent = '';
 	if (! cache) cache = new ActiveXObject("Scripting.Dictionary");
-
+		
 	var package as EA.Package;
 	//Session.Output(indent+'/'+package.Name);
-
+	
 	if (package.StereotypeEx) {
 		//putCache(cache, package.StereotypeEx, package);
-	}
+	}		
 	for (var e=0; e<package.Elements.Count; e++) {
 		var element as EA.Element;
 		element = package.Elements.GetAt(e);
@@ -179,7 +179,7 @@ function fillCache(cache, package, indent) {
 		child = package.Packages.GetAt(p);
 		fillCache(cache, child, indent+'  ');
 	}
-
+	
 	return cache;
 }
 
@@ -198,7 +198,7 @@ function putCache(cache, stereotype, element) {
 			cache.Item(stereotype).Add(tag.Value, element);
 		}
 	}
-
+	
 }
 
 function getCache(cache, stereotype, id) {
@@ -263,7 +263,7 @@ function findPackage(parent, stereotype, name, id) {
 			}
 		}
 	}
-
+	
 	if (!result) {
 		for (var c=0; c<parent.Packages.Count; c++) {
 			var child as EA.Package;
@@ -271,7 +271,7 @@ function findPackage(parent, stereotype, name, id) {
 			if (result) break;
 		}
 	}
-
+	
 	return result;
 }
 
@@ -279,13 +279,13 @@ function findOrCreatePackage(parent, stereotype, name, id, cache) {
 	var result as EA.Package;
 	var element as EA.Element;
 	result = findPackage(parent, stereotype, name, id);
-
+	
 	if (! result) {
 		result = parent.Packages.AddNew(name || '', 'Package');
 		result.Update();
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
-		Session.Output('+ package stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
+		//Session.Output('+ package stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
 	}
 
 	if (stereotype) {
@@ -293,7 +293,7 @@ function findOrCreatePackage(parent, stereotype, name, id, cache) {
 	}
 
 	element = result.Element;
-
+	
 	if (id) setTaggedValue(element, '@ID', id);
 	if (name) setTaggedValue(element, 'Name', name);
 
@@ -304,9 +304,9 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 	var parent as EA.Element;
 	var result as EA.Element;
 	if (! parent) return;
-
+	
 	result = getCache(cache, stereotype, id);
-
+	
 	if (! result) {
 		result = parent.Elements.AddNew(name, tipe);
 		result.Update();
@@ -316,16 +316,16 @@ function findOrCreateElement(parent, tipe, stereotype, name, id, cache) {
 		result.Update();
 		putCache(cache, stereotype, result);
 		//Session.Output('+ element stereotype="'+result.StereotypeEx+'" name="'+result.Name+'"');
-	}
+	}	
 	return result;
-
+	
 }
 
 function setTaggedValue(element, name, value) {
 	var result as EA.TaggedValue;
 	var element as EA.Element;
 	if (!element) return;
-
+		
 	if (element.Element) {
 		element = element.Element;
 	}
@@ -346,7 +346,7 @@ function setTaggedValue(element, name, value) {
 		result.Value = value;
 	}
 	result.Update();
-
+	
 	return result;
 }
 
@@ -357,7 +357,7 @@ function getTaggedValue(element, name) {
 		element = element.Element;
 	}
 	if (!element.TaggedValues) return;
-
+		
 	for (var t=0; t<element.TaggedValues.Count; t++) {
 		var tag as EA.TaggedValue;
 		tag = element.TaggedValues.GetAt(t);
@@ -378,21 +378,21 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 	var stereotype as EA.Stereotype;
 	var taggedvalue as EA.TaggedValue;
 	var prefix = '+';
-
+		
 	if (! target) return;
 	if (! source) return;
-
+	
 	//if (! target.Connectors) return;
-
+		
 	for (var c=0; c<target.Connectors.Count; c++) {
 		connector = target.Connectors.GetAt(c);
-		if (connector.SupplierID == source.ElementID && stereotype == ''+connector.Stereotype ) {
+		if (connector.SupplierID == source.ElementID) {
 			result = connector;
 			prefix = '~';
 			break;
 		}
 	}
-
+	
 	if (! result) {
 		result = target.Connectors.AddNew(name, tipe);
 		result.Direction = true;
@@ -400,9 +400,10 @@ function createOrReplaceConnector(source, target, stereotype, name, tipe) {
 		result.StereotypeEx = 'STEP Types::'+stereotype;
 		result.Update();
 		target.Update();
-		//Session.Output('+ connector stereotype="'+result.StereotypeEx+'" source="'+source.Name+'" target="'+target.Name+'"');
 	}
-
+	
+	//Session.Output(prefix+' connector stereotype="'+stereotype+'" source="'+source.Name+'" target="'+target.Name+'"');
+		
 	return result;
 }
 
@@ -411,7 +412,7 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 	var stereotype as EA.Stereotype;
 	if (!tipe) tipe='';
 	if (!value) value = '';
-
+		
 	var element as EA.Element;
 	var result as EA.Attribute;
 	var prefix = '+';
@@ -438,17 +439,17 @@ function findOrCreateAttribute(element, stereotype, name, tipe, value) {
 
 function findClassesThatUsesAttribute(cache, attribute) {
 	var attribute as EA.Element;
-	var claszes = [];
+	var claszes = [];	
 	var tipes = ['Product','Classification','Entity','Asset','Reference Definition'];
 	for (var t=0; t<tipes.length; t++) {
 		var tipe = tipes[t];
 		if (! cache.Exists(tipe)) continue;
-
+			
 		var _claszes = cache.Item(tipe).Items().toArray();
 		for (var j=0; j<_claszes.length; j++) {
 			var clasz as EA.Element;
 			clasz = _claszes[j];
-
+			
 			for (var k=0; k<clasz.Attributes.Count; k++) {
 				var item as EA.Attribute;
 				item = clasz.Attributes.GetAt(k);
@@ -522,7 +523,7 @@ function writeYesNo(xmlNode, element, attrName, tagName) {
 	//Session.Output('writeYesNo xmlNode='+xmlNode.nodeName+' element='+element.Name+' attrName='+attrName+' tagName='+tagName);
 	var tag = getTaggedValue(element, tagName);
 	if (tag) {
-		//Session.Output('	tag='+tag.Value);
+		//Session.Output('    tag='+tag.Value);
 		if (tag.Value == 'Yes') {
 			xmlNode.setAttribute(attrName, 'true');
 		}
@@ -537,7 +538,7 @@ function setupDiagram(package, name, diagram_type) {
 	var package as EA.Package;
 	var diagram as EA.Diagram;
 	if (! package) return;
-
+		
 	if (package.Diagrams) {
 		for (var d=0; d<package.Diagrams.Count; d++) {
 			diagram = package.Diagrams.GetAt(d);

@@ -269,7 +269,7 @@ class Assets(STEP):
 		'''
 		path='%s/%s/content'%(self.base, id)
 		name='/%s/%s/%s/content'%(self.path, self.base, id)
-		super().file(path=path, destination=output)
+		super().file(path, output)
 
 
 	@args.operation

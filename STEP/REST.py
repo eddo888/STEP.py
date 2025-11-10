@@ -194,7 +194,7 @@ class STEP(object):
 			"context" : self.context,
 			"workspace" : self.workspace
 		}
-		self.headers = None
+		self.headers['Accept'] = 'application/octet-stream'
 		result = self.process(path, params=params, kwargs=dict(stream=True))
 		if destination:
 			with open(destination, 'wb') as output:

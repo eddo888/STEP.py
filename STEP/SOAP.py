@@ -73,14 +73,22 @@ class StepSoapClient(object):
 	@args.property(short='p')
 	def password(self): return
 
+	@args.property(short='C')
+	def context(self): return
+
+	@args.property(short='W')
+	def workspace(self): return
+
 	@args.property(short='v', flag=True)
 	def verbose(self): return False
 
-	def __init__(self, hostname=None, wsdlpath=None, username=None, password=None, verbose=False):
+	def __init__(self, hostname=None, wsdlpath=None, username=None, password=None, context=None, workspace=None, verbose=False):
 		if hostname: self.hostname = hostname
 		if wsdlpath: self.wsdlpath = wsdlpath
 		if username: self.username = username
 		if password: self.password = password
+		if context: self.context = context
+		if workspace: self.workspace = workspace
 		if verbose:  self.verbose  = verbose
 
 		if self.verbose:
@@ -108,6 +116,10 @@ class StepSoapClient(object):
 		request = self.client.factory.create('ns1:accessContext')
 		request.userName = self.username
 		request.password = self.password
+		if self.context:
+			request.contextUrl = f'step://context?id={self.context}'
+		if self.workspace:
+			request.workspaceUrl = f'step://workspace?id={self.workspace}'
 		return request
 
 	@args.operation
@@ -174,6 +186,24 @@ class StepSoapClient(object):
 	@args.operation
 	def getContexts(self):
 		response = self.client.service.getContexts(self.username,self.password)
+		return response
+
+	@args.operation
+	def getTopProduct(self):
+		request = self.createAccessControl()
+		response = self.client.service.getTopProduct(request)
+		return response
+
+	@args.operation
+	def getTopClassification(self):
+		request = self.createAccessControl()
+		response = self.client.service.getTopClassification(request)
+		return response
+
+	@args.operation
+	def getTopEntity(self):
+		request = self.createAccessControl()
+		response = self.client.service.getTopEntity(request)
 		return response
 
 	@args.operation

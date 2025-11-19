@@ -13,7 +13,7 @@ from openpyxl import load_workbook
 from GoldenChild.xpath import *
 from Perdy.pyxbext import directory
 from Perdy.parser import printXML
-from Spanners.IdentityCache import IdentityCache
+from STEP.IdentityCache import IdentityCache
 from Argumental.Argue import Argue
 
 from STEP.XSD import *

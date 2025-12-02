@@ -574,7 +574,8 @@ function readUserTypes(package, doc, cache) {
 		//diagram = diagrams.Item(stereotype);
 		//add_diagram_element(diagram, element);
 		
-		user_types.Add(id, element);
+		//Session.Output("UserType id="+id+", name="+element.Name);	
+		user_types.Add(id, element);			
 		child2parents.Add(id, []);
 		
 		var UserTypeLinks = userType.selectNodes('s:UserTypeLink');

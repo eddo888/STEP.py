@@ -4,6 +4,7 @@ import os, sys, re, json, logging, hashlib, traceback, collections
 collections.MutableSequence = collections.abc.MutableSequence
 collections.Iterable = collections.abc.Iterable
 
+from lxml import etree as ET
 from enum import Enum
 from uuid import uuid4 as uuid
 from datetime import datetime
@@ -15,7 +16,6 @@ from collections import OrderedDict
 from Perdy.pyxbext import directory
 from Perdy.parser import doParse
 from Perdy.pretty import prettyPrint
-from GoldenChild.xpath import *
 
 from STEP.XML import *
 

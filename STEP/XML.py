@@ -4,13 +4,13 @@
 
 import sys, os, argparse, json, xmltodict, codecs, sqlalchemy
 
+from lxml import etree
 from datetime import datetime, date
 from decimal import Decimal
 from io import StringIO
 from collections import namedtuple, OrderedDict
 from openpyxl import load_workbook
 
-from GoldenChild.xpath import *
 from Perdy.pyxbext import directory
 from Perdy.parser import printXML
 from STEP.IdentityCache import IdentityCache

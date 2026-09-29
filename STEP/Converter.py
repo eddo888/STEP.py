@@ -8,6 +8,7 @@ import collections
 collections.MutableSequence = collections.abc.MutableSequence
 collections.Iterable = collections.abc.Iterable
 
+from lxml import etree as ET
 from uuid import uuid4 as uuid
 from datetime import datetime
 from dateutil import tz
@@ -21,7 +22,6 @@ from Argumental.Argue import Argue
 from Perdy.pyxbext import directory
 from Perdy.parser import doParse
 from Perdy.pretty import prettyPrint
-from GoldenChild.xpath import *
 
 from STEP.XML import *
 

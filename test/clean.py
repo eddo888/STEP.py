@@ -3,10 +3,9 @@
 import os,sys,re,codecs
 
 from collections import OrderedDict
+from lxml import etree as ET
 
 from Baubles.Colours import Colours
-from GoldenChild.xpath import *
-from Perdy.parser import printXML
 
 colours = Colours()
 
@@ -89,32 +88,33 @@ for file in sys.argv[1:]:
 		continue
 	
 	print(file)
-	
-	STEP = XML(*getContextFromFile(file))
-	STEP.ctx.xpathRegisterNs('step', 'http://www.stibosystems.com/step')
+
+	parser = ET.XMLParser(huge_tree=True)
+	STEP = ET.parse(file, parser=parser)
+	ns = {'step': 'http://www.stibosystems.com/step'}
 
 	for path, tests in keeps.items():
 		print(path)
 		keepers = set()
 
-		elements =  getElements(STEP.ctx, '%s/%s'%(base, path))
+		elements = STEP.xpath(f'{base}/{path}', namespaces=ns)
 
 		for test in tests:
-			for keep in getElements(STEP.ctx, '%s/%s[%s]'%(base, path, test)):
+			for keep in STEP.xpath(f'{base}/{path}[{test}]', namespaces=ns):
 				keepers.add(keep)
 
 		for element in elements:
+			id = element.attrib.get('ID',None)
 			if element in keepers:
-				print('\t+%s%s%s'%(colours.Green, getAttribute(element,'ID'), colours.Off))
+				print('\t+%s%s%s'%(colours.Green, id, colours.Off))
 			else:
-				print('\t-%s%s%s'%(colours.Red, getAttribute(element,'ID'), colours.Off))
-				element.unlinkNode()
-				element.freeNode()
+				print('\t-%s%s%s'%(colours.Red, id, colours.Off))
+				element.getparent().remove(element)
 
-	root = STEP.doc.getRootElement()
-	setAttribute(root, 'ContextID', 'Australian')
-	setAttribute(root, 'AutoApprove', 'Y')
+	root = STEP.getroot()
+	root.attrib['ContextID'] = 'Australian'
+	root.attrib['AutoApprove'] ='Y'
 
-	with codecs.open(file, 'w', encoding='utf8') as output:
-		printXML(str(STEP.doc), output=output)
+	STEP.write(file, pretty_print=True, xml_declaration=True, encoding='UTF8')
 		
+

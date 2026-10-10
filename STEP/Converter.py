@@ -31,6 +31,17 @@ args = Argue()
 
 logger.setLevel(logging.INFO)
 
+def detag(node):
+	pattern = re.compile('^\\{([^\\}]+)\\}(.*)$')
+	m = pattern.match(node.tag)
+	if m:
+		ns = m.group(1)
+		name = m.group(2)
+	else:
+		ns = None
+		name = node.tag
+	return ns, name
+	
 @args.command(single=True)
 class Converter(object):
 
@@ -274,57 +285,59 @@ class Converter(object):
 		setup the containers for the schem types
 		'''
 
-		if file in self.xsd:
-			return
+		if file in self.xsd: return
 		self.xsd.add(file)
 
 		# todo fix up the nsp root and tns
 		logger.debug(file)
 
-		xsd = '%s/%s'%(dir, file) if len(dir) else file
-		(doc, ctx, nsp) = getContextFromFile(xsd)
+		xsd = os.path.join(dir, file) if len(dir) else file
+		parser = ET.XMLParser(huge_tree=True)
+		doc = ET.parse(xsd, parser=parser)
+		root = doc.getroot()
+		nsp = root.nsmap
 
-		root = doc.getRootElement()
-		tns = getAttribute(root, 'targetNamespace')
+		tns = root.attrib.get('targetNamespace')
 		prefix = None
-
+		for p, n in nsp.items():
+			if n == tns:
+				prefix = p
+				break
+		
 		logger.debug(tns)
-
-		nsp[prefix] = tns
 
 		# xmlns not setting in nsp ??
 
 		for p, n in self.nsp.items():
 			if p not in nsp.keys():
 				nsp[p] = n
-				ctx.xpathRegisterNs(p, n)
 
 		self.__groups(nsp, tns)
 
-		for xsi in getElements(ctx,'/xs:schema/xs:import'):
-			xsd = getAttribute(xsi,'schemaLocation')
+		for xsi in doc.xpath('/xs:schema/xs:import', namespaces=nsp):
+			xsd = xsi.attrib.get('schemaLocation')
 			if not xsd: continue
 			_nsp = self.__schema(dir, xsd)
 			if _nsp:
 				for p, n in _nsp.items():
 					nsp[p] = n
 
-		self.__containers(doc, ctx, nsp, tns, prefix)
-		self.__simpleTypes(doc, ctx, nsp, tns, prefix)
-		self.__complexTypes(doc, ctx, nsp, tns, prefix)
-		self.__complexAttrs(doc, ctx, nsp, tns, prefix)
-		self.__elements(doc, ctx, nsp, tns, prefix)
+		self.__containers(doc, nsp, tns, prefix)
+		self.__simpleTypes(doc, nsp, tns, prefix)
+		self.__complexTypes(doc, nsp, tns, prefix)
+		self.__complexAttrs(doc, nsp, tns, prefix)
+		self.__elements(doc, nsp, tns, prefix)
 
 		return nsp
 
-	def __containers(self, doc, ctx, nsp, tns, prefix):
+	def __containers(self, doc, nsp, tns, prefix):
 		'''
 		setup groups for complex types
 		'''
 
-		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
-			name = getAttribute(complexType,'name')
-			logger.debug('\t%s,%s'%(prefix, name))
+		for complexType in doc.xpath('/xs:schema/xs:complexType', namespaces=nsp):
+			name = complexType.attrib.get('name')
+			logger.debug(f'\t{prefix}, {name}')
 			u = nsp[prefix]
 
 			ag = AttributeGroupType(
@@ -341,7 +354,7 @@ class Converter(object):
 
 		return
 
-	def __simpleTypes(self, doc, ctx, nsp, tns, prefix):
+	def __simpleTypes(self, doc, nsp, tns, prefix):
 		'''
 		setup simple types as LOV and Attributes
 		'''
@@ -350,19 +363,20 @@ class Converter(object):
 		self.__groups(nsp, tns)
 
 
-		for simpleType in getElements(ctx,'/xs:schema/xs:simpleType'):
-			name = getAttribute(simpleType, 'name')
-			desc = getElementText(ctx, 'xs:annotation/xs:documentation', simpleType)
+		for simpleType in doc.xpath('/xs:schema/xs:simpleType', namespaces=nsp):
+			name = simpleType.attrib.get('name')
+			doco = simpleType.xpath('xs:annotation/xs:documentation', namespaces=nsp)
+			desc = doco.text if doco else None
 			u = nsp[prefix]
 
 			multi = False
 
-			for restriction in getElements(ctx, 'xs:restriction', simpleType):
-				tipe = getAttribute(restriction, 'base')
+			for restriction in simpleType.xpath('xs:restriction', namespaces=nsp):
+				tipe = restriction.attrib.get('base')
 				multi = False
 
-			for lizt in getElements(ctx, 'xs:list', simpleType):
-				tipe = getAttribute(lizt, 'itemType')
+			for lizt in simpleType.xpath('xs:list', namespaces=nsp):
+				tipe = lizt.attrib.get('itemType')
 				multi = True
 
 			myAttribute = AttributeType(
@@ -390,7 +404,7 @@ class Converter(object):
 			self.__store(u, name, 'Attribute', myAttribute)
 			self.dom.AttributeList.append(myAttribute)
 
-			enumerations = getElements(ctx,'xs:restriction/xs:enumeration', simpleType)
+			enumerations = simpleType.xpath('xs:restriction/xs:enumeration', namespaces=nsp)
 
 			if len(enumerations) > 0:
 				LOV = ListOfValueType(
@@ -407,7 +421,7 @@ class Converter(object):
 				)
 
 				for enum in enumerations:
-					ev = getAttribute(enum,'value')
+					ev = enum.attrib.get('value')
 
 					if ev and len(ev):
 						LOV.Value.append(
@@ -431,7 +445,7 @@ class Converter(object):
 
 		return
 
-	def __complexTypes(self, doc, ctx, nsp, tns, prefix):
+	def __complexTypes(self, doc, nsp, tns, prefix):
 		'''
 		setup complex types to usertypes
 		and setup inheritance
@@ -439,9 +453,10 @@ class Converter(object):
 
 		# first pass create usertypes
 
-		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
-			name = getAttribute(complexType, 'name')
-			desc = getElementText(ctx, 'xs:annotation/xs:documentation', complexType)
+		for complexType in doc.xpath('/xs:schema/xs:complexType', namespaces=nsp):
+			name = complexType.attrib.get('name')
+			doco = complexType.xpath('xs:annotation/xs:documentation', namespaces=nsp)
+			desc = doco.text if doco else None
 			url = nsp[prefix]
 
 			userType = UserTypeType(
@@ -464,10 +479,11 @@ class Converter(object):
 			if desc:
 				userType.Name = [NameType(desc)]
 
-			extension = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
-			if extension:
+			extensions = complexType.xpath('xs:complexContent/xs:extension', namespaces=nsp)
+			if len(extensions):
+				extension = extensions[0]
 				# this may need a two pass process to pick up base types before inheritance types
-				base = getAttribute(extension,'base')
+				base = extension.attrib.get('base')
 				if ':' in base:
 					(p,t) = tuple(base.split(':'))
 					u = nsp[p]
@@ -481,15 +497,15 @@ class Converter(object):
 
 		# second pass, link parents
 
-		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
-			name = getAttribute(complexType, 'name')
+		for complexType in doc.xpath('/xs:schema/xs:complexType', namespaces=nsp):
+			name = complexType.attrib.get('name')
 			url = nsp[prefix]
 
 			userType = self.step[url][name]['UserType']
 
-			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complexType):
-				elem = getAttribute(xse, 'name')
-				tipe = getAttribute(xse, 'type')
+			for xse in complexType.xpath('(xs:choice|xs:sequence)/xs:element', namespaces=nsp):
+				elem = xse.attrib.get('name')
+				tipe = xse.attrib.get('type', None)
 
 				if not tipe: continue
 
@@ -525,26 +541,26 @@ class Converter(object):
 
 		return
 
-	def __complexAttrs(self, doc, ctx, nsp, tns, prefix):
+	def __complexAttrs(self, doc, nsp, tns, prefix):
 		'''
 		setup usertypes element attributes
 		'''
 
 		# todo, make elements referencing simple types use attributes.
 
-		for complexType in getElements(ctx,'/xs:schema/xs:complexType'):
-			name = getAttribute(complexType, 'name')
+		for complexType in doc.xpath('/xs:schema/xs:complexType', namespaces=nsp):
+			name = complexType.attrib.get('name')
 			url = nsp[prefix]
 
 			userType = self.step[url][name]['UserType']
 
-			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
+			#child = complexType.xpath('xs:complexContent/xs:extension', namespaces=nsp)
 			#if child:
 			#	child = cc
 
-			for xsa in getElements(ctx, 'xs:attribute', complexType):
-				attr = getAttribute(xsa, 'name')
-				tipe = getAttribute(xsa, 'type')
+			for xsa in complexType.xpath('xs:attribute', namespaces=nsp):
+				attr = xsa.attrib.get('name')
+				tipe = xsa.attrib.get('type', None)
 				if not tipe: continue
 				(p,t) = tuple(tipe.split(':'))
 				u = nsp[p]
@@ -596,7 +612,7 @@ class Converter(object):
 
 		return
 
-	def __elements(self, doc, ctx, nsp, tns, prefix):
+	def __elements(self, doc, nsp, tns, prefix):
 		'''
 		setup relationships on elements
 
@@ -608,9 +624,9 @@ class Converter(object):
 
 		root = self.step['/'][self.root]['UserType']
 
-		for element in getElements(ctx,'/xs:schema/xs:element'):
-			name = getAttribute(element, 'name')
-			tipe = getAttribute(element, 'type')
+		for element in doc.xpath('/xs:schema/xs:element', namespaces=nsp):
+			name = element.attrib.get('name')
+			tipe = element.attrib.get('type')
 
 			if ':' in tipe:
 				(p,etipe) = tuple(tipe.split(':'))
@@ -632,9 +648,9 @@ class Converter(object):
 
 		# resolve element and attribute names second
 
-		for element in getElements(ctx,'//xs:element'):
-			name = getAttribute(element, 'name')
-			tipe = getAttribute(element, 'type')
+		for element in doc.xpath('//xs:element', namespaces=nsp):
+			name = element.attrib.get('name')
+			tipe = element.attrib.get('type')
 
 			if ':' in tipe:
 				(p,etipe) = tuple(tipe.split(':'))
@@ -643,44 +659,44 @@ class Converter(object):
 				etipe = tipe
 				url = tns
 
-			complex_type = getElement(ctx, f'//xs:complexType[@name="{etipe}"]')
-			#child = getElement(ctx, 'xs:complexContent/xs:extension', complexType)
-			#if not child:
-			#	child = complexType
+			for complex_type in doc.xpath(f'//xs:complexType[@name="{etipe}"]', namespaces=nsp):
+				#child = complexType.xpath('xs:complexContent/xs:extension', namespaces=nsp)
+				#if not child:
+				#	child = complexType
 
-			if 'UserType' not in self.step[url][etipe].keys():
-				continue
+				if 'UserType' not in self.step[url][etipe].keys():
+					continue
 
-			source = self.step[url][etipe]['UserType']
-			source.NamePattern = name
+				source = self.step[url][etipe]['UserType']
+				source.NamePattern = name
 
-			for xsa in getElements(ctx, 'xs:attribute', complex_type):
-				attr = getAttribute(xsa, 'name')
-				tipe = getAttribute(xsa, 'type')
-				if not tipe: continue
-				(p,atipe) = tuple(tipe.split(':'))
-				u = nsp[p]
-
-				key = f'{etipe}@{attr}'
-				target = self.step[u][key]['Attribute']
-
-				self.elements[tns][f'{name}@{attr}'] = target
-
-			for xse in getElements(ctx, '(xs:choice|xs:sequence)/xs:element', complex_type):
-				elem = getAttribute(xse, 'name')
-				t = getAttribute(xse, 'type')
-				if not etipe: continue
-
-				if ':' in t:
-					(p,t) = tuple(t.split(':'))
+				for xsa in complex_type.xpath('xs:attribute', namespaces=nsp):
+					attr = xsa.attrib.get('name')
+					tipe = xsa.attrib.get('type', None)
+					if not tipe: continue
+					(p,atipe) = tuple(tipe.split(':'))
 					u = nsp[p]
-				else:
-					u = tns
 
-				if 'UserType' in self.step[u][t].keys():
-					target = self.step[u][t]['UserType']
+					key = f'{etipe}@{attr}'
+					target = self.step[u][key]['Attribute']
 
-					self.elements[tns][elem] = target
+					self.elements[tns][f'{name}@{attr}'] = target
+
+				for xse in complex_type.xpath('(xs:choice|xs:sequence)/xs:element', namespaces=nsp):
+					elem = xse.attrib.get('name')
+					t = xse.attrib.get('type', None)
+					if not etipe: continue
+
+					if ':' in t:
+						(p,t) = tuple(t.split(':'))
+						u = nsp[p]
+					else:
+						u = tns
+
+					if 'UserType' in self.step[u][t].keys():
+						target = self.step[u][t]['UserType']
+
+						self.elements[tns][elem] = target
 
 		return
 
@@ -695,24 +711,24 @@ class Converter(object):
 		mt = os.stat(xml).st_mtime
 		dt = datetime.fromtimestamp(mt, tz=ltz)
 
-		ctx = libxml2.schemaNewParserCtxt(xsd)
-		schema = ctx.schemaParse()
-		validator = schema.schemaNewValidCtxt()
+		parser = ET.XMLParser(huge_tree=True)
+		schema = ET.parse(xsd, parser=parser)
+		tns = schema.getroot().attrib.get('targetNamespace')
 
-		DATA = XML(*getContextFromFile(xml))
-		validation = validator.schemaValidateDoc(DATA.doc)
+		doc = ET.parse(xml, parser=parser)
+		#validation = schema.validate(doc)
 
-		if validation != 0:
-			sys.stderr.write('schema invalid %s\n'%validation)
-			return
+		#if not validation:
+		#	sys.stderr.write(f'schema {xsd} invalid for {xml}\n')
+		#	return
 
-		root = DATA.doc.getRootElement()
-		tns = str(root.ns().content)
+		root = doc.getroot()
 		root_home = self.step['/'][self.root]['Product']
 
 		# seed for id generation path
 
-		salt = f'{xml}:{dt:%Y-%m-%dT%H:%M:%S}:{root.name}'
+		root_ns, root_name = detag(root)
+		salt = f'{xml}:{dt:%Y-%m-%dT%H:%M:%S}:{root_name}'
 
 		xdf = '%Y-%m-%d'
 		xdtf = '%Y-%m-%dT%H:%M:%S'
@@ -762,11 +778,10 @@ class Converter(object):
 					)
 
 			return
-
+	
 		def walk(node, parent=None, indent='', path=''):
 
-			name = node.name
-			ns = str(node.ns().content)
+			ns, name = detag(node)
 			logger.info(f'{indent}{ns}:{name}')# -> {path}')
 
 			id = self.__hash(path)
@@ -788,18 +803,15 @@ class Converter(object):
 			)
 			parent.append(product)
 
-			if node.properties:
-				for p in node.properties:
-					if p.type == 'attribute':
-						aname = p.name
-						value = str(p.content)
-						valueAdd(ns, node.name, aname, value, product, indent)
+			for aname, value in node.attrib.items():
+				valueAdd(ns, name, aname, value, product, indent)
 
-			if not node.children: return
+			if len(node.getchildren()) == 0: return
 
-			for index, child in enumerate(getElements(DATA.ctx, '*', node)):
-				if child.name in self.elements[tns].keys():
-				   	walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child.name}[{index}]')
+			for index, child in enumerate(node.getchildren()):
+				child_ns, child_name = detag(child)
+				if child_name in self.elements[child_ns].keys():
+				   	walk(child, parent=product, indent=f'\t{indent}', path=f'{path}/{child_name}[{index}]')
 
 			return
 
@@ -822,9 +834,6 @@ class Converter(object):
 				xf = os.path.expanduser(xml)
 				if os.path.isfile(xf):
 					self.__products(xsd, xf) # todo: update and test
-
-		if self.verbose:
-			logger.info('step: ',prettyLogger.Info(self.step))
 
 		xml = str(self.dom.toxml())
 		if output:

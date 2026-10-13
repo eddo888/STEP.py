@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ns1:STEP-ProductInformation
 	ContextID="Context1"
-	ExportTime="2026-10-10 11:46:41.409393"
+	ExportTime="2026-10-10 12:26:01.770371"
 	SingleUpdateMode="Y"
 	UseContextLocale="false"
 	WorkspaceID="Main"
@@ -249,11 +249,11 @@
 	</ns1:AttributeList>
 	<ns1:Products>
 		<ns1:Product ID="ID_8813a5719da5048b53cf6629541c7267" ParentID="Product hierarchy root" UserTypeID="ID_3842fe4f462b30306459a0694aed8fc8">
-			<ns1:Product ID="ID_2040a0898ea5731ad4e20b4a6ee45caf" UserTypeID="ID_6fe064606fe4005520cdee18f2b7510c">
+			<ns1:Product ID="ID_5477b29e7c63ba7941459c31b02cdc09" UserTypeID="ID_6fe064606fe4005520cdee18f2b7510c">
 				<ns1:Name>people</ns1:Name>
-				<ns1:Product ID="ID_eed42739f2c9c6f2405ed6e9d0269e3c" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="ID_c71be1ae9a88783d16fcffa76a325908" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="ID_383c9c22824fca1ab9db09bbddb92fd9" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="ID_f6c2fd13beb55f7ed8b0c4ff5cea9cdf" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
 						<ns1:Values>
 							<ns1:Value AttributeID="ID_7e6f944e143497bb1a983ade8346f156">DE</ns1:Value>
@@ -270,11 +270,11 @@
 						<ns1:Value AttributeID="ID_d32eccfc66be66b12e9e2be1495d5d3b">11</ns1:Value>
 					</ns1:Values>
 				</ns1:Product>
-				<ns1:Product ID="ID_1fe989300dd855848070215b1aeb78cf" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
+				<ns1:Product ID="ID_ee5b4dffc9a00327c0e2e8ffe7a83009" UserTypeID="ID_49dc65673f2d236498a685a2dabd02f2">
 					<ns1:Name>group</ns1:Name>
-					<ns1:Product ID="ID_1fd9e172531b37120902aabae350bfe8" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
+					<ns1:Product ID="ID_a3d8cedc869c555e85b42985bdb96e59" UserTypeID="ID_c5db2f624b174d6867f1b7ec12def059">
 						<ns1:Name>person</ns1:Name>
-						<ns1:Product ID="ID_ad750818d38b90ae5928e0e50efe4a25" UserTypeID="ID_e1069d5be446a51506e34e1d5c21007e">
+						<ns1:Product ID="ID_9676ae49a5149a585a837dd89331128b" UserTypeID="ID_e1069d5be446a51506e34e1d5c21007e">
 							<ns1:Name>contact</ns1:Name>
 							<ns1:Values>
 								<ns1:Value AttributeID="ID_7517efd27841e2b77a7a5a8a33b0c807">DE</ns1:Value>
